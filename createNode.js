@@ -78,7 +78,7 @@
   
   function filter (array, callback) {
     var i = 0;
-    var n = isArray(array) || isNodelist(array) ? array.length : 0;
+    var n = isArray(array) || isNodeList(array) ? array.length : 0;
     var a = [];
   
     for (; i < n; i++) {
@@ -92,7 +92,7 @@
   
   function forEach (array, callback) {
     var i = 0;
-    var n = isArray(array) || isNodelist(array) ? array.length : 0;
+    var n = isArray(array) || isNodeList(array) ? array.length : 0;
   
     for (; i < n; i++) {
       callback(array[i], i, array);
@@ -108,7 +108,7 @@
   }
   
   function isElement (a) {
-    return typeof a.nodeType === 'number' && a.nodeType === 1;
+    return a && typeof a.nodeType === 'number' && a.nodeType === 1;
   }
   
   function isFunction (x) {
@@ -133,7 +133,7 @@
   
   function map (array, callback) {
     var i = 0;
-    var n = isArray(array) || isNodelist(array) ? array.length : 0;
+    var n = isArray(array) || isNodeList(array) ? array.length : 0;
     var a = [];
   
     for (; i < n; i++) {
@@ -189,6 +189,31 @@
   
   function trim (string) {
     return string.replace(/^\s+|\s+$/g, '');
+  }
+  
+  // From http://stackoverflow.com/questions/263743/caret-position-in-textarea-in-characters-from-the-start
+  function appendChild (node, child) {
+    var f;
+  
+    if (typeof child === 'string') {
+      node.innerHTML = child;
+    } else if (child instanceof CreateNode) {
+      node.appendChild(child._node_);
+    } else if (isArray(child)) {
+      // Is a node creation
+      if (typeof child[0] === 'string') {
+        node.appendChild(new CreateNode(child)._node_);
+      } else {
+        // Is a group
+        f = new DocumentFragment();
+        forEach(child, function (c) {
+          appendChild(f, c);
+        });
+        node.appendChild(f);
+      }
+    } else if (isElement(child)) {
+      node.appendChild(child);
+    }
   }
   
   // From http://stackoverflow.com/questions/263743/caret-position-in-textarea-in-characters-from-the-start
@@ -342,8 +367,34 @@
     return string;
   }
   
-  function CreateNode (target, opt, text) {
+  /*
+    Argument format
+    CreateNode([String], [Object], [Text | CreateNode Object | Array | Node ])
+  */
+  
+  function CreateNode () {
     var self = this;
+    var target;
+    var opt;
+    var child;
+  
+    var i = 0;
+    var n = arguments.length;
+    var a = new Array(n);
+  
+    for (; i < n; i++) {
+      a[i] = arguments[i];
+    }
+  
+    if (isArray(a[0]) && a.length === 1) {
+      target = a[0][0];
+      opt = a[0][1];
+      child = a[0].length <= 3 ? a[0][2] : a[0].slice(2);
+    } else {
+      target = a[0];
+      opt = a[1];
+      child = a.length <= 3 ? a[2] : a.slice(2);
+    }
   
     this._class_ = [];
   
@@ -361,14 +412,18 @@
     setNode(this, target);
     setAttributes(this._node_, opt);
     normalizeTextInput(this);
-  
-    if (typeof text === 'string') {
-      this._node_.innerHTML = text;
-    }
+    appendChild(this._node_, child);
   }
   
-  function createNode (target, opt, text) {
-    return new CreateNode(target, opt, text);
+  function createNode (target, opt, child) {
+    switch (arguments.length) {
+      case 1 :
+      return new CreateNode(target);
+      case 2 :
+      return new CreateNode(target, opt);
+      default :
+      return new CreateNode(target, opt, child);
+    }
   }
   
   CreateNode.prototype.addClass = function (a) {
@@ -701,7 +756,9 @@
   };
   
   CreateNode.prototype.remove = function () {
-    this._node_.parentNode.removeChild(this._node_);
+    if (isElement(this._node_.parentNode)) {
+      this._node_.parentNode.removeChild(this._node_);
+    }
     return this;
   };
   
@@ -785,7 +842,10 @@
   };
   
   CreateNode.prototype.siblings = function () {
-    return map(filter(node.parentNode.childNodes, isElement), createNode);
+    var children = this._node_.parentNode.childNodes;
+    return map(filter(children, isElement), function (s) {
+      return createNode(s);
+    });
   };
   
   CreateNode.prototype.style = function () {
