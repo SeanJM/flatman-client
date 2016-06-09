@@ -15,7 +15,7 @@ function CreateNode (target, opt, text) {
   };
 
   setNode(this, target);
-  setAttributes(this);
+  setAttributes(this._node_, opt);
   normalizeTextInput(this);
 
   if (typeof text === 'string') {

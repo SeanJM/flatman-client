@@ -1,5 +1,6 @@
-CreateNode.prototype.removeClass = function (className) {
-  this._class_ = this._class_.filter(partial(not, className)).sort();
-  this._node_.className = this._class_.join(' ');
+CreateNode.prototype.removeClass = function (a) {
+  this._node_.className = filter(map(this._node_.className.split(' '), trim), function (b) {
+    return hasLength(b) && not(a, b);
+  }).sort().join(' ');
   return this;
 };
