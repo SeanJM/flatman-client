@@ -10,7 +10,7 @@ createNode('div', { class : 'my-class-name' }, 'some text');
 
 #### Attributes
 - [`addClass`](#add-class)
-- `attr`
+- [`attr`](#attr)
 - `copyAttributes`
 - `removeClass`
 - `src`
@@ -66,8 +66,21 @@ createNode('div', { class : 'my-class-name' }, 'some text');
 
 ## Details
 
-### `Add Class`
+### `addClass`
 
 ```
 createNode('div').addClass('this-class-name');
+```
+
+### `attr`
+
+```
+createNode('div').attr('data-attribute', 'value');
+```
+
+```
+createNode('div').attr({
+  class : 'some-class-name',
+  style : 'background: red'
+});
 ```
