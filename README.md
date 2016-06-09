@@ -2,8 +2,33 @@
 #### Now you to can create nodes with a simple interface which will be very familiar.
 
 ### Basic usage
-```
+```javascript
 createNode('div', { class : 'my-class-name' }, 'some text');
+```
+### Nesting
+
+Possible `Child Object`
+
+- Array of Arguments `['div', {}, Child Object]`
+- `Text`
+- `CreateNode Object`
+- `HTML Element`
+
+```javascript
+createNode('div', { class : 'my-class-name' }, [Child Object]);
+```
+
+### HTML Like Syntax
+```javascript
+createNode(
+  ['div', { class : 'parent' },
+    ['div', { class : 'parent_child-1'}],
+    ['div', { class : 'parent_child-2'}],
+    ['div', { class : 'parent_child-3'},
+      ['div', { class : 'parent_child-3_child-1' }]
+    ],
+  ]
+);
 ```
 
 ### Methods
@@ -14,7 +39,7 @@ createNode('div', { class : 'my-class-name' }, 'some text');
 - [`copyAttributes`](#copyattributes)
 - [`removeClass`](#removeclass)
 - [`style`](#style)
-- `toggleClass`
+- [`toggleClass`](#toggleclass)
 
 #### Query
 - `closest`
@@ -95,7 +120,7 @@ createNode('div').copyAttributes(node);
 
 ### `removeClass`
 
-`createNode([String], [Object], [String]).removeClass([String])`
+`createNode([String], [Object], [Child Object]).removeClass([String])`
 
 ```javascript
 createNode('div').removeClass('class-name');
@@ -103,8 +128,9 @@ createNode('div').removeClass('class-name');
 
 ### `style`
 
-`createNode([String], [Object], [String]).style([Property], [Value])`
-`createNode([String], [Object], [String]).style([Object])`
+`createNode([String], [Object], [Child Object]).style([Property], [Value])`
+
+`createNode([String], [Object], [Child Object]).style([Object])`
 
 ```javascript
 createNode('div').style('paddingLeft', 10);
@@ -112,4 +138,16 @@ createNode('div').style('paddingLeft', 10);
 
 ```javascript
 createNode('div').style({ paddingLeft : 10, marginTop : 10 });
+```
+
+### `toggleClass`
+
+`createNode([String], [Object], [Child Object]).toggleClass([String])`
+
+```javascript
+var myDIV = createNode('div');
+
+myDIV.toggleClass('toggle'); // -> myDIV has class 'toggle'
+
+myDIV.toggleClass('toggle'); // -> myDIV does not have class 'toggle'
 ```
