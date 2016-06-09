@@ -68,17 +68,17 @@ createNode('div', { class : 'my-class-name' }, 'some text');
 
 ### `addClass`
 
-```
+```javascript
 createNode('div').addClass('this-class-name');
 ```
 
 ### `attr`
 
-```
+```javascript
 createNode('div').attr('data-attribute', 'value');
 ```
 
-```
+```javascript
 createNode('div').attr({
   class : 'some-class-name',
   style : 'background: red'
