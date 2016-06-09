@@ -9,7 +9,7 @@ createNode('div', { class : 'my-class-name' }, 'some text');
 ### Methods
 
 #### Attributes
-- [`addClass`](#add-class)
+- [`addClass`](#addclass)
 - [`attr`](#attr)
 - `copyAttributes`
 - `removeClass`
