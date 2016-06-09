@@ -11,7 +11,7 @@ createNode('div', { class : 'my-class-name' }, 'some text');
 #### Attributes
 - [`addClass`](#addclass)
 - [`attr`](#attr)
-- `copyAttributes`
+- [`copyAttributes`](#copyattributes)
 - `removeClass`
 - `src`
 - `style`
@@ -83,4 +83,12 @@ createNode('div').attr({
   class : 'some-class-name',
   style : 'background: red'
 });
+```
+
+### `copyAttributes`
+
+`createNode([string], [object], [string]).copyAttributes([CreateNode Object | selector | HTML Element])`
+
+```javascript
+createNode('div').copyAttributes(document.querySelector('#copy-these-attributes'));
 ```
