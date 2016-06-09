@@ -12,7 +12,7 @@ createNode('div', { class : 'my-class-name' }, 'some text');
 - [`addClass`](#addclass)
 - [`attr`](#attr)
 - [`copyAttributes`](#copyattributes)
-- `removeClass`
+- [`removeClass`](#removeclass)
 - `src`
 - `style`
 - `toggleClass`
@@ -87,8 +87,17 @@ createNode('div').attr({
 
 ### `copyAttributes`
 
-`createNode([string], [object], [string]).copyAttributes([CreateNode Object | selector | HTML Element])`
+`createNode([String], [Object], [String]).copyAttributes([CreateNode Object | Selector | HTML Element])`
 
 ```javascript
-createNode('div').copyAttributes(document.querySelector('#copy-these-attributes'));
+var node = document.querySelector('#copy-these-attributes');
+createNode('div').copyAttributes(node);
+```
+
+### `removeClass`
+
+`createNode([String], [Object], [String]).removeClass([String])`
+
+```javascript
+createNode('div').removeClass('class-name');
 ```
