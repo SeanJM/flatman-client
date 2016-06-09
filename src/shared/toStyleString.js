@@ -10,10 +10,6 @@ function toStyleString(styleObject) {
       property = JS_PROPERTY_TO_CSS[property];
     }
 
-    if (this._dimensions_.hasOwnProperty(property)) {
-      this._dimensions_[property] = value;
-    }
-
     if (typeof value === 'number' && CSS_PROPERTY_IS_NUMBER.indexOf(property) === -1) {
       value += 'px';
     }
