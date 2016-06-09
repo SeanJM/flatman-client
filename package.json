@@ -1,0 +1,19 @@
+{
+  "name": "createNode",
+  "version": "0.5.0",
+  "description": "A JavaScript API for color manipulation",
+  "main": "createNode.js",
+  "scripts": {
+    "build": "node build/build.js",
+    "test": "node createNode.test.js"
+  },
+  "keywords": [],
+  "author": "Various",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "concat-with-sourcemaps": "^1.0.4",
+    "match-file-utility": "^3.3.16",
+    "uglify-js": "^2.6.2"
+  }
+}
