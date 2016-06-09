@@ -96,6 +96,7 @@ createNode(
 createNode('div').addClass('this-class-name');
 ```
 
+
 ### `attr`
 
 ```javascript
@@ -109,6 +110,7 @@ createNode('div').attr({
 });
 ```
 
+
 ### `copyAttributes`
 
 `createNode([String], [Object], [String]).copyAttributes([CreateNode Object | Selector | HTML Element])`
@@ -118,6 +120,7 @@ var node = document.querySelector('#copy-these-attributes');
 createNode('div').copyAttributes(node);
 ```
 
+
 ### `removeClass`
 
 `createNode([String], [Object], [Child Object]).removeClass([String])`
@@ -125,6 +128,7 @@ createNode('div').copyAttributes(node);
 ```javascript
 createNode('div').removeClass('class-name');
 ```
+
 
 ### `style`
 
@@ -139,6 +143,7 @@ createNode('div').style('paddingLeft', 10);
 ```javascript
 createNode('div').style({ paddingLeft : 10, marginTop : 10 });
 ```
+
 
 ### `toggleClass`
 
