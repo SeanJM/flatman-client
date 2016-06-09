@@ -8,9 +8,9 @@ CreateNode.prototype.attr = function () {
   }
 
   if (typeof a[0] === 'string' && typeof a[1] === 'string') {
-    this._node_.setAttribute(property, value);
+    this._node_.setAttribute(a[0], a[1]);
   } else if (typeof a[0] === 'string') {
-    return this._node_.getAttribute(property);
+    return this._node_.getAttribute(a[0]);
   } else if (typeof a[0] === 'object') {
     setAttributes(this._node_, a[0]);
   } else if (!a.length) {

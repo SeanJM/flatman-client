@@ -1,32 +1,22 @@
-CreateNode.prototype.style = function (name, value) {
-  var node = this._node_;
+CreateNode.prototype.style = function () {
+  var styles = window.getComputedStyle(this._node_);
+  var i = 0;
+  var n = arguments.length;
+  var a = new Array(n);
 
-  if (typeof value === 'undefined' && this._dimensions_.hasOwnProperty(name)) {
-    this._dimensions_ = node.getBoundingClientRect();
-    this._dimensions_.right = this._dimensions_.left + this._dimensions_.width;
-    this._dimensions_.bottom = this._dimensions_.top + this._dimensions_.height;
-    return this._dimensions_[name];
-  } else if (typeof value === 'undefined') {
-    return window.getComputedStyle(node)[name];
+  for (; i < n; i++) {
+    a[i] = arguments[i];
   }
 
-  if (typeof VENDOR_PREFIX[name] === 'string') {
-    name = VENDOR_PREFIX[name];
+  if (typeof a[0] === 'string' && typeof a[1] === 'undefined') {
+    return styles[a[0]];
+  } else if (typeof a[0] === 'string' && typeof a[1] !== 'undefined') {
+    setStyle(this._node_, a[0], a[1]);
   }
 
-  if (TO_PIXEL.indexOf(name) !== -1 && !isNaN(Number(value))) {
-    node.style[name] = value.toString().substr(-2) === 'px' ? value : value + 'px';
-  } else {
-    node.style[name] = value;
-  }
-
-  if (this._dimensions_.hasOwnProperty(name)) {
-    if (typeof value === 'number') {
-      this._dimensions_[name] = value;
-      value = value + 'px';
-    } else {
-      this._dimensions_[name] = parseInt(value, 10);
+  if (typeof a[0] === 'object') {
+    for (var k in a[0]) {
+      setStyle(this._node_, k, a[0][k]);
     }
-    node.style[name] = value;
   }
 };

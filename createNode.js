@@ -266,17 +266,18 @@
     }
   }
   
-  function setAttributes (self) {
+  function setAttributes (node, opt) {
+    var className;
     for (var k in opt) {
       if (k === 'class') {
-        self._class_ = opt[k].split(' ').map(trim).filter(hasLength).sort();
-        self._node_.className = self._class_.join(' ');
+        className = filter(map(opt[k].split(' '), trim), hasLength).sort();
+        node.className = className.join(' ');
       } else if (k === 'text') {
-        self._node_.innerHTML = opt[k];
+        node.innerHTML = opt[k];
       } else if (k === 'style') {
-        self._node_.setAttribute(k, toStyleString.call(self, opt[k]));
+        node.setAttribute(k, toStyleString(opt[k]));
       } else {
-        self._node_.setAttribute(k, opt[k]);
+        node.setAttribute(k, opt[k]);
       }
     }
   }
@@ -291,9 +292,9 @@
       self._node_ = target._node_;
     } else if (isNode(target) || target === window) {
       self._node_ = target;
+    } else {
+      throw 'Invalid arguments';
     }
-  
-    throw 'Invalid arguements';
   }
   
   function setSelection (node, start, end) {
@@ -307,6 +308,18 @@
       range.select();
     }
   }
+  function setStyle(node, name, value) {
+    if (typeof VENDOR_PREFIX[name] === 'string') {
+      name = VENDOR_PREFIX[name];
+    }
+  
+    if (TO_PIXEL.indexOf(name) !== -1 && !isNaN(Number(value))) {
+      node.style[name] = value.toString().substr(-2) === 'px' ? value : value + 'px';
+    } else {
+      node.style[name] = value;
+    }
+  }
+  
   function toStyleString(styleObject) {
     var string = '';
     var property;
@@ -319,10 +332,6 @@
         property = JS_PROPERTY_TO_CSS[property];
       }
   
-      if (this._dimensions_.hasOwnProperty(property)) {
-        this._dimensions_[property] = value;
-      }
-  
       if (typeof value === 'number' && CSS_PROPERTY_IS_NUMBER.indexOf(property) === -1) {
         value += 'px';
       }
@@ -332,6 +341,7 @@
   
     return string;
   }
+  
   function CreateNode (target, opt, text) {
     var self = this;
   
@@ -349,7 +359,7 @@
     };
   
     setNode(this, target);
-    setAttributes(this);
+    setAttributes(this._node_, opt);
     normalizeTextInput(this);
   
     if (typeof text === 'string') {
@@ -361,13 +371,14 @@
     return new CreateNode(target, opt, text);
   }
   
-  CreateNode.prototype.addClass = function (className) {
-    var i = this._class_.indexOf(className);
+  CreateNode.prototype.addClass = function (a) {
+    var className = filter(map(this._node_.className.split(' '), trim), hasLength);
+    var i = className.indexOf(a);
   
     if (i === -1) {
-      this._class_.push(className);
-      this._class_.sort();
-      this._node_.className = this._class_.join(' ');
+      className.push(a);
+      className.sort();
+      this._node_.className = className.join(' ');
     }
   
     return this;
@@ -409,16 +420,24 @@
     return this;
   };
   
-  CreateNode.prototype.attr = function (property, value) {
-    if (typeof property === 'undefined') {
+  CreateNode.prototype.attr = function () {
+    var i = 0;
+    var n = arguments.length;
+    var a = new Array(n);
+  
+    for (; i < n; i++) {
+      a[i] = arguments[i];
+    }
+  
+    if (typeof a[0] === 'string' && typeof a[1] === 'string') {
+      this._node_.setAttribute(a[0], a[1]);
+    } else if (typeof a[0] === 'string') {
+      return this._node_.getAttribute(a[0]);
+    } else if (typeof a[0] === 'object') {
+      setAttributes(this._node_, a[0]);
+    } else if (!a.length) {
       return this._node_.attributes;
     }
-  
-    if (typeof value === 'undefined') {
-      return this._node_.getAttribute(property);
-    }
-  
-    this._node_.setAttribute(property, value);
   
     return this;
   };
@@ -686,9 +705,10 @@
     return this;
   };
   
-  CreateNode.prototype.removeClass = function (className) {
-    this._class_ = this._class_.filter(partial(not, className)).sort();
-    this._node_.className = this._class_.join(' ');
+  CreateNode.prototype.removeClass = function (a) {
+    this._node_.className = filter(map(this._node_.className.split(' '), trim), function (b) {
+      return hasLength(b) && not(a, b);
+    }).sort().join(' ');
     return this;
   };
   
@@ -768,46 +788,26 @@
     return map(filter(node.parentNode.childNodes, isElement), createNode);
   };
   
-  CreateNode.prototype.src = function (value) {
-    if (typeof value === 'string') {
-      this._node_.setAttribute('src', value);
-    } else {
-      return this._node_.getAttribute('src');
+  CreateNode.prototype.style = function () {
+    var styles = window.getComputedStyle(this._node_);
+    var i = 0;
+    var n = arguments.length;
+    var a = new Array(n);
+  
+    for (; i < n; i++) {
+      a[i] = arguments[i];
     }
   
-    return this;
-  };
-  
-  CreateNode.prototype.style = function (name, value) {
-    var node = this._node_;
-  
-    if (typeof value === 'undefined' && this._dimensions_.hasOwnProperty(name)) {
-      this._dimensions_ = node.getBoundingClientRect();
-      this._dimensions_.right = this._dimensions_.left + this._dimensions_.width;
-      this._dimensions_.bottom = this._dimensions_.top + this._dimensions_.height;
-      return this._dimensions_[name];
-    } else if (typeof value === 'undefined') {
-      return window.getComputedStyle(node)[name];
+    if (typeof a[0] === 'string' && typeof a[1] === 'undefined') {
+      return styles[a[0]];
+    } else if (typeof a[0] === 'string' && typeof a[1] !== 'undefined') {
+      setStyle(this._node_, a[0], a[1]);
     }
   
-    if (typeof VENDOR_PREFIX[name] === 'string') {
-      name = VENDOR_PREFIX[name];
-    }
-  
-    if (TO_PIXEL.indexOf(name) !== -1 && !isNaN(Number(value))) {
-      node.style[name] = value.toString().substr(-2) === 'px' ? value : value + 'px';
-    } else {
-      node.style[name] = value;
-    }
-  
-    if (this._dimensions_.hasOwnProperty(name)) {
-      if (typeof value === 'number') {
-        this._dimensions_[name] = value;
-        value = value + 'px';
-      } else {
-        this._dimensions_[name] = parseInt(value, 10);
+    if (typeof a[0] === 'object') {
+      for (var k in a[0]) {
+        setStyle(this._node_, k, a[0][k]);
       }
-      node.style[name] = value;
     }
   };
   

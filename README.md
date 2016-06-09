@@ -13,7 +13,6 @@ createNode('div', { class : 'my-class-name' }, 'some text');
 - [`attr`](#attr)
 - [`copyAttributes`](#copyattributes)
 - [`removeClass`](#removeclass)
-- `src`
 - `style`
 - `toggleClass`
 

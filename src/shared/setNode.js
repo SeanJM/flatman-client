@@ -8,7 +8,7 @@ function setNode (self, target) {
     self._node_ = target._node_;
   } else if (isNode(target) || target === window) {
     self._node_ = target;
+  } else {
+    throw 'Invalid arguments';
   }
-
-  throw 'Invalid arguements';
 }
