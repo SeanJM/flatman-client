@@ -13,7 +13,7 @@ createNode('div', { class : 'my-class-name' }, 'some text');
 - [`attr`](#attr)
 - [`copyAttributes`](#copyattributes)
 - [`removeClass`](#removeclass)
-- `style`
+- [`style`](#style)
 - `toggleClass`
 
 #### Query
@@ -99,4 +99,17 @@ createNode('div').copyAttributes(node);
 
 ```javascript
 createNode('div').removeClass('class-name');
+```
+
+### `style`
+
+`createNode([String], [Object], [String]).style([Property], [Value])`
+`createNode([String], [Object], [String]).style([Object])`
+
+```javascript
+createNode('div').style('paddingLeft', 10);
+```
+
+```javascript
+createNode('div').style({ paddingLeft : 10, marginTop : 10 });
 ```
