@@ -1,10 +1,15 @@
 # Create Node
 #### Now you to can create nodes with a simple interface which will be very familiar.
 
+### Basic usage
+```
+createNode('div', { class : 'my-class-name' }, 'some text');
+```
+
 ### Methods
 
 #### Attributes
-- `addClass`
+- [`addClass`](#add-class)
 - `attr`
 - `copyAttributes`
 - `removeClass`
@@ -58,3 +63,11 @@
 - `on`
 - `off`
 - `trigger`
+
+## Details
+
+### `Add Class`
+
+```
+createNode('div').addClass('this-class-name');
+```
