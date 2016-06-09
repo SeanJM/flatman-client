@@ -1,3 +1,6 @@
 CreateNode.prototype.siblings = function () {
-  return map(filter(node.parentNode.childNodes, isElement), createNode);
+  var children = this._node_.parentNode.childNodes;
+  return map(filter(children, isElement), function (s) {
+    return createNode(s);
+  });
 };
