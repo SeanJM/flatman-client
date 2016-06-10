@@ -621,7 +621,7 @@
   CreateNode.prototype.getSelector = function () {
     var attr = this.node.attributes;
     var tagName = this.node.tagName.toLowerCase();
-    var siblings = this.siblings(true);
+    var siblings = this.siblings();
     var format = {
       class : function (value) {
         return '.' + value.replace(/[ ]+/g, ' ').trim().split(' ').join('.');
@@ -747,7 +747,7 @@
     var p = this.node.parentNode;
   
     while (p) {
-      parents.unshift(p);
+      parents.unshift(el(p));
       p = p.parentNode;
     }
   
@@ -857,7 +857,7 @@
   };
   
   CreateNode.prototype.siblings = function () {
-    var children = this.node.parentNode.childNodes;
+    var children = this.node.parentNode ? this.node.parentNode.childNodes : [];
     return map(filter(children, isElement), function (s) {
       return createNode(s);
     });

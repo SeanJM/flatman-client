@@ -1,3 +1,32 @@
+function stringMe(res) {
+  var type = Object.prototype.toString.call(res);
+  var t;
+  if (type === '[object Array]') {
+    return '[' + res.map(function (a) {
+      return stringMe(a);
+    }).join(',\n ') + ']';
+  } else if (type === '[object String]' || type === '[object Number]') {
+    return res;
+  } else if (res.node) {
+    return res.getSelector();
+  } else if (type === '[object Object]') {
+    t = '{';
+    for (var k in res) {
+      t += stringMe(res[k]);
+    }
+    t += '}';
+    return t;
+  }
+  console.log(type);
+}
+
+function logTest(name, res) {
+  var title = el('h1', name);
+  var pre = el('pre', { class : 'grey'}, stringMe(res));
+  title.appendTo(document.body);
+  pre.appendTo(document.body);
+}
+
 function Comp () {
   this.el = el('div',
     this.doc = el('div', {
@@ -35,5 +64,5 @@ test.put();
     )
   );
 
-  document.write(JSON.stringify(child.parents()));
+  logTest('parents', child.parents());
 }());
