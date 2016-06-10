@@ -29,9 +29,9 @@ el('div',
 #### [Boolean](#boolean-1)
 - [`contains`](#contains)
 - [`hasClass`](#hasclass)
-- [`hasParent`](#hasParent)
-- [`isChecked`](#isChecked)
-- `isFocused`
+- [`hasParent`](#hasparent)
+- [`isChecked`](#ischecked)
+- [`isFocused`](#isfocused)
 - `isVisible`
 
 #### Query
@@ -186,5 +186,19 @@ var myParent = el('label',
 myCheckbox.check();
 
 myCheckbox.isChecked(myParent);
+// -> true
+```
+
+#### `isFocused`
+
+```javascript
+var myFocus = el('label');
+
+myFocus.isFocused();
+// -> false
+
+myFocus.focus();
+
+myFocus.isFocused();
 // -> true
 ```
