@@ -24,6 +24,8 @@ function CreateNode () {
     for (var i = 1, n = arguments.length; i < n; i++) {
       if (arguments[i] instanceof CreateNode) {
         this.node.appendChild(arguments[i].node);
+      } else if (isString(arguments[i])) {
+        this.node.appendChild(document.createTextNode(arguments[i]));
       }
     }
 
