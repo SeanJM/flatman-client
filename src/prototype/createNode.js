@@ -30,7 +30,10 @@ function CreateNode () {
     }
 
     for (var k in attributes) {
-      if (k === 'style') {
+      if (k === 'class') {
+        className = filter(map(attributes[k].split(' '), trim), hasLength);
+        addClasses.apply(null, [this.node].concat(className));
+      } else if (k === 'style') {
         setStyle(this.node, attributes[k]);
       } else {
         this.node.setAttribute(k, attributes[k]);

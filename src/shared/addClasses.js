@@ -4,9 +4,6 @@ function addClasses (node) {
   var a;
 
   for (; i < n; i++) {
-    a = trim(arguments[i]);
-    if (hasLength(a)) {
-      addClass(node, a);
-    }
+    addClass(node, a);
   }
 }
