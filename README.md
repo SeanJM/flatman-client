@@ -77,15 +77,15 @@ el('div',
 
 ## Details
 
-#### `addClass`
+#### `addClass` [ø](#methods)
 
 ```javascript
 el('div').addClass('this-class-name');
 ```
 
-## Attributes
+## Attributes [ø](#methods)
 
-#### `attr`
+#### `attr` [ø](#methods)
 
 ```javascript
 el('div').attr('data-attribute', 'value');
@@ -99,7 +99,7 @@ el('div').attr({
 ```
 
 
-#### `copyAttributes`
+#### `copyAttributes` [ø](#methods)
 
 `el([String], [Object], [String]).copyAttributes([CreateNode Object | Selector | HTML Element])`
 
@@ -109,7 +109,7 @@ el('div').copyAttributes(node);
 ```
 
 
-#### `removeClass`
+#### `removeClass` [ø](#methods)
 
 `el([String], [Object], [Child Object]).removeClass([String])`
 
@@ -118,7 +118,7 @@ el('div').removeClass('class-name');
 ```
 
 
-#### `style`
+#### `style` [ø](#methods)
 
 `el([String], [Object], [Child Object]).style([Property], [Value])`
 
@@ -133,7 +133,7 @@ el('div').style({ paddingLeft : 10, marginTop : 10 });
 ```
 
 
-#### `toggleClass`
+#### `toggleClass` [ø](#methods)
 
 ```javascript
 var myDIV = el('div');
@@ -143,9 +143,9 @@ myDIV.toggleClass('toggle'); // -> myDIV does not have class 'toggle'
 ```
 
 
-## Booleans
+## Booleans [ø](#methods)
 
-#### `contains`
+#### `contains` [ø](#methods)
 
 ```javascript
 var myParent = el('div',
@@ -156,7 +156,7 @@ myParent.contains(myChild);
 // -> true
 ```
 
-#### `hasClass`
+#### `hasClass` [ø](#methods)
 
 ```javascript
 var myDiv = el('div', { class : 'class-name' });
@@ -165,7 +165,7 @@ myParent.hasClass('class-name');
 // -> true
 ```
 
-#### `hasParent`
+#### `hasParent` [ø](#methods)
 
 ```javascript
 var myParent = el('div',
@@ -176,7 +176,7 @@ myChild.hasParent(myParent);
 // -> true
 ```
 
-#### `isChecked`
+#### `isChecked` [ø](#methods)
 
 ```javascript
 var myParent = el('label',
@@ -192,7 +192,7 @@ myCheckbox.isChecked(myParent);
 // -> true
 ```
 
-#### `isFocused`
+#### `isFocused` [ø](#methods)
 
 ```javascript
 var myFocus = el('label', { tabIndex : 0 });
@@ -206,7 +206,7 @@ myFocus.isFocused();
 // -> true
 ```
 
-#### `isVisible`
+#### `isVisible` [ø](#methods)
 
 This one requires a bit of explaining, it doesn't only check for 'visibility'.
 
@@ -223,7 +223,7 @@ var myNode = el('div', {
   }
 }).appendTo(document.body);
 
-myFocus.isVisible();
+myFocus.isVisible(); [ø](#methods)
 // -> true
 
 myFocus.style('left', -100000);
