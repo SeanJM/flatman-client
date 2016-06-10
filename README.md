@@ -183,6 +183,9 @@ var myParent = el('label',
   var myCheckbox = el('input', { type : 'checkbox' })
 );
 
+myCheckbox.isChecked(myParent);
+// -> false
+
 myCheckbox.check();
 
 myCheckbox.isChecked(myParent);
