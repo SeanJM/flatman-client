@@ -101,11 +101,14 @@ el('div').attr({
 
 #### `copyAttributes` [top](#methods)
 
-`el([String], [Object], [String]).copyAttributes([CreateNode Object | Selector | HTML Element])`
+Copies the attributes from the node passed.
 
 ```javascript
-var node = document.querySelector('#copy-these-attributes');
+var node = document.querySelector('#copy');
+// #copy : .my-class-name[id="copy"][data-attribute="some-text"]
+
 el('div').copyAttributes(node);
+// div : .my-class-name[id="copy"][data-attribute="some-text"]
 ```
 
 
