@@ -192,7 +192,7 @@ myCheckbox.isChecked(myParent);
 #### `isFocused`
 
 ```javascript
-var myFocus = el('label');
+var myFocus = el('label', { tabindex : 0 });
 
 myFocus.isFocused();
 // -> false
