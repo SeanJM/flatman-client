@@ -18,7 +18,7 @@ el('div',
 
 ### Methods
 
-#### [Attributes](#attributes)
+#### [Attributes](#attributes-1)
 - [`addClass`](#addclass)
 - [`attr`](#attr)
 - [`copyAttributes`](#copyattributes)
@@ -26,9 +26,9 @@ el('div',
 - [`style`](#style)
 - [`toggleClass`](#toggleclass)
 
-#### [Boolean](#boolean)
+#### [Boolean](#boolean-1)
 - [`contains`](#contains)
-- `hasClass`
+- [`hasClass`](#hasclass)
 - `hasParent`
 - `isChecked`
 - `isFocused`
@@ -156,5 +156,14 @@ var myParent = el('div',
 );
 
 myParent.contains(myChild);
+// -> true
+```
+
+### `hasClass`
+
+```javascript
+var myDiv = el('div', { class : 'class-name' });
+
+myParent.hasClass('class-name');
 // -> true
 ```
