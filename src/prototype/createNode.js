@@ -32,7 +32,7 @@ function CreateNode () {
     for (var k in attributes) {
       if (k === 'class') {
         className = filter(map(attributes[k].split(' '), trim), hasLength);
-        addClasses.apply(null, [this.node].concat(className));
+        this.node.className = className.sort().join(' ');
       } else if (k === 'style') {
         setStyle(this.node, attributes[k]);
       } else {

@@ -221,15 +221,6 @@
     }
   }
   
-  function addClasses (node) {
-    var i = 1;
-    var n = arguments.length;
-  
-    for (; i < n; i++) {
-      addClass(node, arguments[i]);
-    }
-  }
-  
   // From http://stackoverflow.com/questions/263743/caret-position-in-textarea-in-characters-from-the-start
   function appendChild (node, child) {
     var f;
@@ -405,7 +396,7 @@
       for (var k in attributes) {
         if (k === 'class') {
           className = filter(map(attributes[k].split(' '), trim), hasLength);
-          addClasses.apply(null, [this.node].concat(className));
+          this.node.className = className.sort().join(' ');
         } else if (k === 'style') {
           setStyle(this.node, attributes[k]);
         } else {
