@@ -30,7 +30,7 @@ el('div',
 - [`contains`](#contains)
 - [`hasClass`](#hasclass)
 - [`hasParent`](#hasParent)
-- `isChecked`
+- [`isChecked`](#isChecked)
 - `isFocused`
 - `isVisible`
 
@@ -83,7 +83,6 @@ el('div',
 el('div').addClass('this-class-name');
 ```
 
----------------------------------------
 ## Attributes
 
 #### `attr`
@@ -99,7 +98,6 @@ el('div').attr({
 });
 ```
 
----------------------------------------
 
 #### `copyAttributes`
 
@@ -110,7 +108,6 @@ var node = document.querySelector('#copy-these-attributes');
 el('div').copyAttributes(node);
 ```
 
----------------------------------------
 
 #### `removeClass`
 
@@ -120,7 +117,6 @@ el('div').copyAttributes(node);
 el('div').removeClass('class-name');
 ```
 
----------------------------------------
 
 #### `style`
 
@@ -136,7 +132,6 @@ el('div').style('paddingLeft', 10);
 el('div').style({ paddingLeft : 10, marginTop : 10 });
 ```
 
----------------------------------------
 
 #### `toggleClass`
 
@@ -147,7 +142,6 @@ myDIV.toggleClass('toggle'); // -> myDIV has class 'toggle'
 myDIV.toggleClass('toggle'); // -> myDIV does not have class 'toggle'
 ```
 
----------------------------------------
 
 ## Booleans
 
@@ -179,5 +173,18 @@ var myParent = el('div',
 );
 
 myChild.hasParent(myParent);
+// -> true
+```
+
+#### `isChecked`
+
+```javascript
+var myParent = el('label',
+  var myCheckbox = el('input', { type : 'checkbox' })
+);
+
+myCheckbox.check();
+
+myCheckbox.isChecked(myParent);
 // -> true
 ```
