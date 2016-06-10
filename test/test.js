@@ -25,7 +25,6 @@ function stringMe(res) {
   var type = Object.prototype.toString.call(res);
   var t;
   var a;
-  console.log(type);
   if (type === '[object Array]') {
     return '[\n' + res.map(function (a) {
       return '  ' + stringMe(a);
@@ -34,7 +33,7 @@ function stringMe(res) {
     return '"' + res + '"';
   } else if (type === '[object Number]') {
     return res;
-  } else if (res.node) {
+  } else if (res && res.node) {
     return renderNode(res, 0);
   } else if (type === '[object Object]') {
     t = '{';
@@ -60,23 +59,24 @@ el('h1', 'el Tests').appendTo(document.body);
 
 // Parents test
 (function () {
-  var child;
+  var parent_1_1;
   var d1;
   var d2;
   var d1_1;
   var parent;
+  var parent_1;
 
   d1 = el('div', { class : 'div-1' }, d1_1 = el('div', { class : 'div-1_1' }));
   d2 = el('div', { class : 'div-2' });
 
 
-  parent = el('div', { class : 'parent-1' },
-    el('div', { class : 'parent-2' },
-      child = el('div', { class : 'parent-3 '})
+  parent = el('div', { class : 'parent-1', tabIndex : 0 },
+    parent_1 = el('div', { class : 'parent-2' },
+      parent_1_1 = el('div', { class : 'parent-3 '})
     )
   );
 
-  logTest('parents for ' + child.getSelector(), child.parents());
+  logTest('parents for ' + parent_1_1.getSelector(), parent_1_1.parents());
   logTest('addClass', el('div').addClass('my-class-name'));
   logTest('append', el('div').append(el('div')));
   logTest('attr', el('div').attr('type', 'test').attr('title', 'my-title'));
@@ -84,8 +84,8 @@ el('h1', 'el Tests').appendTo(document.body);
   d2.before(d1_1);
   logTest('before', d1);
 
-  logTest('check (true)', el('input', { type : 'checkbox' }).check().isChecked());
-  logTest('check (false)', el('input', { type : 'checkbox' }).isChecked());
+  logTest('check / isChecked (true)', el('input', { type : 'checkbox' }).check().isChecked());
+  logTest('check / isChecked (false)', el('input', { type : 'checkbox' }).isChecked());
 
   d1 = el('div', { class : 'parent-1' },
     el('div', { class : 'parent-2' },
@@ -94,9 +94,33 @@ el('h1', 'el Tests').appendTo(document.body);
   );
   logTest('children', d1.children());
   logTest('clone', d1.clone());
-  logTest('closest (true)', child.closest('.parent-1'));
-  logTest('closest (false)', child.closest('body'));
-  logTest('contains (true)', parent.contains(child));
+  logTest('closest', parent_1_1.closest('.parent-1'));
+  logTest('closest (false)', parent_1_1.closest('body'));
+  logTest('contains (true)', parent.contains(parent_1_1));
   logTest('contains (false)', parent.contains(d1));
-  logTest('copyAttributes', child.copyAttributes(d1));
+  logTest('copyAttributes', parent_1_1.copyAttributes(d1));
+  logTest('disable', d1.disable().node.getAttribute('disabled') === 'disabled');
+  logTest('enable', d1.enable().node.getAttribute('disabled') !== 'disabled');
+  logTest('find', parent.find('.parent-1')[0].node === parent_1_1.node);
+  logTest('find', parent.firstChild().node === parent_1.node);
+  parent.appendTo(document.body);
+  logTest('focus / isFocused', parent.focus().isFocused());
+  parent.remove();
+  logTest('getSelector', parent.getSelector());
+  logTest('hasClass (true)', parent.hasClass('parent-1'));
+  logTest('hasClass (false)', parent.hasClass('parent-2'));
+  logTest('hasParent (true)', parent_1.hasParent(parent));
+  logTest('hasParent (false)', parent.hasParent(parent_1));
+  parent.appendTo(document.body);
+  logTest('isVisible (true)', parent.isVisible());
+  parent.remove();
+  logTest('isVisible (false)', parent.isVisible());
+  parent.append(d1 = el('div', { class : 'last-child' }));
+  logTest('lastChild (true)', parent.lastChild().node === d1.node);
+  d1.append('text');
+  logTest('nodeText', parent.nodeText() === 'text');
+  d1.on('click', function () { logTest('on / trigger', true); logTest('off', true); });
+  d1.trigger('click');
+  d1.off('click');
+  d1.trigger('click');
 }());

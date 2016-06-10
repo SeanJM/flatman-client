@@ -615,7 +615,7 @@
   };
   
   CreateNode.prototype.firstChild = function () {
-    return createNode(filter(this.children(), isElement)[0]);
+    return createNode(filter(this.node.childNodes, isElement)[0]);
   };
   
   CreateNode.prototype.focus = function () {
@@ -697,7 +697,7 @@
   };
   
   CreateNode.prototype.lastChild = function () {
-    return createNode(filter(this.children(), isElement).slice(-1)[0]);
+    return createNode(filter(this.node.childNodes, isElement).slice(-1)[0]);
   };
   
   CreateNode.prototype.nodeText = function () {

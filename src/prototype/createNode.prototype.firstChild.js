@@ -1,3 +1,3 @@
 CreateNode.prototype.firstChild = function () {
-  return createNode(filter(this.children(), isElement)[0]);
+  return createNode(filter(this.node.childNodes, isElement)[0]);
 };
