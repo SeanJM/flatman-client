@@ -1,33 +1,18 @@
 # Create Node
 #### Now you to can create nodes with a simple interface which will be very familiar.
 
+#### Thanks to Freezer for some help https://freezer.js.org/minimum-viable-view-library/
+
 ### Basic usage
 ```javascript
-createNode('div', { class : 'my-class-name' }, 'some text');
+el('div', { class : 'my-class-name' }, 'some text');
 ```
+
 ### Nesting
-
-Possible `Child Object`
-
-- Array of Arguments `['div', {}, Child Object]`
-- `Text`
-- `CreateNode Object`
-- `HTML Element`
-
 ```javascript
-createNode('div', { class : 'my-class-name' }, [Child Object]);
-```
-
-### HTML Like Syntax
-```javascript
-createNode(
-  ['div', { class : 'parent' },
-    ['div', { class : 'parent_child-1'}],
-    ['div', { class : 'parent_child-2'}],
-    ['div', { class : 'parent_child-3'},
-      ['div', { class : 'parent_child-3_child-1' }]
-    ],
-  ]
+el('div',
+  el('div', { class : 'child'}),
+  el('div', { class : 'child-2'})
 );
 ```
 
@@ -93,7 +78,7 @@ createNode(
 ### `addClass`
 
 ```javascript
-createNode('div').addClass('this-class-name');
+el('div').addClass('this-class-name');
 ```
 
 ---------------------------------------
@@ -101,11 +86,11 @@ createNode('div').addClass('this-class-name');
 ### `attr`
 
 ```javascript
-createNode('div').attr('data-attribute', 'value');
+el('div').attr('data-attribute', 'value');
 ```
 
 ```javascript
-createNode('div').attr({
+el('div').attr({
   class : 'some-class-name',
   style : 'background: red'
 });
@@ -115,47 +100,47 @@ createNode('div').attr({
 
 ### `copyAttributes`
 
-`createNode([String], [Object], [String]).copyAttributes([CreateNode Object | Selector | HTML Element])`
+`el([String], [Object], [String]).copyAttributes([CreateNode Object | Selector | HTML Element])`
 
 ```javascript
 var node = document.querySelector('#copy-these-attributes');
-createNode('div').copyAttributes(node);
+el('div').copyAttributes(node);
 ```
 
 ---------------------------------------
 
 ### `removeClass`
 
-`createNode([String], [Object], [Child Object]).removeClass([String])`
+`el([String], [Object], [Child Object]).removeClass([String])`
 
 ```javascript
-createNode('div').removeClass('class-name');
+el('div').removeClass('class-name');
 ```
 
 ---------------------------------------
 
 ### `style`
 
-`createNode([String], [Object], [Child Object]).style([Property], [Value])`
+`el([String], [Object], [Child Object]).style([Property], [Value])`
 
-`createNode([String], [Object], [Child Object]).style([Object])`
+`el([String], [Object], [Child Object]).style([Object])`
 
 ```javascript
-createNode('div').style('paddingLeft', 10);
+el('div').style('paddingLeft', 10);
 ```
 
 ```javascript
-createNode('div').style({ paddingLeft : 10, marginTop : 10 });
+el('div').style({ paddingLeft : 10, marginTop : 10 });
 ```
 
 ---------------------------------------
 
 ### `toggleClass`
 
-`createNode([String], [Object], [Child Object]).toggleClass([String])`
+`el([String], [Object], [Child Object]).toggleClass([String])`
 
 ```javascript
-var myDIV = createNode('div');
+var myDIV = el('div');
 
 myDIV.toggleClass('toggle'); // -> myDIV has class 'toggle'
 
