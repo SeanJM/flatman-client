@@ -696,7 +696,7 @@
   };
   
   CreateNode.prototype.nodeText = function () {
-    return this.node.innerHTML.replace(/<[^>]+>/g, '').trim().replace(/\s+/g, ' ');
+    return trim(this.node.innerHTML.replace(/<[^>]+?>/g, '')).replace(/\s+/g, ' ');
   };
   
   CreateNode.prototype.off = function (names, callback) {
@@ -738,16 +738,17 @@
   };
   
   CreateNode.prototype.parent = function () {
-    return new CreateNode(this.node.parentNode);
+    var p = this.node.parentNode;
+    return isElement(p) ? new CreateNode(p) : false;
   };
   
   CreateNode.prototype.parents = function () {
     var parents = [];
-    var p = this.node.parent;
+    var p = this.node.parentNode;
   
     while (p) {
-      parents.push(p);
-      p = this.node.parent;
+      parents.unshift(p);
+      p = p.parentNode;
     }
   
     return parents;

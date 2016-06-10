@@ -50,8 +50,8 @@ var wrapped = el(document.querySelector('#my-div'));
 - [`lastChild`](#lastchild-top)
 - [`nodeText`](#nodetext-top)
 - [`offset`](#offset-top)
-- [`parent`](#parent)
-- `parents`
+- [`parent`](#parent-top)
+- [`parents`](#parents-top)
 - `selectorPath`
 - `siblings`
 - `textNodes`
@@ -159,8 +159,9 @@ myDIV.toggleClass('toggle'); // -> myDIV does not have class 'toggle'
 #### `contains` [top](#methods)
 
 ```javascript
+var myChild;
 var myParent = el('div',
-  var myChild = el('div')
+  myChild = el('div')
 );
 
 myParent.contains(myChild);
@@ -190,8 +191,9 @@ myChild.hasParent(myParent);
 #### `isChecked` [top](#methods)
 
 ```javascript
+var myCheckbox;
 var myParent = el('label',
-  var myCheckbox = el('input', { type : 'checkbox' })
+  myCheckbox = el('input', { type : 'checkbox' })
 );
 
 myCheckbox.isChecked(myParent);
@@ -266,8 +268,9 @@ The idea here is that this check is smart, so it knows whether the node is visib
 Returns the closest parent matching the query.
 
 ```javascript
+var farthest;
 var parent = el('div', { class : 'closest' },
-  var farthest = el('div', { class : 'farthest' })
+  farthest = el('div', { class : 'farthest' })
 );
 
 farthest.closest('.closest');
@@ -374,6 +377,27 @@ var child = el('div');
 
 child.parent();
 // -> false
+
+child.appendTo(document.body);
+child.parent();
+// -> HTML Element : document.body
+```
+
+#### `parents` [top](#methods)
+
+Returns an array of parents, from first to last.
+
+```javascript
+var child;
+
+el('div', { class : 'parent-1' }
+  el('div' { class : 'parent-2' },
+    child = el('div' { class : 'parent-3' }
+  )
+);
+
+child.parents();
+// -> [Array]
 
 child.appendTo(document.body);
 child.parent();

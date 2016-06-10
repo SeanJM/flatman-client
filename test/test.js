@@ -24,3 +24,16 @@ Comp.prototype.put = function () {
 var test = new Comp();
 
 test.put();
+
+// Parents test
+(function () {
+  var child;
+
+  el('div', { class : 'parent-1' },
+    el('div', { class : 'parent-2' },
+      child = el('div', { class : 'parent-3 '})
+    )
+  );
+
+  document.write(JSON.stringify(child.parents()));
+}());

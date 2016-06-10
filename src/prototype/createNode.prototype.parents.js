@@ -1,10 +1,10 @@
 CreateNode.prototype.parents = function () {
   var parents = [];
-  var p = this.node.parent;
+  var p = this.node.parentNode;
 
   while (p) {
-    parents.push(p);
-    p = this.node.parent;
+    parents.unshift(p);
+    p = p.parentNode;
   }
 
   return parents;
