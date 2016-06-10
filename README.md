@@ -49,7 +49,7 @@ var wrapped = el(document.querySelector('#my-div'));
 - [`getSelector`](#getselector-top)
 - [`lastChild`](#lastchild-top)
 - [`nodeText`](#nodetext-top)
-- `offset`
+- [`offset`](#offset-top)
 - `parent`
 - `parents`
 - `selectorPath`
@@ -342,4 +342,23 @@ var parent = el('div', { class : 'closest' },
 
 parent.nodeText();
 // -> 'my text'
+```
+
+#### `offset` [top](#methods)
+
+Returns the `top`, `left`, `width`, `height` relative to the `body`'s coordinates. It is an interface for `this.node.getBoundingClientRect()`
+
+```javascript
+var parent = el('div');
+
+parent.appendTo(document.body);
+
+parent.offset();
+/* -> {
+        height : [Number],
+        left : [Number],
+        top : [Number],
+        width : [Number]
+      }
+*/
 ```
