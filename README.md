@@ -18,21 +18,21 @@ el('div',
 
 ### Methods
 
-#### [Attributes](#attributes-1)
-- [`addClass`](#addclass)
-- [`attr`](#attr)
-- [`copyAttributes`](#copyattributes)
-- [`removeClass`](#removeclass)
-- [`style`](#style)
-- [`toggleClass`](#toggleclass)
+#### [Attributes](#attributes-ø)
+- [`addClass`](#addclass-ø)
+- [`attr`](#attr-ø)
+- [`copyAttributes`](#copyattributes-ø)
+- [`removeClass`](#removeclass-ø)
+- [`style`](#style-ø)
+- [`toggleClass`](#toggleclass-ø)
 
-#### [Boolean](#boolean-1)
-- [`contains`](#contains)
-- [`hasClass`](#hasclass)
-- [`hasParent`](#hasparent)
-- [`isChecked`](#ischecked)
-- [`isFocused`](#isfocused)
-- [`isVisible`](#isvisible)
+#### [Boolean](#boolean-ø)
+- [`contains`](#contains-ø)
+- [`hasClass`](#hasclass-ø)
+- [`hasParent`](#hasparent-ø)
+- [`isChecked`](#ischecked-ø)
+- [`isFocused`](#isfocused-ø)
+- [`isVisible`](#isvisible-ø)
 
 #### Query
 - `closest`
