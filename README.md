@@ -16,6 +16,14 @@ el('div',
 );
 ```
 
+### Wrapping a DOM node and getting the interface
+
+You can get all the methods and the simplified interface based on ideas in jQuery by wrapping a node in `el`.
+
+```
+var wrapped = el(document.querySelector('#my-div'));
+```
+
 ### Methods
 
 #### [Attributes](#attributes-top)
