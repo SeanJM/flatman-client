@@ -474,25 +474,10 @@
   
   CreateNode.prototype.append = function () {
     var n = arguments.length;
-    var a = new Array(n);
     var i = 0;
-    var child;
-  
     for (; i < n; i++) {
-      a[i] = arguments[i];
+      appendChild(this.node, arguments[i]);
     }
-  
-    // Is a 'CreateNode' element
-    if (a[0] instanceof CreateNode) {
-      i = 0;
-      for (; i < n; i++) {
-        this.node.appendChild(a[i].node);
-      }
-    } else {
-      child = createNode.apply(null, a);
-      this.node.appendChild(child.node);
-    }
-  
     return this;
   };
   
@@ -573,9 +558,7 @@
   };
   
   CreateNode.prototype.children = function () {
-    return [].filter.call(this.node.childNodes, function (node) {
-      return node.nodeType === 1;
-    });
+    return filter(this.node.childNodes, isElement);
   };
   
   CreateNode.prototype.clone = function () {
@@ -971,7 +954,6 @@
   };
   
   window.el = createNode;
-  window.CreateNode = CreateNode;
   window.el.classPrefix = CreateNode.classPrefix;
   window.el.fn = CreateNode.fn;
   
