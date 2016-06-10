@@ -507,7 +507,7 @@
       res = {};
   
       for (var i = 0, n = attr.length; i < n; i++) {
-        res[attr[i].nodeName] = this.node.getAttribute(attr[i].nodeName);
+        res[attr[i].nodeName] = attr[i].nodeValue;
       }
   
       return res;
@@ -519,6 +519,7 @@
   CreateNode.prototype.before = function (maybeNode) {
     var node = this.node;
     var target = maybeNode instanceof CreateNode ? maybeNode.node : maybeNode;
+    console.log(target);
     target.parentNode.insertBefore(node, target);
   };
   
