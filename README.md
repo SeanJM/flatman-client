@@ -37,8 +37,8 @@ el('div',
 #### Query
 - [`closest`](#closest-top)
 - [`find`](#find-top)
-- `firstChild`
-- `getSelector`
+- [`firstChild`](#firstchild-top)
+- [`getSelector`](#getselector-top)
 - `lastChild`
 - `nodeText`
 - `offset`
@@ -259,7 +259,7 @@ var parent = el('div', { class : 'closest' },
 
 farthest.closest('.closest');
 
-// -> HTML Element : [ div.closest ]
+// -> HTML Element : div.closest
 ```
 
 #### `find` [top](#methods)
@@ -273,6 +273,34 @@ var parent = el('div', { class : 'closest' },
 );
 
 parent.find('.find');
-
 // -> HTML NodeList : [ div.find, div.find ]
+```
+
+#### `firstChild` [top](#methods)
+
+Returns the first child of NodeType 1 of a parent.
+
+```javascript
+var parent = el('div', { class : 'closest' },
+  el('div', { class : 'find-1' }),
+  el('div', { class : 'find-2' })
+);
+
+parent.firstChild();
+// -> HTML NodeList : div.find-1
+```
+
+#### `getSelector` [top](#methods)
+
+Returns a `String` selector for the selected node.
+
+```javascript
+var parent = el('div', {
+  class : 'closest',
+  tabIndex : 0,
+  id : 'my-id'
+};
+
+parent.getSelector();
+// -> HTML NodeList : div.closest#my-id[tabindex="0"]
 ```
