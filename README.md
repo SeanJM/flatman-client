@@ -77,7 +77,7 @@ el('div',
 
 ## Details
 
-### `addClass`
+#### `addClass`
 
 ```javascript
 el('div').addClass('this-class-name');
@@ -86,7 +86,7 @@ el('div').addClass('this-class-name');
 ---------------------------------------
 ## Attributes
 
-### `attr`
+#### `attr`
 
 ```javascript
 el('div').attr('data-attribute', 'value');
@@ -101,7 +101,7 @@ el('div').attr({
 
 ---------------------------------------
 
-### `copyAttributes`
+#### `copyAttributes`
 
 `el([String], [Object], [String]).copyAttributes([CreateNode Object | Selector | HTML Element])`
 
@@ -112,7 +112,7 @@ el('div').copyAttributes(node);
 
 ---------------------------------------
 
-### `removeClass`
+#### `removeClass`
 
 `el([String], [Object], [Child Object]).removeClass([String])`
 
@@ -122,7 +122,7 @@ el('div').removeClass('class-name');
 
 ---------------------------------------
 
-### `style`
+#### `style`
 
 `el([String], [Object], [Child Object]).style([Property], [Value])`
 
@@ -138,7 +138,7 @@ el('div').style({ paddingLeft : 10, marginTop : 10 });
 
 ---------------------------------------
 
-### `toggleClass`
+#### `toggleClass`
 
 ```javascript
 var myDIV = el('div');
@@ -148,7 +148,7 @@ myDIV.toggleClass('toggle'); // -> myDIV does not have class 'toggle'
 ```
 ## Booleans
 
-### `contains`
+#### `contains`
 
 ```javascript
 var myParent = el('div',
@@ -159,7 +159,7 @@ myParent.contains(myChild);
 // -> true
 ```
 
-### `hasClass`
+#### `hasClass`
 
 ```javascript
 var myDiv = el('div', { class : 'class-name' });
