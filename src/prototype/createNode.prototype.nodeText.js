@@ -1,3 +1,3 @@
 CreateNode.prototype.nodeText = function () {
-  return this.node.innerHTML.replace(/<[^>]+>/g, '').trim().replace(/\s+/g, ' ');
+  return trim(this.node.innerHTML.replace(/<[^>]+?>/g, '')).replace(/\s+/g, ' ');
 };

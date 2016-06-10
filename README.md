@@ -48,7 +48,7 @@ var wrapped = el(document.querySelector('#my-div'));
 - [`firstChild`](#firstchild-top)
 - [`getSelector`](#getselector-top)
 - [`lastChild`](#lastchild-top)
-- `nodeText`
+- [`nodeText`](#nodetext-top)
 - `offset`
 - `parent`
 - `parents`
@@ -328,4 +328,18 @@ var parent = el('div', { class : 'closest' },
 
 parent.lastChild();
 // -> HTML NodeList : div.find-2
+```
+
+#### `nodeText` [top](#methods)
+
+Returns the text of a node and removes any HTML, and sanitizes the string.
+
+```javascript
+var parent = el('div', { class : 'closest' },
+  el('div', { class : 'find-1' }, 'my text'),
+  el('div', { class : 'find-2' })
+);
+
+parent.nodeText();
+// -> 'my text'
 ```
