@@ -630,16 +630,16 @@
         return '#' + value;
       },
       name : function (value) {
-        return value;
+        return '[name="'+ value + '"]';
       },
       title : function (value) {
-        return value;
+        return '[title="'+ value + '"]';
       },
       value : function (value) {
-        return value;
+        return '[value="'+ value + '"]';
       },
       type : function (value) {
-        return value;
+        return '[type="'+ value + '"]';
       }
     };
     var selector = [];

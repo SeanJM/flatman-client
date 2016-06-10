@@ -17,42 +17,16 @@ function stringMe(res) {
     t += '}';
     return t;
   }
-  console.log(type);
 }
 
 function logTest(name, res) {
-  var title = el('h1', name);
+  var title = el('h2', name);
   var pre = el('pre', { class : 'grey'}, stringMe(res));
   title.appendTo(document.body);
   pre.appendTo(document.body);
 }
 
-function Comp () {
-  this.el = el('div',
-    this.doc = el('div', {
-      class : 'child_child-1'
-    }),
-    this.an = el('div', {
-      class : 'child_child-2'
-    }),
-    this.an = el('div', {
-      class : 'child_child-3'
-    }),
-    this.ab = el('div', {
-      class : 'child_child-4'
-    }),
-    this.ab = el('div', el('div'))
-  );
-  console.log(this.el);
-}
-
-Comp.prototype.put = function () {
-  this.el.appendTo(document.body);
-};
-
-var test = new Comp();
-
-test.put();
+el('h1', 'el Tests').appendTo(document.body);
 
 // Parents test
 (function () {
@@ -64,5 +38,6 @@ test.put();
     )
   );
 
-  logTest('parents', child.parents());
+  logTest('parents for ' + child.getSelector(), child.parents());
+  logTest('attributes', el('div').attr('type', 'test').attr('title', 'my-title'));
 }());
