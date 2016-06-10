@@ -1,5 +1,7 @@
 // CSS Related
 var
+  CLASS_PREFIX = '';
+  
   CSS_PROPERTY_IS_NUMBER = [
     'z-index',
     'opacity'

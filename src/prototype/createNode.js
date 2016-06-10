@@ -25,14 +25,14 @@ function CreateNode () {
       if (arguments[i] instanceof CreateNode) {
         this.node.appendChild(arguments[i].node);
       } else if (isString(arguments[i])) {
-        this.node.appendChild(document.createTextNode(arguments[i]));
+        this.node.innerHTML = arguments[i];
       }
     }
 
     for (var k in attributes) {
       if (k === 'class') {
         className = filter(map(attributes[k].split(' '), trim), hasLength);
-        this.node.className = className.sort().join(' ');
+        this.node.className = className.sort().join(' ').replace(/\{\{prefix}}/g, CLASS_PREFIX);
       } else if (k === 'style') {
         setStyle(this.node, attributes[k]);
       } else {
