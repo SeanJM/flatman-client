@@ -1,17 +1,17 @@
 CreateNode.prototype.select = function (start, end) {
   if (typeof start === 'undefined' && typeof end === 'undefined') {
-    return getSelection(this._node_);
+    return getSelection(this.node);
   }
 
   if (start === -1 && typeof end === 'undefined') {
-    start = this._node_.value.length;
-    end = this._node_.value.length;
+    start = this.node.value.length;
+    end = this.node.value.length;
   }
 
   if (typeof end === 'undefined' || end === -1) {
-    end = this._node_.value.length;
+    end = this.node.value.length;
   }
 
-  this._node_.focus();
-  setSelection(this._node_, start, end);
+  this.node.focus();
+  setSelection(this.node, start, end);
 };

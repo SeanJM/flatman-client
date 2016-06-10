@@ -1,3 +1,3 @@
 CreateNode.prototype.closest = function (selector) {
-  return createNode(this._node_.closest(selector));
+  return createNode(this.node.closest(selector));
 };

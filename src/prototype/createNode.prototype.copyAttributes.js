@@ -9,7 +9,7 @@ CreateNode.prototype.copyAttributes = function (fromNode) {
   }
 
   for (; i < attr.length; i++){
-    this._node_.setAttribute(attr[i].nodeName, attr[i].nodeValue);
+    this.node.setAttribute(attr[i].nodeName, attr[i].nodeValue);
   }
 
   return this;

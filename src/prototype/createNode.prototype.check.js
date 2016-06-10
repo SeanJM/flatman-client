@@ -1,5 +1,5 @@
 CreateNode.prototype.check = function () {
-  this._node_.checked = true;
+  this.node.checked = true;
 
   return this;
 };

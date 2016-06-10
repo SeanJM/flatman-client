@@ -1,5 +1,5 @@
 CreateNode.prototype.textNodes = function () {
-  var walk = document.createTreeWalker(this._node_, NodeFilter.SHOW_TEXT, null, false);
+  var walk = document.createTreeWalker(this.node, NodeFilter.SHOW_TEXT, null, false);
   var nextNode = walk.nextNode();
   var nodeList = [];
 

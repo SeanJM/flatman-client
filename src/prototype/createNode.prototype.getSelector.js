@@ -1,6 +1,6 @@
 CreateNode.prototype.getSelector = function () {
-  var attr = this._node_.attributes;
-  var tagName = this._node_.tagName.toLowerCase();
+  var attr = this.node.attributes;
+  var tagName = this.node.tagName.toLowerCase();
   var siblings = this.siblings(true);
   var format = {
     class : function (value) {
@@ -35,8 +35,8 @@ CreateNode.prototype.getSelector = function () {
     }
   }
 
-  if (siblings.length > 1 && typeof this._node_.id === 'undefined') {
-    selector.push(':nth-child(' + (siblings.indexOf(this._node_) + 1) + ')');
+  if (siblings.length > 1 && typeof this.node.id === 'undefined') {
+    selector.push(':nth-child(' + (siblings.indexOf(this.node) + 1) + ')');
   }
 
   return selector.join('');

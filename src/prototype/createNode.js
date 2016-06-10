@@ -4,55 +4,87 @@
 */
 
 function CreateNode () {
-  var self = this;
-  var target;
-  var opt;
-  var child;
+  var attributes = {};
+  var values = [];
+  var className;
 
+  this.subscribers = {};
+
+  if (arguments[0] instanceof CreateNode) {
+    this.node = arguments[0];
+    this.subscribers = arguments[0].subscribers;
+  } else if (isElement(arguments[0]) || arguments[0] === window) {
+    this.node = arguments[0];
+  } else if (isString(arguments[0])) {
+    this.node = document.createElement(arguments[0]);
+    if (isObject(arguments[1]) && !(arguments[1] instanceof CreateNode)) {
+      attributes = arguments[1];
+    }
+
+    for (var i = 1, n = arguments.length; i < n; i++) {
+      if (arguments[i] instanceof CreateNode) {
+        this.node.appendChild(arguments[i].node);
+      }
+    }
+
+    for (var k in attributes) {
+      if (k === 'style') {
+        setStyle(this.node, attributes[k]);
+      } else {
+        this.node.setAttribute(k, attributes[k]);
+      }
+    }
+  }
+
+  if (IS_IE && isTextInput(this.node)) {
+    // Normalize IE 9 input event
+    this.node.addEventListener('keyup', function (e) {
+      if (e.target === this.node) {
+        if (!values.length) {
+          values = [
+            this.node.value,
+            this.node.value
+          ];
+        } else {
+          values[0] = values[1];
+          values[1] = this.node.value;
+        }
+
+        if (values[0] !== values[1] && (e.which === IS_DELETE_KEY || e.which === IS_BACKSPACE_KEY)) {
+          this.trigger('input', {
+            type : 'input',
+            which : e.which
+          });
+        }
+      }
+    }, false);
+  }
+}
+
+function createNode () {
   var i = 0;
   var n = arguments.length;
-  var a = new Array(n);
+  var a;
+
+  // Faster way to apply arguments
+  switch (n) {
+    case 1 :
+    return new CreateNode(arguments[0]);
+    case 2 :
+    return new CreateNode(arguments[0], arguments[1]);
+    case 3 :
+    return new CreateNode(arguments[0], arguments[1], arguments[2]);
+    case 4 :
+    return new CreateNode(arguments[0], arguments[1], arguments[2], arguments[3]);
+  }
+
+  a = new Array(n);
 
   for (; i < n; i++) {
     a[i] = arguments[i];
   }
 
-  if (isArray(a[0]) && a.length === 1) {
-    target = a[0][0];
-    opt = a[0][1];
-    child = a[0].length <= 3 ? a[0][2] : a[0].slice(2);
-  } else {
-    target = a[0];
-    opt = a[1];
-    child = a.length <= 3 ? a[2] : a.slice(2);
-  }
-
-  this._class_ = [];
-
-  this._subscribers_ = {};
-
-  this._dimensions_ = {
-    bottom : undefined,
-    height : undefined,
-    left : undefined,
-    right : undefined,
-    top : undefined,
-    width : undefined,
-  };
-
-  setNode(this, target);
-  setAttributes(this._node_, opt);
-  normalizeTextInput(this);
-  appendChild(this._node_, child);
-}
-
-function createNode (target, opt, child) {
-  switch (arguments.length) {
-    case 1 :
-    return new CreateNode(target);
-    case 2 :
-    return new CreateNode(target, opt);
-    default :
-    return new CreateNode(target, opt, child);
-  }
+  function F() { return CreateNode.apply(this, a); }
+  F.prototype = CreateNode.prototype;
+  return new F();
 }

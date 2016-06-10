@@ -1,5 +1,5 @@
 CreateNode.prototype.scale = function (x, y) {
-  var computed = window.getComputedStyle(this._node_)[createNode.prefix.transform];
+  var computed = window.getComputedStyle(this.node)[createNode.prefix.transform];
   var matrix = [];
 
   if (computed === 'none') {
@@ -20,5 +20,5 @@ CreateNode.prototype.scale = function (x, y) {
   matrix[0] = x;
   matrix[3] = y;
 
-  this._node_.style[VENDOR_PREFIX.transform] = 'matrix(' + matrix.join(',') + ')';
+  this.node.style[VENDOR_PREFIX.transform] = 'matrix(' + matrix.join(',') + ')';
 };

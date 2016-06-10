@@ -1,5 +1,5 @@
 CreateNode.prototype.centerTo = function (targetNode) {
-  var nodeRect = this._node_.getBoundingClientRect();
+  var nodeRect = this.node.getBoundingClientRect();
   var width = nodeRect.width;
   var height = nodeRect.height;
   var targetIsParent;
@@ -11,10 +11,10 @@ CreateNode.prototype.centerTo = function (targetNode) {
     targetIsParent = true;
   } else if (targetNode instanceof CreateNode) {
     targetRect = targetNode._node_.getBoundingClientRect();
-    targetIsParent = targetNode._node_.contains(this._node_);
+    targetIsParent = targetNode._node_.contains(this.node);
   } else {
     targetRect = targetNode.getBoundingClientRect();
-    targetIsParent = targetNode.contains(this._node_);
+    targetIsParent = targetNode.contains(this.node);
   }
 
   if (targetIsParent) {

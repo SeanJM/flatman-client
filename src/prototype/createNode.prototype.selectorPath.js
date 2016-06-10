@@ -1,6 +1,6 @@
 CreateNode.prototype.selectorPath = function () {
   var path = [this.getSelector()];
-  var p = this._node_.parentNode;
+  var p = this.node.parentNode;
 
   while (p) {
     path.unshift(new CreateNode(p).getSelector());

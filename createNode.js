@@ -107,6 +107,10 @@
     return Object.prototype.toString.call(array) === '[object Array]';
   }
   
+  function isDefined (a) {
+    return typeof a !== 'undefined';
+  }
+  
   function isElement (a) {
     return a && typeof a.nodeType === 'number' && a.nodeType === 1;
   }
@@ -123,12 +127,28 @@
     return Object.prototype.toString.call(list) === '[object NodeList]';
   }
   
+  function isNumber (a) {
+    return !isNaN(Number(a));
+  }
+  
+  function isObject (a) {
+    return Object.prototype.toString.call(a) === '[object Object]';
+  }
+  
+  function isString (a) {
+    return typeof a === 'string';
+  }
+  
   function isTextInput (node) {
     var types = ['text', 'password', 'phone', 'number'];
     var tagName = node.tagName;
     var isTextarea = tagName === 'TEXTAREA';
     var isText = tagName === 'INPUT' && types.indexOf(node.type) > -1;
     return isTextarea || isText;
+  }
+  
+  function isUndefined (a) {
+    return typeof a === 'undefined';
   }
   
   function map (array, callback) {
@@ -189,6 +209,29 @@
   
   function trim (string) {
     return string.replace(/^\s+|\s+$/g, '');
+  }
+  
+  function addClass (node, a) {
+    var className = filter(map(node.className.split(' '), trim), hasLength);
+    var i = className.indexOf(a);
+  
+    if (i === -1) {
+      className.push(a);
+      node.className = className.join(' ');
+    }
+  }
+  
+  function addClasses (node) {
+    var i = 1;
+    var n = arguments.length;
+    var a;
+  
+    for (; i < n; i++) {
+      a = trim(arguments[i]);
+      if (hasLength(a)) {
+        addClass(node, a);
+      }
+    }
   }
   
   // From http://stackoverflow.com/questions/263743/caret-position-in-textarea-in-characters-from-the-start
@@ -263,65 +306,6 @@
   
     return [ start, end ];
   }
-  function normalizeTextInput (self) {
-    var values = [];
-  
-    if (IS_IE && isTextInput(self._node_)) {
-      // Normalize IE 9 input event
-      self._node_.addEventListener('keyup', function (e) {
-        if (e.target === self._node_) {
-          if (!values.length) {
-            values = [
-              self._node_.value,
-              self._node_.value
-            ];
-          } else {
-            values[0] = values[1];
-            values[1] = self._node_.value;
-          }
-  
-          if (values[0] !== values[1] && (e.which === IS_DELETE_KEY || e.which === IS_BACKSPACE_KEY)) {
-            self.trigger('input', {
-              type : 'input',
-              which : e.which
-            });
-          }
-        }
-      }, false);
-    }
-  }
-  
-  function setAttributes (node, opt) {
-    var className;
-    for (var k in opt) {
-      if (k === 'class') {
-        className = filter(map(opt[k].split(' '), trim), hasLength).sort();
-        node.className = className.join(' ');
-      } else if (k === 'text') {
-        node.innerHTML = opt[k];
-      } else if (k === 'style') {
-        node.setAttribute(k, toStyleString(opt[k]));
-      } else {
-        node.setAttribute(k, opt[k]);
-      }
-    }
-  }
-  
-  function setNode (self, target) {
-    if (typeof target === 'string') {
-      self._node_ = document.createElement(target);
-    } else if (target instanceof CreateNode) {
-      self._class_ = target._class_;
-      self._dimensions_ = target._class_;
-      self._subscribers_ = target._subscribers_;
-      self._node_ = target._node_;
-    } else if (isNode(target) || target === window) {
-      self._node_ = target;
-    } else {
-      throw 'Invalid arguments';
-    }
-  }
-  
   function setSelection (node, start, end) {
     if (node.setSelectionRange) {
       node.setSelectionRange(start, end);
@@ -333,15 +317,39 @@
       range.select();
     }
   }
-  function setStyle(node, name, value) {
-    if (typeof VENDOR_PREFIX[name] === 'string') {
-      name = VENDOR_PREFIX[name];
+  function setStyle(node) {
+    var i = 0;
+    var n = arguments.length;
+    var a = new Array(n);
+  
+    function style(name, value) {
+      if (JS_PROPERTY_TO_CSS.hasOwnProperty(name)) {
+        name = JS_PROPERTY_TO_CSS[name];
+      }
+  
+      if (typeof VENDOR_PREFIX[name] === 'string') {
+        name = VENDOR_PREFIX[name];
+      }
+  
+      if (isNumber(value) && TO_PIXEL.indexOf(name) !== -1) {
+        value += 'px';
+      }
+  
+      node.style[name] = value;
     }
   
-    if (TO_PIXEL.indexOf(name) !== -1 && !isNaN(Number(value))) {
-      node.style[name] = value.toString().substr(-2) === 'px' ? value : value + 'px';
-    } else {
-      node.style[name] = value;
+    for (; i < n; i++) {
+      a[i] = arguments[i];
+    }
+  
+    if (isString(a[1]) && isUndefined(a[2])) {
+      return window.getComputedStyle(node)[a[1]];
+    } else if (isString(a[1]) && isDefined(a[2])) {
+      style(a[0], a[1]);
+    } else if (isObject(a[1])) {
+      for (var k in a[0]) {
+        setStyle(node, k, a[0][k]);
+      }
     }
   }
   
@@ -373,69 +381,93 @@
   */
   
   function CreateNode () {
-    var self = this;
-    var target;
-    var opt;
-    var child;
+    var attributes = {};
+    var values = [];
+    var className;
   
+    this.subscribers = {};
+  
+    if (arguments[0] instanceof CreateNode) {
+      this.node = arguments[0];
+      this.subscribers = arguments[0].subscribers;
+    } else if (isElement(arguments[0]) || arguments[0] === window) {
+      this.node = arguments[0];
+    } else if (isString(arguments[0])) {
+      this.node = document.createElement(arguments[0]);
+      if (isObject(arguments[1]) && !(arguments[1] instanceof CreateNode)) {
+        attributes = arguments[1];
+      }
+  
+      for (var i = 1, n = arguments.length; i < n; i++) {
+        if (arguments[i] instanceof CreateNode) {
+          this.node.appendChild(arguments[i].node);
+        }
+      }
+  
+      for (var k in attributes) {
+        if (k === 'style') {
+          setStyle(this.node, attributes[k]);
+        } else {
+          this.node.setAttribute(k, attributes[k]);
+        }
+      }
+    }
+  
+    if (IS_IE && isTextInput(this.node)) {
+      // Normalize IE 9 input event
+      this.node.addEventListener('keyup', function (e) {
+        if (e.target === this.node) {
+          if (!values.length) {
+            values = [
+              this.node.value,
+              this.node.value
+            ];
+          } else {
+            values[0] = values[1];
+            values[1] = this.node.value;
+          }
+  
+          if (values[0] !== values[1] && (e.which === IS_DELETE_KEY || e.which === IS_BACKSPACE_KEY)) {
+            this.trigger('input', {
+              type : 'input',
+              which : e.which
+            });
+          }
+        }
+      }, false);
+    }
+  }
+  
+  function createNode () {
     var i = 0;
     var n = arguments.length;
-    var a = new Array(n);
+    var a;
+  
+    // Faster way to apply arguments
+    switch (n) {
+      case 1 :
+      return new CreateNode(arguments[0]);
+      case 2 :
+      return new CreateNode(arguments[0], arguments[1]);
+      case 3 :
+      return new CreateNode(arguments[0], arguments[1], arguments[2]);
+      case 4 :
+      return new CreateNode(arguments[0], arguments[1], arguments[2], arguments[3]);
+    }
+  
+    a = new Array(n);
   
     for (; i < n; i++) {
       a[i] = arguments[i];
     }
   
-    if (isArray(a[0]) && a.length === 1) {
-      target = a[0][0];
-      opt = a[0][1];
-      child = a[0].length <= 3 ? a[0][2] : a[0].slice(2);
-    } else {
-      target = a[0];
-      opt = a[1];
-      child = a.length <= 3 ? a[2] : a.slice(2);
-    }
-  
-    this._class_ = [];
-  
-    this._subscribers_ = {};
-  
-    this._dimensions_ = {
-      bottom : undefined,
-      height : undefined,
-      left : undefined,
-      right : undefined,
-      top : undefined,
-      width : undefined,
-    };
-  
-    setNode(this, target);
-    setAttributes(this._node_, opt);
-    normalizeTextInput(this);
-    appendChild(this._node_, child);
-  }
-  
-  function createNode (target, opt, child) {
-    switch (arguments.length) {
-      case 1 :
-      return new CreateNode(target);
-      case 2 :
-      return new CreateNode(target, opt);
-      default :
-      return new CreateNode(target, opt, child);
-    }
+    function F() { return CreateNode.apply(this, a); }
+    F.prototype = CreateNode.prototype;
+    return new F();
   }
   
   CreateNode.prototype.addClass = function (a) {
-    var className = filter(map(this._node_.className.split(' '), trim), hasLength);
-    var i = className.indexOf(a);
-  
-    if (i === -1) {
-      className.push(a);
-      className.sort();
-      this._node_.className = className.join(' ');
-    }
-  
+    addClass(this.node, a);
     return this;
   };
   
@@ -453,11 +485,11 @@
     if (a[0] instanceof CreateNode) {
       i = 0;
       for (; i < n; i++) {
-        this._node_.appendChild(a[i]._node_);
+        this.node.appendChild(a[i]._node_);
       }
     } else {
       child = createNode.apply(null, a);
-      this._node_.appendChild(child._node_);
+      this.node.appendChild(child._node_);
     }
   
     return this;
@@ -467,9 +499,9 @@
     if (target instanceof CreateNode) {
       target.append(this);
     } else if (isNode(target)) {
-      target.appendChild(this._node_);
+      target.appendChild(this.node);
     } else if (typeof target === 'string') {
-      document.querySelector(target).appendChild(this._node_);
+      document.querySelector(target).appendChild(this.node);
     }
   
     return this;
@@ -485,26 +517,26 @@
     }
   
     if (typeof a[0] === 'string' && typeof a[1] === 'string') {
-      this._node_.setAttribute(a[0], a[1]);
+      this.node.setAttribute(a[0], a[1]);
     } else if (typeof a[0] === 'string') {
-      return this._node_.getAttribute(a[0]);
+      return this.node.getAttribute(a[0]);
     } else if (typeof a[0] === 'object') {
-      setAttributes(this._node_, a[0]);
+      setAttributes(this.node, a[0]);
     } else if (!a.length) {
-      return this._node_.attributes;
+      return this.node.attributes;
     }
   
     return this;
   };
   
   CreateNode.prototype.before = function (maybeNode) {
-    var node = this._node_;
+    var node = this.node;
     var target = maybeNode instanceof CreateNode ? maybeNode._node_ : maybeNode;
     target.parentNode.insertBefore(node, target);
   };
   
   CreateNode.prototype.centerTo = function (targetNode) {
-    var nodeRect = this._node_.getBoundingClientRect();
+    var nodeRect = this.node.getBoundingClientRect();
     var width = nodeRect.width;
     var height = nodeRect.height;
     var targetIsParent;
@@ -516,10 +548,10 @@
       targetIsParent = true;
     } else if (targetNode instanceof CreateNode) {
       targetRect = targetNode._node_.getBoundingClientRect();
-      targetIsParent = targetNode._node_.contains(this._node_);
+      targetIsParent = targetNode._node_.contains(this.node);
     } else {
       targetRect = targetNode.getBoundingClientRect();
-      targetIsParent = targetNode.contains(this._node_);
+      targetIsParent = targetNode.contains(this.node);
     }
   
     if (targetIsParent) {
@@ -534,30 +566,30 @@
   };
   
   CreateNode.prototype.check = function () {
-    this._node_.checked = true;
+    this.node.checked = true;
   
     return this;
   };
   
   CreateNode.prototype.children = function () {
-    return [].filter.call(this._node_.childNodes, function (node) {
+    return [].filter.call(this.node.childNodes, function (node) {
       return node.nodeType === 1;
     });
   };
   
   CreateNode.prototype.clone = function () {
-    return createNode(this._node_.cloneNode(true));
+    return createNode(this.node.cloneNode(true));
   };
   
   CreateNode.prototype.closest = function (selector) {
-    return createNode(this._node_.closest(selector));
+    return createNode(this.node.closest(selector));
   };
   
   CreateNode.prototype.contains = function (target) {
     if (target instanceof CreateNode) {
-      return this._node_.contains(target._node_);
+      return this.node.contains(target._node_);
     }
-    return this._node_.contains(target);
+    return this.node.contains(target);
   };
   
   CreateNode.prototype.copyAttributes = function (fromNode) {
@@ -571,24 +603,24 @@
     }
   
     for (; i < attr.length; i++){
-      this._node_.setAttribute(attr[i].nodeName, attr[i].nodeValue);
+      this.node.setAttribute(attr[i].nodeName, attr[i].nodeValue);
     }
   
     return this;
   };
   
   CreateNode.prototype.disable = function () {
-    this._node_.setAttribute('disabled', 'disabled');
+    this.node.setAttribute('disabled', 'disabled');
     return this;
   };
   
   CreateNode.prototype.enable = function () {
-    this._node_.removeAttribute('disabled');
+    this.node.removeAttribute('disabled');
     return this;
   };
   
   CreateNode.prototype.find = function (selector) {
-    return [].map.call(this._node_.querySelectorAll(selector), function (node) {
+    return [].map.call(this.node.querySelectorAll(selector), function (node) {
       return new CreateNode(node);
     });
   };
@@ -598,13 +630,13 @@
   };
   
   CreateNode.prototype.focus = function () {
-    this._node_.focus();
+    this.node.focus();
     return this;
   };
   
   CreateNode.prototype.getSelector = function () {
-    var attr = this._node_.attributes;
-    var tagName = this._node_.tagName.toLowerCase();
+    var attr = this.node.attributes;
+    var tagName = this.node.tagName.toLowerCase();
     var siblings = this.siblings(true);
     var format = {
       class : function (value) {
@@ -639,32 +671,32 @@
       }
     }
   
-    if (siblings.length > 1 && typeof this._node_.id === 'undefined') {
-      selector.push(':nth-child(' + (siblings.indexOf(this._node_) + 1) + ')');
+    if (siblings.length > 1 && typeof this.node.id === 'undefined') {
+      selector.push(':nth-child(' + (siblings.indexOf(this.node) + 1) + ')');
     }
   
     return selector.join('');
   };
   
   CreateNode.prototype.hasClass = function (className) {
-    return this._node_.className.split(' ').indexOf(className) !== -1;
+    return this.node.className.split(' ').indexOf(className) !== -1;
   };
   
   CreateNode.prototype.hasParent = function (target) {
-    return target.contains(this._node_);
+    return target.contains(this.node);
   };
   
   CreateNode.prototype.isChecked = function () {
-    return this._node_.checked;
+    return this.node.checked;
   };
   
   CreateNode.prototype.isFocused = function () {
-    return document.activeElement === this._node_;
+    return document.activeElement === this.node;
   };
   
   CreateNode.prototype.isVisible = function () {
-    var css = window.getComputedStyle(this._node_);
-    var rect = this._node_.getBoundingClientRect();
+    var css = window.getComputedStyle(this.node);
+    var rect = this.node.getBoundingClientRect();
     var offLeft = rect.left + rect.width < 0;
     var offRight = rect.left > window.innerWidth;
     var offTop = rect.top + rect.bottom + window.pageYOffset < 0;
@@ -680,14 +712,14 @@
   };
   
   CreateNode.prototype.nodeText = function () {
-    return this._node_.innerHTML.replace(/<[^>]+>/g, '').trim().replace(/\s+/g, ' ');
+    return this.node.innerHTML.replace(/<[^>]+>/g, '').trim().replace(/\s+/g, ' ');
   };
   
   CreateNode.prototype.off = function (names, callback) {
     var self = this;
   
     names.split(',').map(trim).filter(hasLength).forEach(function (name) {
-      var subscribers = self._subscribers_;
+      var subscribers = self.subscribers;
   
       if (isFunction(callback)) {
         subscribers[name] = subscribers[name].filter(partial(not, callback));
@@ -704,34 +736,34 @@
   };
   
   CreateNode.prototype.offset = function () {
-    return this._node_.getBoundingClientRect();
+    return this.node.getBoundingClientRect();
   };
   
   CreateNode.prototype.on = function (names, callback) {
     var self = this;
   
     forEach(names.split(',').map(trim).filter(hasLength), function (name) {
-      if (typeof self._subscribers_[name] === 'undefined') {
-        self._subscribers_[name] = [];
+      if (typeof self.subscribers[name] === 'undefined') {
+        self.subscribers[name] = [];
       }
-      if (self._subscribers_[name].indexOf(callback) === -1) {
-        self._subscribers_[name].push(callback);
+      if (self.subscribers[name].indexOf(callback) === -1) {
+        self.subscribers[name].push(callback);
         self._node_.addEventListener(name, callback, false);
       }
     });
   };
   
   CreateNode.prototype.parent = function () {
-    return new CreateNode(this._node_.parentNode);
+    return new CreateNode(this.node.parentNode);
   };
   
   CreateNode.prototype.parents = function () {
     var parents = [];
-    var p = this._node_.parent;
+    var p = this.node.parent;
   
     while (p) {
       parents.push(p);
-      p = this._node_.parent;
+      p = this.node.parent;
     }
   
     return parents;
@@ -756,14 +788,14 @@
   };
   
   CreateNode.prototype.remove = function () {
-    if (isElement(this._node_.parentNode)) {
-      this._node_.parentNode.removeChild(this._node_);
+    if (isElement(this.node.parentNode)) {
+      this.node.parentNode.removeChild(this.node);
     }
     return this;
   };
   
   CreateNode.prototype.removeClass = function (a) {
-    this._node_.className = filter(map(this._node_.className.split(' '), trim), function (b) {
+    this.node.className = filter(map(this.node.className.split(' '), trim), function (b) {
       return hasLength(b) && not(a, b);
     }).sort().join(' ');
     return this;
@@ -772,17 +804,17 @@
   CreateNode.prototype.replaceWith = function (newNode) {
     var withNode = newNode instanceof CreateNode ? newNode._node_ : newNode;
   
-    if (this._node_.parentNode) {
-      this._node_.parentNode.replaceChild(withNode, this._node_);
+    if (this.node.parentNode) {
+      this.node.parentNode.replaceChild(withNode, this.node);
     }
   
-    this._node_ = withNode;
+    this.node = withNode;
   
     return this;
   };
   
   CreateNode.prototype.scale = function (x, y) {
-    var computed = window.getComputedStyle(this._node_)[createNode.prefix.transform];
+    var computed = window.getComputedStyle(this.node)[createNode.prefix.transform];
     var matrix = [];
   
     if (computed === 'none') {
@@ -803,30 +835,30 @@
     matrix[0] = x;
     matrix[3] = y;
   
-    this._node_.style[VENDOR_PREFIX.transform] = 'matrix(' + matrix.join(',') + ')';
+    this.node.style[VENDOR_PREFIX.transform] = 'matrix(' + matrix.join(',') + ')';
   };
   
   CreateNode.prototype.select = function (start, end) {
     if (typeof start === 'undefined' && typeof end === 'undefined') {
-      return getSelection(this._node_);
+      return getSelection(this.node);
     }
   
     if (start === -1 && typeof end === 'undefined') {
-      start = this._node_.value.length;
-      end = this._node_.value.length;
+      start = this.node.value.length;
+      end = this.node.value.length;
     }
   
     if (typeof end === 'undefined' || end === -1) {
-      end = this._node_.value.length;
+      end = this.node.value.length;
     }
   
-    this._node_.focus();
-    setSelection(this._node_, start, end);
+    this.node.focus();
+    setSelection(this.node, start, end);
   };
   
   CreateNode.prototype.selectorPath = function () {
     var path = [this.getSelector()];
-    var p = this._node_.parentNode;
+    var p = this.node.parentNode;
   
     while (p) {
       path.unshift(new CreateNode(p).getSelector());
@@ -842,14 +874,13 @@
   };
   
   CreateNode.prototype.siblings = function () {
-    var children = this._node_.parentNode.childNodes;
+    var children = this.node.parentNode.childNodes;
     return map(filter(children, isElement), function (s) {
       return createNode(s);
     });
   };
   
   CreateNode.prototype.style = function () {
-    var styles = window.getComputedStyle(this._node_);
     var i = 0;
     var n = arguments.length;
     var a = new Array(n);
@@ -857,30 +888,20 @@
     for (; i < n; i++) {
       a[i] = arguments[i];
     }
-  
-    if (typeof a[0] === 'string' && typeof a[1] === 'undefined') {
-      return styles[a[0]];
-    } else if (typeof a[0] === 'string' && typeof a[1] !== 'undefined') {
-      setStyle(this._node_, a[0], a[1]);
-    }
-  
-    if (typeof a[0] === 'object') {
-      for (var k in a[0]) {
-        setStyle(this._node_, k, a[0][k]);
-      }
-    }
+    
+    setStyle.apply(null, [this.node].concat(a));
   };
   
   CreateNode.prototype.tag = function (name) {
     var clone;
   
     if (typeof name === 'undefined') {
-      return this._node_.tagName;
+      return this.node.tagName;
     }
   
     clone = new CreateNode(name);
-    clone.text(this._node_.innerHTML);
-    clone.copyAttributes(this._node_);
+    clone.text(this.node.innerHTML);
+    clone.copyAttributes(this.node);
   
     this.replaceWith(clone);
   
@@ -889,16 +910,16 @@
   
   CreateNode.prototype.text = function (value) {
     if (typeof value === 'string') {
-      this._node_.innerHTML = value;
+      this.node.innerHTML = value;
     } else {
-      return this._node_.innerHTML;
+      return this.node.innerHTML;
     }
   
     return this;
   };
   
   CreateNode.prototype.textNodes = function () {
-    var walk = document.createTreeWalker(this._node_, NodeFilter.SHOW_TEXT, null, false);
+    var walk = document.createTreeWalker(this.node, NodeFilter.SHOW_TEXT, null, false);
     var nextNode = walk.nextNode();
     var nodeList = [];
   
@@ -924,14 +945,14 @@
     var nameList = names.split(',').map(trim).filter(hasLength);
   
     if (typeof e === 'undefined') {
-      e = { type : name, target : this._node_ };
+      e = { type : name, target : this.node };
     } else if (typeof e.type === 'undefined') {
       e.type = name;
     }
   
     if (!self._node_.disabled) {
       forEach(nameList, function (name) {
-        forEach(self._subscribers_[name], function (callback) {
+        forEach(self.subscribers[name], function (callback) {
           callback(e);
         });
       });
@@ -939,17 +960,18 @@
   };
   
   CreateNode.prototype.uncheck = function () {
-    this._node_.checked = false;
+    this.node.checked = false;
   };
   
   CreateNode.prototype.value = function (value) {
     if (typeof value !== 'undefined') {
-      this._node_.value = value;
+      this.node.value = value;
     } else {
-      return this._node_.value;
+      return this.node.value;
     }
   };
   
-  window.createNode = createNode;
+  window.cn = createNode;
   window.CreateNode = CreateNode;
+  
 }());

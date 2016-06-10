@@ -1,4 +1,4 @@
 CreateNode.prototype.disable = function () {
-  this._node_.setAttribute('disabled', 'disabled');
+  this.node.setAttribute('disabled', 'disabled');
   return this;
 };

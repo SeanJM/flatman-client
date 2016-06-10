@@ -1,11 +1,11 @@
 CreateNode.prototype.replaceWith = function (newNode) {
   var withNode = newNode instanceof CreateNode ? newNode._node_ : newNode;
 
-  if (this._node_.parentNode) {
-    this._node_.parentNode.replaceChild(withNode, this._node_);
+  if (this.node.parentNode) {
+    this.node.parentNode.replaceChild(withNode, this.node);
   }
 
-  this._node_ = withNode;
+  this.node = withNode;
 
   return this;
 };

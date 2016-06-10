@@ -3,14 +3,14 @@ CreateNode.prototype.trigger = function (names, e) {
   var nameList = names.split(',').map(trim).filter(hasLength);
 
   if (typeof e === 'undefined') {
-    e = { type : name, target : this._node_ };
+    e = { type : name, target : this.node };
   } else if (typeof e.type === 'undefined') {
     e.type = name;
   }
 
   if (!self._node_.disabled) {
     forEach(nameList, function (name) {
-      forEach(self._subscribers_[name], function (callback) {
+      forEach(self.subscribers[name], function (callback) {
         callback(e);
       });
     });

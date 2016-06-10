@@ -1,3 +1,3 @@
 CreateNode.prototype.isFocused = function () {
-  return document.activeElement === this._node_;
+  return document.activeElement === this.node;
 };
