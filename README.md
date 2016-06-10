@@ -1,7 +1,7 @@
 # Create Node
-#### Now you to can create nodes with a simple interface which will be very familiar.
+Now you to can create nodes with a simple interface which will be very familiar.
 
-#### Thanks to Freezer for some help https://freezer.js.org/minimum-viable-view-library/
+Thanks to Freezer for some help for clearing up the "child" problem https://freezer.js.org/minimum-viable-view-library/
 
 ### Basic usage
 ```javascript
@@ -29,7 +29,7 @@ el('div',
 #### [Boolean](#boolean-1)
 - [`contains`](#contains)
 - [`hasClass`](#hasclass)
-- `hasParent`
+- [`hasParent`](#hasParent)
 - `isChecked`
 - `isFocused`
 - `isVisible`
@@ -146,6 +146,9 @@ var myDIV = el('div');
 myDIV.toggleClass('toggle'); // -> myDIV has class 'toggle'
 myDIV.toggleClass('toggle'); // -> myDIV does not have class 'toggle'
 ```
+
+---------------------------------------
+
 ## Booleans
 
 #### `contains`
@@ -165,5 +168,16 @@ myParent.contains(myChild);
 var myDiv = el('div', { class : 'class-name' });
 
 myParent.hasClass('class-name');
+// -> true
+```
+
+#### `hasParent`
+
+```javascript
+var myParent = el('div',
+  var myChild = el('div')
+);
+
+myChild.hasParent(myParent);
 // -> true
 ```
