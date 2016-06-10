@@ -1,3 +1,4 @@
 CreateNode.prototype.parent = function () {
-  return new CreateNode(this.node.parentNode);
+  var p = this.node.parentNode;
+  return isElement(p) ? new CreateNode(p) : false;
 };

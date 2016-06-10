@@ -50,7 +50,7 @@ var wrapped = el(document.querySelector('#my-div'));
 - [`lastChild`](#lastchild-top)
 - [`nodeText`](#nodetext-top)
 - [`offset`](#offset-top)
-- `parent`
+- [`parent`](#parent)
 - `parents`
 - `selectorPath`
 - `siblings`
@@ -363,4 +363,19 @@ parent.offset();
         width : [Number]
       }
 */
+```
+
+#### `parent` [top](#methods)
+
+If the `node` has a parent, it will return it's parent. Otherwise, it will return `false`
+
+```javascript
+var child = el('div');
+
+child.parent();
+// -> false
+
+child.appendTo(document.body);
+child.parent();
+// -> HTML Element : document.body
 ```
