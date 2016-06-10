@@ -1,13 +1,5 @@
 function setStyle(node) {
-  var i = 0;
-  var n = arguments.length;
-  var a = new Array(n);
-
   function style(name, value) {
-    if (JS_PROPERTY_TO_CSS.hasOwnProperty(name)) {
-      name = JS_PROPERTY_TO_CSS[name];
-    }
-
     if (typeof VENDOR_PREFIX[name] === 'string') {
       name = VENDOR_PREFIX[name];
     }
@@ -19,17 +11,13 @@ function setStyle(node) {
     node.style[name] = value;
   }
 
-  for (; i < n; i++) {
-    a[i] = arguments[i];
-  }
-
-  if (isString(a[1]) && isUndefined(a[2])) {
-    return window.getComputedStyle(node)[a[1]];
-  } else if (isString(a[1]) && isDefined(a[2])) {
-    style(a[0], a[1]);
-  } else if (isObject(a[1])) {
-    for (var k in a[0]) {
-      setStyle(node, k, a[0][k]);
+  if (isString(arguments[1]) && isUndefined(arguments[2])) {
+    return window.getComputedStyle(node)[arguments[1]];
+  } else if (isString(arguments[1]) && isDefined(arguments[2])) {
+    style(arguments[1], arguments[2]);
+  } else if (isObject(arguments[1])) {
+    for (var k in arguments[1]) {
+      setStyle(node, k, arguments[1][k]);
     }
   }
 }
