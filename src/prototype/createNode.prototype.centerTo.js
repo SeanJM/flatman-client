@@ -10,8 +10,8 @@ CreateNode.prototype.centerTo = function (targetNode) {
     targetRect.height = window.innerHeight;
     targetIsParent = true;
   } else if (targetNode instanceof CreateNode) {
-    targetRect = targetNode._node_.getBoundingClientRect();
-    targetIsParent = targetNode._node_.contains(this.node);
+    targetRect = targetNode.node.getBoundingClientRect();
+    targetIsParent = targetNode.node.contains(this.node);
   } else {
     targetRect = targetNode.getBoundingClientRect();
     targetIsParent = targetNode.contains(this.node);

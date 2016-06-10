@@ -3,7 +3,7 @@ CreateNode.prototype.copyAttributes = function (fromNode) {
       attr;
 
   if (fromNode instanceof CreateNode) {
-    attr = fromNode._node_.attributes;
+    attr = fromNode.node.attributes;
   } else {
     attr = fromNode.attributes;
   }

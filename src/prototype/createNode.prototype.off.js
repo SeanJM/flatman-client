@@ -6,10 +6,10 @@ CreateNode.prototype.off = function (names, callback) {
 
     if (isFunction(callback)) {
       subscribers[name] = subscribers[name].filter(partial(not, callback));
-      self._node_.removeEventListener(name, callback, false);
+      self.node.removeEventListener(name, callback, false);
     } else {
       while (subscribers[name].length) {
-        self._node_.removeEventListener(name, subscribers[name][0], false);
+        self.node.removeEventListener(name, subscribers[name][0], false);
         subscribers[name].shift();
       }
     }

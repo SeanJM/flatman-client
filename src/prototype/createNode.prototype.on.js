@@ -7,7 +7,7 @@ CreateNode.prototype.on = function (names, callback) {
     }
     if (self.subscribers[name].indexOf(callback) === -1) {
       self.subscribers[name].push(callback);
-      self._node_.addEventListener(name, callback, false);
+      self.node.addEventListener(name, callback, false);
     }
   });
 };

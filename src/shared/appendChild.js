@@ -5,11 +5,11 @@ function appendChild (node, child) {
   if (typeof child === 'string') {
     node.innerHTML = child;
   } else if (child instanceof CreateNode) {
-    node.appendChild(child._node_);
+    node.appendChild(child.node);
   } else if (isArray(child)) {
     // Is a node creation
     if (typeof child[0] === 'string') {
-      node.appendChild(new CreateNode(child)._node_);
+      node.appendChild(new CreateNode(child).node);
     } else {
       // Is a group
       f = new DocumentFragment();

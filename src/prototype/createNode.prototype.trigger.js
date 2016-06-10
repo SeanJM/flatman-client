@@ -8,7 +8,7 @@ CreateNode.prototype.trigger = function (names, e) {
     e.type = name;
   }
 
-  if (!self._node_.disabled) {
+  if (!self.node.disabled) {
     forEach(nameList, function (name) {
       forEach(self.subscribers[name], function (callback) {
         callback(e);

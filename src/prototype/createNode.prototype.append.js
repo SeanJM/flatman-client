@@ -12,11 +12,11 @@ CreateNode.prototype.append = function () {
   if (a[0] instanceof CreateNode) {
     i = 0;
     for (; i < n; i++) {
-      this.node.appendChild(a[i]._node_);
+      this.node.appendChild(a[i].node);
     }
   } else {
     child = createNode.apply(null, a);
-    this.node.appendChild(child._node_);
+    this.node.appendChild(child.node);
   }
 
   return this;
