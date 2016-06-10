@@ -47,7 +47,7 @@ var wrapped = el(document.querySelector('#my-div'));
 - [`find`](#find-top)
 - [`firstChild`](#firstchild-top)
 - [`getSelector`](#getselector-top)
-- `lastChild`
+- [`lastChild`](#lastchild-top)
 - `nodeText`
 - `offset`
 - `parent`
@@ -310,8 +310,22 @@ var parent = el('div', {
   class : 'closest',
   tabIndex : 0,
   id : 'my-id'
-};
+});
 
 parent.getSelector();
 // -> HTML NodeList : div.closest#my-id[tabindex="0"]
+```
+
+#### `lastChild` [top](#methods)
+
+Returns the first child of NodeType 1 of a parent.
+
+```javascript
+var parent = el('div', { class : 'closest' },
+  el('div', { class : 'find-1' }),
+  el('div', { class : 'find-2' })
+);
+
+parent.lastChild();
+// -> HTML NodeList : div.find-2
 ```
