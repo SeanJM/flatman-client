@@ -25,6 +25,7 @@ function stringMe(res) {
   var type = Object.prototype.toString.call(res);
   var t;
   var a;
+  console.log(type);
   if (type === '[object Array]') {
     return '[\n' + res.map(function (a) {
       return '  ' + stringMe(a);
@@ -43,6 +44,8 @@ function stringMe(res) {
     }
     t += a.join(',') + '\n}';
     return t;
+  } else if (type === '[object Boolean]') {
+    return res ? 'true' : 'false';
   }
 }
 
@@ -61,12 +64,13 @@ el('h1', 'el Tests').appendTo(document.body);
   var d1;
   var d2;
   var d1_1;
+  var parent;
 
   d1 = el('div', { class : 'div-1' }, d1_1 = el('div', { class : 'div-1_1' }));
   d2 = el('div', { class : 'div-2' });
 
 
-  el('div', { class : 'parent-1' },
+  parent = el('div', { class : 'parent-1' },
     el('div', { class : 'parent-2' },
       child = el('div', { class : 'parent-3 '})
     )
@@ -79,4 +83,20 @@ el('h1', 'el Tests').appendTo(document.body);
   logTest('empty attr', el('div').attr('type', 'test').attr());
   d2.before(d1_1);
   logTest('before', d1);
+
+  logTest('check (true)', el('input', { type : 'checkbox' }).check().isChecked());
+  logTest('check (false)', el('input', { type : 'checkbox' }).isChecked());
+
+  d1 = el('div', { class : 'parent-1' },
+    el('div', { class : 'parent-2' },
+      el('div', { class : 'parent-3 '})
+    )
+  );
+  logTest('children', d1.children());
+  logTest('clone', d1.clone());
+  logTest('closest (true)', child.closest('.parent-1'));
+  logTest('closest (false)', child.closest('body'));
+  logTest('contains (true)', parent.contains(child));
+  logTest('contains (false)', parent.contains(d1));
+  logTest('copyAttributes', child.copyAttributes(d1));
 }());

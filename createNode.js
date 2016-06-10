@@ -519,7 +519,6 @@
   CreateNode.prototype.before = function (maybeNode) {
     var node = this.node;
     var target = maybeNode instanceof CreateNode ? maybeNode.node : maybeNode;
-    console.log(target);
     target.parentNode.insertBefore(node, target);
   };
   
@@ -571,7 +570,8 @@
   };
   
   CreateNode.prototype.closest = function (selector) {
-    return createNode(this.node.closest(selector));
+    var c = this.node.closest(selector);
+    return c !== null ? createNode(c) : false;
   };
   
   CreateNode.prototype.contains = function (target) {
