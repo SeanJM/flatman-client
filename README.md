@@ -18,25 +18,25 @@ el('div',
 
 ### Methods
 
-#### [Attributes](#attributes-)
-- [`addClass`](#addclass-_)
-- [`attr`](#attr-)
-- [`copyAttributes`](#copyattributes-)
-- [`removeClass`](#removeclass-)
-- [`style`](#style-)
-- [`toggleClass`](#toggleclass-)
+#### [Attributes](#attributes-top)
+- [`addClass`](#addclass-top)
+- [`attr`](#attr-top)
+- [`copyAttributes`](#copyattributes-top)
+- [`removeClass`](#removeclass-top)
+- [`style`](#style-top)
+- [`toggleClass`](#toggleclass-top)
 
-#### [Boolean](#boolean-)
-- [`contains`](#contains-)
-- [`hasClass`](#hasclass-)
-- [`hasParent`](#hasparent-)
-- [`isChecked`](#ischecked-)
-- [`isFocused`](#isfocused-)
-- [`isVisible`](#isvisible-)
+#### [Boolean](#boolean-top)
+- [`contains`](#contains-top)
+- [`hasClass`](#hasclass-top)
+- [`hasParent`](#hasparent-top)
+- [`isChecked`](#ischecked-top)
+- [`isFocused`](#isfocused-top)
+- [`isVisible`](#isvisible-top)
 
 #### Query
-- [`closest`](#closest-)
-- `find`
+- [`closest`](#closest-top)
+- [`find`](#find-top)
 - `firstChild`
 - `getSelector`
 - `lastChild`
@@ -258,5 +258,21 @@ var parent = el('div', { class : 'closest' },
 );
 
 farthest.closest('.closest');
+
 // -> HTML Element : [ div.closest ]
+```
+
+#### `find` [top](#methods)
+
+Returns an array of matches as a result of executing the query.
+
+```javascript
+var parent = el('div', { class : 'closest' },
+  el('div', { class : 'find' }),
+  el('div', { class : 'find' })
+);
+
+parent.find('.find');
+
+// -> HTML NodeList : [ div.find, div.find ]
 ```
