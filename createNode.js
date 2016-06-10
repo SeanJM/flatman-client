@@ -2,6 +2,8 @@
 
   // CSS Related
   var
+    CLASS_PREFIX = '';
+    
     CSS_PROPERTY_IS_NUMBER = [
       'z-index',
       'opacity'
@@ -213,10 +215,14 @@
   
   function addClass (node, a) {
     var className = filter(map(node.className.split(' '), trim), hasLength);
-    var i = className.indexOf(a);
+    var i;
+  
+    a = a.replace(/\{\{prefix}}/g, CLASS_PREFIX);
+    i = className.indexOf(a);
   
     if (i === -1) {
       className.push(a);
+      className.sort();
       node.className = className.join(' ');
     }
   }
@@ -228,11 +234,11 @@
     if (typeof child === 'string') {
       node.innerHTML = child;
     } else if (child instanceof CreateNode) {
-      node.appendChild(child._node_);
+      node.appendChild(child.node);
     } else if (isArray(child)) {
       // Is a node creation
       if (typeof child[0] === 'string') {
-        node.appendChild(new CreateNode(child)._node_);
+        node.appendChild(new CreateNode(child).node);
       } else {
         // Is a group
         f = new DocumentFragment();
@@ -293,6 +299,13 @@
   
     return [ start, end ];
   }
+  function removeClass (node, a) {
+    a = a.replace(/\{\{prefix}}/g, CLASS_PREFIX);
+    node.className = filter(map(node.className.split(' '), trim), function (b) {
+      return hasLength(b) && not(a, b);
+    }).sort().join(' ');
+  }
+  
   function setSelection (node, start, end) {
     if (node.setSelectionRange) {
       node.setSelectionRange(start, end);
@@ -305,15 +318,7 @@
     }
   }
   function setStyle(node) {
-    var i = 0;
-    var n = arguments.length;
-    var a = new Array(n);
-  
     function style(name, value) {
-      if (JS_PROPERTY_TO_CSS.hasOwnProperty(name)) {
-        name = JS_PROPERTY_TO_CSS[name];
-      }
-  
       if (typeof VENDOR_PREFIX[name] === 'string') {
         name = VENDOR_PREFIX[name];
       }
@@ -325,17 +330,13 @@
       node.style[name] = value;
     }
   
-    for (; i < n; i++) {
-      a[i] = arguments[i];
-    }
-  
-    if (isString(a[1]) && isUndefined(a[2])) {
-      return window.getComputedStyle(node)[a[1]];
-    } else if (isString(a[1]) && isDefined(a[2])) {
-      style(a[0], a[1]);
-    } else if (isObject(a[1])) {
-      for (var k in a[0]) {
-        setStyle(node, k, a[0][k]);
+    if (isString(arguments[1]) && isUndefined(arguments[2])) {
+      return window.getComputedStyle(node)[arguments[1]];
+    } else if (isString(arguments[1]) && isDefined(arguments[2])) {
+      style(arguments[1], arguments[2]);
+    } else if (isObject(arguments[1])) {
+      for (var k in arguments[1]) {
+        setStyle(node, k, arguments[1][k]);
       }
     }
   }
@@ -361,6 +362,14 @@
   
     return string;
   }
+  
+  CreateNode.classPrefix = function (name) {
+    CLASS_PREFIX = name;
+  };
+  
+  CreateNode.fn = function (name, callback) {
+    CreateNode.prototype[name] = callback;
+  };
   
   /*
     Argument format
@@ -389,14 +398,14 @@
         if (arguments[i] instanceof CreateNode) {
           this.node.appendChild(arguments[i].node);
         } else if (isString(arguments[i])) {
-          this.node.appendChild(document.createTextNode(arguments[i]));
+          this.node.innerHTML = arguments[i];
         }
       }
   
       for (var k in attributes) {
         if (k === 'class') {
           className = filter(map(attributes[k].split(' '), trim), hasLength);
-          this.node.className = className.sort().join(' ');
+          this.node.className = className.sort().join(' ').replace(/\{\{prefix}}/g, CLASS_PREFIX);
         } else if (k === 'style') {
           setStyle(this.node, attributes[k]);
         } else {
@@ -477,11 +486,11 @@
     if (a[0] instanceof CreateNode) {
       i = 0;
       for (; i < n; i++) {
-        this.node.appendChild(a[i]._node_);
+        this.node.appendChild(a[i].node);
       }
     } else {
       child = createNode.apply(null, a);
-      this.node.appendChild(child._node_);
+      this.node.appendChild(child.node);
     }
   
     return this;
@@ -523,7 +532,7 @@
   
   CreateNode.prototype.before = function (maybeNode) {
     var node = this.node;
-    var target = maybeNode instanceof CreateNode ? maybeNode._node_ : maybeNode;
+    var target = maybeNode instanceof CreateNode ? maybeNode.node : maybeNode;
     target.parentNode.insertBefore(node, target);
   };
   
@@ -539,8 +548,8 @@
       targetRect.height = window.innerHeight;
       targetIsParent = true;
     } else if (targetNode instanceof CreateNode) {
-      targetRect = targetNode._node_.getBoundingClientRect();
-      targetIsParent = targetNode._node_.contains(this.node);
+      targetRect = targetNode.node.getBoundingClientRect();
+      targetIsParent = targetNode.node.contains(this.node);
     } else {
       targetRect = targetNode.getBoundingClientRect();
       targetIsParent = targetNode.contains(this.node);
@@ -579,7 +588,7 @@
   
   CreateNode.prototype.contains = function (target) {
     if (target instanceof CreateNode) {
-      return this.node.contains(target._node_);
+      return this.node.contains(target.node);
     }
     return this.node.contains(target);
   };
@@ -589,7 +598,7 @@
         attr;
   
     if (fromNode instanceof CreateNode) {
-      attr = fromNode._node_.attributes;
+      attr = fromNode.node.attributes;
     } else {
       attr = fromNode.attributes;
     }
@@ -715,10 +724,10 @@
   
       if (isFunction(callback)) {
         subscribers[name] = subscribers[name].filter(partial(not, callback));
-        self._node_.removeEventListener(name, callback, false);
+        self.node.removeEventListener(name, callback, false);
       } else {
         while (subscribers[name].length) {
-          self._node_.removeEventListener(name, subscribers[name][0], false);
+          self.node.removeEventListener(name, subscribers[name][0], false);
           subscribers[name].shift();
         }
       }
@@ -740,7 +749,7 @@
       }
       if (self.subscribers[name].indexOf(callback) === -1) {
         self.subscribers[name].push(callback);
-        self._node_.addEventListener(name, callback, false);
+        self.node.addEventListener(name, callback, false);
       }
     });
   };
@@ -787,14 +796,12 @@
   };
   
   CreateNode.prototype.removeClass = function (a) {
-    this.node.className = filter(map(this.node.className.split(' '), trim), function (b) {
-      return hasLength(b) && not(a, b);
-    }).sort().join(' ');
+    removeClass(this.node, a);
     return this;
   };
   
   CreateNode.prototype.replaceWith = function (newNode) {
-    var withNode = newNode instanceof CreateNode ? newNode._node_ : newNode;
+    var withNode = newNode instanceof CreateNode ? newNode.node : newNode;
   
     if (this.node.parentNode) {
       this.node.parentNode.replaceChild(withNode, this.node);
@@ -942,7 +949,7 @@
       e.type = name;
     }
   
-    if (!self._node_.disabled) {
+    if (!self.node.disabled) {
       forEach(nameList, function (name) {
         forEach(self.subscribers[name], function (callback) {
           callback(e);
@@ -965,5 +972,7 @@
   
   window.el = createNode;
   window.CreateNode = CreateNode;
+  window.el.classPrefix = CreateNode.classPrefix;
+  window.el.fn = CreateNode.fn;
   
 }());
