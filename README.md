@@ -42,7 +42,7 @@ var wrapped = el(document.querySelector('#my-div'));
 - [`isFocused`](#isfocused-top)
 - [`isVisible`](#isvisible-top)
 
-#### Query
+#### [Query](#query-top)
 - [`closest`](#closest-top)
 - [`find`](#find-top)
 - [`firstChild`](#firstchild-top)
@@ -258,6 +258,8 @@ myFocus.isVisible();
 ```
 
 The idea here is that this check is smart, so it knows whether the node is visible or not in various contexts.
+
+## Query [top](#methods)
 
 #### `closest` [top](#methods)
 
