@@ -18,7 +18,7 @@ el('div',
 
 ### Methods
 
-#### Attributes
+#### `Attributes`(#attributes)
 - [`addClass`](#addclass)
 - [`attr`](#attr)
 - [`copyAttributes`](#copyattributes)
@@ -26,17 +26,19 @@ el('div',
 - [`style`](#style)
 - [`toggleClass`](#toggleclass)
 
-#### Query
-- `closest`
-- `contains`
-- `find`
-- `firstChild`
-- `getSelector`
+#### `Boolean`(#boolean)
+- [`contains`](#contains)
 - `hasClass`
 - `hasParent`
 - `isChecked`
 - `isFocused`
 - `isVisible`
+
+#### Query
+- `closest`
+- `find`
+- `firstChild`
+- `getSelector`
 - `lastChild`
 - `nodeText`
 - `offset`
@@ -82,6 +84,7 @@ el('div').addClass('this-class-name');
 ```
 
 ---------------------------------------
+## Attributes
 
 ### `attr`
 
@@ -137,12 +140,21 @@ el('div').style({ paddingLeft : 10, marginTop : 10 });
 
 ### `toggleClass`
 
-`el([String], [Object], [Child Object]).toggleClass([String])`
-
 ```javascript
 var myDIV = el('div');
 
 myDIV.toggleClass('toggle'); // -> myDIV has class 'toggle'
-
 myDIV.toggleClass('toggle'); // -> myDIV does not have class 'toggle'
+```
+## Booleans
+
+### `contains`
+
+```javascript
+var myParent = el('div',
+  var myChild = el('div')
+);
+
+myParent.contains(myChild);
+// -> true
 ```
