@@ -1,2 +1,2 @@
-window.createNode = createNode;
+window.el = createNode;
 window.CreateNode = CreateNode;
