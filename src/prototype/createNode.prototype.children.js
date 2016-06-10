@@ -1,3 +1,6 @@
 CreateNode.prototype.children = function () {
-  return filter(this.node.childNodes, isElement);
+  var c = this.node.childNodes;
+  return c.length ? map(filter(c, isElement), function (a) {
+    return el(a);
+  }) : false;
 };
