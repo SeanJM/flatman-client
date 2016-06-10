@@ -18,7 +18,7 @@ el('div',
 
 ### Methods
 
-#### `Attributes`(#attributes)
+#### [`Attributes`](#attributes)
 - [`addClass`](#addclass)
 - [`attr`](#attr)
 - [`copyAttributes`](#copyattributes)
@@ -26,7 +26,7 @@ el('div',
 - [`style`](#style)
 - [`toggleClass`](#toggleclass)
 
-#### `Boolean`(#boolean)
+#### [`Boolean`](#boolean)
 - [`contains`](#contains)
 - `hasClass`
 - `hasParent`
