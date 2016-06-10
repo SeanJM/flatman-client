@@ -18,21 +18,21 @@ el('div',
 
 ### Methods
 
-#### [Attributes](#attributes-^)
-- [`addClass`](#addclass-^)
-- [`attr`](#attr-^)
-- [`copyAttributes`](#copyattributes-^)
-- [`removeClass`](#removeclass-^)
-- [`style`](#style-^)
-- [`toggleClass`](#toggleclass-^)
+#### [Attributes](#attributes-ø)
+- [`addClass`](#addclass-ø)
+- [`attr`](#attr-ø)
+- [`copyAttributes`](#copyattributes-ø)
+- [`removeClass`](#removeclass-ø)
+- [`style`](#style-ø)
+- [`toggleClass`](#toggleclass-ø)
 
-#### [Boolean](#boolean-^)
-- [`contains`](#contains-^)
-- [`hasClass`](#hasclass-^)
-- [`hasParent`](#hasparent-^)
-- [`isChecked`](#ischecked-^)
-- [`isFocused`](#isfocused-^)
-- [`isVisible`](#isvisible-^)
+#### [Boolean](#boolean-ø)
+- [`contains`](#contains-ø)
+- [`hasClass`](#hasclass-ø)
+- [`hasParent`](#hasparent-ø)
+- [`isChecked`](#ischecked-ø)
+- [`isFocused`](#isfocused-ø)
+- [`isVisible`](#isvisible-ø)
 
 #### Query
 - `closest`
@@ -77,15 +77,15 @@ el('div',
 
 ## Details
 
-#### `addClass` [^](#methods)
+#### `addClass` [ø](#methods)
 
 ```javascript
 el('div').addClass('this-class-name');
 ```
 
-## Attributes [^](#methods)
+## Attributes [ø](#methods)
 
-#### `attr` [^](#methods)
+#### `attr` [ø](#methods)
 
 ```javascript
 el('div').attr('data-attribute', 'value');
@@ -99,7 +99,7 @@ el('div').attr({
 ```
 
 
-#### `copyAttributes` [^](#methods)
+#### `copyAttributes` [ø](#methods)
 
 `el([String], [Object], [String]).copyAttributes([CreateNode Object | Selector | HTML Element])`
 
@@ -109,7 +109,7 @@ el('div').copyAttributes(node);
 ```
 
 
-#### `removeClass` [^](#methods)
+#### `removeClass` [ø](#methods)
 
 `el([String], [Object], [Child Object]).removeClass([String])`
 
@@ -118,7 +118,7 @@ el('div').removeClass('class-name');
 ```
 
 
-#### `style` [^](#methods)
+#### `style` [ø](#methods)
 
 `el([String], [Object], [Child Object]).style([Property], [Value])`
 
@@ -133,7 +133,7 @@ el('div').style({ paddingLeft : 10, marginTop : 10 });
 ```
 
 
-#### `toggleClass` [^](#methods)
+#### `toggleClass` [ø](#methods)
 
 ```javascript
 var myDIV = el('div');
@@ -143,9 +143,9 @@ myDIV.toggleClass('toggle'); // -> myDIV does not have class 'toggle'
 ```
 
 
-## Booleans [^](#methods)
+## Booleans [ø](#methods)
 
-#### `contains` [^](#methods)
+#### `contains` [ø](#methods)
 
 ```javascript
 var myParent = el('div',
@@ -156,7 +156,7 @@ myParent.contains(myChild);
 // -> true
 ```
 
-#### `hasClass` [^](#methods)
+#### `hasClass` [ø](#methods)
 
 ```javascript
 var myDiv = el('div', { class : 'class-name' });
@@ -165,7 +165,7 @@ myParent.hasClass('class-name');
 // -> true
 ```
 
-#### `hasParent` [^](#methods)
+#### `hasParent` [ø](#methods)
 
 ```javascript
 var myParent = el('div',
@@ -176,7 +176,7 @@ myChild.hasParent(myParent);
 // -> true
 ```
 
-#### `isChecked` [^](#methods)
+#### `isChecked` [ø](#methods)
 
 ```javascript
 var myParent = el('label',
@@ -192,7 +192,7 @@ myCheckbox.isChecked(myParent);
 // -> true
 ```
 
-#### `isFocused` [^](#methods)
+#### `isFocused` [ø](#methods)
 
 ```javascript
 var myFocus = el('label', { tabIndex : 0 });
@@ -206,7 +206,7 @@ myFocus.isFocused();
 // -> true
 ```
 
-#### `isVisible` [^](#methods)
+#### `isVisible` [ø](#methods)
 
 This one requires a bit of explaining, it doesn't only check for 'visibility'.
 
@@ -223,7 +223,7 @@ var myNode = el('div', {
   }
 }).appendTo(document.body);
 
-myFocus.isVisible(); [^](#methods)
+myFocus.isVisible(); [ø](#methods)
 // -> true
 
 myFocus.style('left', -100000);
