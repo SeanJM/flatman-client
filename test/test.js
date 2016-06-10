@@ -1,18 +1,18 @@
 function Comp () {
-  this.el = cn('div',
-    this.doc = cn('div', {
+  this.el = el('div',
+    this.doc = el('div', {
       class : 'child_child-1'
     }),
-    this.an = cn('div', {
+    this.an = el('div', {
       class : 'child_child-2'
     }),
-    this.an = cn('div', {
+    this.an = el('div', {
       class : 'child_child-3'
     }),
-    this.ab = cn('div', {
+    this.ab = el('div', {
       class : 'child_child-4'
     }),
-    this.ab = cn('div', cn('div'))
+    this.ab = el('div', el('div'))
   );
   console.log(this.el);
 }

@@ -224,13 +224,9 @@
   function addClasses (node) {
     var i = 1;
     var n = arguments.length;
-    var a;
   
     for (; i < n; i++) {
-      a = trim(arguments[i]);
-      if (hasLength(a)) {
-        addClass(node, a);
-      }
+      addClass(node, arguments[i]);
     }
   }
   
@@ -401,11 +397,16 @@
       for (var i = 1, n = arguments.length; i < n; i++) {
         if (arguments[i] instanceof CreateNode) {
           this.node.appendChild(arguments[i].node);
+        } else if (isString(arguments[i])) {
+          this.node.appendChild(document.createTextNode(arguments[i]));
         }
       }
   
       for (var k in attributes) {
-        if (k === 'style') {
+        if (k === 'class') {
+          className = filter(map(attributes[k].split(' '), trim), hasLength);
+          addClasses.apply(null, [this.node].concat(className));
+        } else if (k === 'style') {
           setStyle(this.node, attributes[k]);
         } else {
           this.node.setAttribute(k, attributes[k]);
@@ -971,7 +972,7 @@
     }
   };
   
-  window.cn = createNode;
+  window.el = createNode;
   window.CreateNode = CreateNode;
   
 }());
