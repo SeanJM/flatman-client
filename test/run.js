@@ -350,11 +350,33 @@ startTest(function (test) {
     a.select(0, 1);
     test('select', a.select()[0] === 0 && a.select()[1] === 1, true);
   }());
+
+  // selectorPath
+  (function () {
+    var a;
+    el('div', { class : '1' },
+      el('div', { class : '1_1'},
+        a = el('div', { class : '1_1_1'})
+      )
+    );
+    test('selectorPath', a.selectorPath(), 'div.1 div.1_1 div.1_1_1');
+  }());
+
+  // siblings
+  (function () {
+    var a;
+    var b;
+    el('div', { class : '1' },
+      a = el('div', { class : '1_1'}),
+      el('div', { class : '1_2'}),
+      el('div', { class : '1_3'}),
+      b = el('div', { class : '1_4'})
+    );
+    test('siblings', a.siblings()[3].node, b.node);
+  }());
 });
 
 (function () {
-  // logTest('selectorPath', parent_1_1.selectorPath());
-  // logTest('siblings', parent_1.siblings());
   // logTest('style', parent_1.style({ color : 'red' }));
   // logTest('style', parent_1.style('color') === 'rgb(255, 0, 0)');
   // logTest('style', el('div', { style : { color : 'red' } }).style('color') === 'rgb(255, 0, 0)');
