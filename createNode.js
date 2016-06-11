@@ -384,7 +384,7 @@
     this.subscribers = {};
   
     if (arguments[0] instanceof CreateNode) {
-      this.node = arguments[0];
+      this.node = arguments[0].node;
       this.subscribers = arguments[0].subscribers;
     } else if (isElement(arguments[0]) || arguments[0] === window) {
       this.node = arguments[0];
@@ -516,10 +516,9 @@
     return this;
   };
   
-  CreateNode.prototype.before = function (maybeNode) {
-    var node = this.node;
-    var target = maybeNode instanceof CreateNode ? maybeNode.node : maybeNode;
-    target.parentNode.insertBefore(node, target);
+  CreateNode.prototype.before = function (target) {
+    target = createNode(target);
+    target.node.parentNode.insertBefore(this.node, target.node);
   };
   
   CreateNode.prototype.centerTo = function (targetNode) {
@@ -761,7 +760,7 @@
   
   CreateNode.prototype.prepend = function (node) {
     var children = this.children();
-    if (children.length) {
+    if (children) {
       createNode(node).before(children[0]);
     } else {
       createNode(node).appendTo(this);
