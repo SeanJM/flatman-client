@@ -25,7 +25,9 @@ function stringMe(res) {
   var type = Object.prototype.toString.call(res);
   var t;
   var a;
-  if (type === '[object Array]') {
+  if (type === '[object Text]') {
+    return type + ': "' + res.nodeValue + '"';
+  } else if (type === '[object Array]') {
     return '[\n' + res.map(function (a) {
       return '  ' + stringMe(a);
     }).join(',\n') + '\n]';
@@ -143,4 +145,16 @@ el('h1', 'el Tests').appendTo(document.body);
   logTest('siblings', parent_1.siblings());
   logTest('style', parent_1.style({ color : 'red' }));
   logTest('tag', parent_1.tag('h1'));
+  logTest('tag', parent_1.tag() === 'h1');
+  parent_1.text('this is a title');
+  logTest('text', parent_1.text());
+  logTest('textNodes', parent_1.textNodes());
+  parent_1.toggleClass('this-class');
+  logTest('toggleClass (true)', parent_1.hasClass('this-class'));
+  parent_1.toggleClass('this-class');
+  logTest('toggleClass (false)', parent_1.hasClass('this-class'));
+  d1 = el('input', { type : 'checkbox' }).check().uncheck();
+  logTest('uncheck (true)', !d1.isChecked());
+  d1 = el('input', { type : 'text' }).value('test');
+  logTest('value', d1.value() === 'test');
 }());
