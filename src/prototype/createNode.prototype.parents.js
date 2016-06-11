@@ -3,7 +3,7 @@ CreateNode.prototype.parents = function () {
   var p = this.node.parentNode;
 
   while (p) {
-    parents.unshift(el(p));
+    parents.push(el(p));
     p = p.parentNode;
   }
 

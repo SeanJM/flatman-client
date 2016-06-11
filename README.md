@@ -398,8 +398,4 @@ el('div', { class : 'parent-1' },
 
 child.parents();
 // -> [Array]
-
-child.appendTo(document.body);
-child.parent();
-// -> HTML Element : document.body
 ```
