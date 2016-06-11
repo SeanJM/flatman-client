@@ -114,7 +114,7 @@ startTest(function (test) {
   // focus
   (function () {
     var p = el('div', { tabIndex : '0' });
-    p.appendTo(document.body);
+    p.appendTo('body');
     p.focus();
     test('focus', p.isFocused(), true);
     p.remove();
@@ -135,31 +135,173 @@ startTest(function (test) {
     var t = a.hasClass('test') && b.hasClass('test-2');
     test('hasClass', t, true);
   }());
+
+  // hasParent
+  (function () {
+    var a = el('div', { class : 'test'});
+    var b = el('div', { class : 'test-2'});
+    a.append(b);
+    test('hasParent', b.hasParent(a) && !a.hasParent(b), true);
+  }());
+
+  // isChecked
+  (function () {
+    var a = el('input', { type : 'checkbox'});
+    var b = el('input', { type : 'checkbox'});
+    a.check();
+    test('isChecked', a.isChecked() && !b.isChecked(), true);
+  }());
+
+  // isDisabled
+  (function () {
+    var a = el('input', { type : 'checkbox'});
+    var b = el('input', { type : 'checkbox'});
+    a.disable();
+    test('isDisabled', a.isDisabled() && !b.isDisabled(), true);
+  }());
+
+  // isFocused
+  (function () {
+    var a = el('input', { type : 'checkbox' });
+    var b = el('input', { type : 'checkbox' });
+
+    a.appendTo('body');
+    b.appendTo('body');
+    a.focus();
+
+    test('isFocused', a.isFocused() && !b.isFocused(), true);
+
+    a.remove();
+    b.remove();
+  }());
+
+  // isVisible
+  (function () {
+    var a = el('div');
+    var b = el('div');
+    var c = el('div');
+    var d = el('div');
+    var e = el('div');
+    var f = el('div');
+
+    a.appendTo('body');
+    b.appendTo('body').style('position: absolute; left: -100000px');
+    c.appendTo('body').style('display', 'none');
+    d.appendTo('body').style('width : 0; height: 0; overflow: hidden;');
+    e.appendTo('body').style('display', 'none');
+    f.appendTo(e);
+
+    test('isVisible',
+      a.isVisible() &&
+      !b.isVisible() &&
+      !c.isVisible() &&
+      !d.isVisible() &&
+      !f.isVisible(),
+      true
+    );
+
+    a.remove();
+    b.remove();
+    c.remove();
+    d.remove();
+    e.remove();
+    f.remove();
+  }());
+
+  // lastChild
+  (function () {
+    var a = el('div');
+    var b = el('div');
+    var c = el('div');
+    var d = el('div');
+    a.append(b, c, d);
+    test('lastChild', a.lastChild().node, d.node);
+  }());
+
+  // nodeText
+  (function () {
+    var a = el('div', 'text');
+    test('nodeText', a.nodeText(), 'text');
+  }());
+
+  // off
+  (function () {
+    var a = el('div');
+    var x = true;
+
+    a.on('click', function () {
+      test('off', true, false);
+      x = false;
+    });
+
+    a.off('click');
+    a.trigger('click');
+
+    if (x) {
+      test('off', true, true);
+    }
+  }());
+
+  // offset
+  (function () {
+    var a = el('div', { style : 'position: absolute; left: 0; top: 0; width : 0; height: 0'});
+    var o;
+    a.appendTo('body');
+    o = a.offset();
+    test('offset', o.top === 0 && o.left === 0 && o.width === 0 && o.height === 0, true);
+    a.remove();
+  }());
+
+  // on
+  (function () {
+    var a = el('div');
+    var x = true;
+
+    a.on('click', function () {
+      test('on', true, true);
+      x = false;
+    });
+
+    a.trigger('click');
+
+    if (x) {
+      test('on', true, false);
+    }
+  }());
+
+  // parent
+  (function () {
+    var a = el('div');
+    var b = el('div');
+    a.appendTo(b);
+    test('parent', a.parent().node, b.node);
+  }());
+
+  // parents
+  (function () {
+    var a = el('div', { class : 'a' });
+    var b = el('div', { class : 'b' });
+    var c = el('div', { class : 'c' });
+    var p;
+    a.append(b.append(c));
+    p = c.parents();
+    test('parents', p[0].node, a.node);
+  }());
+
+  // prepend
+  (function () {
+    var a = el('div', { class : 'a' });
+    var b = el('div', { class : 'b' });
+    var c = el('div', { class : 'c' });
+    var p;
+    a.append(b);
+    a.prepend(c);
+    test('prepend', a.firstChild().node, c.node);
+  }());
 });
 
 (function () {
-  // logTest('hasParent (true)', parent_1.hasParent(parent));
-  // logTest('hasParent (false)', parent.hasParent(parent_1));
-  // parent.appendTo(document.body);
-  // logTest('isVisible (true)', parent.isVisible());
-  // parent.remove();
-  // logTest('isVisible (false)', parent.isVisible());
-  // parent.append(d1 = el('div', { class : 'last-child' }));
-  // logTest('lastChild (true)', parent.lastChild().node === d1.node);
-  // d1.append('text');
-  // logTest('nodeText', parent.nodeText() === 'text');
-  // d1.on('click', function () { logTest('on / trigger', true); logTest('off', true); });
-  // d1.trigger('click');
-  // d1.off('click');
-  // d1.trigger('click');
-  // parent.append(d1);
-  // logTest('parent', d1.parent().node === parent.node);
-  // parent.append(d1);
-  // parent.prepend(d2);
-  // logTest('prepend', parent.firstChild().node === d2.node);
-  // parent_1.prependTo(parent);
-  // logTest('prependTo', parent.firstChild().node === parent_1.node);
-  // parent_1.appendTo(document.body);
+  // parent_1.appendTo('body');
   // parent_1.remove();
   // logTest('remove', !parent_1.hasParent(document.body));
   // parent_1.addClass('remove-this-class').removeClass('remove-this-class');
