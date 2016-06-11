@@ -2,8 +2,8 @@
 
   // CSS Related
   var
-    CLASS_PREFIX = '';
-    
+    CLASS_PREFIX = '',
+  
     CSS_PROPERTY_IS_NUMBER = [
       'z-index',
       'opacity'
@@ -809,7 +809,7 @@
   };
   
   CreateNode.prototype.scale = function (x, y) {
-    var computed = window.getComputedStyle(this.node)[createNode.prefix.transform];
+    var computed = window.getComputedStyle(this.node)[VENDOR_PREFIX.transform];
     var matrix = [];
   
     if (computed === 'none') {
