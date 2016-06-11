@@ -46,7 +46,7 @@ body {
 
 .result--pass .result_dot {
   border-color : #87b577;
-  background   : #7bd081;
+  background   : #a3d4b7;
 }
 
 .result--fail .result_dot {
@@ -112,7 +112,7 @@ body {
 
 .test-results_bar_progress {
   height     : 100%;
-  background : #7bd081;
+  background : #89c89f;
 }
 
 h1 {
