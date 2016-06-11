@@ -1,6 +1,6 @@
 
 # Create Node
-### 100% Unit tests cover 100% of the code
+### Unit tests cover 100% of the code
 
 Now you to can create nodes with a simple interface which will be very familiar.
 
