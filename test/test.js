@@ -1,144 +1,457 @@
-function renderNode(node, n) {
-  return '{tab}&lt;{tag}{attr}&gt;{children}{tab}&lt;/{tag}&gt;'.replace(/\{(\w+)}/g, function (a, b) {
-    var x = [];
-    var y;
-    if (b === 'tag') {
-      return node.node.tagName.toLowerCase();
-    } else if (b === 'attr') {
-      y = node.attr();
-      for (var k in y) {
-        x.push(k + '="' + y[k] + '"');
-      }
-      return x.length ? ' ' + x.join(' ') : '';
-    } else if (b === 'children') {
-      if (node.children()) {
-        return node.children().map(function (c) {
-          return renderNode(c, n + 1);
-        }).join('');
-      }
-    }
-    return '';
-  });
-}
+// Parents test
+startTest(function (test) {
+  // Add Class
+  (function () {
+    var a = el('div');
+    a.addClass('my-class-name');
+    test('addClass', a.attr('class'), 'my-class-name');
+  }());
 
-function stringMe(res) {
-  var type = Object.prototype.toString.call(res);
-  var t;
-  var a;
-  if (type === '[object Text]') {
-    return type + ': "' + res.nodeValue + '"';
-  } else if (type === '[object Array]') {
-    return '[\n' + res.map(function (a) {
-      return '  ' + stringMe(a);
-    }).join(',\n') + '\n]';
-  } else if (type === '[object String]') {
-    return '"' + res + '"';
-  } else if (type === '[object Number]') {
-    return res;
-  } else if (res && res.node) {
-    return renderNode(res, 0);
-  } else if (type.indexOf('[object HTML') !== -1) {
-    return renderNode(el(res), 0);
-  } else if (type === '[object Object]') {
-    t = '{';
-    a = [];
-    for (var k in res) {
-      a.push('\n  ' + k + ' : ' + stringMe(res[k]));
-    }
-    t += a.join(',') + '\n}';
-    return t;
-  } else if (type === '[object Boolean]') {
-    return res ? 'true' : 'false';
-  }
-}
+  // Append
+  (function () {
+    var a = el('div');
+    var b = el('div');
+    a.append(b);
+    test('append', a.firstChild().node, b.node);
+  }());
 
-function objectIsEqual(a, b) {
-  if (a === b) {
-    return a === b;
-  } else {
-    for (var k in a) {
-      if (!isEqual(a[k], b[k])) {
-        return false;
-      }
-    }
-  }
-  return true;
-}
+  // attr
+  (function () {
+    var a = el('div');
+    a.attr('type', 'test');
+    test('attr', a.attr('type'), 'test');
+  }());
 
-function arrayIsEqual(a, b) {
-  var i = 0;
-  var n = a.length;
+  // empty attr
+  (function () {
+    var a = el('div');
+    a.attr('type', 'test').attr('tabindex', '0');
+    test('attr (no arguments, returns an object)', a.attr(), { type : 'test', tabindex : '0' });
+  }());
 
-  if (a.length === b.length) {
-    for (; i < n; i++) {
-      if (!isEqual(a[i], b[i])) {
-        return false;
-      }
-    }
-    return true;
-  }
+  // before
+  (function () {
+    var p = el('div');
+    var a = el('div');
+    var b = el('div');
+    p.append(a);
+    b.before(a);
+    test('before', p.firstChild().node, b.node);
+  }());
 
-  return false;
-}
+  // check
+  (function () {
+    var p = el('input', { type : 'checkbox' });
+    test('check', p.check().isChecked(), true);
+  }());
 
-function isEqual(a, b) {
-  if (typeof a === 'string' || typeof a === 'number' || typeof a === 'boolean') {
-    return a === b;
-  } else if (Array.isArray(a) && Array.isArray(b)) {
-    return arrayIsEqual(a, b);
-  } else if (typeof a === 'object' && typeof b === 'object') {
-    return objectIsEqual(a, b);
-  }
-  return false;
-}
+  // unchecked
+  (function () {
+    var p = el('input', { type : 'checkbox' });
+    test('unchecked', p.isChecked(), false);
+  }());
 
-function startTest(callback) {
-  var passed = 0;
-  var failed = 0;
-  var testDiv = el('div', { class : 'test-container' });
+  // children
+  (function () {
+    var p = el('div');
+    var a = el('div');
+    var b = el('div');
+    var t1;
+    p.append(a, b);
+    t1 = p.children()[0].node === a.node && p.children()[1].node === b.node;
+    test('children', t1, true);
+  }());
 
-  el('h1', 'el Tests').appendTo(testDiv);
+  // clone
+  (function () {
+    var p = el('div', { class : 'test' });
+    var c = p.clone();
+    test('clone', p.attr('class'), c.attr('class'));
+  }());
 
-  function test(name, a, b) {
-    var title;
-    var result;
-    var div = el('div', { class : 'result' },
-      result = el('div', { class : 'result_dot' }),
-      title = el('div', { class : 'result_title'}, name)
+  // closest, contains
+  (function () {
+    var p = el('div', { class : 'test1' });
+    var c = el('div', { class : 'test2' });
+    var x;
+    p.append(c);
+
+    test('closest', c.closest('.test1').node, p.node);
+    test('contains (true)', p.contains(c), true);
+    test('contains (false)', c.contains(p), false);
+  }());
+
+  // copyAttributes
+  (function () {
+    var p = el('div', { class : 'test1', tabIndex : '0' });
+    var c = el('div', { class : 'test2' });
+    var x;
+    c.copyAttributes(p);
+    x = c.attr('class') === 'test1' && c.attr('tabindex') === '0';
+    test('copyAttributes', x, true);
+  }());
+
+  // disable
+  (function () {
+    var p = el('div').disable();
+    test('disable', p.isDisabled(), true);
+  }());
+
+  // find
+  (function () {
+    var a;
+    var p = el('div', a = el('div', { class : 'test'}));
+    test('find', p.find('.test')[0].node, a.node);
+  }());
+
+  // firstChild
+  (function () {
+    var a;
+    var p = el('div', a = el('div', { class : 'test'}));
+    test('firstChild', p.firstChild().node, a.node);
+  }());
+
+  // focus
+  (function () {
+    var p = el('div', { tabIndex : '0' });
+    p.appendTo('body');
+    p.focus();
+    test('focus', p.isFocused(), true);
+    p.remove();
+  }());
+
+  // getSelector
+  (function () {
+    var p = el('div', { class : 'test'});
+    var a = el('div', { class : 'test', tabIndex : '0', id : 'my-id'});
+    var t = p.getSelector() === 'div.test' && a.getSelector() === 'div.test#my-id';
+    test('getSelector', t, true);
+  }());
+
+  // getSelector
+  (function () {
+    var a = el('div', { class : 'test'});
+    var b = el('div', { class : 'test-2'});
+    var t = a.hasClass('test') && b.hasClass('test-2');
+    test('hasClass', t, true);
+  }());
+
+  // hasParent
+  (function () {
+    var a = el('div', { class : 'test'});
+    var b = el('div', { class : 'test-2'});
+    a.append(b);
+    test('hasParent', b.hasParent(a) && !a.hasParent(b), true);
+  }());
+
+  // isChecked
+  (function () {
+    var a = el('input', { type : 'checkbox'});
+    var b = el('input', { type : 'checkbox'});
+    a.check();
+    test('isChecked', a.isChecked() && !b.isChecked(), true);
+  }());
+
+  // isDisabled
+  (function () {
+    var a = el('input', { type : 'checkbox'});
+    var b = el('input', { type : 'checkbox'});
+    a.disable();
+    test('isDisabled', a.isDisabled() && !b.isDisabled(), true);
+  }());
+
+  // isFocused
+  (function () {
+    var a = el('input', { type : 'checkbox' });
+    var b = el('input', { type : 'checkbox' });
+
+    a.appendTo('body');
+    b.appendTo('body');
+    a.focus();
+
+    test('isFocused', a.isFocused() && !b.isFocused(), true);
+
+    a.remove();
+    b.remove();
+  }());
+
+  // isVisible
+  (function () {
+    var a = el('div');
+    var b = el('div');
+    var c = el('div');
+    var d = el('div');
+    var e = el('div');
+    var f = el('div');
+
+    a.appendTo('body');
+    b.appendTo('body').style('position: absolute; left: -100000px');
+    c.appendTo('body').style('display', 'none');
+    d.appendTo('body').style('width : 0; height: 0; overflow: hidden;');
+    e.appendTo('body').style('display', 'none');
+    f.appendTo(e);
+
+    test('isVisible',
+      a.isVisible() &&
+      !b.isVisible() &&
+      !c.isVisible() &&
+      !d.isVisible() &&
+      !f.isVisible(),
+      true
     );
-    var status = el('div', { class : 'result_status' },
-      el('div', { class : 'result_status_item result_status_item--expected'},
-        el('div', { class : 'result_status_title'}, 'Expected'),
-        el('div', { class : 'result_status_value'}, stringMe(b))
-      ),
-      el('div', { class : 'result_status_item result_status_item--actual'},
-        el('div', { class : 'result_status_title'}, 'Actual'),
-        el('div', { class : 'result_status_value'}, stringMe(a))
+
+    a.remove();
+    b.remove();
+    c.remove();
+    d.remove();
+    e.remove();
+    f.remove();
+  }());
+
+  // lastChild
+  (function () {
+    var a = el('div');
+    var b = el('div');
+    var c = el('div');
+    var d = el('div');
+    a.append(b, c, d);
+    test('lastChild', a.lastChild().node, d.node);
+  }());
+
+  // nodeText
+  (function () {
+    var a = el('div', 'text');
+    test('nodeText', a.nodeText(), 'text');
+  }());
+
+  // off
+  (function () {
+    var a = el('div');
+    var x = true;
+
+    a.on('click', function () {
+      test('off', true, false);
+      x = false;
+    });
+
+    a.off('click');
+    a.trigger('click');
+
+    if (x) {
+      test('off', true, true);
+    }
+  }());
+
+  // offset
+  (function () {
+    var a = el('div', { style : 'position: absolute; left: 0; top: 0; width : 0; height: 0'});
+    var o;
+    a.appendTo('body');
+    o = a.offset();
+    test('offset', o.top === 0 && o.left === 0 && o.width === 0 && o.height === 0, true);
+    a.remove();
+  }());
+
+  // on
+  (function () {
+    var a = el('div');
+    var x = true;
+
+    a.on('click', function () {
+      test('on', true, true);
+      x = false;
+    });
+
+    a.trigger('click');
+
+    if (x) {
+      test('on', true, false);
+    }
+  }());
+
+  // parent
+  (function () {
+    var a = el('div');
+    var b = el('div');
+    a.appendTo(b);
+    test('parent', a.parent().node, b.node);
+  }());
+
+  // parents
+  (function () {
+    var a = el('div', { class : 'a' });
+    var b = el('div', { class : 'b' });
+    var c = el('div', { class : 'c' });
+    var p;
+    a.append(b.append(c));
+    p = c.parents();
+    test('parents', p[0].node, a.node);
+  }());
+
+  // prepend
+  (function () {
+    var a = el('div', { class : 'a' });
+    var b = el('div', { class : 'b' });
+    var c = el('div', { class : 'c' });
+    var p;
+    a.append(b);
+    a.prepend(c);
+    test('prepend', a.firstChild().node, c.node);
+  }());
+
+  // prependTo
+  (function () {
+    var a = el('div', { class : 'a' });
+    var b = el('div', { class : 'b' });
+    var c = el('div', { class : 'c' });
+    var p;
+    a.append(b);
+    c.prependTo(a);
+    test('prependTo', a.firstChild().node, c.node);
+  }());
+
+  // remove
+  (function () {
+    var a = el('div', { class : 'a' });
+    a.appendTo('body');
+    a.remove();
+    test('remove', el(document.body).contains(a), false);
+  }());
+
+  // removeClass
+  (function () {
+    var a = el('div', { class : 'a' });
+    test('removeClass', a.removeClass('a').hasClass('a'), false);
+  }());
+
+  // replaceWith
+  (function () {
+    var a = el('div');
+    var b = el('div');
+    var c = el('div');
+    a.append(b);
+    b.replaceWith(c);
+    test('replaceWith', a.contains(c) && !a.contains(b), true);
+  }());
+
+  // scale
+  (function () {
+    var a = el('div');
+    a.appendTo('body');
+    a.scale(2);
+    test('scale', a.attr('style'), 'transform: matrix(2, 0, 0, 2, 0, 0);');
+    a.remove();
+  }());
+
+  // select
+  (function () {
+    var a = el('input', { type : 'text' });
+    a.value('text');
+    a.select(0, 1);
+    test('select', a.select()[0] === 0 && a.select()[1] === 1, true);
+  }());
+
+  // selectorPath
+  (function () {
+    var a;
+    el('div', { class : '1' },
+      el('div', { class : '1_1'},
+        a = el('div', { class : '1_1_1'})
       )
     );
+    test('selectorPath', a.selectorPath(), 'div.1 div.1_1 div.1_1_1');
+  }());
 
-    if (isEqual(a, b)) {
-      div.addClass('result--pass');
-      passed += 1;
-    } else {
-      div.append(status);
-      div.addClass('result--fail');
-      failed += 1;
-    }
+  // siblings
+  (function () {
+    var a;
+    var b;
+    el('div', { class : '1' },
+      a = el('div', { class : '1_1'}),
+      el('div', { class : '1_2'}),
+      el('div', { class : '1_3'}),
+      b = el('div', { class : '1_4'})
+    );
+    test('siblings', a.siblings()[3].node, b.node);
+  }());
 
-    div.appendTo(testDiv);
-  }
+  // style
+  (function () {
+    var a = el('div');
+    var b = el('div');
+    var c = el('div');
+    var m = 'rgb(255, 0, 0)';
 
-  callback(test);
+    a.style('color', 'red');
+    b.style('color: red');
+    c.style({ color : 'red' });
 
-  el('div', { class : 'test-results' }, 'Failed: ' + failed + ' Passed: ' + passed).appendTo(testDiv);
+    a.appendTo('body');
+    b.appendTo('body');
+    c.appendTo('body');
 
-  el('div', { class : 'test-results_bar' },
-    el('div', {
-      class : 'test-results_bar_progress',
-      style : 'width: ' + (passed / (failed + passed) * 100) + '%;'
-    })
-  ).appendTo(testDiv);
+    test('style', a.style('color') === m && b.style('color') === m && c.style('color') === m, true);
+  }());
 
-  testDiv.appendTo(document.body);
-}
+  // tag
+  (function () {
+    var a = el('div');
+    a.tag('span');
+    test('tag', a.tag(), 'span');
+  }());
+
+  // text
+  (function () {
+    var a = el('div', el('div'), el('div'));
+    a.text('span');
+    test('text', a.text(), 'span');
+  }());
+
+  // text
+  (function () {
+    var a = el('div', el('div'), el('div'));
+    a.text('span');
+    test('textNodes', a.textNodes()[0].nodeValue, 'span');
+  }());
+
+  // toggleClass
+  (function () {
+    var a = el('div');
+    var b = el('div');
+
+    b.addClass('my-class');
+    b.toggleClass('my-class');
+    a.toggleClass('my-class');
+
+    test('toggleClass', a.hasClass('my-class') && !b.hasClass('my-class'), true);
+  }());
+
+  // trigger
+  (function () {
+    var a = el('div');
+    var x = true;
+
+    a.on('click', function () { x = false; });
+    a.trigger('click');
+
+    test('trigger', x, false);
+  }());
+
+  // uncheck
+  (function () {
+    var a = el('input', { type : 'checkbox' });
+    var b = el('input', { type : 'checkbox' });
+
+    a.check().uncheck();
+    b.check();
+
+    test('uncheck', !a.isChecked() && b.isChecked(), true);
+  }());
+
+  // uncheck
+  (function () {
+    var a = el('input', { type : 'input' });
+    a.value('test');
+    test('value', a.value(), 'test');
+  }());
+});
