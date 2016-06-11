@@ -144,6 +144,8 @@ el('h1', 'el Tests').appendTo(document.body);
   logTest('selectorPath', parent_1_1.selectorPath());
   logTest('siblings', parent_1.siblings());
   logTest('style', parent_1.style({ color : 'red' }));
+  logTest('style', parent_1.style('color') === 'rgb(255, 0, 0)');
+  logTest('style', el('div', { style : { color : 'red' } }).style('color') === 'rgb(255, 0, 0)');
   logTest('tag', parent_1.tag('h1'));
   logTest('tag', parent_1.tag() === 'h1');
   parent_1.text('this is a title');
