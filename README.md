@@ -135,18 +135,19 @@ el('div').removeClass('class-name');
 
 #### `style` [top](#methods)
 
-`el([String], [Object], [Child Object]).style([Property], [Value])`
-
-`el([String], [Object], [Child Object]).style([Object])`
-
 ```javascript
-el('div').style('paddingLeft', 10);
-```
+el('div').style('padding-left', 10);
+el('div').style('padding-left: 10px');
 
-```javascript
-el('div').style({ paddingLeft : 10, marginTop : 10 });
-```
+// Using an Object
+el('div').style({
+  paddingLeft : 10,
+  marginTop : 10
+});
 
+// Performing a query will return an Object
+el('div').style();
+```
 
 #### `toggleClass` [top](#methods)
 
