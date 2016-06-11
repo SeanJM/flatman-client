@@ -11,9 +11,7 @@ function setStyle(node) {
     node.style[name] = value;
   }
 
-  if (isString(arguments[1]) && isUndefined(arguments[2])) {
-    return window.getComputedStyle(node)[arguments[1]];
-  } else if (isString(arguments[1]) && isDefined(arguments[2])) {
+  if (isString(arguments[1])) {
     style(arguments[1], arguments[2]);
   } else if (isObject(arguments[1])) {
     for (var k in arguments[1]) {
