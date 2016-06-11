@@ -14,4 +14,5 @@ CreateNode.prototype.select = function (start, end) {
 
   this.node.focus();
   setSelection(this.node, start, end);
+  return this;
 };

@@ -841,6 +841,7 @@
   
     this.node.focus();
     setSelection(this.node, start, end);
+    return this;
   };
   
   CreateNode.prototype.selectorPath = function () {
@@ -875,8 +876,10 @@
     for (; i < n; i++) {
       a[i] = arguments[i];
     }
-    
+  
     setStyle.apply(null, [this.node].concat(a));
+  
+    return this;
   };
   
   CreateNode.prototype.tag = function (name) {
@@ -892,7 +895,7 @@
   
     this.replaceWith(clone);
   
-    return this;
+    return clone;
   };
   
   CreateNode.prototype.text = function (value) {
@@ -953,6 +956,7 @@
   CreateNode.prototype.value = function (value) {
     if (typeof value !== 'undefined') {
       this.node.value = value;
+      return this;
     } else {
       return this.node.value;
     }

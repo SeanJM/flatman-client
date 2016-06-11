@@ -8,8 +8,7 @@ CreateNode.prototype.tag = function (name) {
   clone = new CreateNode(name);
   clone.text(this.node.innerHTML);
   clone.copyAttributes(this.node);
-
   this.replaceWith(clone);
 
-  return this;
+  return clone;
 };

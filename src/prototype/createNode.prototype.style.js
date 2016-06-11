@@ -6,6 +6,8 @@ CreateNode.prototype.style = function () {
   for (; i < n; i++) {
     a[i] = arguments[i];
   }
-  
+
   setStyle.apply(null, [this.node].concat(a));
+
+  return this;
 };
