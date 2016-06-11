@@ -11,5 +11,5 @@ CreateNode.prototype.tag = function (name) {
   this.replaceWith(clone);
   this.node = clone.node;
 
-  return clone;
+  return this;
 };

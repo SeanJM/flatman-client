@@ -925,7 +925,7 @@
     this.replaceWith(clone);
     this.node = clone.node;
   
-    return clone;
+    return this;
   };
   
   CreateNode.prototype.text = function (value) {
