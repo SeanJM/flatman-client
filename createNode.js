@@ -317,7 +317,7 @@
       range.select();
     }
   }
-  function setStyle(node) {
+  function setStyle(node, a, b) {
     function style(name, value) {
       if (typeof VENDOR_PREFIX[name] === 'string') {
         name = VENDOR_PREFIX[name];
@@ -330,11 +330,13 @@
       node.style[name] = value;
     }
   
-    if (isString(arguments[1])) {
-      style(arguments[1], arguments[2]);
-    } else if (isObject(arguments[1])) {
-      for (var k in arguments[1]) {
-        setStyle(node, k, arguments[1][k]);
+    if (isString(a) && isString(b)) {
+      style(a, b);
+    } else if (isString(a)) {
+      node.setAttribute('style', a);
+    } else if (isObject(a)) {
+      for (var k in a) {
+        setStyle(node, k, a[k]);
       }
     }
   }
@@ -675,6 +677,10 @@
     return this.node.checked;
   };
   
+  CreateNode.prototype.isDisabled = function () {
+    return this.node.getAttribute('disabled') === 'disabled';
+  };
+  
   CreateNode.prototype.isFocused = function () {
     return document.activeElement === this.node;
   };
@@ -748,7 +754,7 @@
     var p = this.node.parentNode;
   
     while (p) {
-      parents.unshift(el(p));
+      parents.push(el(p));
       p = p.parentNode;
     }
   
@@ -865,13 +871,8 @@
     });
   };
   
-  CreateNode.prototype.style = function () {
-    var n = arguments.length;
-    var i;
-    var a;
-    var c;
-  
-    if (n === 1 && isString(arguments[0])) {
+  CreateNode.prototype.style = function (a, b) {
+    if (isString(a) && isUndefined(b)) {
       if (document.body.contains(this.node)) {
         return window.getComputedStyle(this.node)[arguments[0]];
       } else {
@@ -886,14 +887,7 @@
       }
     }
   
-    a = new Array(n);
-    i = 0;
-  
-    for (; i < n; i++) {
-      a[i] = arguments[i];
-    }
-  
-    setStyle.apply(null, [this.node].concat(a));
+    setStyle(this.node, a, b);
     return this;
   };
   
