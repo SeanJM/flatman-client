@@ -1,4 +1,4 @@
-function setStyle(node) {
+function setStyle(node, a, b) {
   function style(name, value) {
     if (typeof VENDOR_PREFIX[name] === 'string') {
       name = VENDOR_PREFIX[name];
@@ -11,11 +11,13 @@ function setStyle(node) {
     node.style[name] = value;
   }
 
-  if (isString(arguments[1])) {
-    style(arguments[1], arguments[2]);
-  } else if (isObject(arguments[1])) {
-    for (var k in arguments[1]) {
-      setStyle(node, k, arguments[1][k]);
+  if (isString(a) && isString(b)) {
+    style(a, b);
+  } else if (isString(a)) {
+    node.setAttribute('style', a);
+  } else if (isObject(a)) {
+    for (var k in a) {
+      setStyle(node, k, a[k]);
     }
   }
 }
