@@ -1,8 +1,9 @@
 
 # Create Node
-### Unit tests cover 100% of the code
 
-Now you to can create nodes with a simple interface which will be very familiar.
+- Unit tests cover 100% of the code
+- Create nodes with a simple interface which will be very familiar.
+- Get an API to simplify DOM manipulation
 
 Thanks to Freezer for some help for clearing up the "child" problem https://freezer.js.org/minimum-viable-view-library/
 
