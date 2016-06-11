@@ -278,8 +278,10 @@ startTest(function (test) {
     var b = el('div', { class : 'b' });
     var c = el('div', { class : 'c' });
     var p;
+
     a.append(b.append(c));
     p = c.parents();
+
     test('parents', p[0].node, a.node);
   }());
 
@@ -288,9 +290,10 @@ startTest(function (test) {
     var a = el('div', { class : 'a' });
     var b = el('div', { class : 'b' });
     var c = el('div', { class : 'c' });
-    var p;
+
     a.append(b);
     a.prepend(c);
+
     test('prepend', a.firstChild().node, c.node);
   }());
 
@@ -299,17 +302,20 @@ startTest(function (test) {
     var a = el('div', { class : 'a' });
     var b = el('div', { class : 'b' });
     var c = el('div', { class : 'c' });
-    var p;
+
     a.append(b);
     c.prependTo(a);
+
     test('prependTo', a.firstChild().node, c.node);
   }());
 
   // remove
   (function () {
     var a = el('div', { class : 'a' });
+
     a.appendTo('body');
     a.remove();
+
     test('remove', el(document.body).contains(a), false);
   }());
 
@@ -324,36 +330,45 @@ startTest(function (test) {
     var a = el('div');
     var b = el('div');
     var c = el('div');
+
     a.append(b);
     b.replaceWith(c);
+
     test('replaceWith', a.contains(c) && !a.contains(b), true);
   }());
 
   // scale
   (function () {
     var a = el('div');
+
     a.appendTo('body');
     a.scale(2);
+
     test('scale', a.attr('style'), 'transform: matrix(2, 0, 0, 2, 0, 0);');
+
     a.remove();
   }());
 
   // select
   (function () {
     var a = el('input', { type : 'text' });
+
     a.value('text');
     a.select(0, 1);
+
     test('select', a.select()[0] === 0 && a.select()[1] === 1, true);
   }());
 
   // selectorPath
   (function () {
     var a;
+
     el('div', { class : '1' },
       el('div', { class : '1_1'},
         a = el('div', { class : '1_1_1'})
       )
     );
+
     test('selectorPath', a.selectorPath(), 'div.1 div.1_1 div.1_1_1');
   }());
 
@@ -361,12 +376,14 @@ startTest(function (test) {
   (function () {
     var a;
     var b;
+
     el('div', { class : '1' },
       a = el('div', { class : '1_1'}),
       el('div', { class : '1_2'}),
       el('div', { class : '1_3'}),
       b = el('div', { class : '1_4'})
     );
+
     test('siblings', a.siblings()[3].node, b.node);
   }());
 
