@@ -1,10 +1,5 @@
-CreateNode.prototype.style = function () {
-  var n = arguments.length;
-  var i;
-  var a;
-  var c;
-
-  if (n === 1 && isString(arguments[0])) {
+CreateNode.prototype.style = function (a, b) {
+  if (isString(a) && isUndefined(b)) {
     if (document.body.contains(this.node)) {
       return window.getComputedStyle(this.node)[arguments[0]];
     } else {
@@ -19,13 +14,6 @@ CreateNode.prototype.style = function () {
     }
   }
 
-  a = new Array(n);
-  i = 0;
-
-  for (; i < n; i++) {
-    a[i] = arguments[i];
-  }
-
-  setStyle.apply(null, [this.node].concat(a));
+  setStyle(this.node, a, b);
   return this;
 };
