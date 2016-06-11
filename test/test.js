@@ -76,7 +76,6 @@ el('h1', 'el Tests').appendTo(document.body);
     )
   );
 
-  logTest('parents for ' + parent_1_1.getSelector(), parent_1_1.parents());
   logTest('addClass', el('div').addClass('my-class-name'));
   logTest('append', el('div').append(el('div')));
   logTest('attr', el('div').attr('type', 'test').attr('title', 'my-title'));
@@ -123,4 +122,9 @@ el('h1', 'el Tests').appendTo(document.body);
   d1.trigger('click');
   d1.off('click');
   d1.trigger('click');
+  parent.append(d1);
+  logTest('parent', d1.parent().node === parent.node);
+  parent.append(d1);
+  parent.prepend(d2);
+  logTest('prepend', parent.firstChild().node === d2.node);
 }());
