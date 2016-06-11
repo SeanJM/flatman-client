@@ -41,14 +41,9 @@ startTest(function (test) {
 
   // check
   (function () {
-    var p = el('input', { type : 'checkbox' });
-    test('check', p.check().isChecked(), true);
-  }());
-
-  // unchecked
-  (function () {
-    var p = el('input', { type : 'checkbox' });
-    test('unchecked', p.isChecked(), false);
+    var a = el('input', { type : 'checkbox' });
+    var b = el('input', { type : 'checkbox' });
+    test('check', a.check().isChecked() && !b.isChecked(), true);
   }());
 
   // children
