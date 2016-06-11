@@ -374,12 +374,34 @@ startTest(function (test) {
     );
     test('siblings', a.siblings()[3].node, b.node);
   }());
+
+  // style
+  (function () {
+    var a = el('div');
+    var b = el('div');
+    var c = el('div');
+    var m = 'rgb(255, 0, 0)';
+
+    a.style('color', 'red');
+    b.style('color: red');
+    c.style({ color : 'red' });
+
+    a.appendTo('body');
+    b.appendTo('body');
+    c.appendTo('body');
+
+    test('style', a.style('color') === m && b.style('color') === m && c.style('color') === m, true);
+  }());
+
+  // tag
+  (function () {
+    var a = el('div');
+    a.tag('span');
+    test('tag', a.tag(), 'span');
+  }());
 });
 
 (function () {
-  // logTest('style', parent_1.style({ color : 'red' }));
-  // logTest('style', parent_1.style('color') === 'rgb(255, 0, 0)');
-  // logTest('style', el('div', { style : { color : 'red' } }).style('color') === 'rgb(255, 0, 0)');
   // logTest('tag', parent_1.tag('h1'));
   // logTest('tag', parent_1.tag() === 'h1');
   // parent_1.text('this is a title');

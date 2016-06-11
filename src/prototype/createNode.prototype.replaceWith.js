@@ -6,6 +6,6 @@ CreateNode.prototype.replaceWith = function (newNode) {
     return this;
   }
 
-  this.node = withNode.node;
+  this.node = newNode.node;
   return this;
 };
