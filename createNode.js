@@ -789,14 +789,14 @@
   };
   
   CreateNode.prototype.replaceWith = function (newNode) {
-    var withNode = newNode instanceof CreateNode ? newNode.node : newNode;
+    newNode = createNode(newNode);
   
     if (this.node.parentNode) {
-      this.node.parentNode.replaceChild(withNode, this.node);
+      this.node.parentNode.replaceChild(newNode.node, this.node);
+      return this;
     }
   
-    this.node = withNode;
-  
+    this.node = withNode.node;
     return this;
   };
   
