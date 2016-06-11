@@ -11,7 +11,7 @@ function CreateNode () {
   this.subscribers = {};
 
   if (arguments[0] instanceof CreateNode) {
-    this.node = arguments[0];
+    this.node = arguments[0].node;
     this.subscribers = arguments[0].subscribers;
   } else if (isElement(arguments[0]) || arguments[0] === window) {
     this.node = arguments[0];
