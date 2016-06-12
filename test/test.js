@@ -471,10 +471,19 @@ startTest('el', function (test) {
     test('uncheck', !a.isChecked() && b.isChecked()).shouldEqual(true);
   }());
 
-  // uncheck
+  // value
   (function () {
     var a = el('input', { type : 'input' });
     a.value('test');
     test('value', a.value()).shouldEqual('test');
+  }());
+
+  // fn
+  (function () {
+    var a = el('div');
+    el.fn('test', function () {
+      return this.node;
+    });
+    test('fn (plugin)', a.test()).shouldEqual(a.node);
   }());
 });
