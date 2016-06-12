@@ -78,6 +78,7 @@
     IS_BACKSPACE_KEY = 8,
     IS_DELETE_KEY = 46;
   
+
   function filter (array, callback) {
     var i = 0;
     var n = isArray(array) || isNodeList(array) ? array.length : 0;
@@ -92,6 +93,7 @@
     return a;
   }
   
+
   function forEach (array, callback) {
     var i = 0;
     var n = isArray(array) || isNodeList(array) ? array.length : 0;
@@ -101,46 +103,57 @@
     }
   }
   
+
   function hasLength (x) {
     return x.length > 0;
   }
   
+
   function isArray (array) {
     return Object.prototype.toString.call(array) === '[object Array]';
   }
   
+
   function isDefined (a) {
     return typeof a !== 'undefined';
   }
   
+
   function isElement (a) {
     return a && typeof a.nodeType === 'number' && a.nodeType === 1;
   }
   
+
   function isFunction (x) {
     return typeof x === 'function';
   }
   
+
   function isNode (a) {
     return /^\[object HTML/.test(Object.prototype.toString.call(a));
   }
   
+
   function isNodeList (list) {
     return Object.prototype.toString.call(list) === '[object NodeList]';
   }
   
+
   function isNumber (a) {
     return !isNaN(Number(a));
   }
   
+
   function isObject (a) {
     return Object.prototype.toString.call(a) === '[object Object]';
   }
   
+
   function isString (a) {
     return typeof a === 'string';
   }
   
+
   function isTextInput (node) {
     var types = ['text', 'password', 'phone', 'number'];
     var tagName = node.tagName;
@@ -149,10 +162,12 @@
     return isTextarea || isText;
   }
   
+
   function isUndefined (a) {
     return typeof a === 'undefined';
   }
   
+
   function map (array, callback) {
     var i = 0;
     var n = isArray(array) || isNodeList(array) ? array.length : 0;
@@ -165,10 +180,12 @@
     return a;
   }
   
+
   function not (a, b) {
     return a !== b;
   }
   
+
   function partial(fn) {
     var left = new Array(arguments.length - 1);
     var leftIndex = 0;
@@ -189,6 +206,7 @@
     };
   }
   
+
   function partialRight(fn) {
     var right = new Array(arguments.length - 1);
     var rightIndex = 0;
@@ -209,10 +227,12 @@
     };
   }
   
+
   function trim (string) {
     return string.replace(/^\s+|\s+$/g, '');
   }
   
+
   function addClass (node, a) {
     var className = filter(map(node.className.split(' '), trim), hasLength);
     var i;
@@ -227,6 +247,7 @@
     }
   }
   
+
   // From http://stackoverflow.com/questions/263743/caret-position-in-textarea-in-characters-from-the-start
   function appendChild (node, child) {
     var f;
@@ -252,6 +273,7 @@
     }
   }
   
+
   // From http://stackoverflow.com/questions/263743/caret-position-in-textarea-in-characters-from-the-start
   function getSelection (node) {
     var
@@ -299,6 +321,7 @@
   
     return [ start, end ];
   }
+
   function removeClass (node, a) {
     a = a.replace(/\{\{prefix}}/g, CLASS_PREFIX);
     node.className = filter(map(node.className.split(' '), trim), function (b) {
@@ -306,6 +329,7 @@
     }).sort().join(' ');
   }
   
+
   function setSelection (node, start, end) {
     if (node.setSelectionRange) {
       node.setSelectionRange(start, end);
@@ -317,6 +341,7 @@
       range.select();
     }
   }
+
   function setStyle(node, a, b) {
     function style(name, value) {
       if (typeof VENDOR_PREFIX[name] === 'string') {
@@ -341,6 +366,7 @@
     }
   }
   
+
   function toStyleString(styleObject) {
     var string = '';
     var property;
@@ -363,14 +389,17 @@
     return string;
   }
   
+
   CreateNode.classPrefix = function (name) {
     CLASS_PREFIX = name;
   };
   
+
   CreateNode.fn = function (name, callback) {
     CreateNode.prototype[name] = callback;
   };
   
+
   /*
     Argument format
     CreateNode([String], [Object], [Text | CreateNode Object | Array | Node ])
@@ -467,11 +496,13 @@
     return new F();
   }
   
+
   CreateNode.prototype.addClass = function (a) {
     addClass(this.node, a);
     return this;
   };
   
+
   CreateNode.prototype.append = function () {
     var n = arguments.length;
     var i = 0;
@@ -481,6 +512,7 @@
     return this;
   };
   
+
   CreateNode.prototype.appendTo = function (target) {
     if (target instanceof CreateNode) {
       target.append(this);
@@ -493,6 +525,7 @@
     return this;
   };
   
+
   CreateNode.prototype.attr = function () {
     var attr;
     var res;
@@ -516,11 +549,13 @@
     return this;
   };
   
+
   CreateNode.prototype.before = function (target) {
     target = createNode(target);
     target.node.parentNode.insertBefore(this.node, target.node);
   };
   
+
   CreateNode.prototype.centerTo = function (targetNode) {
     var nodeRect = this.node.getBoundingClientRect();
     var width = nodeRect.width;
@@ -551,11 +586,13 @@
     return this;
   };
   
+
   CreateNode.prototype.check = function () {
     this.node.checked = true;
     return this;
   };
   
+
   CreateNode.prototype.children = function () {
     var c = this.node.childNodes;
     return c.length ? map(filter(c, isElement), function (a) {
@@ -563,15 +600,18 @@
     }) : false;
   };
   
+
   CreateNode.prototype.clone = function () {
     return createNode(this.node.cloneNode(true));
   };
   
+
   CreateNode.prototype.closest = function (selector) {
     var c = this.node.closest(selector);
     return c !== null ? createNode(c) : false;
   };
   
+
   CreateNode.prototype.contains = function (target) {
     if (target instanceof CreateNode) {
       return this.node.contains(target.node);
@@ -579,6 +619,7 @@
     return this.node.contains(target);
   };
   
+
   CreateNode.prototype.copyAttributes = function (fromNode) {
     var i = 0,
         attr;
@@ -596,26 +637,31 @@
     return this;
   };
   
+
   CreateNode.prototype.disable = function () {
     this.node.setAttribute('disabled', 'disabled');
     return this;
   };
   
+
   CreateNode.prototype.enable = function () {
     this.node.removeAttribute('disabled');
     return this;
   };
   
+
   CreateNode.prototype.find = function (selector) {
     return [].map.call(this.node.querySelectorAll(selector), function (node) {
       return new CreateNode(node);
     });
   };
   
+
   CreateNode.prototype.firstChild = function () {
     return createNode(filter(this.node.childNodes, isElement)[0]);
   };
   
+
   CreateNode.prototype.focus = function () {
     if (!this.node.getAttribute('tabindex')) {
       this.node.setAttribute('tabindex', '0');
@@ -626,6 +672,7 @@
     return this;
   };
   
+
   CreateNode.prototype.getSelector = function () {
     var attr = this.node.attributes;
     var tagName = this.node.tagName.toLowerCase();
@@ -670,26 +717,32 @@
     return selector.join('');
   };
   
+
   CreateNode.prototype.hasClass = function (className) {
     return this.node.className.split(' ').indexOf(className) !== -1;
   };
   
+
   CreateNode.prototype.hasParent = function (target) {
     return target.contains(this.node);
   };
   
+
   CreateNode.prototype.isChecked = function () {
     return this.node.checked;
   };
   
+
   CreateNode.prototype.isDisabled = function () {
     return this.node.getAttribute('disabled') === 'disabled';
   };
   
+
   CreateNode.prototype.isFocused = function () {
     return document.activeElement === this.node;
   };
   
+
   CreateNode.prototype.isVisible = function () {
     var css = window.getComputedStyle(this.node);
     var rect = this.node.getBoundingClientRect();
@@ -703,14 +756,17 @@
     return !(offCanvas || zeroWH || invisible);
   };
   
+
   CreateNode.prototype.lastChild = function () {
     return createNode(filter(this.node.childNodes, isElement).slice(-1)[0]);
   };
   
+
   CreateNode.prototype.nodeText = function () {
     return trim(this.node.innerHTML.replace(/<[^>]+?>/g, '')).replace(/\s+/g, ' ');
   };
   
+
   CreateNode.prototype.off = function (names, callback) {
     var self = this;
   
@@ -731,10 +787,12 @@
     return this;
   };
   
+
   CreateNode.prototype.offset = function () {
     return this.node.getBoundingClientRect();
   };
   
+
   CreateNode.prototype.on = function (names, callback) {
     var self = this;
   
@@ -749,11 +807,13 @@
     });
   };
   
+
   CreateNode.prototype.parent = function () {
     var p = this.node.parentNode;
     return isElement(p) ? new CreateNode(p) : false;
   };
   
+
   CreateNode.prototype.parents = function () {
     var parents = [];
     var p = this.node.parentNode;
@@ -766,6 +826,7 @@
     return parents;
   };
   
+
   CreateNode.prototype.prepend = function (node) {
     var children = this.children();
     if (children) {
@@ -775,6 +836,7 @@
     }
   };
   
+
   CreateNode.prototype.prependTo = function (target) {
     var children = createNode(target).children();
     if (children.length) {
@@ -784,6 +846,7 @@
     }
   };
   
+
   CreateNode.prototype.remove = function () {
     if (isElement(this.node.parentNode)) {
       this.node.parentNode.removeChild(this.node);
@@ -791,11 +854,13 @@
     return this;
   };
   
+
   CreateNode.prototype.removeClass = function (a) {
     removeClass(this.node, a);
     return this;
   };
   
+
   CreateNode.prototype.replaceWith = function (newNode) {
     newNode = createNode(newNode);
   
@@ -808,6 +873,7 @@
     return this;
   };
   
+
   CreateNode.prototype.scale = function (x, y) {
     var computed = window.getComputedStyle(this.node)[VENDOR_PREFIX.transform];
     var matrix = [];
@@ -833,6 +899,7 @@
     this.node.style[VENDOR_PREFIX.transform] = 'matrix(' + matrix.join(',') + ')';
   };
   
+
   CreateNode.prototype.select = function (start, end) {
     if (typeof start === 'undefined' && typeof end === 'undefined') {
       return getSelection(this.node);
@@ -852,6 +919,7 @@
     return this;
   };
   
+
   CreateNode.prototype.selectorPath = function () {
     var path = [this.getSelector()];
     var p = this.node.parentNode;
@@ -869,6 +937,7 @@
     return path.join(' ');
   };
   
+
   CreateNode.prototype.siblings = function () {
     var children = this.node.parentNode ? this.node.parentNode.childNodes : [];
     return map(filter(children, isElement), function (s) {
@@ -876,6 +945,7 @@
     });
   };
   
+
   CreateNode.prototype.style = function (a, b) {
   
     /* The Problem
@@ -912,6 +982,7 @@
     return this;
   };
   
+
   CreateNode.prototype.tag = function (name) {
     var clone;
   
@@ -928,6 +999,7 @@
     return this;
   };
   
+
   CreateNode.prototype.text = function (value) {
     if (typeof value === 'string') {
       this.node.innerHTML = value;
@@ -938,6 +1010,7 @@
     return this;
   };
   
+
   CreateNode.prototype.textNodes = function () {
     var walk = document.createTreeWalker(this.node, NodeFilter.SHOW_TEXT, null, false);
     var nextNode = walk.nextNode();
@@ -951,6 +1024,7 @@
     return nodeList;
   };
   
+
   CreateNode.prototype.toggleClass = function (className) {
     if (this.hasClass(className)) {
       this.removeClass(className);
@@ -960,6 +1034,7 @@
     return this;
   };
   
+
   CreateNode.prototype.trigger = function (names, e) {
     var self = this;
     var nameList = names.split(',').map(trim).filter(hasLength);
@@ -979,11 +1054,13 @@
     }
   };
   
+
   CreateNode.prototype.uncheck = function () {
     this.node.checked = false;
     return this;
   };
   
+
   CreateNode.prototype.value = function (value) {
     if (typeof value !== 'undefined') {
       this.node.value = value;
@@ -993,8 +1070,10 @@
     }
   };
   
+
   window.el = createNode;
   window.el.classPrefix = CreateNode.classPrefix;
   window.el.fn = CreateNode.fn;
   
+
 }());

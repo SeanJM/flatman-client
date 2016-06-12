@@ -14,7 +14,7 @@ function indent(res, chr) {
   .map(function (a) {
     return chr + a;
   })
-  .join('\n');
+  .join('\n') + '\n';
 }
 
 function getContents(files, callback) {

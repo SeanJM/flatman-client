@@ -1,10 +1,10 @@
 // Parents test
-startTest(function (test) {
+startTest('el', function (test) {
   // Add Class
   (function () {
     var a = el('div');
     a.addClass('my-class-name');
-    test('addClass', a.attr('class'), 'my-class-name');
+    test('addClass', a.attr('class')).shouldEqual('my-class-name');
   }());
 
   // Append
@@ -12,21 +12,22 @@ startTest(function (test) {
     var a = el('div');
     var b = el('div');
     a.append(b);
-    test('append', a.firstChild().node, b.node);
+    test('append', a.firstChild().node).shouldEqual(b.node);
   }());
 
   // attr
   (function () {
     var a = el('div');
     a.attr('type', 'test');
-    test('attr', a.attr('type'), 'test');
+    test('attr', a.attr('type')).shouldEqual('test');
   }());
 
   // empty attr
   (function () {
     var a = el('div');
     a.attr('type', 'test').attr('tabindex', '0');
-    test('attr (no arguments, returns an object)', a.attr(), { type : 'test', tabindex : '0' });
+    test('attr (no arguments, returns an object)', a.attr())
+    .shouldEqual({ type : 'test', tabindex : '0' });
   }());
 
   // before
@@ -36,14 +37,14 @@ startTest(function (test) {
     var b = el('div');
     p.append(a);
     b.before(a);
-    test('before', p.firstChild().node, b.node);
+    test('before', p.firstChild().node).shouldEqual(b.node);
   }());
 
   // check
   (function () {
     var a = el('input', { type : 'checkbox' });
     var b = el('input', { type : 'checkbox' });
-    test('check', a.check().isChecked() && !b.isChecked(), true);
+    test('check', a.check().isChecked() && !b.isChecked()).shouldEqual(true);
   }());
 
   // children
@@ -54,14 +55,14 @@ startTest(function (test) {
     var t1;
     p.append(a, b);
     t1 = p.children()[0].node === a.node && p.children()[1].node === b.node;
-    test('children', t1, true);
+    test('children', t1).shouldEqual(true);
   }());
 
   // clone
   (function () {
     var p = el('div', { class : 'test' });
     var c = p.clone();
-    test('clone', p.attr('class'), c.attr('class'));
+    test('clone', p.attr('class')).shouldEqual(c.attr('class'));
   }());
 
   // closest, contains
@@ -72,8 +73,8 @@ startTest(function (test) {
     p.append(c);
 
     test('closest', c.closest('.test1').node, p.node);
-    test('contains (true)', p.contains(c), true);
-    test('contains (false)', c.contains(p), false);
+    test('contains (true)', p.contains(c)).shouldEqual(true);
+    test('contains (false)', c.contains(p)).shouldEqual(false);
   }());
 
   // copyAttributes
@@ -83,27 +84,27 @@ startTest(function (test) {
     var x;
     c.copyAttributes(p);
     x = c.attr('class') === 'test1' && c.attr('tabindex') === '0';
-    test('copyAttributes', x, true);
+    test('copyAttributes', x).shouldEqual(true);
   }());
 
   // disable
   (function () {
     var p = el('div').disable();
-    test('disable', p.isDisabled(), true);
+    test('disable', p.isDisabled()).shouldEqual(true);
   }());
 
   // find
   (function () {
     var a;
     var p = el('div', a = el('div', { class : 'test'}));
-    test('find', p.find('.test')[0].node, a.node);
+    test('find', p.find('.test')[0].node).shouldEqual(a.node);
   }());
 
   // firstChild
   (function () {
     var a;
     var p = el('div', a = el('div', { class : 'test'}));
-    test('firstChild', p.firstChild().node, a.node);
+    test('firstChild', p.firstChild().node).shouldEqual(a.node);
   }());
 
   // focus
@@ -111,7 +112,7 @@ startTest(function (test) {
     var p = el('div', { tabIndex : '0' });
     p.appendTo('body');
     p.focus();
-    test('focus', p.isFocused(), true);
+    test('focus', p.isFocused()).shouldEqual(true);
     p.remove();
   }());
 
@@ -120,7 +121,7 @@ startTest(function (test) {
     var p = el('div', { class : 'test'});
     var a = el('div', { class : 'test', tabIndex : '0', id : 'my-id'});
     var t = p.getSelector() === 'div.test' && a.getSelector() === 'div.test#my-id';
-    test('getSelector', t, true);
+    test('getSelector', t).shouldEqual(true);
   }());
 
   // getSelector
@@ -128,7 +129,7 @@ startTest(function (test) {
     var a = el('div', { class : 'test'});
     var b = el('div', { class : 'test-2'});
     var t = a.hasClass('test') && b.hasClass('test-2');
-    test('hasClass', t, true);
+    test('hasClass', t).shouldEqual(true);
   }());
 
   // hasParent
@@ -136,7 +137,7 @@ startTest(function (test) {
     var a = el('div', { class : 'test'});
     var b = el('div', { class : 'test-2'});
     a.append(b);
-    test('hasParent', b.hasParent(a) && !a.hasParent(b), true);
+    test('hasParent', b.hasParent(a) && !a.hasParent(b)).shouldEqual(true);
   }());
 
   // isChecked
@@ -144,7 +145,7 @@ startTest(function (test) {
     var a = el('input', { type : 'checkbox'});
     var b = el('input', { type : 'checkbox'});
     a.check();
-    test('isChecked', a.isChecked() && !b.isChecked(), true);
+    test('isChecked', a.isChecked() && !b.isChecked()).shouldEqual(true);
   }());
 
   // isDisabled
@@ -152,7 +153,7 @@ startTest(function (test) {
     var a = el('input', { type : 'checkbox'});
     var b = el('input', { type : 'checkbox'});
     a.disable();
-    test('isDisabled', a.isDisabled() && !b.isDisabled(), true);
+    test('isDisabled', a.isDisabled() && !b.isDisabled()).shouldEqual(true);
   }());
 
   // isFocused
@@ -164,7 +165,7 @@ startTest(function (test) {
     b.appendTo('body');
     a.focus();
 
-    test('isFocused', a.isFocused() && !b.isFocused(), true);
+    test('isFocused', a.isFocused() && !b.isFocused()).shouldEqual(true);
 
     a.remove();
     b.remove();
@@ -191,9 +192,8 @@ startTest(function (test) {
       !b.isVisible() &&
       !c.isVisible() &&
       !d.isVisible() &&
-      !f.isVisible(),
-      true
-    );
+      !f.isVisible()
+    ).shouldEqual(true);
 
     a.remove();
     b.remove();
@@ -210,13 +210,13 @@ startTest(function (test) {
     var c = el('div');
     var d = el('div');
     a.append(b, c, d);
-    test('lastChild', a.lastChild().node, d.node);
+    test('lastChild', a.lastChild().node).shouldEqual(d.node);
   }());
 
   // nodeText
   (function () {
     var a = el('div', 'text');
-    test('nodeText', a.nodeText(), 'text');
+    test('nodeText', a.nodeText()).shouldEqual('text');
   }());
 
   // off
@@ -225,7 +225,7 @@ startTest(function (test) {
     var x = true;
 
     a.on('click', function () {
-      test('off', true, false);
+      test('off', true).shouldEqual(false);
       x = false;
     });
 
@@ -233,7 +233,7 @@ startTest(function (test) {
     a.trigger('click');
 
     if (x) {
-      test('off', true, true);
+      test('off', true).shouldEqual(true);
     }
   }());
 
@@ -241,9 +241,17 @@ startTest(function (test) {
   (function () {
     var a = el('div', { style : 'position: absolute; left: 0; top: 0; width : 0; height: 0'});
     var o;
+
     a.appendTo('body');
     o = a.offset();
-    test('offset', o.top === 0 && o.left === 0 && o.width === 0 && o.height === 0, true);
+
+    test('offset',
+      o.top === 0 &&
+      o.left === 0 &&
+      o.width === 0 &&
+      o.height === 0
+    ).shouldEqual(true);
+
     a.remove();
   }());
 
@@ -252,15 +260,14 @@ startTest(function (test) {
     var a = el('div');
     var x = true;
 
-    a.on('click', function () {
-      test('on', true, true);
-      x = false;
-    });
+    a.on('click', function () { x = false; });
 
     a.trigger('click');
 
     if (x) {
-      test('on', true, false);
+      test('on', true).shouldEqual(false);
+    } else {
+      test('on', true).shouldEqual(true);
     }
   }());
 
@@ -269,7 +276,7 @@ startTest(function (test) {
     var a = el('div');
     var b = el('div');
     a.appendTo(b);
-    test('parent', a.parent().node, b.node);
+    test('parent', a.parent().node).shouldEqual(b.node);
   }());
 
   // parents
@@ -282,7 +289,7 @@ startTest(function (test) {
     a.append(b.append(c));
     p = c.parents();
 
-    test('parents', p[0].node, a.node);
+    test('parents', p[0].node).shouldEqual(a.node);
   }());
 
   // prepend
@@ -294,7 +301,7 @@ startTest(function (test) {
     a.append(b);
     a.prepend(c);
 
-    test('prepend', a.firstChild().node, c.node);
+    test('prepend', a.firstChild().node).shouldEqual(c.node);
   }());
 
   // prependTo
@@ -306,7 +313,7 @@ startTest(function (test) {
     a.append(b);
     c.prependTo(a);
 
-    test('prependTo', a.firstChild().node, c.node);
+    test('prependTo', a.firstChild().node).shouldEqual(c.node);
   }());
 
   // remove
@@ -316,13 +323,13 @@ startTest(function (test) {
     a.appendTo('body');
     a.remove();
 
-    test('remove', el(document.body).contains(a), false);
+    test('remove', el(document.body).contains(a)).shouldEqual(false);
   }());
 
   // removeClass
   (function () {
     var a = el('div', { class : 'a' });
-    test('removeClass', a.removeClass('a').hasClass('a'), false);
+    test('removeClass', a.removeClass('a').hasClass('a')).shouldEqual(false);
   }());
 
   // replaceWith
@@ -334,7 +341,7 @@ startTest(function (test) {
     a.append(b);
     b.replaceWith(c);
 
-    test('replaceWith', a.contains(c) && !a.contains(b), true);
+    test('replaceWith', a.contains(c) && !a.contains(b)).shouldEqual(true);
   }());
 
   // scale
@@ -344,7 +351,7 @@ startTest(function (test) {
     a.appendTo('body');
     a.scale(2);
 
-    test('scale', a.attr('style'), 'transform: matrix(2, 0, 0, 2, 0, 0);');
+    test('scale', a.attr('style')).shouldEqual('transform: matrix(2, 0, 0, 2, 0, 0);');
 
     a.remove();
   }());
@@ -356,7 +363,7 @@ startTest(function (test) {
     a.value('text');
     a.select(0, 1);
 
-    test('select', a.select()[0] === 0 && a.select()[1] === 1, true);
+    test('select', a.select()[0] === 0 && a.select()[1] === 1).shouldEqual(true);
   }());
 
   // selectorPath
@@ -369,7 +376,7 @@ startTest(function (test) {
       )
     );
 
-    test('selectorPath', a.selectorPath(), 'div.1 div.1_1 div.1_1_1');
+    test('selectorPath', a.selectorPath()).shouldEqual('div.1 div.1_1 div.1_1_1');
   }());
 
   // siblings
@@ -384,7 +391,7 @@ startTest(function (test) {
       b = el('div', { class : '1_4'})
     );
 
-    test('siblings', a.siblings()[3].node, b.node);
+    test('siblings', a.siblings()[3].node).shouldEqual(b.node);
   }());
 
   // style
@@ -402,7 +409,11 @@ startTest(function (test) {
     b.appendTo('body');
     c.appendTo('body');
 
-    test('style', a.style('color') === m && b.style('color') === m && c.style('color') === m, true);
+    test('style',
+      a.style('color') === m &&
+      b.style('color') === m &&
+      c.style('color') === m
+    ).shouldEqual(true);
   }());
 
   // tag
@@ -416,14 +427,14 @@ startTest(function (test) {
   (function () {
     var a = el('div', el('div'), el('div'));
     a.text('span');
-    test('text', a.text(), 'span');
+    test('text', a.text()).shouldEqual('span');
   }());
 
   // text
   (function () {
     var a = el('div', el('div'), el('div'));
     a.text('span');
-    test('textNodes', a.textNodes()[0].nodeValue, 'span');
+    test('textNodes', a.textNodes()[0].nodeValue).shouldEqual('span');
   }());
 
   // toggleClass
@@ -435,7 +446,7 @@ startTest(function (test) {
     b.toggleClass('my-class');
     a.toggleClass('my-class');
 
-    test('toggleClass', a.hasClass('my-class') && !b.hasClass('my-class'), true);
+    test('toggleClass', a.hasClass('my-class') && !b.hasClass('my-class')).shouldEqual(true);
   }());
 
   // trigger
@@ -457,13 +468,13 @@ startTest(function (test) {
     a.check().uncheck();
     b.check();
 
-    test('uncheck', !a.isChecked() && b.isChecked(), true);
+    test('uncheck', !a.isChecked() && b.isChecked()).shouldEqual(true);
   }());
 
   // uncheck
   (function () {
     var a = el('input', { type : 'input' });
     a.value('test');
-    test('value', a.value(), 'test');
+    test('value', a.value()).shouldEqual('test');
   }());
 });
