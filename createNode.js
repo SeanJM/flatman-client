@@ -355,7 +355,7 @@
       node.style[name] = value;
     }
   
-    if (isString(a) && isString(b)) {
+    if (isString(a) && isDefined(b)) {
       style(a, b);
     } else if (isString(a)) {
       node.setAttribute('style', a);
@@ -954,7 +954,6 @@
      * (C) node.style({ property : value });
      * (D) node.style('property', 'value');
      */
-  
     if (isString(a) && isUndefined(b)) {
       // Solve for (A)
       if (a.indexOf(':') === -1) {
@@ -1072,6 +1071,7 @@
   
 
   window.el = createNode;
+  window.CreateNode = CreateNode;
   window.el.classPrefix = CreateNode.classPrefix;
   window.el.fn = CreateNode.fn;
   

@@ -11,7 +11,7 @@ function setStyle(node, a, b) {
     node.style[name] = value;
   }
 
-  if (isString(a) && isString(b)) {
+  if (isString(a) && isDefined(b)) {
     style(a, b);
   } else if (isString(a)) {
     node.setAttribute('style', a);

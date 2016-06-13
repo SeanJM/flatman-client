@@ -6,7 +6,6 @@ CreateNode.prototype.style = function (a, b) {
    * (C) node.style({ property : value });
    * (D) node.style('property', 'value');
    */
-
   if (isString(a) && isUndefined(b)) {
     // Solve for (A)
     if (a.indexOf(':') === -1) {
