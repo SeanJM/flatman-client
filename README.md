@@ -423,7 +423,7 @@ child.selectorPath();
 // -> div.parent-3 div.parent-2 div.parent-1
 ```
 
-If any of the parents has an ID, the path will algorithm will terminate.
+If any of the parents has an ID, the path algorithm will terminate.
 
 ```javascript
 var child;
