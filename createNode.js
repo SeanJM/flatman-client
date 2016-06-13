@@ -1000,7 +1000,7 @@
   
 
   CreateNode.prototype.text = function (value) {
-    if (typeof value === 'string') {
+    if (isDefined(value)) {
       this.node.innerHTML = value;
     } else {
       return this.node.innerHTML;

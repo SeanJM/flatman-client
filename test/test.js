@@ -434,7 +434,14 @@ startTest('el', function (test) {
   (function () {
     var a = el('div', el('div'), el('div'));
     a.text('span');
-    test('textNodes', a.textNodes()[0].nodeValue).shouldEqual('span');
+    test('textNodes (String)', a.textNodes()[0].nodeValue).shouldEqual('span');
+  }());
+
+  // text
+  (function () {
+    var a = el('div', el('div'), el('div'));
+    a.text(1);
+    test('textNodes (String)', a.textNodes()[0].nodeValue).shouldEqual('1');
   }());
 
   // toggleClass
