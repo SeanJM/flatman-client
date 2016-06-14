@@ -19,6 +19,8 @@ var
     'marginTop',
     'minHeight',
     'minWidth',
+    'maxHeight',
+    'maxWidth',
     'paddingBottom',
     'paddingLeft',
     'paddingRight',

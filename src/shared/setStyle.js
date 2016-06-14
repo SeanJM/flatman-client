@@ -17,7 +17,7 @@ function setStyle(node, a, b) {
     node.setAttribute('style', a);
   } else if (isObject(a)) {
     for (var k in a) {
-      setStyle(node, k, a[k]);
+      style(k, a[k]);
     }
   }
 }

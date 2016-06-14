@@ -21,6 +21,8 @@
       'marginTop',
       'minHeight',
       'minWidth',
+      'maxHeight',
+      'maxWidth',
       'paddingBottom',
       'paddingLeft',
       'paddingRight',
@@ -361,7 +363,7 @@
       node.setAttribute('style', a);
     } else if (isObject(a)) {
       for (var k in a) {
-        setStyle(node, k, a[k]);
+        style(k, a[k]);
       }
     }
   }
