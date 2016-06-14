@@ -57,9 +57,9 @@ var wrapped = el(document.querySelector('#my-div'));
 - [`offset`](#offset-top)
 - [`parent`](#parent-top)
 - [`parents`](#parents-top)
-- [`selectorPath`](#selectortop)
-- `siblings`
-- `textNodes`
+- [`selectorPath`](#selectorpath-top)
+- [`siblings`](#siblings-top)
+- [`textNodes`](#textnodes-top)
 
 #### DOM Manipulation
 - `append`
@@ -436,4 +436,32 @@ el('div', { class : 'parent-1' },
 
 child.selectorPath();
 // -> div.parent-2#super-parent div.parent-1
+```
+
+#### `siblings` [top](#methods)
+
+Returns a selected Node and it's siblings filtered to show only nodes of type `1`, which are HTML element nodes, this excludes text nodes.
+
+```javascript
+var selected;
+
+el('div', { class : 'parent-1' },
+  selected = el('div', { class : 'sibling-1' }),
+  el('div', { class : 'sibling-2' }),
+  el('div', { class : 'sibling-3' }),
+  el('div', { class : 'sibling-4' })
+);
+
+selected.siblings();
+// -> [div.siblings-1, div.siblings-2, div.siblings-3, div.siblings-4]
+```
+
+#### `textNodes` [top](#methods)
+
+Returns all the `Text Nodes` which are a child of a selected node.
+
+```javascript
+var selected = el('div', { class : 'parent-1' }, 'text node');
+selected.textNodes();
+// -> [text node]
 ```
