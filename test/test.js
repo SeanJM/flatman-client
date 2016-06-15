@@ -213,12 +213,6 @@ startTest('el', function (test) {
     test('lastChild', a.lastChild().node).shouldEqual(d.node);
   }());
 
-  // nodeText
-  (function () {
-    var a = el('div', 'text');
-    test('nodeText', a.nodeText()).shouldEqual('text');
-  }());
-
   // off
   (function () {
     var a = el('div');
@@ -426,8 +420,8 @@ startTest('el', function (test) {
   // text
   (function () {
     var a = el('div', el('div'), el('div'));
-    a.text('span');
-    test('text', a.text()).shouldEqual('span');
+    a.text('text');
+    test('text', a.text()).shouldEqual('text');
   }());
 
   // text
