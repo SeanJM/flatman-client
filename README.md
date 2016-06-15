@@ -61,7 +61,7 @@ var wrapped = el(document.querySelector('#my-div'));
 - [`siblings`](#siblings-top)
 - [`textNodes`](#textnodes-top)
 
-#### [DOM Manipulation](#dommanipulation-top)
+#### [DOM Manipulation](#dom-manipulation-top)
 - [`append`](#append-top)
 - `appendTo`
 - `before`
