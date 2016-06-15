@@ -61,8 +61,8 @@ var wrapped = el(document.querySelector('#my-div'));
 - [`siblings`](#siblings-top)
 - [`textNodes`](#textnodes-top)
 
-#### DOM Manipulation
-- `append`
+#### [DOM Manipulation](#dommanipulation-top)
+- [`append`](#append-top)
 - `appendTo`
 - `before`
 - `centerTo`
@@ -464,4 +464,36 @@ Returns all the `Text Nodes` which are a child of a selected node.
 var selected = el('div', { class : 'parent-1' }, 'text node');
 selected.textNodes();
 // -> [Text Node]
+```
+
+## Dom Manipulation [top](#methods)
+
+#### `append` [top](#methods)
+
+Is an interface for `appendChild`, the result being a way to add a `Node` to a parent `Node`.
+
+```javascript
+var parent = el('div', { class : 'parent-1' });
+var child = el('div', { class : 'child-1' });
+parent.append(child);
+```
+
+is the same as
+
+```javascript
+var parent = el('div', { class : 'parent-1' }, el('div', { class : 'child-1' }));
+```
+
+```javascript
+el('div', { class : 'parent-1' }).append(el('div', { class : 'child-1' }));
+```
+
+And
+
+Result
+
+```HTML
+<div class="parent-1">
+  <div class="child-1"></div>
+</div>
 ```
