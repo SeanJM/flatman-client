@@ -82,8 +82,9 @@ startTest('el', function (test) {
     var a = el('div', { class : 'test1' });
     var b = el('div', { class : 'test2' });
     var c = el('div', { class : 'test2' });
-    a.append(b, c);
-    test('contains (multiple arguments)', a.contains(b, c) && !a.contains(a, c)).shouldEqual(true);
+    var d = el('div', { class : 'test2' });
+    a.append(b, c, d);
+    test('contains (multiple arguments)', a.contains(b, c, d) && !a.contains(a, c, d) && a.contains([b, c], d)).shouldEqual(true);
   }());
 
   // copyAttributes
