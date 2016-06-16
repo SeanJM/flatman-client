@@ -77,6 +77,15 @@ startTest('el', function (test) {
     test('contains (false)', c.contains(p)).shouldEqual(false);
   }());
 
+  // contains array
+  (function () {
+    var a = el('div', { class : 'test1' });
+    var b = el('div', { class : 'test2' });
+    var c = el('div', { class : 'test2' });
+    a.append(b, c);
+    test('contains (multiple arguments)', a.contains(b, c) && !a.contains(a, c)).shouldEqual(true);
+  }());
+
   // copyAttributes
   (function () {
     var p = el('div', { class : 'test1', tabIndex : '0' });
