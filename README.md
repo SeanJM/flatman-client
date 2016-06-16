@@ -544,6 +544,7 @@ var centerMe = el('div', {
   }
 });
 
+// This is important for the elements to be in the DOM to calculate their position
 parent.appendTo('body');
 centerMe.appendTo('body');
 centerMe.centerTo(parent);
