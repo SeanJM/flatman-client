@@ -4,6 +4,6 @@ window.el.classPrefix = CreateNode.classPrefix;
 window.el.fn = CreateNode.fn;
 
 // Node environment
-if (module && module.exports) {
+if (typeof module === 'object' && module.exports) {
   module.exports = startText;
 }

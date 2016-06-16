@@ -2,6 +2,6 @@ window.startTest = startTest;
 
 // Node environment
 
-if (module && module.exports) {
+if (typeof module === 'object' && module.exports) {
   module.exports = startText;
 }

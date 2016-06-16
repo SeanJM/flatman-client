@@ -1,5 +1,3 @@
-var el = require('../createNode.min.js');
-
 // Parents test
 startTest('el', function (test) {
   // Add Class

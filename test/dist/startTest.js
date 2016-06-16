@@ -110,14 +110,14 @@
     el('div', { class : 'test-results' },
       el('div', { class : 'test-results_failed' }, 'Failed: ' + this.failed),
       el('div', { class : 'test-results_passed' }, ' Passed: ' + this.passed)
-    ).appendTo(this.test);
+    ).prependTo(this.test);
   
     el('div', { class : 'test-results_bar' },
       el('div', {
         class : 'test-results_bar_progress',
         style : 'width: ' + (this.passed / (this.failed + this.passed) * 100) + '%;'
       })
-    ).appendTo(this.test);
+    ).prependTo(this.test);
   
     this.test.appendTo(document.body);
   }
@@ -128,6 +128,13 @@
   
 
   window.startTest = startTest;
+  
+  // Node environment
+  
+  if (typeof module === 'object' && module.exports) {
+    module.exports = startText;
+  }
+  
 
   function typeToString(res) {
     var type = Object.prototype.toString.call(res);
