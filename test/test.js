@@ -187,10 +187,10 @@ startTest('el', function (test) {
     var b = el('div');
     var c = el('div');
     var d = el('div');
-    var e = el('div');
-    var f = el('div');
+    var e = el('div', { class : 'e' });
+    var f = el('div', { class : 'f' });
 
-    a.appendTo('body');
+    a.appendTo('body').style('width : 30px; height : 10px;');
     b.appendTo('body').style('position: absolute; left: -100000px');
     c.appendTo('body').style('display', 'none');
     d.appendTo('body').style('width : 0; height: 0; overflow: hidden;');

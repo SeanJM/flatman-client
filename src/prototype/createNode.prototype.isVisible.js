@@ -1,12 +1,33 @@
 CreateNode.prototype.isVisible = function () {
-  var css = window.getComputedStyle(this.node);
-  var rect = this.node.getBoundingClientRect();
-  var offLeft = rect.left + rect.width < 0;
-  var offRight = rect.left > window.innerWidth;
-  var offTop = rect.top + rect.bottom + window.pageYOffset < 0;
-  var offCanvas = offLeft || offRight || offTop;
-  var zeroWH = !rect.width || !rect.height && css.overflow === 'hidden';
-  var invisible = css.visibility === 'none' || css.display === 'none';
+  var parents = this.parents();
+  var n = parents.length;
+  var i = 0;
 
-  return !(offCanvas || zeroWH || invisible);
+  function isVisible(node) {
+    var css = window.getComputedStyle(node);
+    var rect = node.getBoundingClientRect();
+    return ((
+      rect.left + rect.width > 0 &&
+      rect.left < window.innerWidth &&
+      rect.top + rect.height + window.pageYOffset > 0
+    ) && (
+      rect.width > 0 &&
+      rect.height > 0
+    ) && (
+      css.overflow !== 'hidden' &&
+      css.visibility !== 'none' &&
+      css.display !== 'none'
+    ));
+  }
+
+  // Check parents for visibility
+  if (isVisible(this.node)) {
+    for (; i < n; i++) {
+      if (!isVisible(parents[i].node)) {
+        return false;
+      }
+    }
+    return true;
+  }
+  return false;
 };
