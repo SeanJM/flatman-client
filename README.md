@@ -63,8 +63,8 @@ var wrapped = el(document.querySelector('#my-div'));
 #### [DOM Manipulation](#dom-manipulation-top)
 - [`append`](#append-top)
 - [`appendTo`](#appendto-top)
-- `before`
-- `centerTo`
+- [`before`](#before-top)
+- [`centerTo`](#centerto-top)
 - `check`
 - `children`
 - `clone`
@@ -520,4 +520,38 @@ Result
   <div class="sibling-2"></div>
   <div class="sibling-1"></div>
 </div>
+```
+
+#### `centerTo` [top](#methods)
+
+Is an interface centering a `Node` vertically and horizontally relative to another `Node`.
+
+```javascript
+var parent = el('div', {
+  class : 'parent-1',
+  style : {
+    width : 200,
+    height : 200,
+  }
+});
+
+var centerMe = el('div', {
+  class : 'center-1',
+  style : {
+    width : 50,
+    height : 50,
+    position : 'absolute'
+  }
+});
+
+parent.appendTo('body');
+centerMe.appendTo('body');
+centerMe.centerTo(parent);
+
+```
+
+Result
+
+```HTML
+<div class="center-1" style="top: 75px; left: 75px;"></div>
 ```
