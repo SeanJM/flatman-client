@@ -66,7 +66,7 @@ var wrapped = el(document.querySelector('#my-div'));
 - [`before`](#before-top)
 - [`centerTo`](#centerto-top)
 - [`check`](#check-top)
-- `children`
+- [`children`](#children-top)
 - `clone`
 - `disable`
 - `enable`
@@ -601,4 +601,19 @@ Will check a checkbox or a radio
 var checkbox = el('input', { type : 'checkbox' });
 checkbox.check().isChecked();
 // -> true
+```
+
+#### `children` [top](#methods)
+
+Returns an array of direct descendants wrapped in the `el` constructor. This is an interface for `childNodes` will an additional filter for a `NodeType` equal to `1` (`HTMlElement`)
+
+```javascript
+var a = el('div',
+  el('div', { class : 'child-1' }),
+  el('div', { class : 'child-2' }),
+  el('div', { class : 'child-3' })
+);
+
+e.children();
+// -> [ div.child-1, div.child-2, div.child-3 ]
 ```
