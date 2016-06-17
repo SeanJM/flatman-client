@@ -65,7 +65,7 @@ var wrapped = el(document.querySelector('#my-div'));
 - [`appendTo`](#appendto-top)
 - [`before`](#before-top)
 - [`centerTo`](#centerto-top)
-- `check`
+- [`check`](#check-top)
 - `children`
 - `clone`
 - `disable`
@@ -591,4 +591,14 @@ Result
 
 ```HTML
 <div class="center-1" style="top: 75px; left: 75px;"></div>
+```
+
+#### `check` [top](#methods)
+
+Will check a checkbox or a radio
+
+```javascript
+var checkbox = el('input', { type : 'checkbox' });
+checkbox.check().isChecked();
+// -> true
 ```
