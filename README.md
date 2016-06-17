@@ -605,7 +605,7 @@ checkbox.check().isChecked();
 
 #### `children` [top](#methods)
 
-Returns an array of direct descendants wrapped in the `el` constructor. This is an interface for `childNodes` will an additional filter for a `NodeType` equal to `1` (`HTMlElement`)
+Returns an array of direct descendants wrapped in the `el` constructor. This is an interface for `childNodes` with a filter for a `NodeType` equal to `1` (`HTMlElement`)
 
 ```javascript
 var a = el('div',
