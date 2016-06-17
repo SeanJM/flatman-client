@@ -10,4 +10,6 @@ CreateNode.prototype.on = function (names, callback) {
       self.node.addEventListener(name, callback, false);
     }
   });
+
+  return this;
 };

@@ -35,6 +35,14 @@ function CreateNode () {
         this.node.className = className.sort().join(' ').replace(/\{\{prefix}}/g, CLASS_PREFIX);
       } else if (k === 'style') {
         setStyle(this.node, attributes[k]);
+      } else if (/on[A-Z][a-z]/.test(k.substr(0, 4))) {
+        // A fast test to see if the property matches "onClick" or "onKeyup" or
+        // "onScroll" pattern
+        if (isFunction(attributes[k])) {
+          this.on(k.substr(2).toLowerCase(), attributes[k]);
+        } else {
+          throw '\"' + k + '\" must have a function as a value.';
+        }
       } else {
         this.node.setAttribute(k, attributes[k]);
       }

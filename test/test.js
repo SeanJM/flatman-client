@@ -261,14 +261,15 @@ startTest('el', function (test) {
 
   // on
   (function () {
-    var a = el('div');
     var x = true;
-
-    a.on('click', function () { x = false; });
+    var y = true;
+    var a = el('div').on('click', function () { x = false; });
+    var b = el('div', { onClick : function () { y = false; } });
 
     a.trigger('click');
+    b.trigger('click');
 
-    if (x) {
+    if (x && y) {
       test('on', true).shouldEqual(false);
     } else {
       test('on', true).shouldEqual(true);
