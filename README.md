@@ -69,8 +69,8 @@ var wrapped = el(document.querySelector('#my-div'));
 - [`children`](#children-top)
 - [`clone`](#clone-top)
 - [`disable`](#disable-top)
-- `enable`
-- `focus`
+- [`enable`](#enable-top)
+- [`focus`](#enable-top)
 - `prepend`
 - `prependTo`
 - `remove`
@@ -693,4 +693,13 @@ Result
 
 ```html
 <div id="disabled"></div>
+```
+
+#### `focus` [top](#methods)
+
+Will `focus` an element. This will only work if the element is in the `document.body`.
+
+```javascript
+var a = el('div');
+a.appendTo('body').focus();
 ```
