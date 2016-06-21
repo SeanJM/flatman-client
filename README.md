@@ -67,8 +67,8 @@ var wrapped = el(document.querySelector('#my-div'));
 - [`centerTo`](#centerto-top)
 - [`check`](#check-top)
 - [`children`](#children-top)
-- `clone`
-- `disable`
+- [`clone`](#clone-top)
+- [`disable`](#disable-top)
 - `enable`
 - `focus`
 - `prepend`
@@ -479,7 +479,15 @@ el('div', { class : 'parent-1' },
 );
 
 selected.siblings();
-// -> [div.siblings-1, div.siblings-2, div.siblings-3, div.siblings-4]
+```
+
+Result
+
+```html
+<div class="siblings-1"></div>
+<div class="siblings-2"></div>
+<div class="siblings-3"></div>
+<div class="siblings-4"></div>
 ```
 
 #### `textNodes` [top](#methods)
@@ -619,6 +627,70 @@ var a = el('div',
   el('div', { class : 'child-3' })
 );
 
-e.children();
-// -> [ div.child-1, div.child-2, div.child-3 ]
+a.children();
+```
+
+Result
+
+```html
+<div class="child-1"></div>
+<div class="child-2"></div>
+<div class="child-3"></div>
+```
+
+#### `clone` [top](#methods)
+
+Clones an element, is an interface for `Node.cloneNode(true)`
+
+```javascript
+var a = el('div',
+  el('div', { class : 'child-1' }),
+  el('div', { class : 'child-2' }),
+  el('div', { class : 'child-3' })
+);
+
+var b = a.clone();
+```
+
+Result
+
+```html
+<!-- b -->
+<div>
+  <div class="child-1"></div>
+  <div class="child-2"></div>
+  <div class="child-3"></div>
+</div>
+```
+
+#### `disable` [top](#methods)
+
+Disables an element by setting it's `disabled` attribute to `disabled`
+
+```javascript
+var a = el('div').disable();
+```
+
+Result
+
+```html
+<div disabled="disabled"></div>
+```
+
+#### `enable` [top](#methods)
+
+Enables an element by removing it's `disabled` attribute
+
+```html
+<div disabled="disabled"></div>
+```
+
+```javascript
+var a = el('div').enable();
+```
+
+Result
+
+```html
+<div></div>
 ```
