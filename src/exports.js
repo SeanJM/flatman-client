@@ -2,7 +2,6 @@ window.CreateNode = CreateNode;
 
 // El assignments
 window.el = createNode;
-window.el.classPrefix = CreateNode.classPrefix;
 window.el.fn = CreateNode.fn;
 window.el.isVisible = isVisible;
 

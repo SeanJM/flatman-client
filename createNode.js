@@ -2,8 +2,6 @@
 
   // CSS Related
   var
-    CLASS_PREFIX = '',
-  
     CSS_PROPERTY_IS_NUMBER = [
       'z-index',
       'opacity'
@@ -239,7 +237,6 @@
     var className = filter(map(node.className.split(' '), trim), hasLength);
     var i;
   
-    a = a.replace(/\{\{prefix}}/g, CLASS_PREFIX);
     i = className.indexOf(a);
   
     if (i === -1) {
@@ -369,7 +366,6 @@
   
 
   function removeClass (node, a) {
-    a = a.replace(/\{\{prefix}}/g, CLASS_PREFIX);
     node.className = filter(map(node.className.split(' '), trim), function (b) {
       return hasLength(b) && not(a, b);
     }).sort().join(' ');
@@ -436,11 +432,6 @@
   }
   
 
-  CreateNode.classPrefix = function (name) {
-    CLASS_PREFIX = name;
-  };
-  
-
   CreateNode.fn = function (name, callback) {
     CreateNode.prototype[name] = callback;
   };
@@ -480,7 +471,7 @@
       for (var k in attributes) {
         if (k === 'class') {
           className = filter(map(attributes[k].split(' '), trim), hasLength);
-          this.node.className = className.sort().join(' ').replace(/\{\{prefix}}/g, CLASS_PREFIX);
+          this.node.className = className.sort().join(' ');
         } else if (k === 'style') {
           setStyle(this.node, attributes[k]);
         } else if (/on[A-Z][a-z]/.test(k.substr(0, 4))) {
@@ -745,12 +736,7 @@
   
 
   CreateNode.prototype.focus = function () {
-    if (!this.node.getAttribute('tabindex')) {
-      this.node.setAttribute('tabindex', '0');
-    }
-  
     this.node.focus();
-  
     return this;
   };
   
@@ -1145,7 +1131,6 @@
   
   // El assignments
   window.el = createNode;
-  window.el.classPrefix = CreateNode.classPrefix;
   window.el.fn = CreateNode.fn;
   window.el.isVisible = isVisible;
   
