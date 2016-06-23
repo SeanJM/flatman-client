@@ -709,12 +709,21 @@ a.appendTo('body').focus();
 Will append a child element in the first position of the parent node.
 
 ```javascript
-var a = el('div', { class : 'parent' },
+var parent = el('div', { class : 'parent' },
   el('div', { 'first-child' })
 );
-var b = el('div', { class : 'second-child' });
 
-a.prepend(b);
+var child = el('div', { class : 'second-child' });
+```
+
+```html
+<div class="parent">
+  <div class="first-child"></div>
+</div>
+```
+
+```javascript
+parent.prepend(child);
 ```
 
 ```html
@@ -729,12 +738,20 @@ a.prepend(b);
 Will append a child element in the first position of the parent node.
 
 ```javascript
-var a = el('div', { class : 'second-child' });
-var b = el('div', { class : 'parent' },
+var child = el('div', { class : 'second-child' });
+var parent = el('div', { class : 'parent' },
   el('div', { 'first-child' })
 );
+```
 
-a.prependTo(b);
+```html
+<div class="parent">
+  <div class="first-child"></div>
+</div>
+```
+
+```javascript
+child.prependTo(parent);
 ```
 
 ```html
