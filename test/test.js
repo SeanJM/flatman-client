@@ -349,18 +349,6 @@ startTest('el', function (test) {
     test('replaceWith', a.contains(c) && !a.contains(b)).shouldEqual(true);
   }());
 
-  // scale
-  (function () {
-    var a = el('div');
-
-    a.appendTo('body');
-    a.scale(2);
-
-    test('scale', a.attr('style')).shouldEqual('transform: matrix(2, 0, 0, 2, 0, 0);');
-
-    a.remove();
-  }());
-
   // select
   (function () {
     var a = el('input', { type : 'text' });

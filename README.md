@@ -75,7 +75,6 @@ var wrapped = el(document.querySelector('#my-div'));
 - [`prependTo`](#prependto-top)
 - [`remove`](#remove-top)
 - [`replaceWith`](#replacewith-top)
-- `scale`
 - `select`
 - `tag`
 - `text`
