@@ -71,7 +71,7 @@ var wrapped = el(document.querySelector('#my-div'));
 - [`disable`](#disable-top)
 - [`enable`](#enable-top)
 - [`focus`](#enable-top)
-- `prepend`
+- [`prepend`](#prepend-top)
 - `prependTo`
 - `remove`
 - `replaceWith`
@@ -697,9 +697,27 @@ Result
 
 #### `focus` [top](#methods)
 
-Will `focus` an element. This will only work if the element is in the `document.body`.
+Will `focus` an element. This will only work if the element is in the `document.body` and if it has an `tabindex` attribute.
 
 ```javascript
 var a = el('div');
 a.appendTo('body').focus();
+```
+
+#### `prepend` [top](#methods)
+
+Will append a child element in the first position of the parent node.
+
+```javascript
+var a = el('div', { class : 'a' });
+var b = el('div', { class : 'b' });
+a.prepend(b);
+```
+
+```html
+<div class="a">
+  <div class="b"></div>
+</div>
+```
+
 ```
