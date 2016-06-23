@@ -72,8 +72,8 @@ var wrapped = el(document.querySelector('#my-div'));
 - [`enable`](#enable-top)
 - [`focus`](#enable-top)
 - [`prepend`](#prepend-top)
-- `prependTo`
-- `remove`
+- [`prependTo`](#prependto-top)
+- [`remove`](#remove-top)
 - `replaceWith`
 - `scale`
 - `select`
@@ -709,15 +709,63 @@ a.appendTo('body').focus();
 Will append a child element in the first position of the parent node.
 
 ```javascript
-var a = el('div', { class : 'a' });
-var b = el('div', { class : 'b' });
+var a = el('div', { class : 'parent' },
+  el('div', { 'first-child' })
+);
+var b = el('div', { class : 'second-child' });
+
 a.prepend(b);
 ```
 
 ```html
-<div class="a">
-  <div class="b"></div>
+<div class="parent">
+  <div class="second-child"></div>
+  <div class="first-child"></div>
 </div>
 ```
 
+#### `prependTo` [top](#methods)
+
+Will append a child element in the first position of the parent node.
+
+```javascript
+var a = el('div', { class : 'second-child' });
+var b = el('div', { class : 'parent' },
+  el('div', { 'first-child' })
+);
+
+a.prependTo(b);
+```
+
+```html
+<div class="parent">
+  <div class="second-child"></div>
+  <div class="first-child"></div>
+</div>
+```
+
+#### `remove` [top](#methods)
+
+Will remove a `Node` from it's parent.
+
+```javascript
+var a = el('div', { class : 'parent' });
+var b = el('div', { class : 'first-child' });
+
+a.append(b);
+```
+
+```html
+<div class="parent">
+  <div class="first-child"></div>
+</div>
+```
+
+```javascript
+b.remove();
+```
+
+```html
+<div class="parent">
+</div>
 ```
