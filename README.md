@@ -74,7 +74,7 @@ var wrapped = el(document.querySelector('#my-div'));
 - [`prepend`](#prepend-top)
 - [`prependTo`](#prependto-top)
 - [`remove`](#remove-top)
-- `replaceWith`
+- [`replaceWith`](#replacewith-top)
 - `scale`
 - `select`
 - `tag`
@@ -784,5 +784,33 @@ b.remove();
 
 ```html
 <div class="parent">
+</div>
+```
+
+#### `replaceWith` [top](#methods)
+
+Will replace a selected `Node` with the first argument in `replaceWith`.
+
+```javascript
+var parent = el('div', { class : 'parent' });
+var replaceMe = el('div', { class : 'replace-me' });
+var withMe = el('div', { class : 'with-me' });
+
+parent.append(replaceMe);
+```
+
+```html
+<div class="parent">
+  <div class="replace-me"></div>
+</div>
+```
+
+```javascript
+replaceMe.replaceWith(withMe);
+```
+
+```html
+<div class="parent">
+  <div class="with-me"></div>
 </div>
 ```
