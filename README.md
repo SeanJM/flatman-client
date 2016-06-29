@@ -104,8 +104,14 @@ el('div').addClass('this-class-name');
 #### `attr` [top](#methods)
 
 ```javascript
-el('div').attr('data-attribute', 'value');
+var div = el('div');
+div.attr('data-attribute', 'value');
 ```
+```html
+<div data-attribute="value"></div>
+```
+
+***
 
 ```javascript
 el('div').attr({
@@ -113,29 +119,44 @@ el('div').attr({
   style : 'background: red'
 });
 ```
-
+```html
+<div class="some-class-name" style="background: red"></div>
+```
 
 #### `copyAttributes` [top](#methods)
 
 Copies the attributes from the node passed.
 
-```javascript
-var node = document.querySelector('#copy');
-// #copy : .my-class-name[id="copy"][data-attribute="some-text"]
-
-el('div').copyAttributes(node);
-// div : .my-class-name[id="copy"][data-attribute="some-text"]
+```html
+<div id="copy" class="my-class-name" data-attribute="some-text">
 ```
 
+```javascript
+var node = document.querySelector('#copy');
+var span = el('span');
+span.copyAttributes(node);
+```
+
+```html
+<span id="copy" class="my-class-name" data-attribute="some-text">
+```
 
 #### `removeClass` [top](#methods)
 
-`el([String], [Object], [Child Object]).removeClass([String])`
-
-```javascript
-el('div').removeClass('class-name');
+```html
+<div id="copy" class="my-class-name" data-attribute="some-text">
 ```
 
+```javascript
+var node = document.querySelector('#copy');
+el('div').removeClass('my-class-name');
+```
+
+***
+
+```html
+<div id="copy" data-attribute="some-text">
+```
 
 #### `style` [top](#methods)
 
@@ -480,8 +501,6 @@ el('div', { class : 'parent-1' },
 selected.siblings();
 ```
 
-Result
-
 ```html
 <div class="siblings-1"></div>
 <div class="siblings-2"></div>
@@ -521,8 +540,6 @@ var parent = el('div', { class : 'parent-1' }, el('div', { class : 'child-1' }))
 el('div', { class : 'parent-1' }).append(el('div', { class : 'child-1' }));
 ```
 
-Result
-
 ```HTML
 <div class="parent-1">
   <div class="child-1"></div>
@@ -538,8 +555,6 @@ var child2 = el('div', { class : 'child-2' });
 
 parent.append(child1, child2);
 ```
-
-Result
 
 ```HTML
 <div class="parent-1">
@@ -558,8 +573,6 @@ var child = el('div', { class : 'child-1' });
 child.appendTo(parent);
 ```
 
-Result
-
 ```HTML
 <div class="parent-1">
   <div class="child-1"></div>
@@ -577,8 +590,6 @@ var sibling_2 = el('div', { class : 'sibling-2' });
 sibling_1.appendTo(parent);
 sibling_2.before(sibling_1);
 ```
-
-Result
 
 ```HTML
 <div class="parent-1">
@@ -616,8 +627,6 @@ centerMe.centerTo(parent);
 
 ```
 
-Result
-
 ```HTML
 <div class="center-1" style="top: 75px; left: 75px;"></div>
 ```
@@ -646,8 +655,6 @@ var a = el('div',
 a.children();
 ```
 
-Result
-
 ```html
 <div class="child-1"></div>
 <div class="child-2"></div>
@@ -667,8 +674,6 @@ var a = el('div',
 
 var b = a.clone();
 ```
-
-Result
 
 ```html
 <!-- b -->
