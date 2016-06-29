@@ -8,12 +8,12 @@
 
 Thanks to [FRZR](https://frzr.js.org/) for some help for clearing up the "child" problem https://freezer.js.org/minimum-viable-view-library/
 
-### Basic usage
+## Basic usage
 ```javascript
 el('div', { class : 'my-class-name' }, 'some text');
 ```
 
-### Nesting
+## Nesting
 ```javascript
 el('div',
   el('div', { class : 'child'}),
@@ -21,7 +21,7 @@ el('div',
 );
 ```
 
-### Wrapping a DOM node and getting the interface
+## Wrapping a DOM node and getting the interface
 
 You can get all the methods and the simplified interface based on ideas in jQuery by wrapping a node in `el`.
 
@@ -29,9 +29,9 @@ You can get all the methods and the simplified interface based on ideas in jQuer
 var wrapped = el(document.querySelector('#my-div'));
 ```
 
-### Methods
+## Methods
 
-#### [Attributes](#attributes-top)
+### [Attributes](#attributes-top)
 - [`addClass`](#addclass-top)
 - [`attr`](#attr-top)
 - [`copyAttributes`](#copyattributes-top)
@@ -39,7 +39,7 @@ var wrapped = el(document.querySelector('#my-div'));
 - [`style`](#style-top)
 - [`toggleClass`](#toggleclass-top)
 
-#### [Boolean](#boolean-top)
+### [Boolean](#boolean-top)
 - [`contains`](#contains-top)
 - [`hasClass`](#hasclass-top)
 - [`hasParent`](#hasparent-top)
@@ -47,7 +47,7 @@ var wrapped = el(document.querySelector('#my-div'));
 - [`isFocused`](#isfocused-top)
 - [`isVisible`](#isvisible-top)
 
-#### [Query](#query-top)
+### [Query](#query-top)
 - [`closest`](#closest-top)
 - [`find`](#find-top)
 - [`firstChild`](#firstchild-top)
@@ -60,7 +60,7 @@ var wrapped = el(document.querySelector('#my-div'));
 - [`siblings`](#siblings-top)
 - [`textNodes`](#textnodes-top)
 
-#### [DOM Manipulation](#dom-manipulation-top)
+### [DOM Manipulation](#dom-manipulation-top)
 - [`append`](#append-top)
 - [`appendTo`](#appendto-top)
 - [`before`](#before-top)
@@ -81,19 +81,19 @@ var wrapped = el(document.querySelector('#my-div'));
 - [`uncheck`](#uncheck-top)
 - `value`
 
-### Event methods
+## Event methods
 - `on`
 - `off`
 - `trigger`
 
-### Functional interfaces
+## Functional interfaces
 - `el.isVisible`
 - `el.classPrefix`
 - `el.fn`
 
 ## Details
 
-#### `addClass` [top](#methods)
+### `addClass` [top](#methods)
 
 ```javascript
 el('div').addClass('this-class-name');
@@ -101,7 +101,7 @@ el('div').addClass('this-class-name');
 
 ## Attributes [top](#methods)
 
-#### `attr` [top](#methods)
+### `attr` [top](#methods)
 
 ```javascript
 var div = el('div');
@@ -123,7 +123,7 @@ el('div').attr({
 <div class="some-class-name" style="background: red"></div>
 ```
 
-#### `copyAttributes` [top](#methods)
+### `copyAttributes` [top](#methods)
 
 Copies the attributes from the node passed.
 
@@ -142,7 +142,7 @@ span.copyAttributes(node);
 <span id="copy" class="my-class-name" data-attribute="some-text">
 ```
 
-#### `removeClass` [top](#methods)
+### `removeClass` [top](#methods)
 
 ```html
 <div id="copy" class="my-class-name" data-attribute="some-text">
@@ -159,7 +159,7 @@ el('div').removeClass('my-class-name');
 <div id="copy" data-attribute="some-text">
 ```
 
-#### `style` [top](#methods)
+### `style` [top](#methods)
 
 ```javascript
 el('div').style('padding-left', 10);
@@ -175,7 +175,7 @@ el('div').style({
 el('div').style();
 ```
 
-#### `toggleClass` [top](#methods)
+### `toggleClass` [top](#methods)
 
 ```javascript
 var myDIV = el('div');
@@ -187,7 +187,7 @@ myDIV.toggleClass('toggle'); // -> myDIV does not have class 'toggle'
 
 ## Booleans [top](#methods)
 
-#### `contains` [top](#methods)
+### `contains` [top](#methods)
 
 ```javascript
 var a;
@@ -235,7 +235,7 @@ p.contains([a, b] c);
 // They will both return 'true'
 ```
 
-#### `hasClass` [top](#methods)
+### `hasClass` [top](#methods)
 
 ```javascript
 var myDiv = el('div', { class : 'class-name' });
@@ -244,7 +244,7 @@ myParent.hasClass('class-name');
 // -> true
 ```
 
-#### `hasParent` [top](#methods)
+### `hasParent` [top](#methods)
 
 ```javascript
 var myParent = el('div',
@@ -255,7 +255,7 @@ myChild.hasParent(myParent);
 // -> true
 ```
 
-#### `isChecked` [top](#methods)
+### `isChecked` [top](#methods)
 
 ```javascript
 var myCheckbox;
@@ -272,7 +272,7 @@ myCheckbox.isChecked(myParent);
 // -> true
 ```
 
-#### `isFocused` [top](#methods)
+### `isFocused` [top](#methods)
 
 ```javascript
 var myFocus = el('label', { tabIndex : 0 });
@@ -286,7 +286,7 @@ myFocus.isFocused();
 // -> true
 ```
 
-#### `isVisible` [top](#methods)
+### `isVisible` [top](#methods)
 
 This one requires a bit of explaining, it doesn't only check for 'visibility'.
 
@@ -330,7 +330,7 @@ The idea here is that this check is smart, so it knows whether the node is visib
 
 ## Query [top](#methods)
 
-#### `closest` [top](#methods)
+### `closest` [top](#methods)
 
 Returns the closest parent matching the query.
 
@@ -345,7 +345,7 @@ farthest.closest('.closest');
 // -> HTML Element : div.closest
 ```
 
-#### `find` [top](#methods)
+### `find` [top](#methods)
 
 Returns an array of matches as a result of executing the query.
 
@@ -359,7 +359,7 @@ parent.find('.find');
 // -> HTML NodeList : [ div.find, div.find ]
 ```
 
-#### `firstChild` [top](#methods)
+### `firstChild` [top](#methods)
 
 Returns the first child of NodeType 1 of a parent.
 
@@ -373,7 +373,7 @@ parent.firstChild();
 // -> HTML NodeList : div.find-1
 ```
 
-#### `getSelector` [top](#methods)
+### `getSelector` [top](#methods)
 
 Returns a `String` selector for the selected node.
 
@@ -388,7 +388,7 @@ parent.getSelector();
 // -> HTML NodeList : div.closest#my-id[tabindex="0"]
 ```
 
-#### `lastChild` [top](#methods)
+### `lastChild` [top](#methods)
 
 Returns the first child of NodeType 1 of a parent.
 
@@ -402,7 +402,7 @@ parent.lastChild();
 // -> HTML NodeList : div.find-2
 ```
 
-#### `offset` [top](#methods)
+### `offset` [top](#methods)
 
 Returns the `top`, `left`, `width`, `height` relative to the `body`'s coordinates. It is an interface for `this.node.getBoundingClientRect()`
 
@@ -421,7 +421,7 @@ parent.offset();
 */
 ```
 
-#### `parent` [top](#methods)
+### `parent` [top](#methods)
 
 If the `node` has a parent, it will return it's parent. Otherwise, it will return `false`
 
@@ -436,7 +436,7 @@ child.parent();
 // -> HTML Element : document.body
 ```
 
-#### `parents` [top](#methods)
+### `parents` [top](#methods)
 
 Returns an array of parents, from first to last.
 
@@ -453,7 +453,7 @@ child.parents();
 // -> [Array]
 ```
 
-#### `selectorPath` [top](#methods)
+### `selectorPath` [top](#methods)
 
 Returns a selector path to the selected node.
 
@@ -485,7 +485,7 @@ child.selectorPath();
 // -> div.parent-2#super-parent div.parent-1
 ```
 
-#### `siblings` [top](#methods)
+### `siblings` [top](#methods)
 
 Returns a selected Node and it's siblings filtered to show only nodes of type `1`, which are HTML element nodes, this excludes text nodes.
 
@@ -509,7 +509,7 @@ selected.siblings();
 <div class="siblings-4"></div>
 ```
 
-#### `textNodes` [top](#methods)
+### `textNodes` [top](#methods)
 
 Returns all the `Text Nodes` which are a child of a selected node.
 
@@ -521,7 +521,7 @@ selected.textNodes();
 
 ## Dom Manipulation [top](#methods)
 
-#### `append` [top](#methods)
+### `append` [top](#methods)
 
 Is an interface for `appendChild`, the result being a way to add a `Node` to a parent `Node`.
 
@@ -564,7 +564,7 @@ parent.append(child1, child2);
 </div>
 ```
 
-#### `appendTo` [top](#methods)
+### `appendTo` [top](#methods)
 
 Is an interface for `appendChild`, the result being a way to add a child `Node` to a parent `Node`.
 
@@ -580,7 +580,7 @@ child.appendTo(parent);
 </div>
 ```
 
-#### `before` [top](#methods)
+### `before` [top](#methods)
 
 Is an interface for `insertBefore`, the result being a way to append a `Node` before it's sibling `Node`.
 
@@ -599,7 +599,7 @@ sibling_2.before(sibling_1);
 </div>
 ```
 
-#### `centerTo` [top](#methods)
+### `centerTo` [top](#methods)
 
 Is an interface centering a `Node` vertically and horizontally relative to another `Node`.
 
@@ -632,7 +632,7 @@ centerMe.centerTo(parent);
 <div class="center-1" style="top: 75px; left: 75px;"></div>
 ```
 
-#### `check` [top](#methods)
+### `check` [top](#methods)
 
 Will check a checkbox or a radio
 
@@ -642,7 +642,7 @@ checkbox.check().isChecked();
 // -> true
 ```
 
-#### `children` [top](#methods)
+### `children` [top](#methods)
 
 Returns an array of direct descendants wrapped in the `el` constructor. This is an interface for `childNodes` with a filter for a `NodeType` equal to `1` (`HTMlElement`)
 
@@ -662,7 +662,7 @@ a.children();
 <div class="child-3"></div>
 ```
 
-#### `clone` [top](#methods)
+### `clone` [top](#methods)
 
 Clones an element, is an interface for `Node.cloneNode(true)`
 
@@ -685,7 +685,7 @@ var b = a.clone();
 </div>
 ```
 
-#### `disable` [top](#methods)
+### `disable` [top](#methods)
 
 Disables an element by setting it's `disabled` attribute to `disabled`
 
@@ -699,7 +699,7 @@ Result
 <div disabled="disabled"></div>
 ```
 
-#### `enable` [top](#methods)
+### `enable` [top](#methods)
 
 Enables an element by removing it's `disabled` attribute
 
@@ -717,7 +717,7 @@ var a = el(document.getElementById('disabled')).enable();
 <div id="disabled"></div>
 ```
 
-#### `focus` [top](#methods)
+### `focus` [top](#methods)
 
 Will `focus` an element. This will only work if the element is in the `document.body` and if it has an `tabindex` attribute.
 
@@ -726,7 +726,7 @@ var a = el('div');
 a.appendTo('body').focus();
 ```
 
-#### `prepend` [top](#methods)
+### `prepend` [top](#methods)
 
 Will append a child element in the first position of the parent node.
 
@@ -755,7 +755,7 @@ parent.prepend(child);
 </div>
 ```
 
-#### `prependTo` [top](#methods)
+### `prependTo` [top](#methods)
 
 Will append a child element in the first position of the parent node.
 
@@ -782,7 +782,7 @@ child.prependTo(parent);
 </div>
 ```
 
-#### `remove` [top](#methods)
+### `remove` [top](#methods)
 
 Will remove a `Node` from it's parent.
 
@@ -808,7 +808,7 @@ b.remove();
 </div>
 ```
 
-#### `replaceWith` [top](#methods)
+### `replaceWith` [top](#methods)
 
 Will replace a selected `Node` with the first argument in `replaceWith`.
 
@@ -836,11 +836,11 @@ replaceMe.replaceWith(withMe);
 </div>
 ```
 
-#### `select` [top](#methods)
+### `select` [top](#methods)
 
 Proves an interface to select text ranges and get the selected text range in an input.
 
-#### `tag` [top](#methods)
+### `tag` [top](#methods)
 
 Change the `tagName` of an element. When passed with no arguments, it returns the value of `tagName`.
 
@@ -852,7 +852,7 @@ div.tag();
 // -> 'input'
 ```
 
-#### `text` [top](#methods)
+### `text` [top](#methods)
 
 Insert text into a node, will replace all the existing content with the text. When passed with no arguments, will return the text inside the node.
 
@@ -864,7 +864,7 @@ div.text();
 // -> 'text'
 ```
 
-#### `uncheck` [top](#methods)
+### `uncheck` [top](#methods)
 
 Uncheck a `radio` or `checkbox`
 
