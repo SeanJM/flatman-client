@@ -705,7 +705,7 @@ Enables an element by removing it's `disabled` attribute
 var a = el(document.getElementById('disabled')).enable();
 ```
 
-Result
+***
 
 ```html
 <div id="disabled"></div>
@@ -731,17 +731,17 @@ var parent = el('div', { class : 'parent' },
 
 var child = el('div', { class : 'second-child' });
 ```
-
 ```html
 <div class="parent">
   <div class="first-child"></div>
 </div>
 ```
 
+***
+
 ```javascript
 parent.prepend(child);
 ```
-
 ```html
 <div class="parent">
   <div class="second-child"></div>
@@ -759,17 +759,16 @@ var parent = el('div', { class : 'parent' },
   el('div', { 'first-child' })
 );
 ```
-
 ```html
 <div class="parent">
   <div class="first-child"></div>
 </div>
 ```
+***
 
 ```javascript
 child.prependTo(parent);
 ```
-
 ```html
 <div class="parent">
   <div class="second-child"></div>
@@ -787,17 +786,17 @@ var b = el('div', { class : 'first-child' });
 
 a.append(b);
 ```
-
 ```html
 <div class="parent">
   <div class="first-child"></div>
 </div>
 ```
 
+***
+
 ```javascript
 b.remove();
 ```
-
 ```html
 <div class="parent">
 </div>
@@ -814,17 +813,17 @@ var withMe = el('div', { class : 'with-me' });
 
 parent.append(replaceMe);
 ```
-
 ```html
 <div class="parent">
   <div class="replace-me"></div>
 </div>
 ```
 
+***
+
 ```javascript
 replaceMe.replaceWith(withMe);
 ```
-
 ```html
 <div class="parent">
   <div class="with-me"></div>
@@ -870,7 +869,8 @@ checkbox.check();
 ```html
 <input type="checkbox" checked="checked">
 ```
-Uncheck
+***
+
 ```javascript
 checkbox.uncheck();
 ```
