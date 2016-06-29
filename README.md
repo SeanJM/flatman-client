@@ -75,10 +75,10 @@ var wrapped = el(document.querySelector('#my-div'));
 - [`prependTo`](#prependto-top)
 - [`remove`](#remove-top)
 - [`replaceWith`](#replacewith-top)
-- `select`
-- `tag`
-- `text`
-- `uncheck`
+- [`select`](#select-top)
+- [`tag`](#tag-top)
+- [`text`](#text-top)
+- [`uncheck`](#uncheck-top)
 - `value`
 
 ### Event methods
@@ -829,4 +829,57 @@ replaceMe.replaceWith(withMe);
 <div class="parent">
   <div class="with-me"></div>
 </div>
+```
+
+#### `select` [top](#methods)
+
+Proves an interface to select text ranges and get the selected text range in an input.
+
+#### `tag` [top](#methods)
+
+Change the `tagName` of an element. When passed with no arguments, it returns the value of `tagName`.
+
+```javascript
+var div = el('div');
+
+div.tag('input');
+div.tag();
+// -> 'input'
+```
+
+#### `text` [top](#methods)
+
+Insert text into a node, will replace all the existing content with the text. When passed with no arguments, will return the text inside the node.
+
+```javascript
+var div = el('div');
+
+div.text('text');
+div.text();
+// -> 'text'
+```
+
+#### `uncheck` [top](#methods)
+
+Uncheck a `radio` or `checkbox`
+
+```javascript
+var checkbox = el('input', { type : 'checkbox' });
+checkbox.check();
+```
+
+Result
+
+```html
+<input type="checkbox" checked="checked">
+```
+
+```javascript
+checkbox.uncheck();
+```
+
+Result
+
+```html
+<input type="checkbox">
 ```
