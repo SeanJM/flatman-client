@@ -136,6 +136,7 @@ var node = document.querySelector('#copy');
 var span = el('span');
 span.copyAttributes(node);
 ```
+***
 
 ```html
 <span id="copy" class="my-class-name" data-attribute="some-text">
