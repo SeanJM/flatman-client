@@ -867,19 +867,13 @@ Uncheck a `radio` or `checkbox`
 var checkbox = el('input', { type : 'checkbox' });
 checkbox.check();
 ```
-
-Result
-
 ```html
 <input type="checkbox" checked="checked">
 ```
-
+Uncheck
 ```javascript
 checkbox.uncheck();
 ```
-
-Result
-
 ```html
 <input type="checkbox">
 ```
