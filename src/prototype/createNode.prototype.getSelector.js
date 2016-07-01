@@ -24,10 +24,15 @@ CreateNode.prototype.getSelector = function () {
   };
   var selector = [];
 
+  if (tagName === 'body') {
+    return tagName;
+  }
+
   // If a tag contains this character, it would be an invalid selector
   if (tagName.indexOf(':') === -1) {
     selector.push(tagName);
   }
+
 
   for (var i = 0; i < attr.length; i++) {
   	if (typeof format[attr[i].name] === 'function' && attr[i].value.length) {
@@ -39,5 +44,5 @@ CreateNode.prototype.getSelector = function () {
     selector.push(':nth-child(' + (siblings.indexOf(this.node) + 1) + ')');
   }
 
-  return selector.join('');
+  return selector.join('').replace(/\n/g, '');
 };
