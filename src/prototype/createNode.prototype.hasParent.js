@@ -1,3 +1,3 @@
 CreateNode.prototype.hasParent = function (target) {
-  return target.contains(this.node);
+  return hasParent(this.node, target);
 };

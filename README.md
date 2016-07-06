@@ -90,6 +90,7 @@ var wrapped = el(document.querySelector('#my-div'));
 - `el.isVisible`
 - `el.classPrefix`
 - `el.fn`
+- `el.hasParent`
 
 ## Details
 
