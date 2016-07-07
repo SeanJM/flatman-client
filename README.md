@@ -79,7 +79,7 @@ var wrapped = el(document.querySelector('#my-div'));
 - [`tag`](#tag-top)
 - [`text`](#text-top)
 - [`uncheck`](#uncheck-top)
-- `value`
+- [`value`](#value-top)
 
 ## Event methods
 - `on`
@@ -883,4 +883,17 @@ checkbox.uncheck();
 ```
 ```html
 <input type="checkbox">
+```
+### `value` [top](#methods)
+
+This method is for setting the value of any text field and select element.
+When passed no arguments, the method will return it's current value.
+
+```javascript
+var input = el('input', { type : 'text' });
+input.appendTo('body');
+
+input.value('text');
+input.value();
+// -> 'text'
 ```
