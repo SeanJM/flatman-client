@@ -891,7 +891,6 @@ When passed no arguments, the method will return it's current value.
 
 ```javascript
 var input = el('input', { type : 'text' });
-input.appendTo('body');
 
 input.value('text');
 input.value();
