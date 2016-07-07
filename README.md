@@ -82,7 +82,7 @@ var wrapped = el(document.querySelector('#my-div'));
 - [`value`](#value-top)
 
 ## Event methods
-- `on`
+- [`on`](#on-top)
 - `off`
 - `trigger`
 
@@ -896,3 +896,18 @@ input.value('text');
 input.value();
 // -> 'text'
 ```
+
+### `on` [top](#methods)
+
+This is an interface for `addEventListener`, with the main difference being how functions are tracked internally.
+
+```javascript
+var element = el('div');
+
+div.on('click', function () {
+  console.log('click');
+});
+
+div.appendTo('body');
+```
+Now when you click on the element, it will log `click` to the console.
