@@ -87,6 +87,7 @@ var wrapped = el(document.querySelector('#my-div'));
 - `trigger`
 
 ## Functional interfaces
+- `el.contains`
 - `el.isVisible`
 - `el.classPrefix`
 - `el.fn`
