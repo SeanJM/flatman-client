@@ -6,17 +6,27 @@ function isVisible() {
   function is(node) {
     var css = window.getComputedStyle(node);
     var rect = node.getBoundingClientRect();
-    return ((
+
+    var isValidPosition = (
       rect.left + rect.width > 0
-        && rect.left < windowWidth
-        && rect.top + rect.height + windowTop > 0
-    ) && (
-      rect.width > 0
-        && rect.height > 0
-    ) && (
+      && rect.left < windowWidth
+      && rect.top + rect.height + windowTop > 0
+    );
+
+    var isClipped = (
+      css.overflow === 'hidden'
+      && (
+        rect.width === 0
+        || rect.height === 0
+      )
+    );
+
+    var isVisible = (
       css.visibility !== 'none'
-        && css.display !== 'none'
-    ));
+      && css.display !== 'none'
+    );
+
+    return isValidPosition && !isClipped && isVisible;
   }
 
   function isDeep(element) {
