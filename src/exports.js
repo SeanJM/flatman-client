@@ -5,6 +5,7 @@ window.el = createNode;
 window.el.fn = CreateNode.fn;
 window.el.isVisible = isVisible;
 window.el.hasParent = hasParent;
+window.el.contains = contains;
 
 // Node environment
 if (typeof module === 'object' && module.exports) {
