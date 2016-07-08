@@ -273,6 +273,40 @@
   }
   
 
+  function contains(node) {
+    var i = 1;
+    var n = arguments.length;
+    var x;
+    var y;
+  
+    node = node instanceof CreateNode
+      ? node.node
+      : node;
+  
+    function each(a) {
+      a = a instanceof CreateNode
+        ? a.node
+        : a;
+  
+      return node.contains(a) && a !== node;
+    }
+  
+    for (; i < n; i++) {
+      if (isArray(arguments[i])) {
+        for (x = 0, y = arguments[i].length; x < y; x++) {
+          if (each(arguments[i][x])) {
+            return true;
+          }
+        }
+      } else if (each(arguments[i])) {
+        return true;
+      }
+    }
+  
+    return false;
+  }
+  
+
   // From http://stackoverflow.com/questions/263743/caret-position-in-textarea-in-characters-from-the-start
   function getSelection (node) {
     var
@@ -364,17 +398,27 @@
     function is(node) {
       var css = window.getComputedStyle(node);
       var rect = node.getBoundingClientRect();
-      return ((
+  
+      var isValidPosition = (
         rect.left + rect.width > 0
-          && rect.left < windowWidth
-          && rect.top + rect.height + windowTop > 0
-      ) && (
-        rect.width > 0
-          && rect.height > 0
-      ) && (
+        && rect.left < windowWidth
+        && rect.top + rect.height + windowTop > 0
+      );
+  
+      var isClipped = (
+        css.overflow === 'hidden'
+        && (
+          rect.width === 0
+          || rect.height === 0
+        )
+      );
+  
+      var isVisible = (
         css.visibility !== 'none'
-          && css.display !== 'none'
-      ));
+        && css.display !== 'none'
+      );
+  
+      return isValidPosition && !isClipped && isVisible;
     }
   
     function isDeep(element) {
@@ -703,38 +747,15 @@
   
 
   CreateNode.prototype.contains = function () {
+    var a = [];
     var i = 0;
     var n = arguments.length;
-    var self = this;
-    var x;
-    var y;
-  
-    function each(a) {
-      if (a instanceof CreateNode) {
-        if (!self.node.contains(a.node) || a.node === self.node) {
-          return false;
-        }
-      } else if (!self.node.contains(a) || self.node === a) {
-        return false;
-      }
-      return true;
-    }
   
     for (; i < n; i++) {
-      if (isArray(arguments[i])) {
-        for (x = 0, y = arguments[i].length; x < y; x++) {
-          if (!each(arguments[i][x])) {
-            return false;
-          }
-        }
-      } else {
-        if (!each(arguments[i])) {
-          return false;
-        }
-      }
+      a.push(arguments[i]);
     }
   
-    return true;
+    return contains.apply(null, [this.node].concat(a));
   };
   
 
@@ -1158,6 +1179,7 @@
   window.el.fn = CreateNode.fn;
   window.el.isVisible = isVisible;
   window.el.hasParent = hasParent;
+  window.el.contains = contains;
   
   // Node environment
   if (typeof module === 'object' && module.exports) {
