@@ -301,7 +301,7 @@ startTest('el', function (test) {
     a.append(b.append(c));
     p = c.parents();
 
-    test('parents', p[0].node).shouldEqual(a.node);
+    test('parents', p[1].node).shouldEqual(a.node);
   }());
 
   // prepend
