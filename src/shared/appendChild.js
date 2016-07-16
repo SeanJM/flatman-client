@@ -1,24 +1,26 @@
-// From http://stackoverflow.com/questions/263743/caret-position-in-textarea-in-characters-from-the-start
-function appendChild (node, child) {
-  var f;
+function appendChild (node) {
+  var i = 1;
+  var n = arguments.length;
 
-  if (typeof child === 'string') {
-    node.innerHTML = child;
-  } else if (child instanceof CreateNode) {
-    node.appendChild(child.node);
-  } else if (isArray(child)) {
-    // Is a node creation
-    if (typeof child[0] === 'string') {
-      node.appendChild(new CreateNode(child).node);
-    } else {
-      // Is a group
-      f = new DocumentFragment();
-      forEach(child, function (c) {
-        appendChild(f, c);
-      });
-      node.appendChild(f);
+  function append(a) {
+    appendChild(node, a);
+  }
+
+  node = node instanceof CreateNode
+    ? node.node
+    : node;
+
+  for (; i < n; i++) {
+    if (typeof arguments[i] === 'string') {
+      node.innerHTML = arguments[i];
+    } else if (arguments[i] instanceof CreateNode) {
+      node.appendChild(arguments[i].node);
+    } else if (!!arguments[i] && typeof arguments[i].appendTo === 'function') {
+      arguments[i].appendTo(node);
+    } else if (isArray(arguments[i])) {
+      forEach(arguments[i], append);
+    } else if (isElement(arguments[i])) {
+      node.appendChild(arguments[i]);
     }
-  } else if (isElement(child)) {
-    node.appendChild(child);
   }
 }
