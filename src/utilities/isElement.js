@@ -1,3 +1,3 @@
 function isElement (a) {
-  return a && typeof a.nodeType === 'number' && a.nodeType === 1;
+  return Object.prototype.toString.call(a).substr(0, 12) === '[object HTML'; 
 }
