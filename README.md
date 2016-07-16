@@ -29,6 +29,26 @@ You can get all the methods and the simplified interface based on ideas in jQuer
 var wrapped = el(document.querySelector('#my-div'));
 ```
 
+## Passing other object types as arguments
+
+- You can pass it anything which has an `appendTo` method
+
+## Passing a constructor object or Component
+
+- `el(MyConstructor, {}, 'string')`
+
+`el` works with constructors, it is opinionated and will return errors if your constructor isn't capitalized. 
+
+The second argument, if it is an `Object` will be passed to the constructor. It will also look for prototype methods which match the key name, when it finds matching prototypes, it will execute them. 
+
+```javascript
+el(MyComponent, { class : 'this-class' }, 'text');
+```
+
+Let's go through this, the first thing is that 'MyComponent' is our constructor. The second argument: `class` will actually trigger an `addClass` method call.
+
+The third argument `text` will trigger the `el` function to check if there is a prototype method called `text`, if it does not find the method, the function will fail with an error message.
+
 ## Methods
 
 ### [Attributes](#attributes-top)
