@@ -79,7 +79,12 @@ function Component(options) {
 Component.prototype.appendTo = function (target) {
   if (typeof target.append === 'function') {
     target.append(this.node.document);
-    this.trigger('appendto');
+
+    this.trigger('appendto');  
+
+    if (this.node.document.hasParent('body')) {
+      this.trigger('live');
+    }
   } else {
     throw 'Invalid target: "' + target.constructor.name + '"';
   }
