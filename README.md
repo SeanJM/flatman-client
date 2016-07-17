@@ -79,7 +79,7 @@ function Component(options) {
 Component.prototype.appendTo = function (target) {
   if (typeof target.append === 'function') {
     target.append(this.node.document);
-    this.trigger('onappendto');
+    this.trigger('appendto');
   } else {
     throw 'Invalid target: "' + target.constructor.name + '"';
   }
