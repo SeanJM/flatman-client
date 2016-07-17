@@ -83,7 +83,7 @@ Component.prototype.appendTo = function (target) {
     this.trigger('appendto');  
 
     if (this.node.document.hasParent('body')) {
-      this.trigger('live');
+      this.trigger('body');
     }
   } else {
     throw 'Invalid target: "' + target.constructor.name + '"';
