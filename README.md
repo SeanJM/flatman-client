@@ -35,21 +35,81 @@ var wrapped = el(document.querySelector('#my-div'));
 
 ## Passing a constructor object or Component
 
-- `el(MyConstructor, {}, 'string')`
-
-`el` works with constructors, it is opinionated and will return errors if your constructor isn't capitalized. 
+- `el` works with constructors, it is opinionated and will return errors if your constructor isn't capitalized. 
+- It takes the same type of arguments that a regular `el` takes.
+- The constructor must have an `appendTo` method which will append it to another element.
+- Any key which begins with `on...` will trigger the `on` method.
+- `onmethod` or `onMethod` are treated equally
 
 The second argument, if it is an `Object` will be passed to the constructor. It will also look for prototype methods which match the key name, when it finds matching prototypes, it will execute them. 
 
 ```javascript
-el(MyComponent, { class : 'this-class' }, 'text');
+el(MyComponent, { 
+    class : 'this-class', // Will actually trigger the components `addClass` method
+    onclick : function () {}, // onclick and onClick are functionally identical
+    onClick : function () {},
+    componentMethod : [ Array ] // This will be applied to the method as a list of arguments
+    componentMethod2 : argument // Will be passed as a single argument to your method
+  }, 
+  'text' // Will trigger the `text` method for the component
+);
 ```
 
-Let's go through this, the first thing is that 'MyComponent' is our constructor. The second argument: `class` will actually trigger an `addClass` method call.
+### I don't have mehtods for `...`
 
-The third argument `text` will trigger the `el` function to check if there is a prototype method called `text`, if it does not find the method, the function will fail with an error message.
+That's okay, if you are missing methods with the exception of
+- `appendTo`
+- `addClass` when the class key is present
+- `on*` when a key matching that pattern is present
 
-## Methods
+You will also get the options object passed to the constructor.
+
+### A more detailed example
+
+- The Component
+
+```javascript
+function Component(options) {
+  this.node = {};
+  this.node.document = el('div', 
+    this.node.label = el('div', { class : 'text' })
+  );
+}
+
+Component.prototype.appendTo = function (target) {
+  if (typeof target.append === 'function') {
+    target.append(this.node.document);
+  } else {
+    throw 'Invalid target: "' + target.constructor.name + '"';
+  }
+};
+
+Component.prototype.addClass = function (className) {
+  this.node.document.addClass(className);
+};
+
+Component.prototype.on = function (name, callback) {
+  this.node.document.on(name, callback);
+};
+
+Component.prototype.text = function (text) {
+  this.node.label.text(text);
+};
+```
+
+- Putting it together 
+
+```javascript
+el(Component, {
+  class : 'my-component-class',
+  onclick : function () {
+    // What it does when it's clicked on
+  },
+  'My Text'
+);
+```
+
+## `el` Methods
 
 ### [Attributes](#attributes-top)
 - [`addClass`](#addclass-top)
