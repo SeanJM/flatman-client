@@ -101,6 +101,13 @@ Component.prototype.on = function (name, callback) {
 Component.prototype.text = function (text) {
   this.node.label.text(text);
 };
+
+// A function to add the minimum prototypes to a constructor
+Component.extend = function (Constructor) {
+  Constructor.prototype.appendTo = Component.prototype.appendTo;
+  Constructor.prototype.addClass = Component.prototype.addClass;
+  Constructor.prototype.on = Component.prototype.on;
+};
 ```
 
 - Putting it together 
