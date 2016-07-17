@@ -114,6 +114,9 @@ el(Component, {
     },
     onAppendTo : function () {
       // What it does when it's appended
+    },
+    onBody : function () {
+      // What it does when it's appended to the body
     }
   },
   'My Text'
