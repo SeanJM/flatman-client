@@ -79,6 +79,7 @@ function Component(options) {
 Component.prototype.appendTo = function (target) {
   if (typeof target.append === 'function') {
     target.append(this.node.document);
+    this.trigger('onappendto');
   } else {
     throw 'Invalid target: "' + target.constructor.name + '"';
   }
@@ -101,9 +102,14 @@ Component.prototype.text = function (text) {
 
 ```javascript
 el(Component, {
-  class : 'my-component-class',
-  onclick : function () {
-    // What it does when it's clicked on
+    class : 'my-component-class',
+
+    onClick : function () {
+      // What it does when it's clicked on
+    },
+    onAppendTo : function () {
+      // What it does when it's appended
+    }
   },
   'My Text'
 );
@@ -169,7 +175,6 @@ el(Component, {
 ## Functional interfaces
 - `el.contains`
 - `el.isVisible`
-- `el.classPrefix`
 - `el.fn`
 - `el.hasParent`
 
