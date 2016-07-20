@@ -22,12 +22,12 @@ function createComponent() {
         component.append(a);
       } else {
         throw '"' + a.constructor.name + '" does not have an "appendTo" method';
-      } 
+      }
     } else {
       throw '"' + component.constructor.name + '" does not have an "append" method';
     }
   }
-  
+
   for (; i < n; i++) {
     if (
       isComponent(arguments[i])
@@ -38,13 +38,13 @@ function createComponent() {
       if (typeof component.text === 'function') {
         component.text(arguments[i]);
       } else {
-        throw 'Invalid argument "' + arguments[i] + '", component "' + component.constructor.name + '" does not have a "text" method.';  
+        throw 'Invalid argument "' + arguments[i] + '", component "' + component.constructor.name + '" does not have a "text" method.';
       }
     } else if (typeof arguments[i] === 'object') {
 
       // Check if it's an object, and if it is, it's going to be treated as
       // an options object.
-      
+
       for (var k in arguments[i]) {
         // Check for an 'on' method
         if (
@@ -161,6 +161,11 @@ function CreateNode () {
       }
     }, false);
   }
+
+  this.check = this.node.check;
+  this.value = this.node.value;
+  this.style = this.node.style;
+  this.style.transform = this.style[VENDOR_PREFIX.transform];
 }
 
 function createNode () {
@@ -169,7 +174,7 @@ function createNode () {
   var a;
 
   function F() { return CreateNode.apply(this, a); }
-  
+
   // Faster way to apply arguments
   if (
     typeof arguments[0] === 'function'
@@ -220,11 +225,11 @@ function createNode () {
   } else if (typeof arguments[0] !== 'undefined') {
     // Check for the possibility that they are passing a constructor as a string
     if (
-      typeof arguments[0] === 'string' 
+      typeof arguments[0] === 'string'
       && arguments[0][0] === arguments[0][0].toUpperCase()
       && arguments[0][1] === arguments[0][1].toLowerCase()
     ) {
-      throw 'Invalid tag name: "' + arguments[0] + '", it looks like you are passing a constructor name as a string.'; 
+      throw 'Invalid tag name: "' + arguments[0] + '", it looks like you are passing a constructor name as a string.';
     }
     switch (n) {
       case 1 :

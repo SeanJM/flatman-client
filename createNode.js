@@ -561,12 +561,12 @@
           component.append(a);
         } else {
           throw '"' + a.constructor.name + '" does not have an "appendTo" method';
-        } 
+        }
       } else {
         throw '"' + component.constructor.name + '" does not have an "append" method';
       }
     }
-    
+  
     for (; i < n; i++) {
       if (
         isComponent(arguments[i])
@@ -577,13 +577,13 @@
         if (typeof component.text === 'function') {
           component.text(arguments[i]);
         } else {
-          throw 'Invalid argument "' + arguments[i] + '", component "' + component.constructor.name + '" does not have a "text" method.';  
+          throw 'Invalid argument "' + arguments[i] + '", component "' + component.constructor.name + '" does not have a "text" method.';
         }
       } else if (typeof arguments[i] === 'object') {
   
         // Check if it's an object, and if it is, it's going to be treated as
         // an options object.
-        
+  
         for (var k in arguments[i]) {
           // Check for an 'on' method
           if (
@@ -700,6 +700,11 @@
         }
       }, false);
     }
+  
+    this.check = this.node.check;
+    this.value = this.node.value;
+    this.style = this.node.style;
+    this.style.transform = this.style[VENDOR_PREFIX.transform];
   }
   
   function createNode () {
@@ -708,7 +713,7 @@
     var a;
   
     function F() { return CreateNode.apply(this, a); }
-    
+  
     // Faster way to apply arguments
     if (
       typeof arguments[0] === 'function'
@@ -759,11 +764,11 @@
     } else if (typeof arguments[0] !== 'undefined') {
       // Check for the possibility that they are passing a constructor as a string
       if (
-        typeof arguments[0] === 'string' 
+        typeof arguments[0] === 'string'
         && arguments[0][0] === arguments[0][0].toUpperCase()
         && arguments[0][1] === arguments[0][1].toLowerCase()
       ) {
-        throw 'Invalid tag name: "' + arguments[0] + '", it looks like you are passing a constructor name as a string.'; 
+        throw 'Invalid tag name: "' + arguments[0] + '", it looks like you are passing a constructor name as a string.';
       }
       switch (n) {
         case 1 :
@@ -905,12 +910,6 @@
   };
   
 
-  CreateNode.prototype.check = function () {
-    this.node.checked = true;
-    return this;
-  };
-  
-
   CreateNode.prototype.children = function () {
     var c = this.node.childNodes;
     return c.length ? map(filter(c, isElement), function (a) {
@@ -940,24 +939,6 @@
     }
   
     return contains.apply(null, [this.node].concat(a));
-  };
-  
-
-  CreateNode.prototype.copyAttributes = function (fromNode) {
-    var i = 0,
-        attr;
-  
-    if (fromNode instanceof CreateNode) {
-      attr = fromNode.node.attributes;
-    } else {
-      attr = fromNode.attributes;
-    }
-  
-    for (; i < attr.length; i++){
-      this.node.setAttribute(attr[i].nodeName, attr[i].nodeValue);
-    }
-  
-    return this;
   };
   
 
@@ -1041,18 +1022,8 @@
   };
   
 
-  CreateNode.prototype.hasClass = function (className) {
-    return this.node.className.split(' ').indexOf(className) !== -1;
-  };
-  
-
   CreateNode.prototype.hasParent = function (target) {
     return hasParent(this.node, target);
-  };
-  
-
-  CreateNode.prototype.isChecked = function () {
-    return this.node.checked;
   };
   
 
@@ -1232,59 +1203,6 @@
   };
   
 
-  CreateNode.prototype.style = function (a, b) {
-  
-    /* The Problem
-     * (A) node.style('property');
-     * (B) node.style('property: value;');
-     * (C) node.style({ property : value });
-     * (D) node.style('property', 'value');
-     */
-    if (isString(a) && isUndefined(b)) {
-      // Solve for (A)
-      if (a.indexOf(':') === -1) {
-        if (document.body.contains(this.node)) {
-          return window.getComputedStyle(this.node)[arguments[0]];
-        } else {
-          c = this.node.cloneNode(true);
-          c.style.position = 'absolute';
-          c.style.left = '-10000000';
-          document.body.appendChild(c);
-          a = window.getComputedStyle(c)[arguments[0]];
-          c.parentNode.removeChild(c);
-          c = undefined;
-          return a;
-        }
-      } else {
-        // Solve for (B)
-        this.node.setAttribute('style', a);
-        return this;
-      }
-    }
-  
-    // Solve for (C) && (D)
-    setStyle(this.node, a, b);
-    return this;
-  };
-  
-
-  CreateNode.prototype.tag = function (name) {
-    var clone;
-  
-    if (typeof name === 'undefined') {
-      return this.node.tagName.toLowerCase();
-    }
-  
-    clone = new CreateNode(name);
-    clone.text(this.node.innerHTML);
-    clone.copyAttributes(this.node);
-    this.replaceWith(clone);
-    this.node = clone.node;
-  
-    return this;
-  };
-  
-
   CreateNode.prototype.text = function (value) {
     if (isDefined(value)) {
       this.node.innerHTML = value;
@@ -1336,22 +1254,6 @@
           callback(e);
         });
       });
-    }
-  };
-  
-
-  CreateNode.prototype.uncheck = function () {
-    this.node.checked = false;
-    return this;
-  };
-  
-
-  CreateNode.prototype.value = function (value) {
-    if (typeof value !== 'undefined') {
-      this.node.value = value;
-      return this;
-    } else {
-      return this.node.value;
     }
   };
   

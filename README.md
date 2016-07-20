@@ -35,22 +35,22 @@ var wrapped = el(document.querySelector('#my-div'));
 
 ## Passing a constructor object or Component
 
-- `el` works with constructors, it is opinionated and will return errors if your constructor isn't capitalized. 
+- `el` works with constructors, it is opinionated and will return errors if your constructor isn't capitalized.
 - It takes the same type of arguments that a regular `el` takes.
 - The constructor must have an `appendTo` method which will append it to another element.
 - Any key which begins with `on...` will trigger the `on` method.
 - `onmethod` or `onMethod` are treated equally
 
-The second argument, if it is an `Object` will be passed to the constructor. It will also look for prototype methods which match the key name, when it finds matching prototypes, it will execute them. 
+The second argument, if it is an `Object` will be passed to the constructor. It will also look for prototype methods which match the key name, when it finds matching prototypes, it will execute them.
 
 ```javascript
-el(MyComponent, { 
+el(MyComponent, {
     class : 'this-class', // Will actually trigger the components `addClass` method
     onclick : function () {}, // onclick and onClick are functionally identical
     onClick : function () {},
     componentMethod : [ Array ] // This will be applied to the method as a list of arguments
     componentMethod2 : argument // Will be passed as a single argument to your method
-  }, 
+  },
   'text' // Will trigger the `text` method for the component
 );
 ```
@@ -71,7 +71,7 @@ You will also get the options object passed to the constructor.
 ```javascript
 function Component(options) {
   this.node = {};
-  this.node.document = el('div', 
+  this.node.document = el('div',
     this.node.label = el('div', { class : 'text' })
   );
 }
@@ -110,7 +110,7 @@ Component.extend = function (Constructor) {
 };
 ```
 
-- Putting it together 
+- Putting it together
 
 ```javascript
 el(Component, {
@@ -142,9 +142,7 @@ el(Component, {
 
 ### [Boolean](#boolean-top)
 - [`contains`](#contains-top)
-- [`hasClass`](#hasclass-top)
 - [`hasParent`](#hasparent-top)
-- [`isChecked`](#ischecked-top)
 - [`isFocused`](#isfocused-top)
 - [`isVisible`](#isvisible-top)
 
@@ -337,15 +335,6 @@ p.contains([a, b] c);
 // They will both return 'true'
 ```
 
-### `hasClass` [top](#methods)
-
-```javascript
-var myDiv = el('div', { class : 'class-name' });
-
-myParent.hasClass('class-name');
-// -> true
-```
-
 ### `hasParent` [top](#methods)
 
 ```javascript
@@ -354,23 +343,6 @@ var myParent = el('div',
 );
 
 myChild.hasParent(myParent);
-// -> true
-```
-
-### `isChecked` [top](#methods)
-
-```javascript
-var myCheckbox;
-var myParent = el('label',
-  myCheckbox = el('input', { type : 'checkbox' })
-);
-
-myCheckbox.isChecked(myParent);
-// -> false
-
-myCheckbox.check();
-
-myCheckbox.isChecked(myParent);
 // -> true
 ```
 
@@ -734,16 +706,6 @@ centerMe.centerTo(parent);
 <div class="center-1" style="top: 75px; left: 75px;"></div>
 ```
 
-### `check` [top](#methods)
-
-Will check a checkbox or a radio
-
-```javascript
-var checkbox = el('input', { type : 'checkbox' });
-checkbox.check().isChecked();
-// -> true
-```
-
 ### `children` [top](#methods)
 
 Returns an array of direct descendants wrapped in the `el` constructor. This is an interface for `childNodes` with a filter for a `NodeType` equal to `1` (`HTMlElement`)
@@ -963,38 +925,6 @@ var div = el('div');
 
 div.text('text');
 div.text();
-// -> 'text'
-```
-
-### `uncheck` [top](#methods)
-
-Uncheck a `radio` or `checkbox`
-
-```javascript
-var checkbox = el('input', { type : 'checkbox' });
-checkbox.check();
-```
-```html
-<input type="checkbox" checked="checked">
-```
-***
-
-```javascript
-checkbox.uncheck();
-```
-```html
-<input type="checkbox">
-```
-### `value` [top](#methods)
-
-This method is for setting the value of any text field and select element.
-When passed no arguments, the method will return it's current value.
-
-```javascript
-var input = el('input', { type : 'text' });
-
-input.value('text');
-input.value();
 // -> 'text'
 ```
 
