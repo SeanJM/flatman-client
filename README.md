@@ -262,17 +262,7 @@ el('div').removeClass('my-class-name');
 ### `style` [top](#methods)
 
 ```javascript
-el('div').style('padding-left', 10);
-el('div').style('padding-left: 10px');
-
-// Using an Object
-el('div').style({
-  paddingLeft : 10,
-  marginTop : 10
-});
-
-// Performing a query will return an Object
-el('div').style();
+el('div').style.paddingLeft = 10 + 'px';
 ```
 
 ### `toggleClass` [top](#methods)
@@ -283,7 +273,6 @@ var myDIV = el('div');
 myDIV.toggleClass('toggle'); // -> myDIV has class 'toggle'
 myDIV.toggleClass('toggle'); // -> myDIV does not have class 'toggle'
 ```
-
 
 ## Booleans [top](#methods)
 
