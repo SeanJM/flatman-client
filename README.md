@@ -175,8 +175,6 @@ el(Component, {
 - [`remove`](#remove-top)
 - [`replaceWith`](#replacewith-top)
 - [`select`](#select-top)
-- [`tag`](#tag-top)
-- [`text`](#text-top)
 - [`uncheck`](#uncheck-top)
 - [`value`](#value-top)
 
@@ -892,30 +890,6 @@ replaceMe.replaceWith(withMe);
 ### `select` [top](#methods)
 
 Proves an interface to select text ranges and get the selected text range in an input.
-
-### `tag` [top](#methods)
-
-Change the `tagName` of an element. When passed with no arguments, it returns the value of `tagName`.
-
-```javascript
-var div = el('div');
-
-div.tag('input');
-div.tag();
-// -> 'input'
-```
-
-### `text` [top](#methods)
-
-Insert text into a node, will replace all the existing content with the text. When passed with no arguments, will return the text inside the node.
-
-```javascript
-var div = el('div');
-
-div.text('text');
-div.text();
-// -> 'text'
-```
 
 ### `on` [top](#methods)
 
