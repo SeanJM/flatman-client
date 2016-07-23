@@ -48,8 +48,7 @@ function createComponent() {
       for (var k in arguments[i]) {
         // Check for an 'on' method
         if (
-          typeof k === 'string'
-          && k.slice(0, 2) === 'on'
+          k.slice(0, 2) === 'on'
         ) {
           if (typeof component.on === 'function') {
             component.on(k.slice[3].toLowerCase() + k.slice(3), arguments[i][k]);
