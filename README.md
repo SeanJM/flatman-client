@@ -48,14 +48,13 @@ el(MyComponent, {
     class : 'this-class', // Will actually trigger the components `addClass` method
     onclick : function () {}, // onclick and onClick are functionally identical
     onClick : function () {},
-    componentMethod : [ Array ] // This will be applied to the method as a list of arguments
-    componentMethod2 : argument // Will be passed as a single argument to your method
+    componentMethod : argument // Will be passed as a single argument to your method
   },
   'text' // Will trigger the `text` method for the component
 );
 ```
 
-### I don't have mehtods for `...`
+### I don't have methods for `...`
 
 That's okay, if you are missing methods with the exception of
 - `appendTo`

@@ -118,6 +118,7 @@
     return (
       typeof C === 'object'
       && C.constructor.name !== 'Object'
+      && C.constructor.name !== 'Array'
       && C.constructor.name[0][0].toUpperCase() === C.constructor.name[0][0]
     );
   }
@@ -583,7 +584,6 @@
           throw 'Invalid argument "' + arguments[i] + '", component "' + component.constructor.name + '" does not have a "text" method.';
         }
       } else if (typeof arguments[i] === 'object') {
-  
         // Check if it's an object, and if it is, it's going to be treated as
         // an options object.
   
@@ -610,14 +610,9 @@
               throw 'Couldn\'t attach "' + arguments[i][k].constructor.name + '" Invalid key "' + k + '", this name is already taken."';
             }
           } else if (
-            typeof k === 'string'
-            && typeof component[k] === 'function'
+            typeof component[k] === 'function'
           ) {
-            if (isArray(arguments[i][k])) {
-              component[k].apply(component, arguments[i][k]);
-            } else {
-              component[k](arguments[i][k]);
-            }
+            component[k](arguments[i][k]);
           } else if (component.hasOwnProperty(k)) {
             throw 'Could not initiate "' + component.constructor.name + '", invalid key: "' + k + '". Component properties must match a component method. Eg: ' + component.constructor.name + '.prototype.' + k;
           }
