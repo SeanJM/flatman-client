@@ -134,7 +134,7 @@ el(Component, {
 ### [Attributes](#attributes-top)
 - [`addClass`](#addclass-top)
 - [`attr`](#attr-top)
-- [`copyAttributes`](#copyattributes-top)
+- [`hasClass`](#hasclass-top)
 - [`removeClass`](#removeclass-top)
 - [`style`](#style-top)
 - [`toggleClass`](#toggleclass-top)
@@ -220,23 +220,12 @@ el('div').attr({
 <div class="some-class-name" style="background: red"></div>
 ```
 
-### `copyAttributes` [top](#methods)
-
-Copies the attributes from the node passed.
-
-```html
-<div id="copy" class="my-class-name" data-attribute="some-text">
-```
+### `hasClass` [top](#methods)
 
 ```javascript
-var node = document.querySelector('#copy');
-var span = el('span');
-span.copyAttributes(node);
-```
-***
-
-```html
-<span id="copy" class="my-class-name" data-attribute="some-text">
+var node = document.querySelector('.class-name');
+el(node).hasClass('class-name');
+// -> true
 ```
 
 ### `removeClass` [top](#methods)
