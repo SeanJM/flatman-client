@@ -172,12 +172,26 @@ startTest('el', function (test) {
     var e = el('div', { class : 'e' });
     var f = el('div', { class : 'f' });
 
-    a.appendTo('body').style('width : 30px; height : 10px;');
-    b.appendTo('body').style('position: absolute; left: -100000px');
-    c.appendTo('body').style('display', 'none');
-    d.appendTo('body').style('width : 0; height: 0; overflow: hidden;');
-    e.appendTo('body').style('display', 'none');
+    a.appendTo('body');
+    b.appendTo('body');
+    c.appendTo('body');
+    d.appendTo('body');
+    e.appendTo('body');
     f.appendTo(e);
+
+    a.style.width = '30px';
+    a.style.height = '10px';
+
+    b.style.position = 'absolute';
+    b.style.left = '-100000px';
+
+    c.style.display = 'none';
+
+    d.style.width = 0;
+    d.style.height = 0;
+    d.style.overflow = 'hidden';
+
+    e.style.display = 'none';
 
     test('isVisible',
       a.isVisible() &&
@@ -335,7 +349,7 @@ startTest('el', function (test) {
   (function () {
     var a = el('input', { type : 'text' });
 
-    a.value('text');
+    a.node.value = 'text';
     a.select(0, 1);
 
     test('select', a.select()[0] === 0 && a.select()[1] === 1).shouldEqual(true);
@@ -345,13 +359,13 @@ startTest('el', function (test) {
   (function () {
     var a;
 
-    el('div', { class : '1' },
+    el('div', { class : '_1' },
       el('div', { class : '1_1'},
         a = el('div', { class : '1_1_1'})
       )
     );
 
-    test('selectorPath', a.selectorPath()).shouldEqual('div.1 div.1_1 div.1_1_1');
+    test('selectorPath', a.selectorPath()).shouldEqual('div._1 div.1_1 div.1_1_1');
   }());
 
   // siblings
@@ -367,35 +381,6 @@ startTest('el', function (test) {
     );
 
     test('siblings', a.siblings()[3].node).shouldEqual(b.node);
-  }());
-
-  // style
-  (function () {
-    var a = el('div');
-    var b = el('div');
-    var c = el('div');
-    var m = 'rgb(255, 0, 0)';
-
-    a.style('color', 'red');
-    b.style('color: red');
-    c.style({ color : 'red' });
-
-    a.appendTo('body');
-    b.appendTo('body');
-    c.appendTo('body');
-
-    test('style',
-      a.style('color') === m &&
-      b.style('color') === m &&
-      c.style('color') === m
-    ).shouldEqual(true);
-  }());
-
-  // tag
-  (function () {
-    var a = el('div');
-    a.tag('span');
-    test('tag', a.tag(), 'span');
   }());
 
   // text
@@ -445,8 +430,8 @@ startTest('el', function (test) {
   // value
   (function () {
     var a = el('input', { type : 'input' });
-    a.value('test');
-    test('value', a.value()).shouldEqual('test');
+    a.node.value = 'test';
+    test('value', a.node.value).shouldEqual('test');
   }());
 
   // fn
