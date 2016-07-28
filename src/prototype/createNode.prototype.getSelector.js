@@ -4,7 +4,11 @@ CreateNode.prototype.getSelector = function () {
   var siblings = this.siblings();
   var format = {
     class : function (value) {
-      return '.' + value.replace(/[ ]+/g, ' ').trim().split(' ').join('.');
+      return '.' + value.replace(/[ ]+/g, ' ')
+        .trim()
+        .split(' ')
+        .filter(function (a) { return !/^\d+$/.test(a); })
+        .join('.');
     },
     id : function (value) {
       return '#' + value;
