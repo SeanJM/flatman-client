@@ -40,13 +40,6 @@ startTest('el', function (test) {
     test('before', p.firstChild().node).shouldEqual(b.node);
   }());
 
-  // check
-  (function () {
-    var a = el('input', { type : 'checkbox' });
-    var b = el('input', { type : 'checkbox' });
-    test('check', a.check().isChecked() && !b.isChecked()).shouldEqual(true);
-  }());
-
   // children
   (function () {
     var p = el('div');
@@ -92,16 +85,6 @@ startTest('el', function (test) {
         && a.contains([b, c], d)
       )
       .shouldEqual(true);
-  }());
-
-  // copyAttributes
-  (function () {
-    var p = el('div', { class : 'test1', tabIndex : '0' });
-    var c = el('div', { class : 'test2' });
-    var x;
-    c.copyAttributes(p);
-    x = c.attr('class') === 'test1' && c.attr('tabindex') === '0';
-    test('copyAttributes', x).shouldEqual(true);
   }());
 
   // disable
@@ -155,14 +138,6 @@ startTest('el', function (test) {
     var b = el('div', { class : 'test-2'});
     a.append(b);
     test('hasParent', b.hasParent(a) && !a.hasParent(b)).shouldEqual(true);
-  }());
-
-  // isChecked
-  (function () {
-    var a = el('input', { type : 'checkbox'});
-    var b = el('input', { type : 'checkbox'});
-    a.check();
-    test('isChecked', a.isChecked() && !b.isChecked()).shouldEqual(true);
   }());
 
   // isDisabled
@@ -465,17 +440,6 @@ startTest('el', function (test) {
     a.trigger('click');
 
     test('trigger', x, false);
-  }());
-
-  // uncheck
-  (function () {
-    var a = el('input', { type : 'checkbox' });
-    var b = el('input', { type : 'checkbox' });
-
-    a.check().uncheck();
-    b.check();
-
-    test('uncheck', !a.isChecked() && b.isChecked()).shouldEqual(true);
   }());
 
   // value
