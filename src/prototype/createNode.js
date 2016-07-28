@@ -28,6 +28,7 @@ function createComponent() {
     }
   }
 
+
   for (; i < n; i++) {
     if (
       isComponent(arguments[i])
@@ -50,7 +51,7 @@ function createComponent() {
           k.slice(0, 2) === 'on'
         ) {
           if (typeof component.on === 'function') {
-            component.on(k.slice[3].toLowerCase() + k.slice(3), arguments[i][k]);
+            component.on(k.substr(2).toLowerCase(), arguments[i][k]);
           } else {
             throw 'Invalid constructor \'' + component.constructor.name + '\', your constructor must have an "on" method.';
           }
@@ -63,17 +64,15 @@ function createComponent() {
           if (typeof component[k] === 'undefined') {
             component[k] = arguments[i][k];
             appendComponent(arguments[i][k]);
-          } else {
+          } else if (component[k] !== arguments[i][k]) {
             throw 'Couldn\'t attach "' + arguments[i][k].constructor.name + '" Invalid key "' + k + '", this name is already taken."';
           }
         } else if (
           typeof component[k] === 'function'
         ) {
           component[k](arguments[i][k]);
-        } else if (component.hasOwnProperty(k)) {
-          throw 'Could not initiate "' + component.constructor.name + '", invalid key: "' + k + '". Component properties must match a component method. Eg: ' + component.constructor.name + '.prototype.' + k;
         }
-      }
+      } // End for loop
     }
   }
   return component;

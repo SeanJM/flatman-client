@@ -117,8 +117,8 @@
   function isComponent(C) {
     return (
       typeof C === 'object'
+      && Object.prototype.toString.call(C) === '[object Object]'
       && C.constructor.name !== 'Object'
-      && C.constructor.name !== 'Array'
       && C.constructor.name[0][0].toUpperCase() === C.constructor.name[0][0]
     );
   }
@@ -571,6 +571,7 @@
       }
     }
   
+  
     for (; i < n; i++) {
       if (
         isComponent(arguments[i])
@@ -593,7 +594,7 @@
             k.slice(0, 2) === 'on'
           ) {
             if (typeof component.on === 'function') {
-              component.on(k.slice[3].toLowerCase() + k.slice(3), arguments[i][k]);
+              component.on(k.substr(2).toLowerCase(), arguments[i][k]);
             } else {
               throw 'Invalid constructor \'' + component.constructor.name + '\', your constructor must have an "on" method.';
             }
@@ -606,17 +607,15 @@
             if (typeof component[k] === 'undefined') {
               component[k] = arguments[i][k];
               appendComponent(arguments[i][k]);
-            } else {
+            } else if (component[k] !== arguments[i][k]) {
               throw 'Couldn\'t attach "' + arguments[i][k].constructor.name + '" Invalid key "' + k + '", this name is already taken."';
             }
           } else if (
             typeof component[k] === 'function'
           ) {
             component[k](arguments[i][k]);
-          } else if (component.hasOwnProperty(k)) {
-            throw 'Could not initiate "' + component.constructor.name + '", invalid key: "' + k + '". Component properties must match a component method. Eg: ' + component.constructor.name + '.prototype.' + k;
           }
-        }
+        } // End for loop
       }
     }
     return component;
@@ -975,7 +974,11 @@
     var siblings = this.siblings();
     var format = {
       class : function (value) {
-        return '.' + value.replace(/[ ]+/g, ' ').trim().split(' ').join('.');
+        return '.' + value.replace(/[ ]+/g, ' ')
+          .trim()
+          .split(' ')
+          .filter(function (a) { return !/^\d+$/.test(a); })
+          .join('.');
       },
       id : function (value) {
         return '#' + value;
@@ -1016,6 +1019,12 @@
     }
   
     return selector.join('').replace(/\n/g, '');
+  };
+  
+
+  CreateNode.prototype.hasClass = function (a) {
+    this.node.className.split(' ').indexOf(a);
+    return this;
   };
   
 
