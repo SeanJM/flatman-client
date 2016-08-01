@@ -174,7 +174,6 @@ el(Component, {
 - [`remove`](#remove-top)
 - [`replaceWith`](#replacewith-top)
 - [`select`](#select-top)
-- [`uncheck`](#uncheck-top)
 - [`value`](#value-top)
 
 ## Event methods
@@ -879,6 +878,34 @@ replaceMe.replaceWith(withMe);
 
 Proves an interface to select text ranges and get the selected text range in an input.
 
+Query
+```javascript
+var a = el(document.querySelector('.my-input'));
+a.select();
+// -> [0, 2]
+```
+
+Set
+```javascript
+var a = el(document.querySelector('.my-input'));
+a.select(0, 2);
+```
+
+### `value` [top](#methods)
+
+Query
+```javascript
+var a = el(document.querySelector('.my-input'));
+a.value();
+// -> 'My text'
+```
+
+Set
+```javascript
+var a = el(document.querySelector('.my-input'));
+a.value('New text');
+```
+
 ### `on` [top](#methods)
 
 This is an interface for `addEventListener`, with the main difference being how functions are tracked internally.
@@ -925,3 +952,7 @@ We will now remove all event listeners attached to the `click` event by passing 
 ```javascript
 element.off('click');
 ```
+
+### `el.isComponent` [top](#methods)
+
+Returns `true` or `false` if the argument is a component

@@ -21,10 +21,10 @@ function createComponent() {
       if (typeof a.appendTo === 'function') {
         component.append(a);
       } else {
-        throw '"' + a.constructor.name + '" does not have an "appendTo" method';
+        throw '"' + (a.constructor.name || 'Anonymous component') + '" does not have an "appendTo" method';
       }
     } else {
-      throw '"' + component.constructor.name + '" does not have an "append" method';
+      throw '"' + (component.constructor.name || 'Anonymous component') + '" does not have an "append" method';
     }
   }
 
@@ -79,6 +79,8 @@ function createComponent() {
 }
 
 function CreateNode () {
+  var that = this;
+  var doubleclick = false;
   var attributes = {};
   var values = [];
   var i = 1;
@@ -154,6 +156,18 @@ function CreateNode () {
     }, false);
   }
 
+  // Double click
+  this.node.addEventListener('click', function (e) {
+    if (doubleclick) {
+      that.trigger('doubleclick', e);
+    } else {
+      doubleclick = true;
+    }
+    setTimeout(function () {
+      doubleclick = false;
+    }, 200);
+  });
+
   this.check = this.node.check;
   this.value = this.node.value;
   this.style = this.node.style;
@@ -168,51 +182,44 @@ function createNode () {
   function F() { return CreateNode.apply(this, a); }
 
   // Faster way to apply arguments
-  if (
-    typeof arguments[0] === 'function'
-    && arguments[0].name.length
-  ) {
-    if (arguments[0].name[0] === arguments[0].name[0].toUpperCase()) {
-      switch (n) {
-        case 1 :
-          return createComponent(arguments[0]);
+  if (typeof arguments[0] === 'function') {
+    switch (n) {
+      case 1 :
+        return createComponent(arguments[0]);
 
-        case 2 :
-          return createComponent(arguments[0], arguments[1]);
+      case 2 :
+        return createComponent(arguments[0], arguments[1]);
 
-        case 3 :
-          return createComponent(
-            arguments[0],
-            arguments[1],
-            arguments[2]
-          );
+      case 3 :
+        return createComponent(
+          arguments[0],
+          arguments[1],
+          arguments[2]
+        );
 
-        case 4 :
-          return createComponent(
-            arguments[0],
-            arguments[1],
-            arguments[2],
-            arguments[3]
-          );
+      case 4 :
+        return createComponent(
+          arguments[0],
+          arguments[1],
+          arguments[2],
+          arguments[3]
+        );
 
-        case 5 :
-          return createComponent(
-            arguments[0],
-            arguments[1],
-            arguments[2],
-            arguments[3],
-            arguments[4]
-          );
+      case 5 :
+        return createComponent(
+          arguments[0],
+          arguments[1],
+          arguments[2],
+          arguments[3],
+          arguments[4]
+        );
 
-        default :
-          a = new Array(n);
-          for (; i < n; i++) {
-            a[i] = arguments[i];
-          }
-          return createComponent.apply(null, a);
-      }
-    } else {
-      throw 'Invalid constructor function, "el" expects a constructor to start with a capital letter, eg: "' + arguments[0].name[0].toUpperCase() + arguments[0].name.slice(1).toLowerCase() + '"';
+      default :
+        a = new Array(n);
+        for (; i < n; i++) {
+          a[i] = arguments[i];
+        }
+        return createComponent.apply(null, a);
     }
   } else if (typeof arguments[0] !== 'undefined') {
     // Check for the possibility that they are passing a constructor as a string
