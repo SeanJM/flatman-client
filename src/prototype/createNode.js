@@ -169,7 +169,6 @@ function CreateNode () {
   });
 
   this.check = this.node.check;
-  this.value = this.node.value;
   this.style = this.node.style;
   this.style.transform = this.style[VENDOR_PREFIX.transform];
 }
