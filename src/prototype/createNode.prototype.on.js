@@ -1,15 +1,18 @@
 CreateNode.prototype.on = function (names, callback) {
-  var self = this;
+  names = names.toLowerCase().split(',');
 
-  forEach(names.split(',').map(trim).filter(hasLength), function (name) {
-    if (typeof self.subscribers[name] === 'undefined') {
-      self.subscribers[name] = [];
+  for (var i = 0, n = names.length; i < n; i++) {
+    names[i] = names[i].trim();
+    if (names[i].length) {
+      if (typeof this.subscribers[names[i]] === 'undefined') {
+        this.subscribers[names[i]] = [];
+      }
+      if (this.subscribers[names[i]].indexOf(callback) === -1) {
+        this.subscribers[names[i]].push(callback);
+        this.node.addEventListener(names[i], callback, false);
+      }
     }
-    if (self.subscribers[name].indexOf(callback) === -1) {
-      self.subscribers[name].push(callback);
-      self.node.addEventListener(name, callback, false);
-    }
-  });
+  }
 
   return this;
 };

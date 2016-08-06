@@ -1,6 +1,9 @@
 CreateNode.prototype.trigger = function (names, e) {
-  var self = this;
-  var nameList = names.split(',').map(trim).filter(hasLength);
+  function trigger(callback) {
+    callback(e);
+  }
+
+  names = names.toLowerCase().split(',');
 
   if (typeof e === 'undefined') {
     e = { type : name, target : this.node };
@@ -8,11 +11,14 @@ CreateNode.prototype.trigger = function (names, e) {
     e.type = name;
   }
 
-  if (!self.node.disabled) {
-    forEach(nameList, function (name) {
-      forEach(self.subscribers[name], function (callback) {
-        callback(e);
-      });
-    });
+  if (!this.node.disabled) {
+    for (var i = 0, n = names.length; i < n; i++) {
+      names[i] = names[i].trim();
+      if (names[i].length && this.subscribers[names[i]]) {
+        for (var x = 0, y = this.subscribers[names[i]].length; x < y; x++) {
+          trigger(this.subscribers[names[i]][x]);
+        }
+      }
+    }
   }
 };
