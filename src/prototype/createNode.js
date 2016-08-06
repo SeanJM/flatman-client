@@ -13,7 +13,6 @@ function CreateNode () {
   var className;
 
   this.subscribers = {};
-  this.elements = [];
 
   if (arguments[0] instanceof CreateNode) {
     this.node = arguments[0].node;
@@ -30,7 +29,7 @@ function CreateNode () {
       if (arguments[i] instanceof CreateNode) {
         this.node.appendChild(arguments[i].node);
       } else if (isString(arguments[i])) {
-        this.node.innerHTML = arguments[i];
+        this.node.appendChild(new Text(arguments[i]));
       } else if (
         arguments[i]
         && typeof arguments[i].appendTo === 'function'
