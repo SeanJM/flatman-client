@@ -128,6 +128,11 @@
   }
   
 
+  function isCreateNode (a) {
+    return a instanceof CreateNode;
+  }
+  
+
   function isDefined (a) {
     return typeof a !== 'undefined';
   }
@@ -379,19 +384,18 @@
   */
   
   function hasParent(node) {
-    var n;
-    var parents;
+    var parents = [];
     var i = 1;
+    var n = arguments.length;
   
     node = node instanceof CreateNode
       ? node.node
       : node;
   
-    if (isArray(arguments[1])) {
-      parents = arguments[1];
-    } else {
-      parents = [];
-      for (i = 1, n = arguments.length; i < n; i++) {
+    for (; i < n; i++) {
+      if (isArray(arguments[i])) {
+        [].push.apply(parents, arguments[i]);
+      } else {
         parents.push(arguments[i]);
       }
     }
@@ -400,7 +404,7 @@
     n = parents.length;
   
     for (; i < n; i++) {
-      if (parents[i].contains(node)) {
+      if (parents[i] && parents[i].contains(node)) {
         return true;
       }
     }
@@ -540,16 +544,6 @@
   }
   
 
-  CreateNode.fn = function (name, callback) {
-    CreateNode.prototype[name] = callback;
-  };
-  
-
-  /*
-    Argument format
-    CreateNode([String], [Object], [Text | CreateNode Object | Array | Node ])
-  */
-  
   function createComponent() {
     var i = 1;
     var n = arguments.length;
@@ -607,17 +601,13 @@
             if (typeof component.addClass === 'function') {
               component.addClass(arguments[i][k]);
             }
-          } else if (isComponent(arguments[i][k])) {
-            if (typeof component[k] === 'undefined') {
-              component[k] = arguments[i][k];
-              appendComponent(arguments[i][k]);
-            } else if (component[k] !== arguments[i][k]) {
-              throw 'Couldn\'t attach "' + arguments[i][k].constructor.name + '" Invalid key "' + k + '", this name is already taken."';
-            }
           } else if (
             typeof component[k] === 'function'
           ) {
             component[k](arguments[i][k]);
+          } else if (typeof component[k] === 'undefined') {
+            // Pass the value of 'opt' to 'this'
+            component[k] = arguments[i][k];
           }
         } // End for loop
       }
@@ -625,103 +615,8 @@
     return component;
   }
   
-  function CreateNode () {
-    var that = this;
-    var doubleclick = false;
-    var attributes = {};
-    var values = [];
-    var i = 1;
-    var n = arguments.length;
-    var className;
-  
-    this.subscribers = {};
-  
-    if (arguments[0] instanceof CreateNode) {
-      this.node = arguments[0].node;
-      this.subscribers = arguments[0].subscribers;
-    } else if (isElement(arguments[0]) || arguments[0] === window) {
-      this.node = arguments[0];
-    } else if (isString(arguments[0])) {
-      this.node = document.createElement(arguments[0]);
-      if (isObject(arguments[1]) && !(arguments[1] instanceof CreateNode)) {
-        attributes = arguments[1];
-      }
-  
-      for (i = 1; i < n; i++) {
-        if (arguments[i] instanceof CreateNode) {
-          this.node.appendChild(arguments[i].node);
-        } else if (isString(arguments[i])) {
-          this.node.innerHTML = arguments[i];
-        } else if (
-          typeof arguments[i].appendTo === 'function'
-        ) {
-          arguments[i].appendTo(this.node);
-        }
-      }
-  
-      for (var k in attributes) {
-        if (k === 'class') {
-          className = filter(map(attributes[k].split(' '), trim), hasLength);
-          this.node.className = className.sort().join(' ');
-        } else if (k === 'style') {
-          setStyle(this.node, attributes[k]);
-        } else if (/on[A-Z][a-z]/.test(k.substr(0, 4))) {
-          // A fast test to see if the property matches "onClick" or "onKeyup" or
-          // "onScroll" pattern
-          if (isFunction(attributes[k])) {
-            this.on(k.substr(2).toLowerCase(), attributes[k]);
-          } else {
-            throw '\"' + k + '\" must have a function as a value.';
-          }
-        } else {
-          this.node.setAttribute(k, attributes[k]);
-        }
-      }
-    }
-  
-    if (IS_IE && isTextInput(this.node)) {
-      // Normalize IE 9 input event
-      this.node.addEventListener('keyup', function (e) {
-        if (e.target === this.node) {
-          if (!values.length) {
-            values = [
-              this.node.value,
-              this.node.value
-            ];
-          } else {
-            values[0] = values[1];
-            values[1] = this.node.value;
-          }
-  
-          if (values[0] !== values[1] && (e.which === IS_DELETE_KEY || e.which === IS_BACKSPACE_KEY)) {
-            this.trigger('input', {
-              type : 'input',
-              which : e.which
-            });
-          }
-        }
-      }, false);
-    }
-  
-    // Double click
-    this.node.addEventListener('click', function (e) {
-      if (doubleclick) {
-        that.trigger('doubleclick', e);
-      } else {
-        doubleclick = true;
-      }
-      setTimeout(function () {
-        doubleclick = false;
-      }, 200);
-    });
-  
-    this.check = this.node.check;
-    this.value = this.node.value;
-    this.style = this.node.style;
-    this.style.transform = this.style[VENDOR_PREFIX.transform];
-  }
-  
-  function createNode () {
+
+  function createEl() {
     var i = 0;
     var n = arguments.length;
     var a;
@@ -825,6 +720,113 @@
   }
   
 
+  CreateNode.fn = function (name, callback) {
+    CreateNode.prototype[name] = callback;
+  };
+  
+
+  /*
+    Argument format
+    CreateNode([String], [Object], [Text | CreateNode Object | Array | Node ])
+  */
+  
+  function CreateNode () {
+    var that = this;
+    var doubleclick = false;
+    var attributes = {};
+    var values = [];
+    var i = 1;
+    var n = arguments.length;
+    var className;
+  
+    this.subscribers = {};
+  
+    if (arguments[0] instanceof CreateNode) {
+      this.node = arguments[0].node;
+      this.subscribers = arguments[0].subscribers;
+    } else if (isElement(arguments[0]) || arguments[0] === window) {
+      this.node = arguments[0];
+    } else if (isString(arguments[0])) {
+      this.node = document.createElement(arguments[0]);
+      if (isObject(arguments[1]) && !(arguments[1] instanceof CreateNode)) {
+        attributes = arguments[1];
+      }
+  
+      for (i = 1; i < n; i++) {
+        if (arguments[i] instanceof CreateNode) {
+          this.node.appendChild(arguments[i].node);
+        } else if (isString(arguments[i])) {
+          this.node.appendChild(new Text(arguments[i]));
+        } else if (
+          arguments[i]
+          && typeof arguments[i].appendTo === 'function'
+        ) {
+          arguments[i].appendTo(this.node);
+        }
+      }
+  
+      for (var k in attributes) {
+        if (k === 'class') {
+          className = filter(map(attributes[k].split(' '), trim), hasLength);
+          this.node.className = className.sort().join(' ');
+        } else if (k === 'style') {
+          setStyle(this.node, attributes[k]);
+        } else if (/on[A-Z][a-z]/.test(k.substr(0, 4))) {
+          // A fast test to see if the property matches "onClick" or "onKeyup" or
+          // "onScroll" pattern
+          if (isFunction(attributes[k])) {
+            this.on(k.substr(2).toLowerCase(), attributes[k]);
+          } else {
+            throw '\"' + k + '\" must have a function as a value.';
+          }
+        } else {
+          this.node.setAttribute(k, attributes[k]);
+        }
+      }
+    }
+  
+    if (IS_IE && isTextInput(this.node)) {
+      // Normalize IE 9 input event
+      this.node.addEventListener('keyup', function (e) {
+        if (e.target === this.node) {
+          if (!values.length) {
+            values = [
+              this.node.value,
+              this.node.value
+            ];
+          } else {
+            values[0] = values[1];
+            values[1] = this.node.value;
+          }
+  
+          if (values[0] !== values[1] && (e.which === IS_DELETE_KEY || e.which === IS_BACKSPACE_KEY)) {
+            this.trigger('input', {
+              type : 'input',
+              which : e.which
+            });
+          }
+        }
+      }, false);
+    }
+  
+    // Double click
+    this.node.addEventListener('click', function (e) {
+      if (doubleclick) {
+        that.trigger('doubleclick', e);
+      } else {
+        doubleclick = true;
+      }
+      setTimeout(function () {
+        doubleclick = false;
+      }, 200);
+    });
+  
+    this.check = this.node.check;
+    this.style = this.node.style;
+    this.style.transform = this.style[VENDOR_PREFIX.transform];
+  }
+  
+
   CreateNode.prototype.addClass = function (a) {
     addClass(this.node, a);
     return this;
@@ -881,7 +883,7 @@
   
 
   CreateNode.prototype.before = function (target) {
-    target = createNode(target);
+    target = createEl(target);
     target.node.parentNode.insertBefore(this.node, target.node);
   };
   
@@ -926,13 +928,13 @@
   
 
   CreateNode.prototype.clone = function () {
-    return createNode(this.node.cloneNode(true));
+    return createEl(this.node.cloneNode(true));
   };
   
 
   CreateNode.prototype.closest = function (selector) {
     var c = this.node.closest(selector);
-    return c !== null ? createNode(c) : false;
+    return c !== null ? createEl(c) : false;
   };
   
 
@@ -969,7 +971,7 @@
   
 
   CreateNode.prototype.firstChild = function () {
-    return createNode(filter(this.node.childNodes, isElement)[0]);
+    return createEl(filter(this.node.childNodes, isElement)[0]);
   };
   
 
@@ -1059,26 +1061,30 @@
   
 
   CreateNode.prototype.lastChild = function () {
-    return createNode(filter(this.node.childNodes, isElement).slice(-1)[0]);
+    return createEl(filter(this.node.childNodes, isElement).slice(-1)[0]);
   };
   
 
   CreateNode.prototype.off = function (names, callback) {
     var self = this;
   
-    names.split(',').map(trim).filter(hasLength).forEach(function (name) {
-      var subscribers = self.subscribers;
+    names = names.toLowerCase().split(',');
   
-      if (isFunction(callback)) {
-        subscribers[name] = subscribers[name].filter(partial(not, callback));
-        self.node.removeEventListener(name, callback, false);
-      } else {
-        while (subscribers[name].length) {
-          self.node.removeEventListener(name, subscribers[name][0], false);
-          subscribers[name].shift();
+    for (var i = 0, n = names.length; i < n; i++) {
+      names[i] = names[i].trim();
+  
+      if (names[i].length) {
+        if (typeof callback === 'function') {
+          self.subscribers[names[i]] = self.subscribers[names[i]].filter(partial(not, callback));
+          self.node.removeEventListener(names[i], callback, false);
+        } else {
+          while (self.subscribers[names[i]].length) {
+            self.node.removeEventListener(names[i], self.subscribers[names[i]][0], false);
+            self.subscribers[names[i]].shift();
+          }
         }
       }
-    });
+    }
   
     return this;
   };
@@ -1090,17 +1096,20 @@
   
 
   CreateNode.prototype.on = function (names, callback) {
-    var self = this;
+    names = names.toLowerCase().split(',');
   
-    forEach(names.split(',').map(trim).filter(hasLength), function (name) {
-      if (typeof self.subscribers[name] === 'undefined') {
-        self.subscribers[name] = [];
+    for (var i = 0, n = names.length; i < n; i++) {
+      names[i] = names[i].trim();
+      if (names[i].length) {
+        if (typeof this.subscribers[names[i]] === 'undefined') {
+          this.subscribers[names[i]] = [];
+        }
+        if (this.subscribers[names[i]].indexOf(callback) === -1) {
+          this.subscribers[names[i]].push(callback);
+          this.node.addEventListener(names[i], callback, false);
+        }
       }
-      if (self.subscribers[name].indexOf(callback) === -1) {
-        self.subscribers[name].push(callback);
-        self.node.addEventListener(name, callback, false);
-      }
-    });
+    }
   
     return this;
   };
@@ -1129,15 +1138,15 @@
   CreateNode.prototype.prepend = function (node) {
     var children = this.children();
     if (children) {
-      createNode(node).before(children[0]);
+      createEl(node).before(children[0]);
     } else {
-      createNode(node).appendTo(this);
+      createEl(node).appendTo(this);
     }
   };
   
 
   CreateNode.prototype.prependTo = function (target) {
-    var children = createNode(target).children();
+    var children = createEl(target).children();
     if (children.length) {
       this.before(children[0]);
     } else {
@@ -1161,7 +1170,7 @@
   
 
   CreateNode.prototype.replaceWith = function (newNode) {
-    newNode = createNode(newNode);
+    newNode = createEl(newNode);
   
     if (this.node.parentNode) {
       this.node.parentNode.replaceChild(newNode.node, this.node);
@@ -1214,7 +1223,7 @@
   CreateNode.prototype.siblings = function () {
     var children = this.node.parentNode ? this.node.parentNode.childNodes : [];
     return map(filter(children, isElement), function (s) {
-      return createNode(s);
+      return createEl(s);
     });
   };
   
@@ -1255,8 +1264,11 @@
   
 
   CreateNode.prototype.trigger = function (names, e) {
-    var self = this;
-    var nameList = names.split(',').map(trim).filter(hasLength);
+    function trigger(callback) {
+      callback(e);
+    }
+  
+    names = names.toLowerCase().split(',');
   
     if (typeof e === 'undefined') {
       e = { type : name, target : this.node };
@@ -1264,12 +1276,15 @@
       e.type = name;
     }
   
-    if (!self.node.disabled) {
-      forEach(nameList, function (name) {
-        forEach(self.subscribers[name], function (callback) {
-          callback(e);
-        });
-      });
+    if (!this.node.disabled) {
+      for (var i = 0, n = names.length; i < n; i++) {
+        names[i] = names[i].trim();
+        if (names[i].length && this.subscribers[names[i]]) {
+          for (var x = 0, y = this.subscribers[names[i]].length; x < y; x++) {
+            trigger(this.subscribers[names[i]][x]);
+          }
+        }
+      }
     }
   };
   
@@ -1284,16 +1299,15 @@
   };
   
 
-  window.CreateNode = CreateNode;
-  
   // El assignments
-  window.el = createNode;
+  window.el = createEl;
   window.el.fn = CreateNode.fn;
   window.el.isVisible = isVisible;
   window.el.hasParent = hasParent;
   window.el.contains = contains;
   window.el.isElement = isElement;
   window.el.isComponent = isComponent;
+  window.el.isCreateNode = isCreateNode;
   
   // Node environment
   if (typeof module === 'object' && module.exports) {
