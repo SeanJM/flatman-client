@@ -19,13 +19,20 @@ function CreateNode () {
     this.subscribers = arguments[0].subscribers;
   } else if (isElement(arguments[0]) || arguments[0] === window) {
     this.node = arguments[0];
-  } else if (isString(arguments[0])) {
-    this.node = document.createElement(arguments[0]);
-    if (isObject(arguments[1]) && !(arguments[1] instanceof CreateNode)) {
-      attributes = arguments[1];
+  } else if (isString(arguments[0]) || isObject(arguments[0])) {
+    if (isString(arguments[0])) {
+      this.node = document.createElement(arguments[0]);
+      i = 1;
+    } else if (isObject(arguments[0])) {
+      this.node = document.createElement('div');
+      i = 0;
     }
 
-    for (i = 1; i < n; i++) {
+    if (isObject(arguments[i]) && !(arguments[i] instanceof CreateNode)) {
+      attributes = arguments[i];
+    }
+
+    for (; i < n; i++) {
       if (arguments[i] instanceof CreateNode) {
         this.node.appendChild(arguments[i].node);
       } else if (isString(arguments[i])) {
@@ -56,6 +63,8 @@ function CreateNode () {
         this.node.setAttribute(k, attributes[k]);
       }
     }
+  } else if (typeof arguments[0] === 'undefined') {
+    throw 'Invalid argument \'undefined\' for createNode.';
   }
 
   if (IS_IE && isTextInput(this.node)) {
@@ -91,7 +100,60 @@ function CreateNode () {
     }
     setTimeout(function () {
       doubleclick = false;
-    }, 200);
+    }, 250);
+  });
+
+  // Drag
+  this.node.addEventListener('mousedown', function (e) {
+    var dragstart = false;
+    var startX = e.pageX;
+    var startY = e.pageY;
+
+    var dragmove;
+    var dragend;
+
+    document.body.addEventListener('mouseup', dragend = function (e) {
+      var eve = {
+        type : 'dragend',
+        startX : startX,
+        startY : startY,
+        pageX : e.pageX,
+        pageY : e.pageY,
+        distanceX : startX - e.pageX,
+        distanceY : startY - e.pageY,
+        target : that
+      };
+
+      document.body.removeEventListener('mousemove', dragmove);
+      document.body.removeEventListener('mousemove', dragend);
+
+      dragstart = false;
+      that.trigger('dragend', eve);
+    });
+
+    document.body.addEventListener('mousemove', dragmove = function (e) {
+      var eve = {
+        type : 'dragstart',
+        startX : startX,
+        startY : startY,
+        pageX : e.pageX,
+        pageY : e.pageY,
+        distanceX : startX - e.pageX,
+        distanceY : startY - e.pageY,
+        target : that
+      };
+
+      if (
+        (Math.abs(startX - e.pageX) + Math.abs(startY - e.pageY)) > 5
+        && !dragstart
+      ) {
+        that.trigger('dragstart', eve);
+        dragstart = true;
+      } else if (dragstart) {
+        eve.type = 'dragmove';
+        that.trigger('dragmove', eve);
+      }
+    });
   });
 
   this.check = this.node.check;
