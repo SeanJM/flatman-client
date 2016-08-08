@@ -3,19 +3,18 @@
 */
 
 function hasParent(node) {
-  var n;
-  var parents;
+  var parents = [];
   var i = 1;
+  var n = arguments.length;
 
   node = node instanceof CreateNode
     ? node.node
     : node;
 
-  if (isArray(arguments[1])) {
-    parents = arguments[1];
-  } else {
-    parents = [];
-    for (i = 1, n = arguments.length; i < n; i++) {
+  for (; i < n; i++) {
+    if (isArray(arguments[i])) {
+      [].push.apply(parents, arguments[i]);
+    } else {
       parents.push(arguments[i]);
     }
   }
@@ -24,7 +23,7 @@ function hasParent(node) {
   n = parents.length;
 
   for (; i < n; i++) {
-    if (parents[i].contains(node)) {
+    if (parents[i] && parents[i].contains(node)) {
       return true;
     }
   }
