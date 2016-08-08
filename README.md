@@ -183,9 +183,12 @@ el(Component, {
 
 ## Functional interfaces
 - `el.contains`
-- `el.isVisible`
 - `el.fn`
 - `el.hasParent`
+- `el.isComponent`
+- `el.isCreateNode`
+- `el.isElement`
+- `el.isVisible`
 
 ## Details
 
