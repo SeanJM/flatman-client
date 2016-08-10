@@ -51,7 +51,7 @@
   
     VENDOR_PREFIX = (function () {
       var styles = window.getComputedStyle(document.body);
-      var properties = ['transform'];
+      var properties = ['transform', 'userSelect', 'userModify'];
       var prefix = ['Moz', 'webkit', 'ms'];
       var list = {};
       var property;
@@ -328,6 +328,13 @@
     }
   
     return false;
+  }
+  
+
+  function createAttribute(node, a, b) {
+    var attr = document.createAttribute(a);
+    attr.value = b;
+    node.setAttributeNode(attr);
   }
   
 
@@ -759,19 +766,6 @@
         attributes = arguments[i];
       }
   
-      for (; i < n; i++) {
-        if (arguments[i] instanceof CreateNode) {
-          this.node.appendChild(arguments[i].node);
-        } else if (isString(arguments[i])) {
-          this.node.appendChild(new Text(arguments[i]));
-        } else if (
-          arguments[i]
-          && typeof arguments[i].appendTo === 'function'
-        ) {
-          arguments[i].appendTo(this.node);
-        }
-      }
-  
       for (var k in attributes) {
         if (k === 'class') {
           className = filter(map(attributes[k].split(' '), trim), hasLength);
@@ -787,7 +781,20 @@
             throw '\"' + k + '\" must have a function as a value.';
           }
         } else {
-          this.node.setAttribute(k, attributes[k]);
+          createAttribute(this.node, k, attributes[k]);
+        }
+      }
+  
+      for (; i < n; i++) {
+        if (arguments[i] instanceof CreateNode) {
+          this.node.appendChild(arguments[i].node);
+        } else if (isString(arguments[i])) {
+          this.node.appendChild(new Text(arguments[i]));
+        } else if (
+          arguments[i]
+          && typeof arguments[i].appendTo === 'function'
+        ) {
+          arguments[i].appendTo(this.node);
         }
       }
     } else if (typeof arguments[0] === 'undefined') {
@@ -855,6 +862,7 @@
         document.body.removeEventListener('mousemove', dragend);
   
         dragstart = false;
+        document.body.style[VENDOR_PREFIX.userSelect] = '';
         that.trigger('dragend', eve);
       });
   
@@ -865,8 +873,8 @@
           startY : startY,
           pageX : e.pageX,
           pageY : e.pageY,
-          distanceX : startX - e.pageX,
-          distanceY : startY - e.pageY,
+          distanceX : e.pageX - startX,
+          distanceY : e.pageY - startY,
           target : that
         };
   
@@ -876,6 +884,7 @@
         ) {
           that.trigger('dragstart', eve);
           dragstart = true;
+          document.body.style[VENDOR_PREFIX.userSelect] = 'none';
         } else if (dragstart) {
           eve.type = 'dragmove';
           that.trigger('dragmove', eve);
@@ -886,6 +895,8 @@
     this.check = this.node.check;
     this.style = this.node.style;
     this.style.transform = this.style[VENDOR_PREFIX.transform];
+    this.style.userSelect = this.style[VENDOR_PREFIX.userSelect];
+    this.style.userModify = this.style[VENDOR_PREFIX.userModify];
   }
   
 
@@ -1197,6 +1208,21 @@
   };
   
 
+  CreateNode.prototype.parentsUntil = function (predicate) {
+    var p = this.node.parentNode;
+    var html = document.body.parentNode;
+  
+    while (p && p !== html) {
+      if (predicate(p)) {
+        return createEl(p);
+      }
+      p = p.parentNode;
+    }
+  
+    return false;
+  };
+  
+
   CreateNode.prototype.prepend = function (node) {
     var children = this.children();
     if (children) {
@@ -1290,6 +1316,11 @@
   };
   
 
+  CreateNode.prototype.styles = function () {
+    return window.getComputedStyle(this.node);
+  };
+  
+
   CreateNode.prototype.text = function (value) {
     if (isDefined(value) && !isBoolean(value)) {
       this.node.innerHTML = value;
@@ -1330,7 +1361,7 @@
       callback(e);
     }
   
-    if (typeof e.preventDefault === 'undefined') {
+    if (e && typeof e.preventDefault === 'undefined') {
       e.defaultPrevented = false;
       e.preventDefault = function () {
         e.defaultPrevented = true;

@@ -3,7 +3,7 @@ CreateNode.prototype.trigger = function (names, e) {
     callback(e);
   }
 
-  if (typeof e.preventDefault === 'undefined') {
+  if (e && typeof e.preventDefault === 'undefined') {
     e.defaultPrevented = false;
     e.preventDefault = function () {
       e.defaultPrevented = true;

@@ -32,19 +32,6 @@ function CreateNode () {
       attributes = arguments[i];
     }
 
-    for (; i < n; i++) {
-      if (arguments[i] instanceof CreateNode) {
-        this.node.appendChild(arguments[i].node);
-      } else if (isString(arguments[i])) {
-        this.node.appendChild(new Text(arguments[i]));
-      } else if (
-        arguments[i]
-        && typeof arguments[i].appendTo === 'function'
-      ) {
-        arguments[i].appendTo(this.node);
-      }
-    }
-
     for (var k in attributes) {
       if (k === 'class') {
         className = filter(map(attributes[k].split(' '), trim), hasLength);
@@ -60,7 +47,20 @@ function CreateNode () {
           throw '\"' + k + '\" must have a function as a value.';
         }
       } else {
-        this.node.setAttribute(k, attributes[k]);
+        createAttribute(this.node, k, attributes[k]);
+      }
+    }
+
+    for (; i < n; i++) {
+      if (arguments[i] instanceof CreateNode) {
+        this.node.appendChild(arguments[i].node);
+      } else if (isString(arguments[i])) {
+        this.node.appendChild(new Text(arguments[i]));
+      } else if (
+        arguments[i]
+        && typeof arguments[i].appendTo === 'function'
+      ) {
+        arguments[i].appendTo(this.node);
       }
     }
   } else if (typeof arguments[0] === 'undefined') {
@@ -128,6 +128,7 @@ function CreateNode () {
       document.body.removeEventListener('mousemove', dragend);
 
       dragstart = false;
+      document.body.style[VENDOR_PREFIX.userSelect] = '';
       that.trigger('dragend', eve);
     });
 
@@ -138,8 +139,8 @@ function CreateNode () {
         startY : startY,
         pageX : e.pageX,
         pageY : e.pageY,
-        distanceX : startX - e.pageX,
-        distanceY : startY - e.pageY,
+        distanceX : e.pageX - startX,
+        distanceY : e.pageY - startY,
         target : that
       };
 
@@ -149,6 +150,7 @@ function CreateNode () {
       ) {
         that.trigger('dragstart', eve);
         dragstart = true;
+        document.body.style[VENDOR_PREFIX.userSelect] = 'none';
       } else if (dragstart) {
         eve.type = 'dragmove';
         that.trigger('dragmove', eve);
@@ -159,4 +161,6 @@ function CreateNode () {
   this.check = this.node.check;
   this.style = this.node.style;
   this.style.transform = this.style[VENDOR_PREFIX.transform];
+  this.style.userSelect = this.style[VENDOR_PREFIX.userSelect];
+  this.style.userModify = this.style[VENDOR_PREFIX.userModify];
 }

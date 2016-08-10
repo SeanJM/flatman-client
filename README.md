@@ -156,7 +156,9 @@ el(Component, {
 - [`parents`](#parents-top)
 - [`selectorPath`](#selectorpath-top)
 - [`siblings`](#siblings-top)
+- [`styles`](#styles-top)
 - [`textNodes`](#textnodes-top)
+- [`parentsUntil`](#parentsuntil-top)
 
 ### [DOM Manipulation](#dom-manipulation-top)
 - [`append`](#append-top)
@@ -560,6 +562,15 @@ selected.siblings();
 <div class="siblings-4"></div>
 ```
 
+### `styles` [top](#methods)
+
+Is an interface for `window.getComputedStyle([node])`, returns an object.
+
+```javascript
+div.styles();
+// -> [ Object ]
+```
+
 ### `textNodes` [top](#methods)
 
 Returns all the `Text Nodes` which are a child of a selected node.
@@ -568,6 +579,14 @@ Returns all the `Text Nodes` which are a child of a selected node.
 var selected = el('div', { class : 'parent-1' }, 'text node');
 selected.textNodes();
 // -> [Text Node]
+```
+
+### `parentsUntil` [top](#methods)
+
+Takes a predicate as an argument and returns the first `truthy` match.
+
+```javascript
+div.parentsUntil(function (p) { return p.tagName === 'h1' });
 ```
 
 ## Dom Manipulation [top](#methods)

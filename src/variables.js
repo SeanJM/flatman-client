@@ -49,7 +49,7 @@ var
 
   VENDOR_PREFIX = (function () {
     var styles = window.getComputedStyle(document.body);
-    var properties = ['transform'];
+    var properties = ['transform', 'userSelect', 'userModify'];
     var prefix = ['Moz', 'webkit', 'ms'];
     var list = {};
     var property;
