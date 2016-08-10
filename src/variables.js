@@ -75,3 +75,7 @@ var IS_IE = /^Mozilla\/(4\.0|5\.0|1\.22) \(((c|C)ompatible;|Windows; U;) MSIE 9\
 var
   IS_BACKSPACE_KEY = 8,
   IS_DELETE_KEY = 46;
+
+var
+  SVG_NAMESPACE = 'http://www.w3.org/2000/svg',
+  SVG_TAGNAMES = ['svg', 'circle', 'line', 'path'];

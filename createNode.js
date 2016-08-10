@@ -78,6 +78,10 @@
     IS_BACKSPACE_KEY = 8,
     IS_DELETE_KEY = 46;
   
+  var
+    SVG_NAMESPACE = 'http://www.w3.org/2000/svg',
+    SVG_TAGNAMES = ['svg', 'circle', 'line', 'path'];
+  
 
   function filter (array, callback) {
     var i = 0;
@@ -328,13 +332,6 @@
     }
   
     return false;
-  }
-  
-
-  function createAttribute(node, a, b) {
-    var attr = document.createAttribute(a);
-    attr.value = b;
-    node.setAttributeNode(attr);
   }
   
 
@@ -744,6 +741,7 @@
     var values = [];
     var i = 1;
     var n = arguments.length;
+    var isSVG = SVG_TAGNAMES.indexOf(arguments[0]) !== -1;
     var className;
   
     this.subscribers = {};
@@ -755,7 +753,11 @@
       this.node = arguments[0];
     } else if (isString(arguments[0]) || isObject(arguments[0])) {
       if (isString(arguments[0])) {
-        this.node = document.createElement(arguments[0]);
+        if (isSVG) {
+          this.node = document.createElementNS(SVG_NAMESPACE, arguments[0]);
+        } else {
+          this.node = document.createElement(arguments[0]);
+        }
         i = 1;
       } else if (isObject(arguments[0])) {
         this.node = document.createElement('div');
@@ -769,7 +771,11 @@
       for (var k in attributes) {
         if (k === 'class') {
           className = filter(map(attributes[k].split(' '), trim), hasLength);
-          this.node.className = className.sort().join(' ');
+          if (isSVG) {
+            this.node.setAttributeNS(null, 'class', className.sort().join(' '));
+          } else {
+            this.node.className = className.sort().join(' ');
+          }
         } else if (k === 'style') {
           setStyle(this.node, attributes[k]);
         } else if (/on[A-Z][a-z]/.test(k.substr(0, 4))) {
@@ -781,7 +787,7 @@
             throw '\"' + k + '\" must have a function as a value.';
           }
         } else {
-          createAttribute(this.node, k, attributes[k]);
+          this.node.setAttribute(k, attributes[k]);
         }
       }
   
