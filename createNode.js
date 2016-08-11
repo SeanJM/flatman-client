@@ -865,10 +865,11 @@
         };
   
         document.body.removeEventListener('mousemove', dragmove);
-        document.body.removeEventListener('mousemove', dragend);
+        document.body.removeEventListener('mouseup', dragend);
   
         dragstart = false;
         document.body.style[VENDOR_PREFIX.userSelect] = '';
+        document.body.style.cursor = '';
         that.trigger('dragend', eve);
       });
   
@@ -891,6 +892,7 @@
           that.trigger('dragstart', eve);
           dragstart = true;
           document.body.style[VENDOR_PREFIX.userSelect] = 'none';
+          document.body.style.cursor = 'default';
         } else if (dragstart) {
           eve.type = 'dragmove';
           that.trigger('dragmove', eve);
@@ -1121,6 +1123,15 @@
 
   CreateNode.prototype.hasParent = function (target) {
     return hasParent(this.node, target);
+  };
+  
+
+  CreateNode.prototype.html = function (a) {
+    if (typeof a !== 'undefined') {
+      this.node.innerHTML = a;
+    } else {
+      return this.node.innerHTML;
+    }
   };
   
 
