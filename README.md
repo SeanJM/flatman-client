@@ -170,12 +170,14 @@ el(Component, {
 - [`clone`](#clone-top)
 - [`disable`](#disable-top)
 - [`enable`](#enable-top)
-- [`focus`](#enable-top)
+- [`focus`](#focus-top)
+- [`html`](#html-top)
 - [`prepend`](#prepend-top)
 - [`prependTo`](#prependto-top)
 - [`remove`](#remove-top)
 - [`replaceWith`](#replacewith-top)
 - [`select`](#select-top)
+- [`text`](#text-top)
 - [`value`](#value-top)
 
 ## Event methods
@@ -784,6 +786,17 @@ Will `focus` an element. This will only work if the element is in the `document.
 ```javascript
 var a = el('div');
 a.appendTo('body').focus();
+```
+
+### `html` [top](#methods)
+
+Is an interface for `innerHTML`. When passed no arguments, it will return the value of `innerHTML`.
+
+```javascript
+var a = el('div');
+a.html('test');
+// a.node.innerHTML -> 'test'
+// a.html() -> 'test'
 ```
 
 ### `prepend` [top](#methods)
