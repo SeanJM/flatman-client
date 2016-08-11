@@ -134,10 +134,11 @@ function CreateNode () {
       };
 
       document.body.removeEventListener('mousemove', dragmove);
-      document.body.removeEventListener('mousemove', dragend);
+      document.body.removeEventListener('mouseup', dragend);
 
       dragstart = false;
       document.body.style[VENDOR_PREFIX.userSelect] = '';
+      document.body.style.cursor = '';
       that.trigger('dragend', eve);
     });
 
@@ -160,6 +161,7 @@ function CreateNode () {
         that.trigger('dragstart', eve);
         dragstart = true;
         document.body.style[VENDOR_PREFIX.userSelect] = 'none';
+        document.body.style.cursor = 'default';
       } else if (dragstart) {
         eve.type = 'dragmove';
         that.trigger('dragmove', eve);
