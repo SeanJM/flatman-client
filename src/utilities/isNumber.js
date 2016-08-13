@@ -1,3 +1,3 @@
 function isNumber (a) {
-  return !isNaN(Number(a));
+  return typeof a === 'number' && !isNaN(a);
 }
