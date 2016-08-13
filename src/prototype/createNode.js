@@ -63,7 +63,7 @@ function CreateNode () {
     for (; i < n; i++) {
       if (arguments[i] instanceof CreateNode) {
         this.node.appendChild(arguments[i].node);
-      } else if (isString(arguments[i])) {
+      } else if (isString(arguments[i]) || isNumber(arguments[i])) {
         this.node.appendChild(new Text(arguments[i]));
       } else if (
         arguments[i]
@@ -121,55 +121,62 @@ function CreateNode () {
     var dragmove;
     var dragend;
 
-    document.body.addEventListener('mouseup', dragend = function (e) {
-      var eve = {
-        type : 'dragend',
-        startX : startX,
-        startY : startY,
-        pageX : e.pageX,
-        pageY : e.pageY,
-        distanceX : startX - e.pageX,
-        distanceY : startY - e.pageY,
-        target : that
-      };
+    // Ensure it's left click which starts the dragging
+    if (e.which === 1) {
+      document.body.addEventListener('mouseup', dragend = function (e) {
+        var eve = {
+          type : 'dragend',
+          startX : startX,
+          startY : startY,
+          pageX : e.pageX,
+          pageY : e.pageY,
+          distanceX : startX - e.pageX,
+          distanceY : startY - e.pageY,
+          target : that
+        };
 
-      document.body.removeEventListener('mousemove', dragmove);
-      document.body.removeEventListener('mouseup', dragend);
+        if (e.which === 1 && dragstart) {
+          document.body.removeEventListener('mousemove', dragmove);
+          document.body.removeEventListener('mouseup', dragend);
 
-      dragstart = false;
-      document.body.style[VENDOR_PREFIX.userSelect] = '';
-      document.body.style.cursor = '';
-      that.trigger('dragend', eve);
-    });
+          dragstart = false;
+          document.body.style[VENDOR_PREFIX.userSelect] = '';
+          document.body.style.cursor = '';
+          that.trigger('dragend', eve);
+        }
+      });
 
-    document.body.addEventListener('mousemove', dragmove = function (e) {
-      var eve = {
-        type : 'dragstart',
-        startX : startX,
-        startY : startY,
-        pageX : e.pageX,
-        pageY : e.pageY,
-        distanceX : e.pageX - startX,
-        distanceY : e.pageY - startY,
-        target : that
-      };
+      document.body.addEventListener('mousemove', dragmove = function (e) {
+        var eve = {
+          type : 'dragstart',
+          startX : startX,
+          startY : startY,
+          pageX : e.pageX,
+          pageY : e.pageY,
+          distanceX : e.pageX - startX,
+          distanceY : e.pageY - startY,
+          target : that
+        };
 
-      if (
-        (Math.abs(startX - e.pageX) + Math.abs(startY - e.pageY)) > 5
-        && !dragstart
-      ) {
-        that.trigger('dragstart', eve);
-        dragstart = true;
-        document.body.style[VENDOR_PREFIX.userSelect] = 'none';
-        document.body.style.cursor = 'default';
-      } else if (dragstart) {
-        eve.type = 'dragmove';
-        that.trigger('dragmove', eve);
-      }
-    });
+        if (
+          (Math.abs(startX - e.pageX) + Math.abs(startY - e.pageY)) > 5
+          && !dragstart
+        ) {
+          that.trigger('dragstart', eve);
+          dragstart = true;
+          document.body.style[VENDOR_PREFIX.userSelect] = 'none';
+          document.body.style.cursor = 'default';
+        } else if (dragstart) {
+          eve.type = 'dragmove';
+          that.trigger('dragmove', eve);
+        }
+      });
+    }
   });
 
-  this.check = this.node.check;
+  if (this.node.check) {
+    this.check = this.node.check;
+  }
   this.style = this.node.style;
   this.style.transform = this.style[VENDOR_PREFIX.transform];
   this.style.userSelect = this.style[VENDOR_PREFIX.userSelect];
