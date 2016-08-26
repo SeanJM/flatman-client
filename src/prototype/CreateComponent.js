@@ -1,6 +1,7 @@
 function createComponent() {
   var i = 1;
   var n = arguments.length;
+  var args = [];
 
   var hasAppend = typeof arguments[0].prototype.append === 'function';
 
@@ -11,10 +12,18 @@ function createComponent() {
       : undefined
   );
 
-  function appendComponent(a) {
+  // Get JIT optimized arguments list
+  for (; i < n; i++) {
+    args.push(arguments[i]);
+  }
+
+  // Reset i to 1, the first argument is a constructor reference
+  i = 1;
+
+  function appendComponent(a, index) {
     if (hasAppend) {
       if (typeof a.appendTo === 'function') {
-        component.append(a);
+        component.append(a, index, args);
       } else {
         throw '"' + (a.constructor.name || 'Anonymous component') + '" does not have an "appendTo" method';
       }
@@ -23,13 +32,12 @@ function createComponent() {
     }
   }
 
-
   for (; i < n; i++) {
     if (
       isComponent(arguments[i])
       || arguments[i] instanceof CreateNode
     ) {
-      appendComponent(arguments[i]);
+      appendComponent(arguments[i], i - 1);
     } else if (typeof arguments[i] === 'string') {
       if (typeof component.text === 'function') {
         component.text(arguments[i]);

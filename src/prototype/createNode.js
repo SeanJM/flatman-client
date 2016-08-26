@@ -20,7 +20,11 @@ function CreateNode () {
     this.subscribers = arguments[0].subscribers;
   } else if (isElement(arguments[0]) || arguments[0] === window) {
     this.node = arguments[0];
-  } else if (isString(arguments[0]) || isObject(arguments[0])) {
+  } else if (
+    isString(arguments[0])
+    || isObject(arguments[0])
+    || isUndefined(arguments[0])
+  ) {
     if (isString(arguments[0])) {
       if (isSVG) {
         this.node = document.createElementNS(SVG_NAMESPACE, arguments[0]);
@@ -28,7 +32,7 @@ function CreateNode () {
         this.node = document.createElement(arguments[0]);
       }
       i = 1;
-    } else if (isObject(arguments[0])) {
+    } else if (isObject(arguments[0]) || isUndefined(arguments[0])) {
       this.node = document.createElement('div');
       i = 0;
     }
@@ -72,8 +76,6 @@ function CreateNode () {
         arguments[i].appendTo(this.node);
       }
     }
-  } else if (typeof arguments[0] === 'undefined') {
-    throw 'Invalid argument \'undefined\' for createNode.';
   }
 
   if (IS_IE && isTextInput(this.node)) {
@@ -135,10 +137,10 @@ function CreateNode () {
           target : that
         };
 
-        if (e.which === 1 && dragstart) {
-          document.body.removeEventListener('mousemove', dragmove);
-          document.body.removeEventListener('mouseup', dragend);
+        document.body.removeEventListener('mousemove', dragmove);
+        document.body.removeEventListener('mouseup', dragend);
 
+        if (e.which === 1 && dragstart) {
           dragstart = false;
           document.body.style[VENDOR_PREFIX.userSelect] = '';
           document.body.style.cursor = '';

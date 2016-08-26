@@ -551,6 +551,7 @@
   function createComponent() {
     var i = 1;
     var n = arguments.length;
+    var args = [];
   
     var hasAppend = typeof arguments[0].prototype.append === 'function';
   
@@ -561,10 +562,18 @@
         : undefined
     );
   
-    function appendComponent(a) {
+    // Get JIT optimized arguments list
+    for (; i < n; i++) {
+      args.push(arguments[i]);
+    }
+  
+    // Reset i to 1, the first argument is a constructor reference
+    i = 1;
+  
+    function appendComponent(a, index) {
       if (hasAppend) {
         if (typeof a.appendTo === 'function') {
-          component.append(a);
+          component.append(a, index, args);
         } else {
           throw '"' + (a.constructor.name || 'Anonymous component') + '" does not have an "appendTo" method';
         }
@@ -573,13 +582,12 @@
       }
     }
   
-  
     for (; i < n; i++) {
       if (
         isComponent(arguments[i])
         || arguments[i] instanceof CreateNode
       ) {
-        appendComponent(arguments[i]);
+        appendComponent(arguments[i], i - 1);
       } else if (typeof arguments[i] === 'string') {
         if (typeof component.text === 'function') {
           component.text(arguments[i]);
@@ -720,6 +728,8 @@
           F.prototype = CreateNode.prototype;
           return new F();
       }
+    } else {
+      return new CreateNode();
     }
   }
   
@@ -751,7 +761,11 @@
       this.subscribers = arguments[0].subscribers;
     } else if (isElement(arguments[0]) || arguments[0] === window) {
       this.node = arguments[0];
-    } else if (isString(arguments[0]) || isObject(arguments[0])) {
+    } else if (
+      isString(arguments[0])
+      || isObject(arguments[0])
+      || isUndefined(arguments[0])
+    ) {
       if (isString(arguments[0])) {
         if (isSVG) {
           this.node = document.createElementNS(SVG_NAMESPACE, arguments[0]);
@@ -759,7 +773,7 @@
           this.node = document.createElement(arguments[0]);
         }
         i = 1;
-      } else if (isObject(arguments[0])) {
+      } else if (isObject(arguments[0]) || isUndefined(arguments[0])) {
         this.node = document.createElement('div');
         i = 0;
       }
@@ -803,8 +817,6 @@
           arguments[i].appendTo(this.node);
         }
       }
-    } else if (typeof arguments[0] === 'undefined') {
-      throw 'Invalid argument \'undefined\' for createNode.';
     }
   
     if (IS_IE && isTextInput(this.node)) {
@@ -866,10 +878,10 @@
             target : that
           };
   
-          if (e.which === 1 && dragstart) {
-            document.body.removeEventListener('mousemove', dragmove);
-            document.body.removeEventListener('mouseup', dragend);
+          document.body.removeEventListener('mousemove', dragmove);
+          document.body.removeEventListener('mouseup', dragend);
   
+          if (e.which === 1 && dragstart) {
             dragstart = false;
             document.body.style[VENDOR_PREFIX.userSelect] = '';
             document.body.style.cursor = '';
@@ -973,37 +985,6 @@
   CreateNode.prototype.before = function (target) {
     target = createEl(target);
     target.node.parentNode.insertBefore(this.node, target.node);
-  };
-  
-
-  CreateNode.prototype.centerTo = function (targetNode) {
-    var nodeRect = this.node.getBoundingClientRect();
-    var width = nodeRect.width;
-    var height = nodeRect.height;
-    var targetIsParent;
-    var targetRect = {};
-  
-    if (targetNode === window) {
-      targetRect.width = window.innerWidth;
-      targetRect.height = window.innerHeight;
-      targetIsParent = true;
-    } else if (targetNode instanceof CreateNode) {
-      targetRect = targetNode.node.getBoundingClientRect();
-      targetIsParent = targetNode.node.contains(this.node);
-    } else {
-      targetRect = targetNode.getBoundingClientRect();
-      targetIsParent = targetNode.contains(this.node);
-    }
-  
-    if (targetIsParent) {
-      this.style('left', (targetRect.width / 2) - (width / 2));
-      this.style('top', (targetRect.height / 2) - (height / 2));
-    } else {
-      this.style('left', targetRect.left + (targetRect.width / 2) - (width / 2));
-      this.style('top', window.pageYOffset + targetRect.top + (targetRect.height / 2) - (height / 2));
-    }
-  
-    return this;
   };
   
 

@@ -98,5 +98,7 @@ function createEl() {
         F.prototype = CreateNode.prototype;
         return new F();
     }
+  } else {
+    return new CreateNode();
   }
 }
