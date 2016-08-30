@@ -143,7 +143,9 @@
   
 
   function isElement (a) {
-    return Object.prototype.toString.call(a).substr(0, 12) === '[object HTML'; 
+    var validElements = ['HTML', 'SVGS'];
+    var stringValue = Object.prototype.toString.call(a).substr(8, 4);
+    return validElements.indexOf(stringValue) !== -1;
   }
   
 
@@ -260,15 +262,20 @@
   
 
   function addClass (node, a) {
-    var className = filter(map(node.className.split(' '), trim), hasLength);
+    var className;
     var i;
   
-    i = className.indexOf(a);
+    if (isArray(a)) {
+      forEach(a, partial(addClass, node));
+    } else {
+      className = filter(map(node.className.split(' '), trim), hasLength);
+      i = className.indexOf(a);
   
-    if (i === -1) {
-      className.push(a);
-      className.sort();
-      node.className = className.join(' ');
+      if (i === -1) {
+        className.push(a);
+        className.sort();
+        node.className = className.join(' ');
+      }
     }
   }
   
@@ -316,7 +323,7 @@
         ? a.node
         : a;
   
-      return node.contains(a) && a !== node;
+      return isNode(a) && node.contains(a) && a !== node;
     }
   
     for (; i < n; i++) {
@@ -482,9 +489,13 @@
   
 
   function removeClass (node, a) {
-    node.className = filter(map(node.className.split(' '), trim), function (b) {
-      return hasLength(b) && not(a, b);
-    }).sort().join(' ');
+    if (isArray(a)) {
+      forEach(a, partial(removeClass, node));
+    } else {
+      node.className = filter(map(node.className.split(' '), trim), function (b) {
+        return hasLength(b) && not(a, b);
+      }).sort().join(' ');
+    }
   }
   
 
@@ -551,9 +562,9 @@
   function createComponent() {
     var i = 1;
     var n = arguments.length;
-    var args = [];
   
     var hasAppend = typeof arguments[0].prototype.append === 'function';
+    var hasText = typeof arguments[0].prototype.text === 'function';
   
     // Pass the objec to the constructor if it exists
     var component = new arguments[0](
@@ -562,42 +573,29 @@
         : undefined
     );
   
-    // Get JIT optimized arguments list
-    for (; i < n; i++) {
-      args.push(arguments[i]);
-    }
-  
-    // Reset i to 1, the first argument is a constructor reference
-    i = 1;
-  
-    function appendComponent(a, index) {
-      if (hasAppend) {
-        if (typeof a.appendTo === 'function') {
-          component.append(a, index, args);
-        } else {
-          throw '"' + (a.constructor.name || 'Anonymous component') + '" does not have an "appendTo" method';
-        }
-      } else {
-        throw '"' + (component.constructor.name || 'Anonymous component') + '" does not have an "append" method';
-      }
-    }
+    var children = [];
+    var strings = [];
   
     for (; i < n; i++) {
       if (
         isComponent(arguments[i])
         || arguments[i] instanceof CreateNode
       ) {
-        appendComponent(arguments[i], i - 1);
-      } else if (typeof arguments[i] === 'string') {
-        if (typeof component.text === 'function') {
-          component.text(arguments[i]);
+        if (hasAppend) {
+          if (typeof arguments[i].appendTo === 'function') {
+            children.push(arguments[i]);
+          } else {
+            throw '"' + (arguments[i].constructor.name || 'Anonymous component') + '" does not have an "appendTo" method';
+          }
         } else {
+          throw '"' + (component.constructor.name || 'Anonymous component') + '" does not have an "append" method';
+        }
+      } else if (typeof arguments[i] === 'string') {
+        if (!hasText) {
           throw 'Invalid argument "' + arguments[i] + '", component "' + component.constructor.name + '" does not have a "text" method.';
         }
+        strings.push(arguments[i]);
       } else if (typeof arguments[i] === 'object') {
-        // Check if it's an object, and if it is, it's going to be treated as
-        // an options object.
-  
         for (var k in arguments[i]) {
           // Check for an 'on' method
           if (
@@ -624,6 +622,15 @@
         } // End for loop
       }
     }
+  
+    if (children.length) {
+      component.append.apply(component, children);
+    }
+  
+    if (strings.length) {
+      component.text.apply(component, strings);
+    }
+  
     return component;
   }
   
@@ -1115,11 +1122,11 @@
   
 
   CreateNode.prototype.html = function (a) {
-    if (typeof a !== 'undefined') {
-      this.node.innerHTML = a;
-    } else {
+    if (typeof a === 'undefined') {
       return this.node.innerHTML;
     }
+    this.node.innerHTML = a;
+    return this;
   };
   
 
