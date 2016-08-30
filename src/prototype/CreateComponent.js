@@ -1,9 +1,9 @@
 function createComponent() {
   var i = 1;
   var n = arguments.length;
-  var args = [];
 
   var hasAppend = typeof arguments[0].prototype.append === 'function';
+  var hasText = typeof arguments[0].prototype.text === 'function';
 
   // Pass the objec to the constructor if it exists
   var component = new arguments[0](
@@ -12,42 +12,29 @@ function createComponent() {
       : undefined
   );
 
-  // Get JIT optimized arguments list
-  for (; i < n; i++) {
-    args.push(arguments[i]);
-  }
-
-  // Reset i to 1, the first argument is a constructor reference
-  i = 1;
-
-  function appendComponent(a, index) {
-    if (hasAppend) {
-      if (typeof a.appendTo === 'function') {
-        component.append(a, index, args);
-      } else {
-        throw '"' + (a.constructor.name || 'Anonymous component') + '" does not have an "appendTo" method';
-      }
-    } else {
-      throw '"' + (component.constructor.name || 'Anonymous component') + '" does not have an "append" method';
-    }
-  }
+  var children = [];
+  var strings = [];
 
   for (; i < n; i++) {
     if (
       isComponent(arguments[i])
       || arguments[i] instanceof CreateNode
     ) {
-      appendComponent(arguments[i], i - 1);
-    } else if (typeof arguments[i] === 'string') {
-      if (typeof component.text === 'function') {
-        component.text(arguments[i]);
+      if (hasAppend) {
+        if (typeof arguments[i].appendTo === 'function') {
+          children.push(arguments[i]);
+        } else {
+          throw '"' + (arguments[i].constructor.name || 'Anonymous component') + '" does not have an "appendTo" method';
+        }
       } else {
+        throw '"' + (component.constructor.name || 'Anonymous component') + '" does not have an "append" method';
+      }
+    } else if (typeof arguments[i] === 'string') {
+      if (!hasText) {
         throw 'Invalid argument "' + arguments[i] + '", component "' + component.constructor.name + '" does not have a "text" method.';
       }
+      strings.push(arguments[i]);
     } else if (typeof arguments[i] === 'object') {
-      // Check if it's an object, and if it is, it's going to be treated as
-      // an options object.
-
       for (var k in arguments[i]) {
         // Check for an 'on' method
         if (
@@ -74,5 +61,14 @@ function createComponent() {
       } // End for loop
     }
   }
+
+  if (children.length) {
+    component.append.apply(component, children);
+  }
+
+  if (strings.length) {
+    component.text.apply(component, strings);
+  }
+
   return component;
 }
