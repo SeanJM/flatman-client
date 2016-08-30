@@ -1,7 +1,7 @@
 CreateNode.prototype.html = function (a) {
-  if (typeof a !== 'undefined') {
-    this.node.innerHTML = a;
-  } else {
+  if (typeof a === 'undefined') {
     return this.node.innerHTML;
   }
+  this.node.innerHTML = a;
+  return this;
 };
