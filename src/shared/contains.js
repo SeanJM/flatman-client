@@ -13,7 +13,7 @@ function contains(node) {
       ? a.node
       : a;
 
-    return node.contains(a) && a !== node;
+    return isNode(a) && node.contains(a) && a !== node;
   }
 
   for (; i < n; i++) {
