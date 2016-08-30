@@ -1,3 +1,5 @@
 function isElement (a) {
-  return Object.prototype.toString.call(a).substr(0, 12) === '[object HTML'; 
+  var validElements = ['HTML', 'SVGS'];
+  var stringValue = Object.prototype.toString.call(a).substr(8, 4);
+  return validElements.indexOf(stringValue) !== -1;
 }
