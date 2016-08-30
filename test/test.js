@@ -2,9 +2,14 @@
 startTest('el', function (test) {
   // Add Class
   (function () {
-    var a = el('div');
+    var a = el();
+    var b = el();
+
     a.addClass('my-class-name');
+    b.addClass(['my-class', 'my-class-2']);
+
     test('addClass', a.attr('class')).shouldEqual('my-class-name');
+    test('addClass: Array', b.attr('class')).shouldEqual('my-class my-class-2');
   }());
 
   // Append
@@ -329,8 +334,10 @@ startTest('el', function (test) {
 
   // removeClass
   (function () {
-    var a = el('div', { class : 'a' });
+    var a = el({ class : 'a' });
+    var b = el({ class : 'a b c' });
     test('removeClass', a.removeClass('a').hasClass('a')).shouldEqual(false);
+    test('removeClass: Array', b.removeClass(['a', 'c']).hasClass('b')).shouldEqual(true);
   }());
 
   // replaceWith
