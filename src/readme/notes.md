@@ -1,4 +1,1 @@
-
-<!--
-  Anything 'notable' that the user should know
--->
+I use this on production, and I would like some help on it. Thanks. The goal is to keep it as simple and light as possible. It's a bit of a bastard child between FRZR and jQuery — a somewhat attractive & useful bastard.

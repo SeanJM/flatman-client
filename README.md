@@ -86,16 +86,16 @@ Thanks to [FRZR](https://frzr.js.org/) for some help for clearing up the "child"
 
 ## Installation ([top](#table-of-contents))
 
+Include the script in your `body` tag, or `head`, I think it's wise to place it in the `body`, at the bottom.
 
-<!--
-  Installation instructions
--->
+```HTML
+<script src="createNode.min.js"></script>
+```
+
 ## Notes ([top](#table-of-contents))
 
+I use this on production, and I would like some help on it. Thanks. The goal is to keep it as simple and light as possible. It's a bit of a bastard child between FRZR and jQuery — a somewhat attractive & useful bastard.
 
-<!--
-  Anything 'notable' that the user should know
--->
 ## Examples
 ### Examples / Nesting ([top](#table-of-contents))
 
