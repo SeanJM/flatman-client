@@ -23,12 +23,14 @@ function tableOfContents(text, content, i) {
     if (Array.isArray(value)) {
       value.forEach(function (a) {
         let name = smartCase(path.basename(a).replace(/\.md$/, ''));
-        text.push(new Array(i + 1).join('  ') + '- [' + name + '](#' + _.kebabCase(a) + ')');
+        var base = a.slice(source.length, -3);
+        text.push(new Array(i + 1).join('  ') + '- [' + name + '](#' + _.kebabCase(base) + ')');
       });
     } else if (typeof value === 'object') {
       tableOfContents(text, value, i + 1);
     } else if (typeof value === 'string') {
-      text.push(new Array(i).join('  ') + '- [' + smartCase(key) + '](#' + _.kebabCase(value) + ')');
+      var base = value.substr(source.length);
+      text.push(new Array(i).join('  ') + '- [' + smartCase(key) + '](#' + _.kebabCase(base) + ')');
     }
   });
 }
@@ -42,9 +44,9 @@ function printContents(text, content, i) {
     if (Array.isArray(value)) {
       value.forEach(function (a) {
         let string = fs.readFileSync(a, 'utf8');
-        let name = smartCase(path.basename(a).replace(/\.md$/, ''));
+        var base = a.slice(source.length, -3).split(path.sep).map(smartCase).join(' / ');
         text.push(
-          new Array(i + 3).join('#') + ' ' + name + ' ... \([top](#table-of-contents)\)',
+          new Array(i + 3).join('#') + ' ' + base + ' ... \([top](#table-of-contents)\)',
           '',
           string
         );
