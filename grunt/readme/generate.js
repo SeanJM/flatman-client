@@ -35,7 +35,9 @@ function tableOfContents(text, content, i) {
 
 function printContents(text, content, i) {
   _.forEach(content, function (value, key) {
-    text.push(new Array(i + 2).join('#') + ' ' + smartCase(key));
+    if (typeof value === 'object') {
+      text.push(new Array(i + 2).join('#') + ' ' + smartCase(key));
+    }
 
     if (Array.isArray(value)) {
       value.forEach(function (a) {

@@ -70,7 +70,6 @@
     - [styles](#src-readme-el-methods-query-styles-md)
     - [textNodes](#src-readme-el-methods-query-text-nodes-md)
 
-## Description
 ### Description ... ([top](#table-of-contents))
 
 - Create nodes with a simple interface which will be very familiar.
@@ -81,14 +80,12 @@ Thanks to [FRZR](https://frzr.js.org/) for some help for clearing up the "child"
 
 ### `el.isComponent` [top](#methods)
 
-## Installation
 ### Installation ... ([top](#table-of-contents))
 
 
 <!--
   Installation instructions
 -->
-## Notes
 ### Notes ... ([top](#table-of-contents))
 
 
