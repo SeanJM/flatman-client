@@ -22,7 +22,7 @@
 
 - Functional Methods
   - Basics ... ([top](#table-of-contents))
-  - El.iscomponent ... ([top](#table-of-contents))
+  - el.isComponent ... ([top](#table-of-contents))
 
 - El Methods
 
@@ -228,7 +228,7 @@ el(Component, {
 - `el.isElement`
 - `el.isVisible`
 
-## El.iscomponent ... ([top](#table-of-contents))
+## el.isComponent ... ([top](#table-of-contents))
 
 Returns `true` or `false` if the argument is a component
 

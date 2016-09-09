@@ -7,15 +7,7 @@ const imageFiles = Object.keys(require('./images').dest);
 
 const cssFiles = require('./css').files.dest;
 
-const scriptFiles = _.map((
-  config.isSite
-    ? require('./scripts/site_files')
-    : require('./scripts/plugin_files')
-  ).dest[
-    config.isProduction
-      ? 'production'
-      : 'development'
-  ], a => a);
+const scripts = _.map(require('./scripts').dest, a => a);
 
 m('bin', /\.css$/).forEach(function (f) {
   if (cssFiles !== f) {
@@ -37,13 +29,13 @@ m('bin', /\.(png|svg|jpg)$/).forEach(function (f) {
 });
 
 m('bin', /\.(js)$/).forEach(function (f) {
-  if (scriptFiles.indexOf(f) === -1) {
+  if (scripts.indexOf(f) === -1) {
     fs.unlink(f);
   }
 });
 
 m('bin', /\.(js\.map)$/).forEach(function (f) {
-  if (scriptFiles.indexOf(f.slice(-4)) === -1) {
+  if (scripts.indexOf(f.slice(-4)) === -1) {
     fs.unlink(f);
   }
 });
