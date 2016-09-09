@@ -9,25 +9,17 @@ const linkLicense = require('./linkLicense');
 const exists = require('../lib/exists');
 const padLeft = require('../lib/padLeft');
 const padRight = require('../lib/padRight');
+const smartCase = require('../lib/smartCase');
 
 const source = 'src/readme/';
 
-function capitalCase(string) {
-  let spaced = string.trim().replace(/-|_/g, ' ').split(' ');
-  let s = spaced.map(function (a) {
-    return /^[A-Z]/.test(a) ? a : a[0].toUpperCase() + a.substr(1).toLowerCase();
-  }).join(' ');
-
-  return s[0].toUpperCase() + s.slice(1);
-}
-
 function tableOfContents(text, content, i) {
   _.forEach(content, function (value, key) {
-    text.push('', new Array(i).join('  ') + '- ' + capitalCase(key));
+    text.push('', new Array(i).join('  ') + '- ' + smartCase(key));
 
     if (Array.isArray(value)) {
       value.forEach(function (a) {
-        let name = capitalCase(path.basename(a).replace(/\.md$/, ''));
+        let name = smartCase(path.basename(a).replace(/\.md$/, ''));
         text.push(new Array(i + 1).join('  ') + '- ' + name + ' ... \([top](#table-of-contents)\)');
       });
     } else {
@@ -38,13 +30,13 @@ function tableOfContents(text, content, i) {
 
 function printContents(text, content, i) {
   _.forEach(content, function (value, key) {
-    text.push(new Array(i + 1).join('#') + ' ' + capitalCase(key));
+    text.push(new Array(i + 1).join('#') + ' ' + smartCase(key));
 
     if (Array.isArray(value)) {
       value.forEach(function (a) {
         let string = fs.readFileSync(a, 'utf8');
-        let name = capitalCase(path.basename(a).replace(/\.md$/, ''));
-        text.push(new Array(i + 2).join('#') + name + ' ... \([top](#table-of-contents)\)');
+        let name = smartCase(path.basename(a).replace(/\.md$/, ''));
+        text.push(new Array(i + 2).join('#') + ' ' + name + ' ... \([top](#table-of-contents)\)');
         text.push('');
         text.push(string);
       });
@@ -85,7 +77,7 @@ function generate(test_results, callback) {
 
   var hasTests = test_results && test_results.int_total > 0;
 
-  text.push('# ' + capitalCase(pkg.name) + ' ' + pkg.version);
+  text.push('# ' + smartCase(pkg.name) + ' ' + pkg.version);
 
   text.push('#### License: ' + linkLicense(pkg.license || 'MIT'));
 
