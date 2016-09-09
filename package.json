@@ -6,7 +6,7 @@
 
   "gruntBuild": {
     "isBundle": true,
-    "isProduction": false,
+    "isProduction": true,
     "sourceMap": true,
     "isSite": false,
     "useClosure": true,
