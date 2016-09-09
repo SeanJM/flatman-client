@@ -1,9 +1,4 @@
 const fs = require('fs');
-const config = JSON.parse(fs.readFileSync('package.json')).gruntBuild;
-
-const root = config.isSite
-  ? 'src/application/'
-  : 'src/';
 
 try {
   fs.statSync('test/');

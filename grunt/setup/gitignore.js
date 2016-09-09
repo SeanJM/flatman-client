@@ -1,20 +1,14 @@
 const fs = require('fs');
-const config = JSON.parse(fs.readFileSync('package.json')).gruntBuild;
+const exists = require('../lib/exists');
 
-const root = config.isSite
-  ? 'src/application/'
-  : 'src/';
-
-
-try {
-  fs.statSync('.gitingore');
-} catch (e) {
+if (!exists('.gitignore')) {
   // Create a gitingore by default
   fs.writeFileSync(
     '.gitignore',
     [
       'node_modules',
-      '.DS_STORE'
+      '.DS_STORE',
+      '.sass-cache'
     ].join('\n')
   );
 }

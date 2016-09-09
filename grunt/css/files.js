@@ -46,6 +46,7 @@ let src = {
   containers : list.concat(m('src/application/styles/containers/', /\.scss$/).sort(byType)),
   collections : list.concat(m('src/application/styles/collections/', /\.scss$/).sort(byType)),
   custom : list.concat(m('src/application/styles/custom', /\.scss$/).sort(byType)),
+  main : list.concat(m('src/application/styles/main', /\.scss$/).sort(byType)),
 };
 
 let dest = {};
@@ -70,6 +71,7 @@ module.exports = {
     src.components,
     src.containers,
     src.collections,
-    src.custom
+    src.custom,
+    src.main
   )
 };

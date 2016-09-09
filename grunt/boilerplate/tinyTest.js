@@ -8,37 +8,37 @@ module.exports = new TinyTest(function (test) {
   } else {
   }
 
-  // Postive test
-  test(
-    // Name of the test
-  )
-    .this(
-      // value to test
-    )
-    .shouldBe(
-      // Result
-    );
-
-  // Negative test
-  test(
-    // Name of the test
-  )
-    .this(
-      // value to test
-    )
-    .shouldNotBe(
-      // Result
-    );
-
-  // Failure / catch test
-  test(
-    // Name of the test
-  )
-    .this(
-      // value to test
-    )
-    .shouldFail(
-      // Result
-    );
+  // // Postive test
+  // test(
+  //   // Name of the test
+  // )
+  //   .this(
+  //     // value to test
+  //   )
+  //   .shouldBe(
+  //     // Result
+  //   );
+  //
+  // // Negative test
+  // test(
+  //   // Name of the test
+  // )
+  //   .this(
+  //     // value to test
+  //   )
+  //   .shouldNotBe(
+  //     // Result
+  //   );
+  //
+  // // Failure / catch test
+  // test(
+  //   // Name of the test
+  // )
+  //   .this(
+  //     // value to test
+  //   )
+  //   .shouldFail(
+  //     // Result
+  //   );
 
 });
