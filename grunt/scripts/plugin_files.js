@@ -23,8 +23,8 @@ let src = {
 let dest = {
   development : {},
   production : {
-    bundle : config.scripts && config.bundle
-      ? config.bundle
+    bundle : config.bundle
+      ? 'bin/' + config.bundle + '.min.js'
       : 'bin/bundle.min.js'
   }
 };

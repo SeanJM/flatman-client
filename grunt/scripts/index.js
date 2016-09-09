@@ -26,9 +26,7 @@ task.uglify = {
   },
   files : {
     src : files.list,
-    dest : config.bundle
-     ? 'bin/' + config.bundle + '.min.js'
-     : 'bin/bundle.min.js'
+    dest : dest.bundle
   }
 };
 
@@ -38,9 +36,7 @@ if (config.isBundle) {
       sourceMap : config.sourceMap,
     },
     src : files.list,
-    dest : config.bundle
-      ? 'bin/' + config.bundle + '.js'
-      : 'bin/bundle.js'
+    dest : dest.bundle
   };
 
   task.watch.scripts = {

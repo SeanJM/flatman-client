@@ -3,7 +3,6 @@ const css = require('./css');
 const fonts = require('./fonts');
 const images = require('./images');
 const scripts = require('./scripts');
-const clean = require('./clean');
 const config = JSON.parse(fs.readFileSync('package.json')).gruntBuild;
 
 let tasks = [];
@@ -37,11 +36,9 @@ if (images.files.length) {
 }
 
 tasks.push(
-  'flatman'
-);
-
-tasks.push(
-  'readme'
+  'flatman',
+  'readme',
+  'clean'
 );
 
 if (!config.isProduction) {
