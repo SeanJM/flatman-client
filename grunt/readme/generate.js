@@ -14,6 +14,12 @@ const printTests = require('./printTests');
 
 const source = 'src/readme/';
 
+function toLink(s) {
+  return '#' + s.toLowerCase()
+    .replace(/_|\s+|\./g,'-')
+    .replace(/\//g, '--') + '-top';
+}
+
 function tableOfContents(text, content, i) {
   _.forEach(content, function (value, key) {
     if (typeof value === 'object') {
@@ -24,13 +30,13 @@ function tableOfContents(text, content, i) {
       value.forEach(function (a) {
         let name = smartCase(path.basename(a).replace(/\.md$/, ''));
         var base = a.slice(source.length, -3);
-        text.push(new Array(i + 1).join('  ') + '- [' + name + '](#' + _.kebabCase(base).split('-').join('--') + '-top)');
+        text.push(new Array(i + 1).join('  ') + '- [' + name + '](' + toLink(base) + ')');
       });
     } else if (typeof value === 'object') {
       tableOfContents(text, value, i + 1);
     } else if (typeof value === 'string') {
       var base = value.substr(source.length);
-      text.push(new Array(i).join('  ') + '- [' + smartCase(key) + '](#' + _.kebabCase(base).split('-').join('--') + '-top)');
+      text.push(new Array(i).join('  ') + '- [' + smartCase(key) + '](' + toLink(base) + '-top)');
     }
   });
 }

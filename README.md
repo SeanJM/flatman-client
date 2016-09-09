@@ -7,68 +7,68 @@
 
 #### Overview
 
-- [Description](#description--md-top)
-- [Installation](#installation--md-top)
-- [Notes](#notes--md-top)
+- [Description](#description-md-top-top)
+- [Installation](#installation-md-top-top)
+- [Notes](#notes-md-top-top)
 
 - Examples
   - [Nesting](#examples--nesting-top)
-  - [Basic Usage](#examples--basic--usage-top)
-  - [Required Methods](#examples--required--methods-top)
-  - [Passing A Component](#examples--passing--a--component-top)
-  - [Wrapping The Dom](#examples--wrapping--the--dom-top)
-  - [Writing A Component](#examples--writing--a--component-top)
-  - [What You Can Pass As An Object](#examples--what--you--can--pass--as--an--object-top)
+  - [Basic Usage](#examples--basic-usage-top)
+  - [Required Methods](#examples--required-methods-top)
+  - [Passing A Component](#examples--passing-a-component-top)
+  - [Wrapping The Dom](#examples--wrapping-the-dom-top)
+  - [Writing A Component](#examples--writing-a-component-top)
+  - [What You Can Pass As An Object](#examples--what-you-can-pass-as-an-object-top)
 
 - Functional Methods
-  - [Basics](#functional--methods--basics-top)
-  - [el.isComponent](#functional--methods--el--is--component-top)
+  - [Basics](#functional-methods--basics-top)
+  - [el.isComponent](#functional-methods---el-iscomponent-top)
 
 - El Methods
 
   - Attributes
-    - [attr](#el--methods--attributes--attr-top)
+    - [attr](#el-methods--attributes---attr-top)
 
   - Dom Manipulation
-    - [addClass](#el--methods--dom--manipulation--add--class-top)
-    - [append](#el--methods--dom--manipulation--append-top)
-    - [appendTo](#el--methods--dom--manipulation--append--to-top)
-    - [children](#el--methods--dom--manipulation--children-top)
-    - [clone](#el--methods--dom--manipulation--clone-top)
-    - [disable](#el--methods--dom--manipulation--disable-top)
-    - [focus](#el--methods--dom--manipulation--focus-top)
-    - [hasClass](#el--methods--dom--manipulation--has--class-top)
-    - [prepend](#el--methods--dom--manipulation--prepend-top)
-    - [prependTo](#el--methods--dom--manipulation--prepend--to-top)
-    - [remove](#el--methods--dom--manipulation--remove-top)
-    - [removeClass](#el--methods--dom--manipulation--remove--class-top)
-    - [replaceWith](#el--methods--dom--manipulation--replace--with-top)
-    - [select](#el--methods--dom--manipulation--select-top)
-    - [toggleClass](#el--methods--dom--manipulation--toggle--class-top)
-    - [value](#el--methods--dom--manipulation--value-top)
+    - [addClass](#el-methods--dom-manipulation---addclass-top)
+    - [append](#el-methods--dom-manipulation---append-top)
+    - [appendTo](#el-methods--dom-manipulation---appendto-top)
+    - [children](#el-methods--dom-manipulation---children-top)
+    - [clone](#el-methods--dom-manipulation---clone-top)
+    - [disable](#el-methods--dom-manipulation---disable-top)
+    - [focus](#el-methods--dom-manipulation---focus-top)
+    - [hasClass](#el-methods--dom-manipulation---hasclass-top)
+    - [prepend](#el-methods--dom-manipulation---prepend-top)
+    - [prependTo](#el-methods--dom-manipulation---prependto-top)
+    - [remove](#el-methods--dom-manipulation---remove-top)
+    - [removeClass](#el-methods--dom-manipulation---removeclass-top)
+    - [replaceWith](#el-methods--dom-manipulation---replacewith-top)
+    - [select](#el-methods--dom-manipulation---select-top)
+    - [toggleClass](#el-methods--dom-manipulation---toggleclass-top)
+    - [value](#el-methods--dom-manipulation---value-top)
 
   - Events
-    - [off](#el--methods--events--off-top)
-    - [on](#el--methods--events--on-top)
+    - [off](#el-methods--events---off-top)
+    - [on](#el-methods--events---on-top)
 
   - Predicates
-    - [contains](#el--methods--predicates--contains-top)
-    - [Predicates](#el--methods--predicates--predicates-top)
+    - [contains](#el-methods--predicates---contains-top)
+    - [Predicates](#el-methods--predicates--predicates-top)
 
   - Query
-    - [closest](#el--methods--query--closest-top)
-    - [find](#el--methods--query--find-top)
-    - [firstChild](#el--methods--query--first--child-top)
-    - [getSelector](#el--methods--query--get--selector-top)
-    - [lastChild](#el--methods--query--last--child-top)
-    - [offset](#el--methods--query--offset-top)
-    - [parent](#el--methods--query--parent-top)
-    - [parents](#el--methods--query--parents-top)
-    - [parentsUntil](#el--methods--query--parents--until-top)
-    - [selectorPath](#el--methods--query--selector--path-top)
-    - [siblings](#el--methods--query--siblings-top)
-    - [styles](#el--methods--query--styles-top)
-    - [textNodes](#el--methods--query--text--nodes-top)
+    - [closest](#el-methods--query---closest-top)
+    - [find](#el-methods--query---find-top)
+    - [firstChild](#el-methods--query---firstchild-top)
+    - [getSelector](#el-methods--query---getselector-top)
+    - [lastChild](#el-methods--query---lastchild-top)
+    - [offset](#el-methods--query---offset-top)
+    - [parent](#el-methods--query---parent-top)
+    - [parents](#el-methods--query---parents-top)
+    - [parentsUntil](#el-methods--query---parentsuntil-top)
+    - [selectorPath](#el-methods--query---selectorpath-top)
+    - [siblings](#el-methods--query---siblings-top)
+    - [styles](#el-methods--query---styles-top)
+    - [textNodes](#el-methods--query---textnodes-top)
 
 ### Description ([top](#table-of-contents))
 
