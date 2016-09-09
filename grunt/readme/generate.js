@@ -23,12 +23,12 @@ function tableOfContents(text, content, i) {
     if (Array.isArray(value)) {
       value.forEach(function (a) {
         let name = smartCase(path.basename(a).replace(/\.md$/, ''));
-        text.push(new Array(i + 1).join('  ') + '- ' + name + ' ... \([top](#table-of-contents)\)');
+        text.push(new Array(i + 1).join('  ') + '- [' + smartCase(name) + '](#link-' + _.kebabCase(a) + ')');
       });
     } else if (typeof value === 'object') {
       tableOfContents(text, value, i + 1);
     } else if (typeof value === 'string') {
-      text.push(new Array(i).join('  ') + '- ' + smartCase(key) + ' ... \([top](#table-of-contents)\)');
+      text.push(new Array(i).join('  ') + '- [' + smartCase(key) + '](#link-' + _.kebabCase(value) + ')');
     }
   });
 }
