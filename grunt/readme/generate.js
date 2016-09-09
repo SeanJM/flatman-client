@@ -69,7 +69,7 @@ function printContents(text, content, i) {
       let string = fs.readFileSync(value, 'utf8');
       let name = smartCase(key);
       text.push(
-        new Array(i + 3).join('#') + ' ' + name + ' \([top](#table-of-contents)\)',
+        new Array(i + 2).join('#') + ' ' + name + ' \([top](#table-of-contents)\)',
         '',
         string
       );

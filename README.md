@@ -72,7 +72,7 @@
     - [styles](#el-methods--query--styles-top)
     - [textNodes](#el-methods--query--textnodes-top)
 
-### Description ([top](#table-of-contents))
+## Description ([top](#table-of-contents))
 
 - Create nodes with a simple interface which will be very familiar.
 - Get an API to simplify DOM manipulation
@@ -82,13 +82,13 @@ Thanks to [FRZR](https://frzr.js.org/) for some help for clearing up the "child"
 
 ### `el.isComponent` [top](#methods)
 
-### Installation ([top](#table-of-contents))
+## Installation ([top](#table-of-contents))
 
 
 <!--
   Installation instructions
 -->
-### Notes ([top](#table-of-contents))
+## Notes ([top](#table-of-contents))
 
 
 <!--
