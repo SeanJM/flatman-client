@@ -44,7 +44,7 @@ function printContents(text, content, i) {
     if (Array.isArray(value)) {
       value.forEach(function (a) {
         let string = fs.readFileSync(a, 'utf8');
-        var base = a.slice(source.length, -3).split(path.sep).map(smartCase).join(' / ');
+        var base = a.slice(source.length, -3).split(path.sep).map(smartCase).join(' ... ');
         text.push(
           new Array(i + 3).join('#') + ' ' + base + ' ... \([top](#table-of-contents)\)',
           '',
