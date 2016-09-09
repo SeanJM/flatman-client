@@ -44,7 +44,7 @@ function printContents(text, content, i) {
       value.forEach(function (a) {
         let string = fs.readFileSync(a, 'utf8');
         let name = capitalCase(path.basename(a).replace(/\.md$/, ''));
-        text.push(new Array(i + 2).join('#') + ' ... \([top](#table-of-contents)\)');
+        text.push(new Array(i + 2).join('#') + name + ' ... \([top](#table-of-contents)\)');
         text.push('');
         text.push(string);
       });
