@@ -23,7 +23,10 @@ module.exports = {
 
     m('bin', /\.(png|svg|jpg)$/).forEach(function (f) {
       var lowres = f.replace(/.lowres/, '');
-      if (imageFiles.indexOf(f) === -1 && imageFiles.indexOf(lowres) === -1) {
+      if (
+        imageFiles.indexOf(f) === -1
+        && imageFiles.indexOf(lowres) === -1
+      ) {
         fs.unlink(f);
       }
     });
