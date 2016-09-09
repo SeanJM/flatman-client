@@ -10,20 +10,25 @@ const exists = require('../lib/exists');
 const padLeft = require('../lib/padLeft');
 const padRight = require('../lib/padRight');
 const smartCase = require('../lib/smartCase');
+const printTests = require('./printTests');
 
 const source = 'src/readme/';
 
 function tableOfContents(text, content, i) {
   _.forEach(content, function (value, key) {
-    text.push('', new Array(i).join('  ') + '- ' + smartCase(key));
+    if (typeof value === 'object') {
+      text.push('', new Array(i).join('  ') + '- ' + smartCase(key));
+    }
 
     if (Array.isArray(value)) {
       value.forEach(function (a) {
         let name = smartCase(path.basename(a).replace(/\.md$/, ''));
         text.push(new Array(i + 1).join('  ') + '- ' + name + ' ... \([top](#table-of-contents)\)');
       });
-    } else {
+    } else if (typeof value === 'object') {
       tableOfContents(text, value, i + 1);
+    } else if (typeof value === 'string') {
+      text.push(new Array(i).join('  ') + '- ' + smartCase(key) + ' ... \([top](#table-of-contents)\)');
     }
   });
 }
@@ -36,46 +41,48 @@ function printContents(text, content, i) {
       value.forEach(function (a) {
         let string = fs.readFileSync(a, 'utf8');
         let name = smartCase(path.basename(a).replace(/\.md$/, ''));
-        text.push(new Array(i + 2).join('#') + ' ' + name + ' ... \([top](#table-of-contents)\)');
-        text.push('');
-        text.push(string);
+        text.push(
+          new Array(i + 2).join('#') + ' ' + name + ' ... \([top](#table-of-contents)\)',
+          '',
+          string
+        );
       });
-    } else {
+    } else if (typeof value === 'object') {
       printContents(text, value, i + 1);
+    } else if (typeof value === 'string') {
+      let string = fs.readFileSync(value, 'utf8');
+      let name = smartCase(key);
+      text.push(
+        new Array(i + 2).join('#') + ' ' + name + ' ... \([top](#table-of-contents)\)',
+        '',
+        string
+      );
     }
   });
 }
 
 function generate(test_results, callback) {
-  let description = source + 'description.md';
-  let notes = source + 'notes.md';
-  let example = source + 'example.md';
-  let installation = source + 'installation.md';
-
   let content = {};
-
-  m(source, /\.md$/).filter(function (a) {
-    return path.dirname(a) + '/' !== source;
-  }).forEach(function (a) {
-    var p = a.substr(source.length).split(path.sep);
-
-    if (typeof _.get(content, p.slice(0, -1)) === 'undefined') {
-      _.set(content, p.slice(0, -1), []);
-    } else if (typeof _.get(content, p.slice(0, -1)) === 'string') {
-      throw new Error('Invalid folder structure for "' + p.slice(0, -1).join(path.sep) + '"');
-    }
-
-    _.get(content, p.slice(0, -1)).push(a);
-  });
-
-  let hasDescription = exists(description);
-  let hasNotes = exists(notes);
-  let hasExample = exists(example);
-  let hasInstallation = exists(installation);
-
   let text = [];
-
   var hasTests = test_results && test_results.int_total > 0;
+
+  m(source, /\.md$/)
+    .forEach(function (a) {
+      var p = a.substr(source.length).split(path.sep);
+      var s = p.slice(0, -1);
+
+      if (s.length) {
+        if (typeof _.get(content, s) === 'undefined') {
+          _.set(content, s, []);
+        } else if (typeof _.get(content, s) === 'string') {
+          throw new Error('Invalid folder structure for "' + s.join(path.sep) + '"');
+        }
+        _.get(content, s).push(a);
+      } else {
+        content[ p[0].replace(/\.md$/, '') ] = a;
+      }
+    });
+
 
   text.push('# ' + smartCase(pkg.name) + ' ' + pkg.version);
 
@@ -97,47 +104,10 @@ function generate(test_results, callback) {
 
   text.push('', '#### Overview', '');
 
-  text.push('- [Description](#description)');
-
-  if (hasInstallation) {
-    text.push('- [Installation](#installation)');
-  }
-
-  if (hasNotes) {
-    text.push('- [Notes](#notes)');
-  }
-
-  if (hasExample) {
-    text.push('- [Example](#example)');
-  }
-
   tableOfContents(text, content, 1);
 
   if (hasTests) {
     text.push('- [Tests](#tests)');
-  }
-
-  text.push('', '## Description', '');
-
-  if (hasDescription) {
-    text.push(fs.readFileSync(description, 'utf8'));
-  } else {
-    text.push('No description provided');
-  }
-
-  if (hasInstallation) {
-    text.push('', '## Installation', '');
-    text.push(fs.readFileSync(installation, 'utf8'));
-  }
-
-  if (hasNotes) {
-    text.push('', '## Notes', '');
-    text.push(fs.readFileSync(notes, 'utf8'));
-  }
-
-  if (hasExample) {
-    text.push('', '## Example', '');
-    text.push(fs.readFileSync(example, 'utf8'));
   }
 
   text.push('');
@@ -145,41 +115,7 @@ function generate(test_results, callback) {
   printContents(text, content, 1);
 
   if (hasTests) {
-    text.push('***', '', '## Tests');
-
-    text.push('', '```');
-
-    for (var k in test_results.passed) {
-      text.push(
-        padLeft(test_results.passed[k].index, 5, ' ') + '. ' + padRight(test_results.passed[k].name, 68, '.') + ' ✅'
-      );
-    }
-
-    for (k in test_results.failed) {
-      text.push(
-        '\n' + padLeft(test_results.failed[k].index, 5, ' ') + '. ' + padRight(test_results.failed[k].name + ' ', 68, '.') + ' 🚫'
-      );
-
-      if (test_results.failed[k].isCaught[0] || test_results.failed[k].isCaught[1]) {
-        if (test_results.failed[k].isCaught[0]) {
-          text.push(
-            '      ' + test_results.failed[k].a.toString()
-          );
-        }
-        if (test_results.failed[k].isCaught[1]) {
-          text.push(
-            '      ' + test_results.failed[k].b.toString()
-          );
-        }
-      } else {
-        text.push(
-          '\n +' + '   Left: ' + padLeft(typeToString(test_results.failed[k].b), 66, ' ') +
-          '\n -' + '  Right: ' + padLeft(typeToString(test_results.failed[k].a), 66, ' ')
-        );
-      }
-    }
-
-    text.push('```', '');
+    printTests(text, test_results);
   }
 
   fs.writeFileSync('README.md', text.join('\n'));
