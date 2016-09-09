@@ -15,7 +15,13 @@ const printTests = require('./printTests');
 const source = 'src/readme/';
 
 function toLink(s) {
-  return '#' + s.toLowerCase()
+  var p = s.split('/');
+
+  p[p.length - 1] = p[p.length - 1].replace(/^_/, '');
+
+  p = p.join('/');
+
+  return '#' + p.toLowerCase()
     .replace(/_|\s+|\./g,'-')
     .replace(/\//g, '--') + '-top';
 }
