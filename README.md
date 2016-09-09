@@ -70,8 +70,8 @@
     - [styles](#src-readme-el-methods-query-styles-md)
     - [textNodes](#src-readme-el-methods-query-text-nodes-md)
 
-# Description
-## Description ... ([top](#table-of-contents))
+## Description
+### Description ... ([top](#table-of-contents))
 
 - Create nodes with a simple interface which will be very familiar.
 - Get an API to simplify DOM manipulation
@@ -81,22 +81,22 @@ Thanks to [FRZR](https://frzr.js.org/) for some help for clearing up the "child"
 
 ### `el.isComponent` [top](#methods)
 
-# Installation
-## Installation ... ([top](#table-of-contents))
+## Installation
+### Installation ... ([top](#table-of-contents))
 
 
 <!--
   Installation instructions
 -->
-# Notes
-## Notes ... ([top](#table-of-contents))
+## Notes
+### Notes ... ([top](#table-of-contents))
 
 
 <!--
   Anything 'notable' that the user should know
 -->
-# Examples
-## Nesting ... ([top](#table-of-contents))
+## Examples
+### Nesting ... ([top](#table-of-contents))
 
 ```javascript
 el('div',
@@ -105,13 +105,13 @@ el('div',
 );
 ```
 
-## Basic Usage ... ([top](#table-of-contents))
+### Basic Usage ... ([top](#table-of-contents))
 
 ```javascript
 el('div', { class : 'my-class-name' }, 'some text');
 ```
 
-## Required Methods ... ([top](#table-of-contents))
+### Required Methods ... ([top](#table-of-contents))
 
 - `appendTo`
 - `addClass` when the class key is present
@@ -119,7 +119,7 @@ el('div', { class : 'my-class-name' }, 'some text');
 
 You will also get the options object passed to the constructor.
 
-## Passing A Component ... ([top](#table-of-contents))
+### Passing A Component ... ([top](#table-of-contents))
 
 - `el` works with constructors, it is opinionated and will return errors if your constructor isn't capitalized.
 - It takes the same type of arguments that a regular `el` takes.
@@ -140,7 +140,7 @@ el(MyComponent, {
 );
 ```
 
-## Wrapping The Dom ... ([top](#table-of-contents))
+### Wrapping The Dom ... ([top](#table-of-contents))
 
 You can get all the methods and the simplified interface based on ideas in jQuery by wrapping a node in `el`.
 
@@ -148,7 +148,7 @@ You can get all the methods and the simplified interface based on ideas in jQuer
 var wrapped = el(document.querySelector('#my-div'));
 ```
 
-## Writing A Component ... ([top](#table-of-contents))
+### Writing A Component ... ([top](#table-of-contents))
 
 ```javascript
 function Component(options) {
@@ -212,12 +212,12 @@ el(Component, {
 );
 ```
 
-## What You Can Pass As An Object ... ([top](#table-of-contents))
+### What You Can Pass As An Object ... ([top](#table-of-contents))
 
 - You can pass it anything which has an `appendTo` method
 
-# Functional Methods
-## Basics ... ([top](#table-of-contents))
+## Functional Methods
+### Basics ... ([top](#table-of-contents))
 
 ## Functional interfaces
 - `el.contains`
@@ -228,13 +228,13 @@ el(Component, {
 - `el.isElement`
 - `el.isVisible`
 
-## el.isComponent ... ([top](#table-of-contents))
+### el.isComponent ... ([top](#table-of-contents))
 
 Returns `true` or `false` if the argument is a component
 
-# El Methods
-## Attributes
-### attr ... ([top](#table-of-contents))
+## El Methods
+### Attributes
+#### attr ... ([top](#table-of-contents))
 
 ```javascript
 var div = el('div');
@@ -256,14 +256,14 @@ el('div').attr({
 <div class="some-class-name" style="background: red"></div>
 ```
 
-## Dom Manipulation
-### addClass ... ([top](#table-of-contents))
+### Dom Manipulation
+#### addClass ... ([top](#table-of-contents))
 
 ```javascript
 el('div').addClass('this-class-name');
 ```
 
-### append ... ([top](#table-of-contents))
+#### append ... ([top](#table-of-contents))
 
 Is an interface for `appendChild`, the result being a way to add a `Node` to a parent `Node`.
 
@@ -306,7 +306,7 @@ parent.append(child1, child2);
 </div>
 ```
 
-### appendTo ... ([top](#table-of-contents))
+#### appendTo ... ([top](#table-of-contents))
 
 Is an interface for `appendChild`, the result being a way to add a child `Node` to a parent `Node`.
 
@@ -341,7 +341,7 @@ sibling_2.before(sibling_1);
 </div>
 ```
 
-### children ... ([top](#table-of-contents))
+#### children ... ([top](#table-of-contents))
 
 Returns an array of direct descendants wrapped in the `el` constructor. This is an interface for `childNodes` with a filter for a `NodeType` equal to `1` (`HTMlElement`)
 
@@ -361,7 +361,7 @@ a.children();
 <div class="child-3"></div>
 ```
 
-### clone ... ([top](#table-of-contents))
+#### clone ... ([top](#table-of-contents))
 
 Clones an element, is an interface for `Node.cloneNode(true)`
 
@@ -384,7 +384,7 @@ var b = a.clone();
 </div>
 ```
 
-### disable ... ([top](#table-of-contents))
+#### disable ... ([top](#table-of-contents))
 
 Disables an element by setting it's `disabled` attribute to `disabled`
 
@@ -416,7 +416,7 @@ var a = el(document.getElementById('disabled')).enable();
 <div id="disabled"></div>
 ```
 
-### focus ... ([top](#table-of-contents))
+#### focus ... ([top](#table-of-contents))
 
 Will `focus` an element. This will only work if the element is in the `document.body` and if it has an `tabindex` attribute.
 
@@ -436,7 +436,7 @@ a.html('test');
 // a.html() -> 'test'
 ```
 
-### hasClass ... ([top](#table-of-contents))
+#### hasClass ... ([top](#table-of-contents))
 
 ```javascript
 var node = document.querySelector('.class-name');
@@ -444,7 +444,7 @@ el(node).hasClass('class-name');
 // -> true
 ```
 
-### prepend ... ([top](#table-of-contents))
+#### prepend ... ([top](#table-of-contents))
 
 Will append a child element in the first position of the parent node.
 
@@ -473,7 +473,7 @@ parent.prepend(child);
 </div>
 ```
 
-### prependTo ... ([top](#table-of-contents))
+#### prependTo ... ([top](#table-of-contents))
 
 Will append a child element in the first position of the parent node.
 
@@ -500,7 +500,7 @@ child.prependTo(parent);
 </div>
 ```
 
-### remove ... ([top](#table-of-contents))
+#### remove ... ([top](#table-of-contents))
 
 Will remove a `Node` from it's parent.
 
@@ -526,7 +526,7 @@ b.remove();
 </div>
 ```
 
-### removeClass ... ([top](#table-of-contents))
+#### removeClass ... ([top](#table-of-contents))
 
 ```html
 <div id="copy" class="my-class-name" data-attribute="some-text">
@@ -543,7 +543,7 @@ el('div').removeClass('my-class-name');
 <div id="copy" data-attribute="some-text">
 ```
 
-### replaceWith ... ([top](#table-of-contents))
+#### replaceWith ... ([top](#table-of-contents))
 
 ### `select` [top](#methods)
 
@@ -577,7 +577,7 @@ var a = el(document.querySelector('.my-input'));
 a.value('New text');
 ```
 
-### select ... ([top](#table-of-contents))
+#### select ... ([top](#table-of-contents))
 
 Proves an interface to select text ranges and get the selected text range in an input.
 
@@ -594,7 +594,7 @@ var a = el(document.querySelector('.my-input'));
 a.select(0, 2);
 ```
 
-### toggleClass ... ([top](#table-of-contents))
+#### toggleClass ... ([top](#table-of-contents))
 
 ```javascript
 var myDIV = el('div');
@@ -603,7 +603,7 @@ myDIV.toggleClass('toggle'); // -> myDIV has class 'toggle'
 myDIV.toggleClass('toggle'); // -> myDIV does not have class 'toggle'
 ```
 
-### value ... ([top](#table-of-contents))
+#### value ... ([top](#table-of-contents))
 
 Query
 ```javascript
@@ -618,8 +618,8 @@ var a = el(document.querySelector('.my-input'));
 a.value('New text');
 ```
 
-## Events
-### off ... ([top](#table-of-contents))
+### Events
+#### off ... ([top](#table-of-contents))
 
 This is an interface for `removeEventListener`, with the main difference being that you don't have to pass a function as a second argument. And when no second argument is passed, all functions associated with the event will be removed.
 
@@ -651,7 +651,7 @@ We will now remove all event listeners attached to the `click` event by passing 
 element.off('click');
 ```
 
-### on ... ([top](#table-of-contents))
+#### on ... ([top](#table-of-contents))
 
 This is an interface for `addEventListener`, with the main difference being how functions are tracked internally.
 
@@ -666,8 +666,8 @@ div.appendTo('body');
 ```
 Now when you click on the element, it will log `click` to the console.
 
-## Predicates
-### contains ... ([top](#table-of-contents))
+### Predicates
+#### contains ... ([top](#table-of-contents))
 
 ```javascript
 var a;
@@ -715,7 +715,7 @@ p.contains([a, b] c);
 // They will both return 'true'
 ```
 
-### Predicates ... ([top](#table-of-contents))
+#### Predicates ... ([top](#table-of-contents))
 
 
 ### `hasParent` [top](#methods)
@@ -785,8 +785,8 @@ myFocus.isVisible();
 
 The idea here is that this check is smart, so it knows whether the node is visible or not in various contexts.
 
-## Query
-### closest ... ([top](#table-of-contents))
+### Query
+#### closest ... ([top](#table-of-contents))
 
 Returns the closest parent matching the query.
 
@@ -801,7 +801,7 @@ farthest.closest('.closest');
 // -> HTML Element : div.closest
 ```
 
-### find ... ([top](#table-of-contents))
+#### find ... ([top](#table-of-contents))
 
 Returns an array of matches as a result of executing the query.
 
@@ -815,7 +815,7 @@ parent.find('.find');
 // -> HTML NodeList : [ div.find, div.find ]
 ```
 
-### firstChild ... ([top](#table-of-contents))
+#### firstChild ... ([top](#table-of-contents))
 
 Returns the first child of NodeType 1 of a parent.
 
@@ -829,7 +829,7 @@ parent.firstChild();
 // -> HTML NodeList : div.find-1
 ```
 
-### getSelector ... ([top](#table-of-contents))
+#### getSelector ... ([top](#table-of-contents))
 
 Returns a `String` selector for the selected node.
 
@@ -844,7 +844,7 @@ parent.getSelector();
 // -> HTML NodeList : div.closest#my-id[tabindex="0"]
 ```
 
-### lastChild ... ([top](#table-of-contents))
+#### lastChild ... ([top](#table-of-contents))
 
 Returns the first child of NodeType 1 of a parent.
 
@@ -858,7 +858,7 @@ parent.lastChild();
 // -> HTML NodeList : div.find-2
 ```
 
-### offset ... ([top](#table-of-contents))
+#### offset ... ([top](#table-of-contents))
 
 Returns the `top`, `left`, `width`, `height` relative to the `body`'s coordinates. It is an interface for `this.node.getBoundingClientRect()`
 
@@ -877,7 +877,7 @@ parent.offset();
 */
 ```
 
-### parent ... ([top](#table-of-contents))
+#### parent ... ([top](#table-of-contents))
 
 If the `node` has a parent, it will return it's parent. Otherwise, it will return `false`
 
@@ -892,7 +892,7 @@ child.parent();
 // -> HTML Element : document.body
 ```
 
-### parents ... ([top](#table-of-contents))
+#### parents ... ([top](#table-of-contents))
 
 Returns an array of parents, from first to last.
 
@@ -909,7 +909,7 @@ child.parents();
 // -> [Array]
 ```
 
-### parentsUntil ... ([top](#table-of-contents))
+#### parentsUntil ... ([top](#table-of-contents))
 
 Takes a predicate as an argument and returns the first `truthy` match.
 
@@ -917,7 +917,7 @@ Takes a predicate as an argument and returns the first `truthy` match.
 div.parentsUntil(function (p) { return p.tagName === 'h1' });
 ```
 
-### selectorPath ... ([top](#table-of-contents))
+#### selectorPath ... ([top](#table-of-contents))
 
 Returns a selector path to the selected node.
 
@@ -949,7 +949,7 @@ child.selectorPath();
 // -> div.parent-2#super-parent div.parent-1
 ```
 
-### siblings ... ([top](#table-of-contents))
+#### siblings ... ([top](#table-of-contents))
 
 Returns a selected Node and it's siblings filtered to show only nodes of type `1`, which are HTML element nodes, this excludes text nodes.
 
@@ -973,7 +973,7 @@ selected.siblings();
 <div class="siblings-4"></div>
 ```
 
-### styles ... ([top](#table-of-contents))
+#### styles ... ([top](#table-of-contents))
 
 Is an interface for `window.getComputedStyle([node])`, returns an object.
 
@@ -982,7 +982,7 @@ div.styles();
 // -> [ Object ]
 ```
 
-### textNodes ... ([top](#table-of-contents))
+#### textNodes ... ([top](#table-of-contents))
 
 Returns all the `Text Nodes` which are a child of a selected node.
 
