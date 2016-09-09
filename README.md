@@ -53,7 +53,9 @@
 
   - Predicates
     - [contains](#el-methods--predicates--contains-top)
-    - [Predicates](#el-methods--predicates--predicates-top)
+    - [hasParent](#el-methods--predicates--hasparent-top)
+    - [isFocused](#el-methods--predicates--isfocused-top)
+    - [isVisible](#el-methods--predicates--isvisible-top)
 
   - Query
     - [closest](#el-methods--query--closest-top)
@@ -712,10 +714,7 @@ p.contains([a, b] c);
 // They will both return 'true'
 ```
 
-#### El Methods / Predicates / Predicates ([top](#table-of-contents))
-
-
-### `hasParent` [top](#methods)
+#### El Methods / Predicates / hasParent ([top](#table-of-contents))
 
 ```javascript
 var myParent = el('div',
@@ -726,7 +725,7 @@ myChild.hasParent(myParent);
 // -> true
 ```
 
-### `isFocused` [top](#methods)
+#### El Methods / Predicates / isFocused ([top](#table-of-contents))
 
 ```javascript
 var myFocus = el('label', { tabIndex : 0 });
@@ -740,7 +739,7 @@ myFocus.isFocused();
 // -> true
 ```
 
-### `isVisible` [top](#methods)
+#### El Methods / Predicates / isVisible ([top](#table-of-contents))
 
 This one requires a bit of explaining, it doesn't only check for 'visibility'.
 
