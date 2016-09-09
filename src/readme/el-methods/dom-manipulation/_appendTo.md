@@ -11,22 +11,3 @@ child.appendTo(parent);
   <div class="child-1"></div>
 </div>
 ```
-
-### `before` [top](#methods)
-
-Is an interface for `insertBefore`, the result being a way to append a `Node` before it's sibling `Node`.
-
-```javascript
-var parent = el('div', { class : 'parent-1' });
-var sibling_1 = el('div', { class : 'sibling-1' });
-var sibling_2 = el('div', { class : 'sibling-2' });
-sibling_1.appendTo(parent);
-sibling_2.before(sibling_1);
-```
-
-```HTML
-<div class="parent-1">
-  <div class="sibling-2"></div>
-  <div class="sibling-1"></div>
-</div>
-```

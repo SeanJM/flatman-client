@@ -27,29 +27,32 @@
 - El Methods
 
   - Attributes
+    - [addClass](#el-methods--attributes--addclass-top)
     - [attr](#el-methods--attributes--attr-top)
+    - [removeClass](#el-methods--attributes--removeclass-top)
+    - [toggleClass](#el-methods--attributes--toggleclass-top)
 
   - Dom Manipulation
-    - [addClass](#el-methods--dom-manipulation--addclass-top)
     - [append](#el-methods--dom-manipulation--append-top)
     - [appendTo](#el-methods--dom-manipulation--appendto-top)
     - [children](#el-methods--dom-manipulation--children-top)
     - [clone](#el-methods--dom-manipulation--clone-top)
     - [disable](#el-methods--dom-manipulation--disable-top)
+    - [enable](#el-methods--dom-manipulation--enable-top)
     - [focus](#el-methods--dom-manipulation--focus-top)
-    - [hasClass](#el-methods--dom-manipulation--hasclass-top)
+    - [html](#el-methods--dom-manipulation--html-top)
     - [prepend](#el-methods--dom-manipulation--prepend-top)
     - [prependTo](#el-methods--dom-manipulation--prependto-top)
     - [remove](#el-methods--dom-manipulation--remove-top)
-    - [removeClass](#el-methods--dom-manipulation--removeclass-top)
     - [replaceWith](#el-methods--dom-manipulation--replacewith-top)
     - [select](#el-methods--dom-manipulation--select-top)
-    - [toggleClass](#el-methods--dom-manipulation--toggleclass-top)
+    - [text](#el-methods--dom-manipulation--text-top)
     - [value](#el-methods--dom-manipulation--value-top)
 
   - Events
     - [off](#el-methods--events--off-top)
     - [on](#el-methods--events--on-top)
+    - [trigger](#el-methods--events--trigger-top)
 
   - Predicates
     - [contains](#el-methods--predicates--contains-top)
@@ -60,9 +63,8 @@
   - Query
     - [closest](#el-methods--query--closest-top)
     - [find](#el-methods--query--find-top)
-    - [firstChild](#el-methods--query--firstchild-top)
     - [getSelector](#el-methods--query--getselector-top)
-    - [lastChild](#el-methods--query--lastchild-top)
+    - [hasClass](#el-methods--query--hasclass-top)
     - [offset](#el-methods--query--offset-top)
     - [parent](#el-methods--query--parent-top)
     - [parents](#el-methods--query--parents-top)
@@ -233,6 +235,14 @@ Returns `true` or `false` if the argument is a component
 
 ## El Methods
 ### Attributes
+#### El Methods / Attributes / addClass ([top](#table-of-contents))
+
+Will add a class to a node, and will check if the class does not exist before adding.
+
+```javascript
+el('div').addClass('this-class-name');
+```
+
 #### El Methods / Attributes / attr ([top](#table-of-contents))
 
 ```javascript
@@ -255,31 +265,56 @@ el('div').attr({
 <div class="some-class-name" style="background: red"></div>
 ```
 
-### Dom Manipulation
-#### El Methods / Dom Manipulation / addClass ([top](#table-of-contents))
+#### El Methods / Attributes / removeClass ([top](#table-of-contents))
 
-```javascript
-el('div').addClass('this-class-name');
+Will remove the class name from a node.
+
+```html
+<div id="copy" class="my-class-name" data-attribute="some-text">
 ```
 
+```javascript
+var node = el(document.querySelector('#copy'));
+node.removeClass('my-class-name');
+```
+
+```html
+<div id="copy" data-attribute="some-text">
+```
+
+#### El Methods / Attributes / toggleClass ([top](#table-of-contents))
+
+Will toggle a class name on a node. If the class exists, it will be removed, if it does not exist, it will be added.
+
+```javascript
+var myDIV = el();
+myDIV.toggleClass('toggle'); // -> myDIV has class 'toggle'
+myDIV.toggleClass('toggle'); // -> myDIV does not have class 'toggle'
+```
+
+### Dom Manipulation
 #### El Methods / Dom Manipulation / append ([top](#table-of-contents))
 
 Is an interface for `appendChild`, the result being a way to add a `Node` to a parent `Node`.
 
 ```javascript
-var parent = el('div', { class : 'parent-1' });
-var child = el('div', { class : 'child-1' });
+var parent = el({ class : 'parent-1' });
+var child = el({ class : 'child-1' });
 parent.append(child);
 ```
 
 is the same as
 
 ```javascript
-var parent = el('div', { class : 'parent-1' }, el('div', { class : 'child-1' }));
+var parent = el({ class : 'parent-1' },
+  el({ class : 'child-1' })
+);
 ```
 
 ```javascript
-el('div', { class : 'parent-1' }).append(el('div', { class : 'child-1' }));
+el({ class : 'parent-1' }).append(
+  el({ class : 'child-1' })
+);
 ```
 
 ```HTML
@@ -291,11 +326,14 @@ el('div', { class : 'parent-1' }).append(el('div', { class : 'child-1' }));
 You can also pass as many valid elements as you want to `append`
 
 ```javascript
-var parent = el('div', { class : 'parent-1' });
-var child1 = el('div', { class : 'child-1' });
-var child2 = el('div', { class : 'child-2' });
+var parent = el({ class : 'parent-1' });
+var child1 = el({ class : 'child-1' });
+var child2 = el({ class : 'child-2' });
 
-parent.append(child1, child2);
+parent.append(
+  child1,
+  child2
+);
 ```
 
 ```HTML
@@ -318,25 +356,6 @@ child.appendTo(parent);
 ```HTML
 <div class="parent-1">
   <div class="child-1"></div>
-</div>
-```
-
-### `before` [top](#methods)
-
-Is an interface for `insertBefore`, the result being a way to append a `Node` before it's sibling `Node`.
-
-```javascript
-var parent = el('div', { class : 'parent-1' });
-var sibling_1 = el('div', { class : 'sibling-1' });
-var sibling_2 = el('div', { class : 'sibling-2' });
-sibling_1.appendTo(parent);
-sibling_2.before(sibling_1);
-```
-
-```HTML
-<div class="parent-1">
-  <div class="sibling-2"></div>
-  <div class="sibling-1"></div>
 </div>
 ```
 
@@ -397,7 +416,7 @@ Result
 <div disabled="disabled"></div>
 ```
 
-### `enable` [top](#methods)
+#### El Methods / Dom Manipulation / enable ([top](#table-of-contents))
 
 Enables an element by removing it's `disabled` attribute
 
@@ -408,8 +427,6 @@ Enables an element by removing it's `disabled` attribute
 ```javascript
 var a = el(document.getElementById('disabled')).enable();
 ```
-
-***
 
 ```html
 <div id="disabled"></div>
@@ -435,12 +452,21 @@ a.html('test');
 // a.html() -> 'test'
 ```
 
-#### El Methods / Dom Manipulation / hasClass ([top](#table-of-contents))
+#### El Methods / Dom Manipulation / html ([top](#table-of-contents))
+
+Sets the `innerHTML` value of a node.
 
 ```javascript
-var node = document.querySelector('.class-name');
-el(node).hasClass('class-name');
-// -> true
+var target = el(document.querySelector('.target-node'));
+target.html('<div class="my-div"></div>');
+```
+
+Passing it no arguments will return the value of `innerHTML`
+
+```javascript
+var target = el(document.querySelector('.target-node'));
+target.html();
+// -> '<div class="my-div"></div>'
 ```
 
 #### El Methods / Dom Manipulation / prepend ([top](#table-of-contents))
@@ -454,17 +480,17 @@ var parent = el('div', { class : 'parent' },
 
 var child = el('div', { class : 'second-child' });
 ```
+
 ```html
 <div class="parent">
   <div class="first-child"></div>
 </div>
 ```
 
-***
-
 ```javascript
 parent.prepend(child);
 ```
+
 ```html
 <div class="parent">
   <div class="second-child"></div>
@@ -482,16 +508,17 @@ var parent = el('div', { class : 'parent' },
   el('div', { 'first-child' })
 );
 ```
+
 ```html
 <div class="parent">
   <div class="first-child"></div>
 </div>
 ```
-***
 
 ```javascript
 child.prependTo(parent);
 ```
+
 ```html
 <div class="parent">
   <div class="second-child"></div>
@@ -509,71 +536,30 @@ var b = el('div', { class : 'first-child' });
 
 a.append(b);
 ```
+
 ```html
 <div class="parent">
   <div class="first-child"></div>
 </div>
 ```
 
-***
-
 ```javascript
 b.remove();
 ```
+
 ```html
 <div class="parent">
 </div>
 ```
 
-#### El Methods / Dom Manipulation / removeClass ([top](#table-of-contents))
-
-```html
-<div id="copy" class="my-class-name" data-attribute="some-text">
-```
-
-```javascript
-var node = document.querySelector('#copy');
-el('div').removeClass('my-class-name');
-```
-
-***
-
-```html
-<div id="copy" data-attribute="some-text">
-```
-
 #### El Methods / Dom Manipulation / replaceWith ([top](#table-of-contents))
 
-### `select` [top](#methods)
+Replaces a target node with a new node.
 
-Proves an interface to select text ranges and get the selected text range in an input.
-
-Query
 ```javascript
-var a = el(document.querySelector('.my-input'));
-a.select();
-// -> [0, 2]
-```
-
-Set
-```javascript
-var a = el(document.querySelector('.my-input'));
-a.select(0, 2);
-```
-
-### `value` [top](#methods)
-
-Query
-```javascript
-var a = el(document.querySelector('.my-input'));
-a.value();
-// -> 'My text'
-```
-
-Set
-```javascript
-var a = el(document.querySelector('.my-input'));
-a.value('New text');
+var targetNode = el(document.querySelector('.target-node'));
+var newNode = el({ class : 'new-node' });
+targetNode.replaceWith(newNode);
 ```
 
 #### El Methods / Dom Manipulation / select ([top](#table-of-contents))
@@ -593,13 +579,34 @@ var a = el(document.querySelector('.my-input'));
 a.select(0, 2);
 ```
 
-#### El Methods / Dom Manipulation / toggleClass ([top](#table-of-contents))
+By entering a single value, the cursor will be placed without selecting.
+- Negative values start from the end.
 
 ```javascript
-var myDIV = el('div');
+a.select(-1);
+```
 
-myDIV.toggleClass('toggle'); // -> myDIV has class 'toggle'
-myDIV.toggleClass('toggle'); // -> myDIV does not have class 'toggle'
+This example selects from the first letter to 3 letters from the end.
+
+```javascript
+a.select(0, -3);
+```
+
+#### El Methods / Dom Manipulation / text ([top](#table-of-contents))
+
+Sets the text value of a node, uses `textContent` as opposed to `innerHTML`, this distinction is important since any HTML passed as a string will be converted to text.
+
+```javascript
+var target = el(document.querySelector('.target-node'));
+target.text('my text');
+```
+
+Passing it no arguments will return the value of `textContent`
+
+```javascript
+var target = el(document.querySelector('.target-node'));
+target.text();
+// -> 'my text'
 ```
 
 #### El Methods / Dom Manipulation / value ([top](#table-of-contents))
@@ -664,6 +671,25 @@ element.on('click', function () {
 div.appendTo('body');
 ```
 Now when you click on the element, it will log `click` to the console.
+
+#### El Methods / Events / trigger ([top](#table-of-contents))
+
+This will trigger all listeners for matching event name.
+
+```javascript
+var node = el();
+
+el.on('click', function myClickHandler() {
+  // Do something
+});
+
+el.on('click', function myClickSecondHandler() {
+  // Do something
+});
+
+el.trigger('click');
+// -> will execute 'myClickHandler' and 'myClickSecondHandler'
+```
 
 ### Predicates
 #### El Methods / Predicates / contains ([top](#table-of-contents))
@@ -811,20 +837,6 @@ parent.find('.find');
 // -> HTML NodeList : [ div.find, div.find ]
 ```
 
-#### El Methods / Query / firstChild ([top](#table-of-contents))
-
-Returns the first child of NodeType 1 of a parent.
-
-```javascript
-var parent = el('div', { class : 'closest' },
-  el('div', { class : 'find-1' }),
-  el('div', { class : 'find-2' })
-);
-
-parent.firstChild();
-// -> HTML NodeList : div.find-1
-```
-
 #### El Methods / Query / getSelector ([top](#table-of-contents))
 
 Returns a `String` selector for the selected node.
@@ -840,18 +852,12 @@ parent.getSelector();
 // -> HTML NodeList : div.closest#my-id[tabindex="0"]
 ```
 
-#### El Methods / Query / lastChild ([top](#table-of-contents))
-
-Returns the first child of NodeType 1 of a parent.
+#### El Methods / Query / hasClass ([top](#table-of-contents))
 
 ```javascript
-var parent = el('div', { class : 'closest' },
-  el('div', { class : 'find-1' }),
-  el('div', { class : 'find-2' })
-);
-
-parent.lastChild();
-// -> HTML NodeList : div.find-2
+var node = document.querySelector('.class-name');
+el(node).hasClass('class-name');
+// -> true
 ```
 
 #### El Methods / Query / offset ([top](#table-of-contents))

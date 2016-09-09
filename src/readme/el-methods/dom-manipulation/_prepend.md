@@ -7,17 +7,17 @@ var parent = el('div', { class : 'parent' },
 
 var child = el('div', { class : 'second-child' });
 ```
+
 ```html
 <div class="parent">
   <div class="first-child"></div>
 </div>
 ```
 
-***
-
 ```javascript
 parent.prepend(child);
 ```
+
 ```html
 <div class="parent">
   <div class="second-child"></div>

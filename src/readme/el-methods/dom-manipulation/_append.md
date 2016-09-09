@@ -1,19 +1,23 @@
 Is an interface for `appendChild`, the result being a way to add a `Node` to a parent `Node`.
 
 ```javascript
-var parent = el('div', { class : 'parent-1' });
-var child = el('div', { class : 'child-1' });
+var parent = el({ class : 'parent-1' });
+var child = el({ class : 'child-1' });
 parent.append(child);
 ```
 
 is the same as
 
 ```javascript
-var parent = el('div', { class : 'parent-1' }, el('div', { class : 'child-1' }));
+var parent = el({ class : 'parent-1' },
+  el({ class : 'child-1' })
+);
 ```
 
 ```javascript
-el('div', { class : 'parent-1' }).append(el('div', { class : 'child-1' }));
+el({ class : 'parent-1' }).append(
+  el({ class : 'child-1' })
+);
 ```
 
 ```HTML
@@ -25,11 +29,14 @@ el('div', { class : 'parent-1' }).append(el('div', { class : 'child-1' }));
 You can also pass as many valid elements as you want to `append`
 
 ```javascript
-var parent = el('div', { class : 'parent-1' });
-var child1 = el('div', { class : 'child-1' });
-var child2 = el('div', { class : 'child-2' });
+var parent = el({ class : 'parent-1' });
+var child1 = el({ class : 'child-1' });
+var child2 = el({ class : 'child-2' });
 
-parent.append(child1, child2);
+parent.append(
+  child1,
+  child2
+);
 ```
 
 ```HTML

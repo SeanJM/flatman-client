@@ -6,17 +6,17 @@ var b = el('div', { class : 'first-child' });
 
 a.append(b);
 ```
+
 ```html
 <div class="parent">
   <div class="first-child"></div>
 </div>
 ```
 
-***
-
 ```javascript
 b.remove();
 ```
+
 ```html
 <div class="parent">
 </div>

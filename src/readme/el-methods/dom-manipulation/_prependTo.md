@@ -6,16 +6,17 @@ var parent = el('div', { class : 'parent' },
   el('div', { 'first-child' })
 );
 ```
+
 ```html
 <div class="parent">
   <div class="first-child"></div>
 </div>
 ```
-***
 
 ```javascript
 child.prependTo(parent);
 ```
+
 ```html
 <div class="parent">
   <div class="second-child"></div>

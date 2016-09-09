@@ -953,11 +953,6 @@ CreateNode.prototype.attr = function () {
   return this;
 };
 
-CreateNode.prototype.before = function (target) {
-  target = createEl(target);
-  target.node.parentNode.insertBefore(this.node, target.node);
-};
-
 CreateNode.prototype.children = function () {
   var c = this.node.childNodes;
   return c.length ? map(filter(c, isElement), function (a) {
@@ -1000,10 +995,6 @@ CreateNode.prototype.find = function (selector) {
   return [].map.call(this.node.querySelectorAll(selector), function (node) {
     return new CreateNode(node);
   });
-};
-
-CreateNode.prototype.firstChild = function () {
-  return createEl(filter(this.node.childNodes, isElement)[0]);
 };
 
 CreateNode.prototype.focus = function () {
@@ -1090,10 +1081,6 @@ CreateNode.prototype.isFocused = function () {
 
 CreateNode.prototype.isVisible = function () {
   return isVisible(this.node);
-};
-
-CreateNode.prototype.lastChild = function () {
-  return createEl(filter(this.node.childNodes, isElement).slice(-1)[0]);
 };
 
 CreateNode.prototype.off = function (names, callback) {
@@ -1218,21 +1205,29 @@ CreateNode.prototype.replaceWith = function (newNode) {
 };
 
 CreateNode.prototype.select = function (start, end) {
-  if (typeof start === 'undefined' && typeof end === 'undefined') {
+  if (
+    typeof start === 'undefined'
+    && typeof end === 'undefined'
+  ) {
     return getSelection(this.node);
   }
 
-  if (start === -1 && typeof end === 'undefined') {
-    start = this.node.value.length;
-    end = this.node.value.length;
+  if (start < 0) {
+    start = this.node.value.length + start;
   }
 
-  if (typeof end === 'undefined' || end === -1) {
-    end = this.node.value.length;
+  if (end < 0) {
+    end = this.node.value.length + end;
+  }
+
+  if (typeof end === 'undefined') {
+    end = start;
   }
 
   this.node.focus();
+
   setSelection(this.node, start, end);
+
   return this;
 };
 
