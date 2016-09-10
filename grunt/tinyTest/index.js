@@ -9,6 +9,10 @@ function TinyTest(callback) {
   var self = this;
   var index = 1;
 
+  if (typeof callback !== 'function') {
+    throw 'TinyTest cannot run, you have not passed a valid callback.';
+  }
+
   function test(name) {
     var promise_test = new Test(
       {
@@ -23,6 +27,10 @@ function TinyTest(callback) {
 
     return promise_test;
   }
+
+  test.done = function () {
+    test.ready();
+  };
 
   this.passed = {};
   this.failed = {};
@@ -40,9 +48,14 @@ function TinyTest(callback) {
   setTimeout(function () {
     callback(test);
 
-    self.log('\n Loading tests (' + self.list_tests.length.toString().cyan + ')\n');
-
-    Promise.all(self.list_tests).then(a => self.complete());
+    test.ready = function () {
+      self.log('\n Loading tests (' + self.list_tests.length.toString().cyan + ')\n');
+      Promise.all(self.list_tests.map(a => a.run())).then(
+        function () {
+          self.complete();
+        }
+      );
+    };
   }, 20);
 }
 

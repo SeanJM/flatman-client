@@ -82,6 +82,8 @@ function generate(test_results, callback) {
   let text = [];
   var hasTests = test_results && test_results.int_total > 0;
 
+  console.log(test_results);
+
   m(source, /\.md$/)
     .forEach(function (a) {
       var p = a.substr(source.length).split(path.sep);

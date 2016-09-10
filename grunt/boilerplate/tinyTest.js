@@ -15,7 +15,7 @@ module.exports = new TinyTest(function (test) {
   //   .this(
   //     // value to test
   //   )
-  //   .shouldBe(
+  //   .equal(
   //     // Result
   //   );
   //
@@ -26,7 +26,7 @@ module.exports = new TinyTest(function (test) {
   //   .this(
   //     // value to test
   //   )
-  //   .shouldNotBe(
+  //   .notEqual(
   //     // Result
   //   );
   //
@@ -37,8 +37,10 @@ module.exports = new TinyTest(function (test) {
   //   .this(
   //     // value to test
   //   )
-  //   .shouldFail(
+  //   .fail(
   //     // Result
   //   );
+  //
+  // test.done();
 
 });

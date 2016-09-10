@@ -29,9 +29,15 @@ let dest = {
   }
 };
 
-for (var k in src) {
-  if (src[k].length) {
-    dest.development[k] = 'bin/' + k + '.js';
+if (config.bundle) {
+  dest.development.bundle = config.bundle
+    ? 'bin/' + config.bundle + '.js'
+    : 'bin/bundle.js';
+} else {
+  for (var k in src) {
+    if (src[k].length) {
+      dest.development[k] = 'bin/' + k + '.js';
+    }
   }
 }
 

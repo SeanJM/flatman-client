@@ -43,7 +43,7 @@ Test.prototype.this = function (value) {
   return this;
 };
 
-Test.prototype.runTest = function() {
+Test.prototype.run = function() {
   var self = this;
 
   this.isCaught = [ false, false ];
@@ -100,19 +100,17 @@ Test.prototype.runTest = function() {
     });
 };
 
-Test.prototype.shouldBe = function (value) {
+Test.prototype.equal = function (value) {
   this.equality = true;
   this.b = value;
-  this.runTest();
 };
 
-Test.prototype.shouldNotBe = function (value) {
+Test.prototype.notEqual = function (value) {
   this.equality = false;
   this.b = value;
-  this.runTest();
 };
 
-Test.prototype.shouldFail = function (value) {
+Test.prototype.fail = function (value) {
   this.isFailure = true;
 
   if (typeof value !== 'string') {
@@ -122,20 +120,27 @@ Test.prototype.shouldFail = function (value) {
   }
 
   this.b = value;
-  this.runTest();
 };
 
 Test.prototype.then = function (callback) {
-  this.method.resolve.push(
-    callback
-  );
+  if (typeof callback === 'function') {
+    this.method.resolve.push(
+      callback
+    );
+  } else {
+    throw 'callback is not a function';
+  }
   return this;
 };
 
 Test.prototype.catch = function (callback) {
-  this.method.reject.push(
-    callback
-  );
+  if (typeof callback === 'function') {
+    this.method.reject.push(
+      callback
+    );
+  } else {
+    throw 'callback is not a function';
+  }
   return this;
 };
 
