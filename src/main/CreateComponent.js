@@ -14,6 +14,7 @@ function createComponent() {
 
   var children = [];
   var strings = [];
+  var init = [];
 
   for (; i < n; i++) {
     if (
@@ -50,6 +51,8 @@ function createComponent() {
           if (typeof component.addClass === 'function') {
             component.addClass(arguments[i][k]);
           }
+        } else if (k === 'init') {
+          init = arguments[i][k];
         } else if (
           typeof component[k] === 'function'
         ) {
@@ -68,6 +71,12 @@ function createComponent() {
 
   if (strings.length) {
     component.text.apply(component, strings);
+  }
+
+  if (init.length) {
+    for (i = 0, n = init.length; i < n; i++) {
+      component[init[i]]();
+    }
   }
 
   return component;
