@@ -1,6 +1,15 @@
 CreateNode.prototype.children = function () {
-  var c = this.node.childNodes;
-  return c.length ? map(filter(c, isElement), function (a) {
-    return el(a);
-  }) : false;
+  var children = this.node.childNodes;
+  var output = [];
+
+  var i = 0;
+  var n = children.length;
+
+  for (; i < n; i++) {
+    if (isElement(children[i])) {
+      output.push(createEl(children[i]));
+    }
+  }
+
+  return output;
 };
