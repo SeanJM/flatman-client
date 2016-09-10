@@ -7,8 +7,3 @@ window.el.contains = contains;
 window.el.isElement = isElement;
 window.el.isComponent = isComponent;
 window.el.isCreateNode = isCreateNode;
-
-// Node environment
-if (typeof module === 'object' && module.exports) {
-  module.exports = startText;
-}
