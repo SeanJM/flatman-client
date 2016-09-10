@@ -38,7 +38,7 @@ module.exports = {
     });
 
     m('bin', /\.(js\.map)$/).forEach(function (f) {
-      if (scripts.indexOf(f.slice(-4)) === -1) {
+      if (scripts.indexOf(f.slice(0, -4)) === -1) {
         fs.unlink(f);
       }
     });
