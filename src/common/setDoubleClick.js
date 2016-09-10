@@ -1,10 +1,10 @@
 function setDoubleClick() {
   var doubleclick = false;
-  
+  var self = this;
   // Double click
   this.node.addEventListener('click', function (e) {
     if (doubleclick) {
-      that.trigger('doubleclick', e);
+      self.trigger('doubleclick', e);
     } else {
       doubleclick = true;
     }
@@ -33,7 +33,7 @@ function setDoubleClick() {
           pageY : e.pageY,
           distanceX : startX - e.pageX,
           distanceY : startY - e.pageY,
-          target : that
+          target : self
         };
 
         document.body.removeEventListener('mousemove', dragmove);
@@ -43,7 +43,7 @@ function setDoubleClick() {
           dragstart = false;
           document.body.style[VENDOR_PREFIX.userSelect] = '';
           document.body.style.cursor = '';
-          that.trigger('dragend', eve);
+          self.trigger('dragend', eve);
         }
       });
 
@@ -56,20 +56,20 @@ function setDoubleClick() {
           pageY : e.pageY,
           distanceX : e.pageX - startX,
           distanceY : e.pageY - startY,
-          target : that
+          target : self
         };
 
         if (
           (Math.abs(startX - e.pageX) + Math.abs(startY - e.pageY)) > 5
           && !dragstart
         ) {
-          that.trigger('dragstart', eve);
+          self.trigger('dragstart', eve);
           dragstart = true;
           document.body.style[VENDOR_PREFIX.userSelect] = 'none';
           document.body.style.cursor = 'default';
         } else if (dragstart) {
           eve.type = 'dragmove';
-          that.trigger('dragmove', eve);
+          self.trigger('dragmove', eve);
         }
       });
     }
