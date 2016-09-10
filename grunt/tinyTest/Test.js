@@ -15,29 +15,6 @@ function Test(opt) {
   };
 }
 
-Test.prototype.pass = function () {
-  this.passed[this.index] = (
-    {
-      index : this.index,
-      name : this.name,
-      a : this.a,
-      b : this.b
-    }
-  );
-};
-
-Test.prototype.fail = function () {
-  this.failed[this.index] = (
-    {
-      isCaught : this.isCaught,
-      index : this.index,
-      name : this.name,
-      a : this.a,
-      b : this.b
-    }
-  );
-};
-
 Test.prototype.this = function (value) {
   this.a = value;
   return this;
@@ -48,11 +25,34 @@ Test.prototype.run = function() {
 
   this.isCaught = [ false, false ];
 
+  function pass() {
+    self.passed[self.index] = (
+      {
+        index : self.index,
+        name : self.name,
+        a : self.a,
+        b : self.b
+      }
+    );
+  }
+
+  function fail() {
+    self.failed[self.index] = (
+      {
+        isCaught : self.isCaught,
+        index : self.index,
+        name : self.name,
+        a : self.a,
+        b : self.b
+      }
+    );
+  }
+
   function checkFailure() {
     if (self.isCaught[0] && self.a.toString() === self.b) {
-      self.pass();
+      pass();
     } else {
-      self.fail();
+      fail();
     }
   }
 
@@ -61,9 +61,9 @@ Test.prototype.run = function() {
       !self.isCaught[0] && !self.isCaught[1]
       && isTypeEqual(self.a, self.b) === self.equality
     ) {
-      self.pass();
+      pass();
     } else {
-      self.fail();
+      fail();
     }
   }
 
