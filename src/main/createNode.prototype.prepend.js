@@ -1,8 +1,8 @@
 CreateNode.prototype.prepend = function (node) {
-  var children = this.children();
-  node = createEl(node).node;
-  if (children) {
-    node.parentNode.insertBefore(children[0].node, node);
+  var children = this.node.childNodes;
+  node = node.node || node;
+  if (children.length) {
+    this.node.insertBefore(node, children[0]);
   } else {
     this.node.appendChild(node);
   }
