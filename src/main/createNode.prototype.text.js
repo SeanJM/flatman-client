@@ -3,5 +3,5 @@ CreateNode.prototype.text = function (value) {
     this.node.textContent = value;
     return this;
   }
-  return trim(this.node.textContent);
+  return this.node.textContent.trim();
 };
