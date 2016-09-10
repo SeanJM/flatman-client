@@ -5,6 +5,7 @@ try {
   fs.statSync('src/');
 } catch(e) {
   fs.mkdirSync('src/');
+  require('./media');
 }
 
 if (config.isSite) {
@@ -22,4 +23,3 @@ require('./tests');
 require('./scripts');
 require('./styles');
 require('./flatman');
-require('./media');
