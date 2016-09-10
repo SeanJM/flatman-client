@@ -7,25 +7,26 @@ const generate = require('./generate');
 const exists = require('../lib/exists');
 
 function task(callback) {
-  if (config.isProduction) {
-    try {
-      const tinyTest = exists('test/index.js')
-      ? require(path.resolve('test/'))
-      : undefined;
+  try {
 
-      if (typeof tinyTest === 'object') {
-        tinyTest.silence();
-        tinyTest.then(function (test_results) {
+    if (config.isProduction && exists('test/index.js')) {
+      let tinyTest = require(path.resolve('test/'));
+
+      tinyTest.silence();
+
+      tinyTest.then(function (test_results) {
+        try {
           generate(test_results, callback);
-        });
-      } else {
-        generate(undefined, callback);
-      }
-    } catch(e) {
-      console.trace(e);
+        } catch(e) {
+          console.trace(e);
+        }
+      });
+
+    } else {
+      generate(undefined, callback);
     }
-  } else {
-    callback();
+  } catch(e) {
+    console.trace(e);
   }
 }
 

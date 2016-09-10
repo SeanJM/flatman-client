@@ -1,3 +1,7 @@
+const path = require('path');
+const padLeft = require(path.resolve('grunt/lib/padLeft'));
+const padRight = require(path.resolve('grunt/lib/padRight'));
+
 module.exports = function (text, test_results) {
   text.push('***', '', '## Tests');
 

@@ -95,7 +95,6 @@ TinyTest.prototype.complete = function () {
     this.int_passed += 1;
   }
 
-
   for (k in this.failed) {
     this.logError(this.failed[k]);
     this.int_failed += 1;

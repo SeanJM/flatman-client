@@ -7,82 +7,19 @@ const pkg = JSON.parse(fs.readFileSync('package.json'));
 
 const linkLicense = require('./linkLicense');
 const exists = require('../lib/exists');
-const padLeft = require('../lib/padLeft');
-const padRight = require('../lib/padRight');
-const smartCase = require('../lib/smartCase');
+const padLeft = require(path.resolve('grunt/lib/padLeft'));
+const padRight = require(path.resolve('grunt/lib/padRight'));
+const smartCase = require(path.resolve('grunt/lib/smartCase'));
 const printTests = require('./printTests');
+const printTableOfContents = require('./printTableOfContents');
+const printContents = require('./printContents');
 
 const source = 'src/readme/';
-
-function toLink(s) {
-  var p = s.split('/');
-
-  p[p.length - 1] = p[p.length - 1].replace(/^_/, '');
-
-  p = p.join('/');
-
-  return '#' + p.toLowerCase()
-    .replace(/_|\s+|\./g,'-')
-    .replace(/\//g, '--') + '-top';
-}
-
-function tableOfContents(text, content, i) {
-  _.forEach(content, function (value, key) {
-    if (typeof value === 'object') {
-      text.push('', new Array(i).join('  ') + '- ' + smartCase(key));
-    }
-
-    if (Array.isArray(value)) {
-      value.forEach(function (a) {
-        let name = smartCase(path.basename(a).replace(/\.md$/, ''));
-        var base = a.slice(source.length, -3);
-        text.push(new Array(i + 1).join('  ') + '- [' + name + '](' + toLink(base) + ')');
-      });
-    } else if (typeof value === 'object') {
-      tableOfContents(text, value, i + 1);
-    } else if (typeof value === 'string') {
-      var base = value.substr(source.length);
-      text.push(new Array(i).join('  ') + '- [' + smartCase(key) + '](' + toLink(base) + '-top)');
-    }
-  });
-}
-
-function printContents(text, content, i) {
-  _.forEach(content, function (value, key) {
-    if (typeof value === 'object') {
-      text.push(new Array(i + 2).join('#') + ' ' + smartCase(key));
-    }
-
-    if (Array.isArray(value)) {
-      value.forEach(function (a) {
-        let string = fs.readFileSync(a, 'utf8');
-        var base = a.slice(source.length, -3).split(path.sep).map(smartCase).join(' / ');
-        text.push(
-          new Array(i + 3).join('#') + ' ' + base + ' \([top](#table-of-contents)\)',
-          '',
-          string
-        );
-      });
-    } else if (typeof value === 'object') {
-      printContents(text, value, i + 1);
-    } else if (typeof value === 'string') {
-      let string = fs.readFileSync(value, 'utf8');
-      let name = smartCase(key);
-      text.push(
-        new Array(i + 2).join('#') + ' ' + name + ' \([top](#table-of-contents)\)',
-        '',
-        string
-      );
-    }
-  });
-}
 
 function generate(test_results, callback) {
   let content = {};
   let text = [];
   var hasTests = test_results && test_results.int_total > 0;
-
-  console.log(test_results);
 
   m(source, /\.md$/)
     .forEach(function (a) {
@@ -122,7 +59,7 @@ function generate(test_results, callback) {
 
   text.push('', '#### Overview', '');
 
-  tableOfContents(text, content, 1);
+  printTableOfContents(text, content, 1);
 
   if (hasTests) {
     text.push('- [Tests](#tests)');
