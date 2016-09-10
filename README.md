@@ -11,13 +11,16 @@
 - [Installation](#installation-md-top-top)
 - [Notes](#notes-md-top-top)
 
+- Component
+  - [Required Methods](#component--required-methods-top)
+  - [Initialing A Component](#component--initialing-a-component-top)
+  - [The Options Object](#component--the-options-object-top)
+  - [Writing A Component](#component--writing-a-component-top)
+
 - Examples
   - [Nesting](#examples--nesting-top)
   - [Basic Usage](#examples--basic-usage-top)
-  - [Required Methods](#examples--required-methods-top)
-  - [Passing A Component](#examples--passing-a-component-top)
   - [Wrapping The Dom](#examples--wrapping-the-dom-top)
-  - [Writing A Component](#examples--writing-a-component-top)
   - [What You Can Pass As An Object](#examples--what-you-can-pass-as-an-object-top)
 
 - Functional Methods
@@ -97,23 +100,8 @@ Include the script in your `body` tag, or `head`, I think it's wise to place it 
 
 I use this on production, and I would like some help on it. Thanks. The goal is to keep it as simple and light as possible. It's a bit of a bastard child between FRZR and jQuery — a somewhat attractive & useful bastard.
 
-## Examples
-### Examples / Nesting ([top](#table-of-contents))
-
-```javascript
-el('div',
-  el('div', { class : 'child'}),
-  el('div', { class : 'child-2'})
-);
-```
-
-### Examples / Basic Usage ([top](#table-of-contents))
-
-```javascript
-el('div', { class : 'my-class-name' }, 'some text');
-```
-
-### Examples / Required Methods ([top](#table-of-contents))
+## Component
+### Component / Required Methods ([top](#table-of-contents))
 
 - `appendTo`
 - `addClass` when the class key is present
@@ -121,36 +109,45 @@ el('div', { class : 'my-class-name' }, 'some text');
 
 You will also get the options object passed to the constructor.
 
-### Examples / Passing A Component ([top](#table-of-contents))
+### Component / Initialing A Component ([top](#table-of-contents))
 
-- `el` works with constructors, it is opinionated and will return errors if your constructor isn't capitalized.
-- It takes the same type of arguments that a regular `el` takes.
-- The constructor must have an `appendTo` method which will append it to another element.
-- Any key which begins with `on...` will trigger the `on` method.
-- `onmethod` or `onMethod` are treated equally
-
-The second argument, if it is an `Object` will be passed to the constructor. It will also look for prototype methods which match the key name, when it finds matching prototypes, it will execute them.
+The most basic way to initialize a component is like this:
 
 ```javascript
-el(MyComponent, {
-    class : 'this-class', // Will actually trigger the components `addClass` method
-    onclick : function () {}, // onclick and onClick are functionally identical
-    onClick : function () {},
-    componentMethod : argument // Will be passed as a single argument to your method
-  },
-  'text' // Will trigger the `text` method for the component
+el(Component)
+```
+
+It takes the same type of arguments that a regular `el` takes.
+
+A component and an element are designed to be similar. This means you can do things like this:
+
+```javascript
+el(Component,
+  el('div'),
+  el(Component)
 );
 ```
 
-### Examples / Wrapping The Dom ([top](#table-of-contents))
+### Component / The Options Object ([top](#table-of-contents))
 
-You can get all the methods and the simplified interface based on ideas in jQuery by wrapping a node in `el`.
+You can pass your component any options.
 
-```javascript
-var wrapped = el(document.querySelector('#my-div'));
+- Keys will be checked for matching methods
+- The options will be passed as an argument to the Component constructor
+- on* is used to attach event listeners on initialization
+- `onmethod` or `onMethod` are treated equally
+
+```
+el(Component, {
+  class : 'this-class', // Will actually trigger the components `addClass` method
+  onclick : function () {}, // onclick and onClick are functionally identical
+  onClick : function () {},
+  componentMethod : argument // Will be passed as a single argument to your method
+  init : [ 'method', 'method' ] // Functions to run last
+})
 ```
 
-### Examples / Writing A Component ([top](#table-of-contents))
+### Component / Writing A Component ([top](#table-of-contents))
 
 ```javascript
 function Component(options) {
@@ -212,6 +209,30 @@ el(Component, {
   },
   'My Text'
 );
+```
+
+## Examples
+### Examples / Nesting ([top](#table-of-contents))
+
+```javascript
+el('div',
+  el('div', { class : 'child'}),
+  el('div', { class : 'child-2'})
+);
+```
+
+### Examples / Basic Usage ([top](#table-of-contents))
+
+```javascript
+el('div', { class : 'my-class-name' }, 'some text');
+```
+
+### Examples / Wrapping The Dom ([top](#table-of-contents))
+
+You can get all the methods and the simplified interface based on ideas in jQuery by wrapping a node in `el`.
+
+```javascript
+var wrapped = el(document.querySelector('#my-div'));
 ```
 
 ### Examples / What You Can Pass As An Object ([top](#table-of-contents))
