@@ -15,3 +15,25 @@ a.children();
 <div class="child-2"></div>
 <div class="child-3"></div>
 ```
+
+You can also specify an index
+
+```javascript
+a.children(0);
+// -> <div class="child-1"></div>
+```
+
+You can also use negative numbers
+
+```javascript
+a.children(-1);
+// -> <div class="child-3"></div>
+```
+
+You can also `slice` the child array
+
+```javascript
+a.children(1, -1);
+// -> <div class="child-2"></div>
+// -> <div class="child-3"></div>
+```

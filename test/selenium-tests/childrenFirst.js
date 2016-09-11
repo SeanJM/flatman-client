@@ -7,8 +7,7 @@ p.append(a, b);
 
 return {
   left : (
-    p.children()[0].node === a.node
-    && p.children()[1].node === b.node
+    p.children(0).node === a.node
   ),
   right : true
 };

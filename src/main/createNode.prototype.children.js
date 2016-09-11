@@ -1,4 +1,4 @@
-CreateNode.prototype.children = function () {
+CreateNode.prototype.children = function (a, b) {
   var children = this.node.childNodes;
   var output = [];
 
@@ -9,6 +9,14 @@ CreateNode.prototype.children = function () {
     if (isElement(children[i])) {
       output.push(createEl(children[i]));
     }
+  }
+
+  if (arguments.length === 1) {
+    return a < 0
+      ? output[output.length + a]
+      : output[a];
+  } else if (arguments.length === 2) {
+    return output.slice(a, b);
   }
 
   return output;

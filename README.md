@@ -1,7 +1,7 @@
-# Create Node 1.0.0
+# Create Node 1.0.1
 #### License: [MIT](https://opensource.org/licenses/MIT)
 
-#### ✅ All 36 tests pass
+#### ✅ All 38 tests pass
 
 ## Table of Contents
 
@@ -38,7 +38,6 @@
   - Dom Manipulation
     - [append](#el-methods--dom-manipulation--append-top)
     - [appendTo](#el-methods--dom-manipulation--appendto-top)
-    - [children](#el-methods--dom-manipulation--children-top)
     - [clone](#el-methods--dom-manipulation--clone-top)
     - [disable](#el-methods--dom-manipulation--disable-top)
     - [enable](#el-methods--dom-manipulation--enable-top)
@@ -64,6 +63,7 @@
     - [isVisible](#el-methods--predicates--isvisible-top)
 
   - Query
+    - [children](#el-methods--query--children-top)
     - [closest](#el-methods--query--closest-top)
     - [find](#el-methods--query--find-top)
     - [getSelector](#el-methods--query--getselector-top)
@@ -105,7 +105,9 @@ I use this on production, and I would like some help on it. Thanks. The goal is 
 
 - `appendTo`
 - `addClass` when the class key is present
-- `on*` when a key matching that pattern is present
+- `on` when a key matching that pattern is present
+- `off` when a key matching that pattern is present
+- `trigger` when a key matching that pattern is present
 
 You will also get the options object passed to the constructor.
 
@@ -379,26 +381,6 @@ child.appendTo(parent);
 <div class="parent-1">
   <div class="child-1"></div>
 </div>
-```
-
-#### El Methods / Dom Manipulation / children ([top](#table-of-contents))
-
-Returns an array of direct descendants wrapped in the `el` constructor. This is an interface for `childNodes` with a filter for a `NodeType` equal to `1` (`HTMlElement`)
-
-```javascript
-var a = el('div',
-  el('div', { class : 'child-1' }),
-  el('div', { class : 'child-2' }),
-  el('div', { class : 'child-3' })
-);
-
-a.children();
-```
-
-```html
-<div class="child-1"></div>
-<div class="child-2"></div>
-<div class="child-3"></div>
 ```
 
 #### El Methods / Dom Manipulation / clone ([top](#table-of-contents))
@@ -830,6 +812,48 @@ myFocus.isVisible();
 The idea here is that this check is smart, so it knows whether the node is visible or not in various contexts.
 
 ### Query
+#### El Methods / Query / children ([top](#table-of-contents))
+
+Returns an array of direct descendants wrapped in the `el` constructor. This is an interface for `childNodes` with a filter for a `NodeType` equal to `1` (`HTMlElement`)
+
+```javascript
+var a = el('div',
+  el('div', { class : 'child-1' }),
+  el('div', { class : 'child-2' }),
+  el('div', { class : 'child-3' })
+);
+
+a.children();
+```
+
+```html
+<div class="child-1"></div>
+<div class="child-2"></div>
+<div class="child-3"></div>
+```
+
+You can also specify an index
+
+```javascript
+a.children(0);
+// -> <div class="child-1"></div>
+```
+
+You can also use negative numbers
+
+```javascript
+a.children(-1);
+// -> <div class="child-3"></div>
+```
+
+You can also `slice` the child array
+
+```javascript
+a.children(1, -1);
+// -> <div class="child-2"></div>
+// -> <div class="child-3"></div>
+```
+
 #### El Methods / Query / closest ([top](#table-of-contents))
 
 Returns the closest parent matching the query.
@@ -1026,35 +1050,37 @@ selected.textNodes();
    3. attr............................................................... ✅
    4. attr (no arguments, returns an object)............................. ✅
    5. children........................................................... ✅
-   6. clone.............................................................. ✅
-   7. contains (with array).............................................. ✅
-   8. contains (with array).............................................. ✅
-   9. disable............................................................ ✅
-  10. find............................................................... ✅
-  11. focus.............................................................. ✅
-  12. getSelector........................................................ ✅
-  13. hasClass........................................................... ✅
-  14. hasParent.......................................................... ✅
-  15. isDisabled......................................................... ✅
-  16. isVisible.......................................................... ✅
-  17. off................................................................ ✅
-  18. offset............................................................. ✅
-  19. on................................................................. ✅
-  20. parent............................................................. ✅
-  21. parents............................................................ ✅
-  22. prepend............................................................ ✅
-  23. prependTo.......................................................... ✅
-  24. remove............................................................. ✅
-  25. removeClass........................................................ ✅
-  26. removeClass (Array)................................................ ✅
-  27. replaceWith........................................................ ✅
-  28. select............................................................. ✅
-  29. selectorPath....................................................... ✅
-  30. siblings........................................................... ✅
-  31. text............................................................... ✅
-  32. textNodes.......................................................... ✅
-  33. toggleClass........................................................ ✅
-  34. trigger............................................................ ✅
-  35. value.............................................................. ✅
-  36. fn................................................................. ✅
+   6. children (first)................................................... ✅
+   7. children (slice)................................................... ✅
+   8. clone.............................................................. ✅
+   9. contains (with array).............................................. ✅
+  10. contains (with array).............................................. ✅
+  11. disable............................................................ ✅
+  12. find............................................................... ✅
+  13. focus.............................................................. ✅
+  14. getSelector........................................................ ✅
+  15. hasClass........................................................... ✅
+  16. hasParent.......................................................... ✅
+  17. isDisabled......................................................... ✅
+  18. isVisible.......................................................... ✅
+  19. off................................................................ ✅
+  20. offset............................................................. ✅
+  21. on................................................................. ✅
+  22. parent............................................................. ✅
+  23. parents............................................................ ✅
+  24. prepend............................................................ ✅
+  25. prependTo.......................................................... ✅
+  26. remove............................................................. ✅
+  27. removeClass........................................................ ✅
+  28. removeClass (Array)................................................ ✅
+  29. replaceWith........................................................ ✅
+  30. select............................................................. ✅
+  31. selectorPath....................................................... ✅
+  32. siblings........................................................... ✅
+  33. text............................................................... ✅
+  34. textNodes.......................................................... ✅
+  35. toggleClass........................................................ ✅
+  36. trigger............................................................ ✅
+  37. value.............................................................. ✅
+  38. fn................................................................. ✅
 ```

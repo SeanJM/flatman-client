@@ -59,9 +59,25 @@ module.exports = new TinyTest(function (test) {
         }),
 
       driver
-        .executeScript(tests.emptyAttr)
+        .executeScript(tests.children)
         .then(function (out) {
           test('children')
+            .this(out.left)
+            .equal(out.right);
+        }),
+
+      driver
+        .executeScript(tests.childrenFirst)
+        .then(function (out) {
+          test('children (first)')
+            .this(out.left)
+            .equal(out.right);
+        }),
+
+      driver
+        .executeScript(tests.childrenSlice)
+        .then(function (out) {
+          test('children (slice)')
             .this(out.left)
             .equal(out.right);
         }),
