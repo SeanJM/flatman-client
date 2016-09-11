@@ -99,14 +99,6 @@ module.exports = new TinyTest(function (test) {
         }),
 
       driver
-        .executeScript(tests.containsArray)
-        .then(function (out) {
-          test('contains (with array)')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
         .executeScript(tests.disable)
         .then(function (out) {
           test('disable')
