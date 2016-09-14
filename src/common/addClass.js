@@ -1,17 +1,17 @@
 function addClass (node, a) {
-  var className;
+  var className = node.getAttribute('class') || '';
   var i;
 
   if (isArray(a)) {
     forEach(a, partial(addClass, node));
   } else {
-    className = filter(map(node.className.split(' '), trim), hasLength);
+    className = filter(map(className.split(' '), trim), hasLength);
     i = className.indexOf(a);
 
     if (i === -1) {
       className.push(a);
       className.sort();
-      node.className = className.join(' ');
+      node.setAttribute('class', className.join(' '));
     }
   }
 }

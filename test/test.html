@@ -16,17 +16,9 @@
       // children
       var p = el();
 
-      var a = el({ class : 'a-1'});
-      var b = el({ class : 'a-2'});
-      var c = el({ class : 'a-3'});
+      p.addClass("test");
 
-      var x;
-
-      p.append(a, b, c);
-
-      x = p.children(1, -1);
-
-      console.log(x[0]);
+      console.log(p);
     </script>
   </body>
 </HTML>
