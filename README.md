@@ -52,9 +52,11 @@
     - [value](#el-methods--dom-manipulation--value-top)
 
   - Events
+    - [doubleclick](#el-methods--events--doubleclick-top)
     - [off](#el-methods--events--off-top)
     - [on](#el-methods--events--on-top)
     - [trigger](#el-methods--events--trigger-top)
+    - [Drag And Drop](#el-methods--events--drag-and-drop-top)
 
   - Predicates
     - [contains](#el-methods--predicates--contains-top)
@@ -629,6 +631,12 @@ a.value('New text');
 ```
 
 ### Events
+#### El Methods / Events / doubleclick ([top](#table-of-contents))
+
+A listener which is triggered when the user double clicks on an element.
+
+- `on('doubleclick', [ Function ])`
+
 #### El Methods / Events / off ([top](#table-of-contents))
 
 This is an interface for `removeEventListener`, with the main difference being that you don't have to pass a function as a second argument. And when no second argument is passed, all functions associated with the event will be removed.
@@ -694,6 +702,29 @@ el.on('click', function myClickSecondHandler() {
 el.trigger('click');
 // -> will execute 'myClickHandler' and 'myClickSecondHandler'
 ```
+
+#### El Methods / Events / Drag And Drop ([top](#table-of-contents))
+
+- `on('dragstart', [ Function ])`
+- `on('dragmove', [ Function ])`
+- `on('dragend', [ Function ])`
+
+You must access the `detail` property to get `pageX` and `pageY` properties.
+
+Additional properties:
+
+- `startX`
+- `startY`
+- `distanceX`
+- `distanceY`
+
+### `startX` and `startY`
+
+The `X` and `Y` position of where drag started
+
+### `distanceX` and `distanceY`
+
+The distance travelled in `pixels` between the start position and the current position.
 
 ### Predicates
 #### El Methods / Predicates / contains ([top](#table-of-contents))
