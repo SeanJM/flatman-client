@@ -27,7 +27,7 @@ document.body.addEventListener('mousedown', function (e) {
   }
 
   function dragmove(e) {
-    var eve = new CustomEvent('dragstart', {
+    var opt = {
       startX : startX,
       startY : startY,
       pageX : e.pageX,
@@ -36,19 +36,18 @@ document.body.addEventListener('mousedown', function (e) {
       distanceY : e.pageY - startY,
       target : e.target,
       bubbles : true
-    });
+    };
 
     if (
       Math.abs(startX - e.pageX) + Math.abs(startY - e.pageY) > 5
       && !isDrag
     ) {
       isDrag = true;
-      e.target.dispatchEvent(eve);
+      e.target.dispatchEvent(new CustomEvent('dragstart', opt));
       document.body.style[VENDOR_PREFIX.userSelect] = 'none';
       document.body.style.cursor = 'default';
     } else if (isDrag) {
-      eve.type = 'dragmove';
-      e.target.dispatchEvent(eve);
+      e.target.dispatchEvent(new CustomEvent('dragmove', opt));
     }
   }
 
