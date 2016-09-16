@@ -2,6 +2,7 @@ document.body.addEventListener('mousedown', function (e) {
   var startX = e.pageX;
   var startY = e.pageY;
   var isDrag = false;
+  var target = e.target;
 
   function dragend(e) {
     var eve = new CustomEvent('dragend', {
@@ -13,7 +14,7 @@ document.body.addEventListener('mousedown', function (e) {
         distanceX : e.pageX - startX,
         distanceY : e.pageY - startY,
       },
-      target : e.target,
+      target : target,
       bubbles : true,
       cancelable : true
     });
@@ -25,7 +26,7 @@ document.body.addEventListener('mousedown', function (e) {
       isDrag = false;
       document.body.style[ VENDOR_PREFIX.userSelect ] = '';
       document.body.style.cursor = '';
-      e.target.dispatchEvent(eve);
+      target.dispatchEvent(eve);
     }
   }
 
@@ -39,7 +40,7 @@ document.body.addEventListener('mousedown', function (e) {
         distanceX : e.pageX - startX,
         distanceY : e.pageY - startY,
       },
-      target : e.target,
+      target : target,
       bubbles : true,
       cancelable : true
     };
@@ -49,11 +50,11 @@ document.body.addEventListener('mousedown', function (e) {
       && !isDrag
     ) {
       isDrag = true;
-      e.target.dispatchEvent(new CustomEvent('dragstart', opt));
+      target.dispatchEvent(new CustomEvent('dragstart', opt));
       document.body.style[VENDOR_PREFIX.userSelect] = 'none';
       document.body.style.cursor = 'default';
     } else if (isDrag) {
-      e.target.dispatchEvent(new CustomEvent('dragmove', opt));
+      target.dispatchEvent(new CustomEvent('dragmove', opt));
     }
   }
 
