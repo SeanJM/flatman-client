@@ -1,6 +1,4 @@
 CreateNode.prototype.off = function (names, callback) {
-  var self = this;
-
   names = names.toLowerCase().split(',');
 
   for (var i = 0, n = names.length; i < n; i++) {
@@ -8,12 +6,12 @@ CreateNode.prototype.off = function (names, callback) {
 
     if (names[i].length) {
       if (typeof callback === 'function') {
-        self.subscribers[names[i]] = self.subscribers[names[i]].filter(partial(not, callback));
-        self.node.removeEventListener(names[i], callback, false);
+        this.subscribers[names[i]] = this.subscribers[names[i]].filter(partial(not, callback));
+        this.node.removeEventListener(names[i], callback, false);
       } else {
-        while (self.subscribers[names[i]].length) {
-          self.node.removeEventListener(names[i], self.subscribers[names[i]][0], false);
-          self.subscribers[names[i]].shift();
+        while (this.subscribers[names[i]].length) {
+          this.node.removeEventListener(names[i], this.subscribers[names[i]][0], false);
+          this.subscribers[names[i]].shift();
         }
       }
     }

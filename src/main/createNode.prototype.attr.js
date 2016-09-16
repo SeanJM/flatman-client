@@ -5,7 +5,11 @@ CreateNode.prototype.attr = function () {
     typeof arguments[0] === 'string'
     && typeof arguments[1] === 'string'
   ) {
-    this.node.setAttribute(arguments[0], arguments[1]);
+    if (this.node.tagName === 'USE') {
+      this.node.setAttributeNS('http://www.w3.org/1999/xlink', arguments[0], arguments[1]);
+    } else {
+      this.node.setAttribute(arguments[0], arguments[1]);
+    }
   } else if (typeof arguments[0] === 'string') {
     return this.node.getAttribute(arguments[0]);
   } else if (typeof arguments[0] === 'object') {

@@ -104,8 +104,6 @@ function CreateNode () {
   if (this.node.check) {
     this.check = this.node.check;
   }
-  
-  setDoubleClick.call(this);
 
   this.style = this.node.style;
   this.style.transform = this.style[VENDOR_PREFIX.transform];
