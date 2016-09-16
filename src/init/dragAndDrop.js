@@ -5,14 +5,17 @@ document.body.addEventListener('mousedown', function (e) {
 
   function dragend(e) {
     var eve = new CustomEvent('dragend', {
-      startX : startX,
-      startY : startY,
-      pageX : e.pageX,
-      pageY : e.pageY,
-      distanceX : e.pageX - startX,
-      distanceY : e.pageY - startY,
+      detail : {
+        startX : startX,
+        startY : startY,
+        pageX : e.pageX,
+        pageY : e.pageY,
+        distanceX : e.pageX - startX,
+        distanceY : e.pageY - startY,
+      },
       target : e.target,
-      bubbles : true
+      bubbles : true,
+      cancelable : true
     });
 
     document.body.removeEventListener('mousemove', dragmove);
@@ -28,14 +31,17 @@ document.body.addEventListener('mousedown', function (e) {
 
   function dragmove(e) {
     var opt = {
-      startX : startX,
-      startY : startY,
-      pageX : e.pageX,
-      pageY : e.pageY,
-      distanceX : e.pageX - startX,
-      distanceY : e.pageY - startY,
+      detail : {
+        startX : startX,
+        startY : startY,
+        pageX : e.pageX,
+        pageY : e.pageY,
+        distanceX : e.pageX - startX,
+        distanceY : e.pageY - startY,
+      },
       target : e.target,
-      bubbles : true
+      bubbles : true,
+      cancelable : true
     };
 
     if (
