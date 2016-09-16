@@ -6,10 +6,11 @@
     if (isDoubleClick) {
       e.target.dispatchEvent(
 
-        new CustomEvent('doubleclick', {
-          pageX : e.pageX,
-          pageY : e.pageY,
-          bubbles : true
+        new MouseEvent('doubleclick', {
+          clientX : e.pageX,
+          clientY : e.pageY,
+          bubbles : true,
+          cancelable : true
         })
       );
 
