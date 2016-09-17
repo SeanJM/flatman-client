@@ -1,4 +1,4 @@
-Proves an interface to select text ranges and get the selected text range in an input.
+Provides an interface to select text ranges and get the selected text range in an input.
 
 Query
 ```javascript

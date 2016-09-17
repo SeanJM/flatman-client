@@ -31,6 +31,8 @@ module.exports = {
 
   imagemin : images.task.imagemin,
 
+  svgstore : images.task.svgstore,
+
   watch : config.isProduction
     ? {}
     : Object.assign({

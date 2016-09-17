@@ -1,7 +1,7 @@
 # Create Node 1.0.1
 #### License: [MIT](https://opensource.org/licenses/MIT)
 
-#### ✅ All 37 tests pass
+#### ✅ All 39 tests pass
 
 ## Table of Contents
 
@@ -48,6 +48,7 @@
     - [remove](#el-methods--dom-manipulation--remove-top)
     - [replaceWith](#el-methods--dom-manipulation--replacewith-top)
     - [select](#el-methods--dom-manipulation--select-top)
+    - [style](#el-methods--dom-manipulation--style-top)
     - [text](#el-methods--dom-manipulation--text-top)
     - [value](#el-methods--dom-manipulation--value-top)
 
@@ -570,7 +571,7 @@ targetNode.replaceWith(newNode);
 
 #### El Methods / Dom Manipulation / select ([top](#table-of-contents))
 
-Proves an interface to select text ranges and get the selected text range in an input.
+Provides an interface to select text ranges and get the selected text range in an input.
 
 Query
 ```javascript
@@ -596,6 +597,34 @@ This example selects from the first letter to 3 letters from the end.
 
 ```javascript
 a.select(0, -3);
+```
+
+#### El Methods / Dom Manipulation / style ([top](#table-of-contents))
+
+An interface to edit the style of a node, it can be used in 2 different ways.
+
+- `el.style([ String property ], [ String|Number value])`
+- `el.style([ Object property and values ])`
+
+The property must be the JavaScript named property. Vendor prefixes are not necessary.
+
+### Value and property
+
+```javascript
+var a = el();
+
+a.style('fontSize', 13);
+```
+
+### Object
+
+```javascript
+var a = el();
+
+a.style({
+  fontSize : 13,
+  fontWeight : 'bold'
+});
 ```
 
 #### El Methods / Dom Manipulation / text ([top](#table-of-contents))
@@ -1113,4 +1142,6 @@ selected.textNodes();
   35. trigger............................................................ ✅
   36. value.............................................................. ✅
   37. fn................................................................. ✅
+  38. style (value, property)............................................ ✅
+  39. style (object)..................................................... ✅
 ```

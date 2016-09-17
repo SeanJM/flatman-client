@@ -20,11 +20,11 @@ function CreateNode () {
   } else if (isElement(arguments[0]) || arguments[0] === window) {
     this.node = arguments[0];
   } else if (
-    isString(arguments[0])
+    typeof arguments[0] === 'string'
     || isObject(arguments[0])
     || isUndefined(arguments[0])
   ) {
-    if (isString(arguments[0])) {
+    if (typeof arguments[0] === 'string') {
       if (isSVG) {
         this.node = document.createElementNS(SVG_NAMESPACE, arguments[0]);
       } else {
@@ -66,7 +66,7 @@ function CreateNode () {
     for (; i < n; i++) {
       if (arguments[i] instanceof CreateNode) {
         this.node.appendChild(arguments[i].node);
-      } else if (isString(arguments[i]) || isNumber(arguments[i])) {
+      } else if (typeof arguments[i] === 'string' || isNumber(arguments[i])) {
         this.node.appendChild(new Text(arguments[i]));
       } else if (
         arguments[i]
@@ -105,8 +105,7 @@ function CreateNode () {
     this.check = this.node.check;
   }
 
-  this.style = this.node.style;
-  this.style.transform = this.style[VENDOR_PREFIX.transform];
-  this.style.userSelect = this.style[VENDOR_PREFIX.userSelect];
-  this.style.userModify = this.style[VENDOR_PREFIX.userModify];
+  this.node.style.transform = this.node.style[VENDOR_PREFIX.transform];
+  this.node.style.userSelect = this.node.style[VENDOR_PREFIX.userSelect];
+  this.node.style.userModify = this.node.style[VENDOR_PREFIX.userModify];
 }

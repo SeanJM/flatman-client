@@ -3,9 +3,12 @@ const m = require('match-file-utility');
 const fs = require('fs');
 const config = JSON.parse(fs.readFileSync('package.json')).gruntBuild;
 
-const imageFiles = Object.keys(require('./images').dest);
+const images = require('./images');
+
+const imageFiles = Object.keys(images.dest);
 const cssFiles = require('./css').files.dest;
 const scripts = _.map(require('./scripts').dest, a => a);
+const fonts = Object.keys(require('./fonts').dest);
 
 module.exports = {
   task : function (callback) {
@@ -26,6 +29,7 @@ module.exports = {
       if (
         imageFiles.indexOf(f) === -1
         && imageFiles.indexOf(lowres) === -1
+        && fonts.indexOf(f) === -1
       ) {
         fs.unlink(f);
       }

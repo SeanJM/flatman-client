@@ -322,6 +322,22 @@ module.exports = new TinyTest(function (test) {
             .equal(out.right);
         }),
 
+      driver
+        .executeScript(tests.fn)
+        .then(function (out) {
+          test('style (value, property)')
+            .this(out.left)
+            .equal(out.right);
+        }),
+
+      driver
+        .executeScript(tests.fn)
+        .then(function (out) {
+          test('style (object)')
+            .this(out.left)
+            .equal(out.right);
+        }),
+
     ])
     .then(
       function () {

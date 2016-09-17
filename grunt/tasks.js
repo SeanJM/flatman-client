@@ -33,12 +33,16 @@ if (images.files.length) {
   } else {
     tasks.push('copy:images');
   }
+
+  if (Object.keys(images.task.svgstore).length) {
+    tasks.push('svgstore');
+  }
 }
 
 tasks.push(
-  'flatman',
+  'clean',
   'readme',
-  'clean'
+  'flatman'
 );
 
 if (!config.isProduction) {
