@@ -1,7 +1,7 @@
-function toPixel(a) {
-  if (typeof a === 'number') {
-    return  a + 'px';
+function toPixel(name, value) {
+  if (typeof value === 'number' && TO_PIXEL.indexOf(name) > -1) {
+    return  value + 'px';
   } else {
-    return a;
+    return value;
   }
 }

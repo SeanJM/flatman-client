@@ -2,7 +2,7 @@ function style(node, name, value) {
   if (typeof style[name] === 'function') {
     node.style[name] = style[name](value);
   } else {
-    node.style[name] = toPixel(value);
+    node.style[name] = toPixel(name, value);
   }
 }
 
@@ -15,10 +15,10 @@ style.transform = function (value) {
         typeof value[k] === 'number'
         || typeof value[k] === 'string'
       ) {
-        str.push(k + '(' + toPixel(value[k]) + ')');
+        str.push(k + '(' + toPixel(k, value[k]) + ')');
       } else if (Array.isArray(value[k])) {
         str.push(
-          k + '(' + value[k].map(toPixel).join(', ') + ')'
+          k + '(' + value[k].map(partial(toPixel, k)).join(', ') + ')'
         );
       }
     }
