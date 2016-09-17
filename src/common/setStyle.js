@@ -1,16 +1,39 @@
 function style(node, name, value) {
-  if (isNumber(value) && TO_PIXEL.indexOf(name) !== -1) {
-    value += 'px';
+  if (typeof style[name] === 'function') {
+    node.style[name] = style[name](value);
+  } else {
+    node.style[name] = toPixel(value);
   }
-  node.style[name] = value;
 }
+
+style.transform = function (value) {
+  var str = [];
+
+  if (typeof value === 'object') {
+    for (var k in value) {
+      if (
+        typeof value[k] === 'number'
+        || typeof value[k] === 'string'
+      ) {
+        str.push(k + '(' + toPixel(value[k]) + ')');
+      } else if (Array.isArray(value[k])) {
+        str.push(
+          k + '(' + value[k].map(toPixel).join(', ') + ')'
+        );
+      }
+    }
+    value = str.join(' ');
+  }
+
+  return value;
+};
 
 function setStyle(node, a, b) {
   if (typeof a === 'string' && isDefined(b)) {
     style(node, a, b);
   } else if (typeof a === 'string') {
     node.setAttribute('style', a);
-  } else if (isObject(a)) {
+  } else if (typeof a === 'object') {
     for (var k in a) {
       style(node, k, a[k]);
     }
