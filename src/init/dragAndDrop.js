@@ -51,8 +51,6 @@ document.body.addEventListener('mousedown', function (e) {
     ) {
       isDrag = true;
       target.dispatchEvent(new CustomEvent('dragstart', opt));
-      document.body.style[VENDOR_PREFIX.userSelect] = 'none';
-      document.body.style.cursor = 'default';
     } else if (isDrag) {
       target.dispatchEvent(new CustomEvent('dragmove', opt));
     }
