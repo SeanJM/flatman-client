@@ -64,6 +64,7 @@
 
   - Predicates
     - [contains](#el-methods--predicates--contains-top)
+    - [hasClass](#el-methods--predicates--hasclass-top)
     - [hasParent](#el-methods--predicates--hasparent-top)
     - [isChecked](#el-methods--predicates--ischecked-top)
     - [isFocused](#el-methods--predicates--isfocused-top)
@@ -851,6 +852,16 @@ p.contains([a, b, c]);
 p.contains([a, b] c);
 
 // They will both return 'true'
+```
+
+#### El Methods / Predicates / hasClass ([top](#table-of-contents))
+
+Returns `boolean` value for whether a `Node` has a className.
+
+```javascript
+var a = el({ class : 'test' });
+a.hasClass('test')
+// -> true
 ```
 
 #### El Methods / Predicates / hasParent ([top](#table-of-contents))

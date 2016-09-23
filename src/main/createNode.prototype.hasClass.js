@@ -1,3 +1,3 @@
 CreateNode.prototype.hasClass = function (a) {
-  return this.node.className.split(' ').indexOf(a) !== -1;
+  return this.className().split(' ').indexOf(a) !== -1;
 };
