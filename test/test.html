@@ -13,12 +13,12 @@
   <body>
     <script src="../bin/createNode.min.js"></script>
     <script>
-      // children
-      var p = el();
+    var a = el();
 
-      p.addClass("test");
+    a.style('fontSize', 13);
+    a.appendTo(document.body);
 
-      console.log(p);
+    console.log(window.getComputedStyle(a.node).fontSize);
     </script>
   </body>
 </HTML>
