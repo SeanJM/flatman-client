@@ -1,7 +1,7 @@
 # Create Node 1.0.1
 #### License: [MIT](https://opensource.org/licenses/MIT)
 
-#### ✅ All 39 tests pass
+#### ✅ All 40 tests pass
 
 ## Table of Contents
 
@@ -32,6 +32,8 @@
   - Attributes
     - [addClass](#el-methods--attributes--addclass-top)
     - [attr](#el-methods--attributes--attr-top)
+    - [className](#el-methods--attributes--classname-top)
+    - [copy](#el-methods--attributes--copy-top)
     - [removeClass](#el-methods--attributes--removeclass-top)
     - [toggleClass](#el-methods--attributes--toggleclass-top)
 
@@ -50,6 +52,7 @@
     - [select](#el-methods--dom-manipulation--select-top)
     - [style](#el-methods--dom-manipulation--style-top)
     - [text](#el-methods--dom-manipulation--text-top)
+    - [uncheck](#el-methods--dom-manipulation--uncheck-top)
     - [value](#el-methods--dom-manipulation--value-top)
 
   - Events
@@ -62,6 +65,7 @@
   - Predicates
     - [contains](#el-methods--predicates--contains-top)
     - [hasParent](#el-methods--predicates--hasparent-top)
+    - [isChecked](#el-methods--predicates--ischecked-top)
     - [isFocused](#el-methods--predicates--isfocused-top)
     - [isVisible](#el-methods--predicates--isvisible-top)
 
@@ -290,6 +294,35 @@ el('div').attr({
 ```
 ```html
 <div class="some-class-name" style="background: red"></div>
+```
+
+#### El Methods / Attributes / className ([top](#table-of-contents))
+
+Will set or return value of the attribute `class` for a node.
+
+```javascript
+var b = el();
+
+a.className('test');
+
+a.className();
+//-> test
+```
+
+#### El Methods / Attributes / copy ([top](#table-of-contents))
+
+Will copy a target node's attributes from another node, including it's `innerHTML`.
+
+```javascript
+var a = el();
+var b = el({ class : 'test' }, 'text');
+a.copy(b);
+
+a.className();
+//-> test
+
+a.html();
+// -> text
 ```
 
 #### El Methods / Attributes / removeClass ([top](#table-of-contents))
@@ -644,6 +677,22 @@ target.text();
 // -> 'my text'
 ```
 
+#### El Methods / Dom Manipulation / uncheck ([top](#table-of-contents))
+
+Uncheck a checkbox and radio
+
+```javascript
+var a = el('input', { type : 'checkbox' });
+
+a.check();
+a.isChecked();
+// -> true
+
+a.uncheck();
+a.isChecked();
+// -> false
+```
+
 #### El Methods / Dom Manipulation / value ([top](#table-of-contents))
 
 Query
@@ -813,6 +862,17 @@ var myParent = el('div',
 
 myChild.hasParent(myParent);
 // -> true
+```
+
+#### El Methods / Predicates / isChecked ([top](#table-of-contents))
+
+Returns a `[ Boolean ]` value of the checked state of a node.
+
+```javascript
+var a = el('input', { type : 'checkbox' });
+a.check();
+a.isChecked();
+// -> false
 ```
 
 #### El Methods / Predicates / isFocused ([top](#table-of-contents))
@@ -1144,4 +1204,5 @@ selected.textNodes();
   37. fn................................................................. ✅
   38. style (value, property)............................................ ✅
   39. style (object)..................................................... ✅
+  40. uncheck............................................................ ✅
 ```
