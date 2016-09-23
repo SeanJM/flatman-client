@@ -1,7 +1,7 @@
 # Create Node 1.0.1
 #### License: [MIT](https://opensource.org/licenses/MIT)
 
-#### ✅ All 40 tests pass
+#### ✅ All 41 tests pass
 
 ## Table of Contents
 
@@ -34,6 +34,7 @@
     - [attr](#el-methods--attributes--attr-top)
     - [className](#el-methods--attributes--classname-top)
     - [copy](#el-methods--attributes--copy-top)
+    - [name](#el-methods--attributes--name-top)
     - [removeClass](#el-methods--attributes--removeclass-top)
     - [toggleClass](#el-methods--attributes--toggleclass-top)
 
@@ -299,7 +300,7 @@ el('div').attr({
 
 #### El Methods / Attributes / className ([top](#table-of-contents))
 
-Will set or return value of the attribute `class` for a node.
+Will set or return value of the attribute `class` for a `Node`.
 
 ```javascript
 var b = el();
@@ -324,6 +325,19 @@ a.className();
 
 a.html();
 // -> text
+```
+
+#### El Methods / Attributes / name ([top](#table-of-contents))
+
+Will set or return value of the attribute `name` for a `Node`.
+
+```javascript
+var b = el();
+
+a.name('test');
+
+a.name();
+//-> test
 ```
 
 #### El Methods / Attributes / removeClass ([top](#table-of-contents))
@@ -1216,4 +1230,5 @@ selected.textNodes();
   38. style (value, property)............................................ ✅
   39. style (object)..................................................... ✅
   40. uncheck............................................................ ✅
+  41. name............................................................... ✅
 ```
