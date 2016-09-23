@@ -13,8 +13,28 @@ CreateNode.prototype.attr = function () {
   } else if (typeof arguments[0] === 'string') {
     return this.node.getAttribute(arguments[0]);
   } else if (typeof arguments[0] === 'object') {
-    setAttributes(this.node, arguments[0]);
+    for (var k in arguments[0]) {
+      if (k === 'class') {
+        className = filter(map(arguments[0][k].split(' '), trim), hasLength);
+        if (this.isSVG) {
+          this.node.setAttributeNS(null, 'class', className.sort().join(' '));
+        } else {
+          this.node.className = className.sort().join(' ');
+        }
+      } else if (k === 'style') {
+        setStyle(this.node, arguments[0][k]);
+      } else if (/on[A-Z][a-z]/.test(k.substr(0, 4))) {
+        // A fast test to see if the property matches "onClick" or "onKeyup" or
+        // "onScroll" pattern
+        if (isFunction(arguments[0][k])) {
+          this.on(k.substr(2).toLowerCase(), arguments[0][k]);
+        } else {
+          throw '\"' + k + '\" must have a function as a value.';
+        }
+      } else {
+        this.node.setAttribute(attributeName(k), arguments[0][k]);
+      }
+    }
   }
-
   return this;
 };
