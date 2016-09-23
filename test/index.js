@@ -346,6 +346,22 @@ module.exports = new TinyTest(function (test) {
             .equal(out.right);
         }),
 
+      driver
+        .executeScript(tests.check)
+        .then(function (out) {
+          test('check')
+            .this(out.left)
+            .equal(out.right);
+        }),
+
+      driver
+        .executeScript(tests.name)
+        .then(function (out) {
+          test('name')
+            .this(out.left)
+            .equal(out.right);
+        }),
+
     ])
     .then(
       function () {

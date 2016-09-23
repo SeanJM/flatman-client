@@ -1,6 +1,6 @@
 CreateNode.prototype.trigger = function (names, e) {
-  function trigger(callback) {
-    callback(e);
+  function trigger(self, callback) {
+    callback.call(self, e);
   }
 
   if (e && typeof e.preventDefault === 'undefined') {
@@ -23,7 +23,7 @@ CreateNode.prototype.trigger = function (names, e) {
       names[i] = names[i].trim();
       if (names[i].length && this.subscribers[names[i]]) {
         for (var x = 0, y = this.subscribers[names[i]].length; x < y; x++) {
-          trigger(this.subscribers[names[i]][x]);
+          trigger(this, this.subscribers[names[i]][x]);
         }
       }
     }

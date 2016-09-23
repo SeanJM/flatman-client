@@ -4,14 +4,11 @@
 */
 
 function CreateNode () {
-  var that = this;
-  var attributes = {};
-  var values = [];
+  var children = [];
   var i = 1;
   var n = arguments.length;
-  var isSVG = SVG_TAGNAMES.indexOf(arguments[0]) !== -1;
-  var className;
 
+  this.isSVG = SVG_TAGNAMES.indexOf(arguments[0]) !== -1;
   this.subscribers = {};
 
   if (arguments[0] instanceof CreateNode) {
@@ -25,87 +22,40 @@ function CreateNode () {
     || isUndefined(arguments[0])
   ) {
     if (typeof arguments[0] === 'string') {
-      if (isSVG) {
-        this.node = document.createElementNS(SVG_NAMESPACE, arguments[0]);
-      } else {
-        this.node = document.createElement(arguments[0]);
-      }
-      i = 1;
+      this.node = this.isSVG
+        ? document.createElementNS(SVG_NAMESPACE, arguments[0])
+        : this.node = document.createElement(arguments[0]);
     } else if (isObject(arguments[0]) || isUndefined(arguments[0])) {
       this.node = document.createElement('div');
       i = 0;
     }
 
-    if (isObject(arguments[i]) && !(arguments[i] instanceof CreateNode)) {
-      attributes = arguments[i];
-    }
-
-    for (var k in attributes) {
-      if (k === 'class') {
-        className = filter(map(attributes[k].split(' '), trim), hasLength);
-        if (isSVG) {
-          this.node.setAttributeNS(null, 'class', className.sort().join(' '));
-        } else {
-          this.node.className = className.sort().join(' ');
-        }
-      } else if (k === 'style') {
-        setStyle(this.node, attributes[k]);
-      } else if (/on[A-Z][a-z]/.test(k.substr(0, 4))) {
-        // A fast test to see if the property matches "onClick" or "onKeyup" or
-        // "onScroll" pattern
-        if (isFunction(attributes[k])) {
-          this.on(k.substr(2).toLowerCase(), attributes[k]);
-        } else {
-          throw '\"' + k + '\" must have a function as a value.';
-        }
-      } else {
-        this.node.setAttribute(k, attributes[k]);
-      }
-    }
-
     for (; i < n; i++) {
       if (arguments[i] instanceof CreateNode) {
-        this.node.appendChild(arguments[i].node);
+        children.push(arguments[i].node);
       } else if (typeof arguments[i] === 'string' || isNumber(arguments[i])) {
-        this.node.appendChild(new Text(arguments[i]));
+        children.push(new Text(arguments[i]));
       } else if (
         arguments[i]
-        && typeof arguments[i].appendTo === 'function'
+        && arguments[i].node
+        && arguments[i].node.document instanceof CreateNode
       ) {
-        arguments[i].appendTo(this.node);
+        children.push(arguments[i].node.document.node);
+      } else if (isObject(arguments[i])) {
+        this.attr(arguments[i]);
       }
     }
   }
 
-  if (IS_IE && isTextInput(this.node)) {
-    // Normalize IE 9 input event
-    this.node.addEventListener('keyup', function (e) {
-      if (e.target === this.node) {
-        if (!values.length) {
-          values = [
-            this.node.value,
-            this.node.value
-          ];
-        } else {
-          values[0] = values[1];
-          values[1] = this.node.value;
-        }
+  appendChild.apply(null, [this.node].concat(children));
 
-        if (values[0] !== values[1] && (e.which === IS_DELETE_KEY || e.which === IS_BACKSPACE_KEY)) {
-          this.trigger('input', {
-            type : 'input',
-            which : e.which
-          });
-        }
-      }
-    }, false);
+  if (isElement(this.node)) {
+    this.tag = this.node.tagName.toLowerCase();
+    this.node.style.transform = this.node.style[VENDOR_PREFIX.transform];
+    this.node.style.userSelect = this.node.style[VENDOR_PREFIX.userSelect];
+    this.node.style.userModify = this.node.style[VENDOR_PREFIX.userModify];
   }
 
-  if (this.node.check) {
-    this.check = this.node.check;
-  }
-
-  this.node.style.transform = this.node.style[VENDOR_PREFIX.transform];
-  this.node.style.userSelect = this.node.style[VENDOR_PREFIX.userSelect];
-  this.node.style.userModify = this.node.style[VENDOR_PREFIX.userModify];
+  bindIEInputEvent(this);
+  bindDragAndDrop(this);
 }
