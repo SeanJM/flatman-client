@@ -1,7 +1,7 @@
 # Create Node 1.0.1
 #### License: [MIT](https://opensource.org/licenses/MIT)
 
-#### ✅ All 41 tests pass
+#### ✅ All 42 tests pass
 
 ## Table of Contents
 
@@ -41,6 +41,7 @@
   - Dom Manipulation
     - [append](#el-methods--dom-manipulation--append-top)
     - [appendTo](#el-methods--dom-manipulation--appendto-top)
+    - [check](#el-methods--dom-manipulation--check-top)
     - [clone](#el-methods--dom-manipulation--clone-top)
     - [disable](#el-methods--dom-manipulation--disable-top)
     - [enable](#el-methods--dom-manipulation--enable-top)
@@ -432,6 +433,18 @@ child.appendTo(parent);
 <div class="parent-1">
   <div class="child-1"></div>
 </div>
+```
+
+#### El Methods / Dom Manipulation / check ([top](#table-of-contents))
+
+Check a checkbox and radio
+
+```javascript
+var a = el('input', { type : 'checkbox' });
+
+a.check();
+a.isChecked();
+// -> true
 ```
 
 #### El Methods / Dom Manipulation / clone ([top](#table-of-contents))
@@ -1230,5 +1243,6 @@ selected.textNodes();
   38. style (value, property)............................................ ✅
   39. style (object)..................................................... ✅
   40. uncheck............................................................ ✅
-  41. name............................................................... ✅
+  41. check.............................................................. ✅
+  42. name............................................................... ✅
 ```
