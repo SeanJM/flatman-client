@@ -1,4 +1,4 @@
-Will set or return value of the attribute `class` for a node.
+Will set or return value of the attribute `class` for a `Node`.
 
 ```javascript
 var b = el();
