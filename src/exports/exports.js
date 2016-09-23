@@ -7,3 +7,4 @@ window.el.contains = contains;
 window.el.isElement = isElement;
 window.el.isComponent = isComponent;
 window.el.isCreateNode = isCreateNode;
+window.el.version = '1.0.1';
