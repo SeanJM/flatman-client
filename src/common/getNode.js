@@ -8,9 +8,9 @@ function getNode(x) {
   } else if (
     x
     && x.node
-    && x.node.document instanceof CreateNode
+    && x.node.document
   ) {
-    return x.node.document.node;
+    return getNode(x.node.document);
   }
   return false;
 }

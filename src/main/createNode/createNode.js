@@ -33,7 +33,6 @@ function CreateNode () {
 
     for (; i < n; i++) {
       child = getNode(arguments[i]);
-      console.log(isObject(arguments[i]));
       if (child) {
         children.appendChild(child);
       } else if (isObject(arguments[i])) {
