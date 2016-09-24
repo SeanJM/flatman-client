@@ -60,3 +60,8 @@ var SVG_NAMESPACE = 'http://www.w3.org/2000/svg';
 var SVG_TAGNAMES = ['svg', 'circle', 'line', 'path', 'use'];
 
 var VENDOR_PREFIX;
+
+var IE_INPUT = {
+  node : [],
+  value : []
+};

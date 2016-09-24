@@ -1,4 +1,4 @@
-function isTextInput (node) {
+function isTextInput(node) {
   var types = ['text', 'password', 'phone', 'number'];
   var tagName = node.tagName;
   var isTextarea = tagName === 'TEXTAREA';

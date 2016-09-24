@@ -6,7 +6,7 @@
 function CreateNode () {
   var i = 1;
   var n = arguments.length;
-  var children = new DocumentFragment();
+  var children = document.createDocumentFragment();
   var child;
 
   this.isSVG = SVG_TAGNAMES.indexOf(arguments[0]) !== -1;
@@ -33,6 +33,7 @@ function CreateNode () {
 
     for (; i < n; i++) {
       child = getNode(arguments[i]);
+      console.log(isObject(arguments[i]));
       if (child) {
         children.appendChild(child);
       } else if (isObject(arguments[i])) {
@@ -50,6 +51,5 @@ function CreateNode () {
     this.node.style.userModify = this.node.style[VENDOR_PREFIX.userModify];
   }
 
-  bindIEInputEvent(this);
   bindDragAndDrop(this);
 }

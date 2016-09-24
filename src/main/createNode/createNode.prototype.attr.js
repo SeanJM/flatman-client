@@ -1,4 +1,5 @@
 CreateNode.prototype.attr = function () {
+  console.log(arguments);
   if (arguments.length === 0) {
     return getAttributes(this.node);
   } else if (
