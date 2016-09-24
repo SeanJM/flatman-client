@@ -12,7 +12,7 @@ function hasParent(node) {
     : node;
 
   for (; i < n; i++) {
-    if (isArray(arguments[i])) {
+    if (Array.isArray(arguments[i])) {
       [].push.apply(parents, arguments[i]);
     } else {
       parents.push(arguments[i]);

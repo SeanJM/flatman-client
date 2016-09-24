@@ -17,7 +17,7 @@ function contains(node) {
   }
 
   for (; i < n; i++) {
-    if (isArray(arguments[i])) {
+    if (Array.isArray(arguments[i])) {
       for (x = 0, y = arguments[i].length; x < y; x++) {
         if (each(arguments[i][x])) {
           return true;

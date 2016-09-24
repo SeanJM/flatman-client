@@ -15,7 +15,7 @@ CreateNode.prototype.attr = function () {
   } else if (typeof arguments[0] === 'object') {
     for (var k in arguments[0]) {
       if (k === 'class') {
-        className = filter(map(arguments[0][k].split(' '), trim), hasLength);
+        className = arguments[0][k].split(' ').map(trim).filter(hasLength);
         if (this.isSVG) {
           this.node.setAttributeNS(null, 'class', className.sort().join(' '));
         } else {

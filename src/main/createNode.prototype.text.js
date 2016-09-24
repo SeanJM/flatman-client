@@ -1,5 +1,5 @@
 CreateNode.prototype.text = function (value) {
-  if (isDefined(value) && !isBoolean(value)) {
+  if (isDefined(value) && !(typeof value === 'boolean')) {
     this.node.textContent = value;
     return this;
   }

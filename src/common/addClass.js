@@ -2,10 +2,10 @@ function addClass (node, a) {
   var className = node.getAttribute('class') || '';
   var i;
 
-  if (isArray(a)) {
-    forEach(a, partial(addClass, node));
+  if (Array.isArray(a)) {
+    a.forEach(partial(addClass, node));
   } else {
-    className = filter(map(className.split(' '), trim), hasLength);
+    className = className.split(' ').map(trim).filter(hasLength);
     i = className.indexOf(a);
 
     if (i === -1) {

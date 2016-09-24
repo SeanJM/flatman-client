@@ -1,11 +1,12 @@
 function removeClass (node, a) {
   var className = node.getAttribute('class') || '';
 
-  if (isArray(a)) {
-    forEach(a, partial(removeClass, node));
+  if (Array.isArray(a)) {
+    a.forEach(partial(removeClass, node));
   } else {
-    className = filter(
-      map(className.split(' '), trim),
+    className = className.split(' ')
+      .map(trim)
+      .filter(
         function (b) {
           return hasLength(b) && not(a, b);
         }
