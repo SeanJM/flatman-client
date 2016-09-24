@@ -4,9 +4,10 @@
 */
 
 function CreateNode () {
-  var children = [];
   var i = 1;
   var n = arguments.length;
+  var children = new DocumentFragment();
+  var child;
 
   this.isSVG = SVG_TAGNAMES.indexOf(arguments[0]) !== -1;
   this.subscribers = {};
@@ -31,23 +32,16 @@ function CreateNode () {
     }
 
     for (; i < n; i++) {
-      if (arguments[i] instanceof CreateNode) {
-        children.push(arguments[i].node);
-      } else if (typeof arguments[i] === 'string' || isNumber(arguments[i])) {
-        children.push(new Text(arguments[i]));
-      } else if (
-        arguments[i]
-        && arguments[i].node
-        && arguments[i].node.document instanceof CreateNode
-      ) {
-        children.push(arguments[i].node.document.node);
+      child = getNode(arguments[i]);
+      if (child) {
+        children.appendChild(child);
       } else if (isObject(arguments[i])) {
         this.attr(arguments[i]);
       }
     }
   }
 
-  appendChild.apply(null, [this.node].concat(children));
+  this.node.appendChild(children);
 
   if (isElement(this.node)) {
     this.tag = this.node.tagName.toLowerCase();
