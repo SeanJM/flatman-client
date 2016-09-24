@@ -1,5 +1,5 @@
 CreateNode.prototype.replaceWith = function (newNode) {
-  newNode = createEl(newNode);
+  newNode = el(newNode);
 
   if (this.node.parentNode) {
     this.node.parentNode.replaceChild(newNode.node, this.node);

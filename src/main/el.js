@@ -1,4 +1,4 @@
-function createEl() {
+function el() {
   var i = 0;
   var n = arguments.length;
   var a;

@@ -1,4 +1,4 @@
 CreateNode.prototype.closest = function (selector) {
   var c = this.node.closest(selector);
-  return c !== null ? createEl(c) : false;
+  return c !== null ? el(c) : false;
 };

@@ -1,3 +1,3 @@
 CreateNode.prototype.clone = function () {
-  return createEl(this.node.cloneNode(true));
+  return el(this.node.cloneNode(true));
 };

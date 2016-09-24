@@ -4,7 +4,7 @@ CreateNode.prototype.parentsUntil = function (predicate) {
 
   while (p && p !== html) {
     if (predicate(p)) {
-      return createEl(p);
+      return el(p);
     }
     p = p.parentNode;
   }
