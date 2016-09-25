@@ -13,7 +13,7 @@ if (IS_IE) {
           IE_INPUT.node.push(e.target);
           IE_INPUT.value.push(
             [
-              e.target.value,
+              '',
               e.target.value
             ]
           );
