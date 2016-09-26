@@ -1,4 +1,4 @@
-(function () {
+function initDoubleClick() {
   var isDoubleClick = false;
 
   // Double click
@@ -23,5 +23,4 @@
     }, 250);
 
   });
-
-}());
+}

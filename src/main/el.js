@@ -6,7 +6,8 @@ function el() {
   function F() { return CreateNode.apply(this, a); }
 
   // Faster way to apply arguments
-  if (typeof arguments[0] === 'function') {
+  // Guards against the [ OBJECT ] element which is a function and an HTML element
+  if (!isElement(arguments[0]) && typeof arguments[0] === 'function') {
     switch (n) {
       case 1 :
         return createComponent(arguments[0]);

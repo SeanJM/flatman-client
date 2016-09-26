@@ -1,4 +1,4 @@
-(function () {
+function initVendorPrefixes() {
  var styles = window.getComputedStyle(document.body);
  var properties = ['transform', 'userSelect', 'userModify'];
  var prefix = ['Moz', 'webkit', 'ms'];
@@ -17,4 +17,4 @@
  }
 
  VENDOR_PREFIX = list;
-}());
+}
