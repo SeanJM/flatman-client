@@ -41,13 +41,12 @@ function CreateNode () {
     }
   }
 
-  this.node.appendChild(children);
-
   if (isElement(this.node)) {
     this.tag = this.node.tagName.toLowerCase();
     this.node.style.transform = this.node.style[VENDOR_PREFIX.transform];
     this.node.style.userSelect = this.node.style[VENDOR_PREFIX.userSelect];
     this.node.style.userModify = this.node.style[VENDOR_PREFIX.userModify];
+    this.node.appendChild(children);
   }
 
   bindDragAndDrop(this);
