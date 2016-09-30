@@ -83,9 +83,17 @@ module.exports = new TinyTest(function (test) {
         }),
 
       driver
-        .executeScript(tests.emptyAttr)
+        .executeScript(tests.clone)
         .then(function (out) {
           test('clone')
+            .this(out.left)
+            .equal(out.right);
+        }),
+
+      driver
+        .executeScript(tests.closest)
+        .then(function (out) {
+          test('closest')
             .this(out.left)
             .equal(out.right);
         }),

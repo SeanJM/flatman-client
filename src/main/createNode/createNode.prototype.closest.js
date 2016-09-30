@@ -1,4 +1,13 @@
 CreateNode.prototype.closest = function (selector) {
-  var c = this.node.closest(selector);
-  return c !== null ? el(c) : false;
+  var c;
+
+  if (typeof this.node.closest === 'function') {
+    c = this.node.closest(selector);
+  } else {
+    c = closest(this.node, selector);
+  }
+
+  return c
+    ? el(c)
+    : false;
 };

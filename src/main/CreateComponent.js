@@ -29,7 +29,7 @@ function createComponent() {
       } else {
         throw '"' + (arguments[0].name || 'Anonymous component') + '" does not have an "append" method';
       }
-    } else if (typeof arguments[i] === 'string') {
+    } else if (typeof arguments[i] === 'string' || typeof arguments[i] === 'number') {
       if (!hasText) {
         throw 'Invalid argument "' + arguments[i] + '", component "' + arguments[0].name + '" does not have a "text" method.';
       }

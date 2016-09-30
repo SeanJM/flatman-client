@@ -3,6 +3,6 @@ CreateNode.prototype.value = function (value) {
     this.node.value = value;
     return this;
   }
-  
-  return this.node.value;
+
+  return this.node.value.trim();
 };
