@@ -1,4 +1,4 @@
-Provides an interface to select text ranges and get the selected text range in an input.
+Provides an interface to select text ranges and select the `option` node.
 
 Query
 ```javascript
@@ -24,4 +24,17 @@ This example selects from the first letter to 3 letters from the end.
 
 ```javascript
 a.select(0, -3);
+```
+
+`select`
+
+```javascript
+var a = el('select',
+  el('option'),
+  el('option')
+);
+
+a.select(0);
+
+// -> will select the first option node
 ```
