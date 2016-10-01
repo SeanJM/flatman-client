@@ -62,6 +62,7 @@
     - [off](#el-methods--events--off-top)
     - [on](#el-methods--events--on-top)
     - [trigger](#el-methods--events--trigger-top)
+    - [Input](#el-methods--events--input-top)
     - [Drag And Drop](#el-methods--events--drag-and-drop-top)
 
   - Predicates
@@ -632,7 +633,7 @@ targetNode.replaceWith(newNode);
 
 #### El Methods / Dom Manipulation / select ([top](#table-of-contents))
 
-Provides an interface to select text ranges and get the selected text range in an input.
+Provides an interface to select text ranges and select the `option` node.
 
 Query
 ```javascript
@@ -658,6 +659,19 @@ This example selects from the first letter to 3 letters from the end.
 
 ```javascript
 a.select(0, -3);
+```
+
+`select`
+
+```javascript
+var a = el('select',
+  el('option'),
+  el('option')
+);
+
+a.select(0);
+
+// -> will select the first option node
 ```
 
 #### El Methods / Dom Manipulation / style ([top](#table-of-contents))
@@ -807,6 +821,43 @@ el.on('click', function myClickSecondHandler() {
 
 el.trigger('click');
 // -> will execute 'myClickHandler' and 'myClickSecondHandler'
+```
+
+#### El Methods / Events / Input ([top](#table-of-contents))
+
+Input has been unified across browsers, so that when you use `on('input')` you will have consistent performance on Internet Explorer, Chrome and Firefox.
+
+In this example, we'll write a component to replace creating an input with `el('input', { type : 'text' })` with a Component, so that the API becomes `el(Editbox)`.
+
+```javascript
+function Editbox() {
+  var self = this;
+  this.node = {
+    document : el('input',
+      {
+        type : 'text',
+        onInput : function (e) {
+          self.trigger('input', e);
+        }
+      }
+    )
+  };
+}
+
+Editbox.prototype.value = function (value) {
+  var f = this.node.document.value;
+  if (!value) {
+    return f();
+  }
+  f(value);
+};
+
+var a = el(Editbox, {
+  onInput : function (e) {
+    console.log(this.value());
+  }
+});
+
 ```
 
 #### El Methods / Events / Drag And Drop ([top](#table-of-contents))
