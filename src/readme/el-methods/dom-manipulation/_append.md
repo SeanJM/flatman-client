@@ -1,5 +1,7 @@
 Is an interface for `appendChild`, the result being a way to add a `Node` to a parent `Node`.
 
+When a `Node` is appended to an element in the `DOM` it emmits a `mount` event.
+
 ```javascript
 var parent = el({ class : 'parent-1' });
 var child = el({ class : 'child-1' });
