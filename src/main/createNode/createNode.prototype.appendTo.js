@@ -1,9 +1,9 @@
 CreateNode.prototype.appendTo = function (target) {
-  if (typeof target === 'string') {
-    document.querySelector(target).appendChild(this.node);
-  } else {
-    getNode(target).appendChild(this.node);
-  }
+  var target = typeof target === 'string'
+    ? document.querySelector(target)
+    : target;
+
+  appendChild(target, this.node);
 
   return this;
 };

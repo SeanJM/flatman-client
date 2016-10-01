@@ -8,4 +8,4 @@ window.el.isElement = isElement;
 window.el.isComponent = isComponent;
 window.el.isCreateNode = isCreateNode;
 window.el.getNode = getNode;
-window.el.version = '1.0.2';
+window.el.version = '1.0.3';
