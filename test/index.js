@@ -195,6 +195,14 @@ module.exports = new TinyTest(function (test) {
         }),
 
       driver
+        .executeScript(tests.once)
+        .then(function (out) {
+          test('once')
+            .this(out.left)
+            .equal(out.right);
+        }),
+
+      driver
         .executeScript(tests.parent)
         .then(function (out) {
           test('parent')

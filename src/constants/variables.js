@@ -65,3 +65,5 @@ var IE_INPUT = {
   node : [],
   value : []
 };
+
+var MOUNTED = [];

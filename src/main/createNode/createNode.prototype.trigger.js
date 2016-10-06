@@ -22,7 +22,7 @@ CreateNode.prototype.trigger = function (names, e) {
     for (var i = 0, n = names.length; i < n; i++) {
       names[i] = names[i].trim();
       if (names[i].length && this.subscribers[names[i]]) {
-        for (var x = 0, y = this.subscribers[names[i]].length; x < y; x++) {
+        for (var x = this.subscribers[names[i]].length - 1; x >= 0; x--) {
           trigger(this, this.subscribers[names[i]][x]);
         }
       }

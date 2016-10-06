@@ -4,5 +4,7 @@ CreateNode.prototype.value = function (value) {
     return this;
   }
 
-  return this.node.value.trim();
+  return this.node.value
+    ? this.node.value.trim()
+    : this.node.value;
 };
