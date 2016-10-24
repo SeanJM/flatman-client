@@ -28,7 +28,7 @@ CreateNode.prototype.select = function (start, end) {
     if (typeof start === 'undefined') {
       return this.node.selectedIndex;
     } else {
-      this.node.value(this.node.childNodes[start].value);
+      this.node.value = this.node.childNodes[start].value;
     }
   }
 };
