@@ -86,7 +86,6 @@
     - [parentsUntil](#el-methods--query--parentsuntil-top)
     - [selectorPath](#el-methods--query--selectorpath-top)
     - [siblings](#el-methods--query--siblings-top)
-    - [styles](#el-methods--query--styles-top)
     - [textNodes](#el-methods--query--textnodes-top)
 - [Tests](#tests)
 
@@ -707,6 +706,18 @@ a.style({
 });
 ```
 
+### Get computed styles
+
+```javascript
+div.style();
+// -> [ Object ]
+```
+
+```javascript
+div.style('fontSize');
+// -> 13px
+```
+
 #### El Methods / Dom Manipulation / text ([top](#table-of-contents))
 
 Sets the text value of a node, uses `textContent` as opposed to `innerHTML`, this distinction is important since any HTML passed as a string will be converted to text.
@@ -1248,15 +1259,6 @@ selected.siblings();
 <div class="siblings-2"></div>
 <div class="siblings-3"></div>
 <div class="siblings-4"></div>
-```
-
-#### El Methods / Query / styles ([top](#table-of-contents))
-
-Is an interface for `window.getComputedStyle([node])`, returns an object.
-
-```javascript
-div.styles();
-// -> [ Object ]
 ```
 
 #### El Methods / Query / textNodes ([top](#table-of-contents))

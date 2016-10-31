@@ -11,23 +11,10 @@
     <link rel="icon" type="image/png" href="bin/favicon-16x16.png" sizes="16x16" />
   </head>
   <body>
-    <script src="../bin/createNode.js"></script>
+    <script src="../bin/createNode.min.js"></script>
     <script>
-    var a = el('input',
-    {
-      type : 'text',
-      style : {
-        height : 30,
-        width : 100,
-        fontSize : 13
-      }
-    });
-
-    a.on('input', function () {
-      console.log(a.value());
-    });
-    console.log(a);
-    a.appendTo(document.body);
+    var a = el('select', el('option', 'test'), el('option', 'test'));
+    console.log(a.select());
     </script>
   </body>
 </HTML>

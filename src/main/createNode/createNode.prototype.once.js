@@ -2,7 +2,7 @@ CreateNode.prototype.once = function (names, callback) {
   var self = this;
 
   var ref = function (e) {
-    callback(e);
+    callback.call(self, e);
     self.off(names, ref);
   };
 

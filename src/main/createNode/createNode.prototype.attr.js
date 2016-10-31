@@ -1,11 +1,12 @@
 CreateNode.prototype.attr = function () {
+  var tagName = this.node.tagName.toLowerCase();
   if (arguments.length === 0) {
     return getAttributes(this.node);
   } else if (
     typeof arguments[0] === 'string'
     && typeof arguments[1] === 'string'
   ) {
-    if (this.node.tagName === 'USE') {
+    if (tagName === 'use' || tagName === 'svg') {
       this.node.setAttributeNS('http://www.w3.org/1999/xlink', arguments[0], arguments[1]);
     } else {
       this.node.setAttribute(arguments[0], arguments[1]);

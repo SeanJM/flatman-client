@@ -23,3 +23,15 @@ a.style({
   fontWeight : 'bold'
 });
 ```
+
+### Get computed styles
+
+```javascript
+div.style();
+// -> [ Object ]
+```
+
+```javascript
+div.style('fontSize');
+// -> 13px
+```

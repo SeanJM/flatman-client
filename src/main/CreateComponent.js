@@ -46,10 +46,18 @@ function createComponent() {
   // Check for an 'on' method
   for (k in opt) {
     if (k.slice(0, 2) === 'on') {
-      if (typeof component.on === 'function') {
-        component.on(k.substr(2).toLowerCase(), opt[k]);
+      if (k.slice(0, 4) === 'once') {
+        if (typeof component.once === 'function') {
+          component.once(k.substr(4).toLowerCase(), opt[k]);
+        } else {
+          throw 'Invalid constructor \'' + arguments[0].name + '\', your component must have a "once" method.';
+        }
       } else {
-        throw 'Invalid constructor \'' + arguments[0].name + '\', your constructor must have an "on" method.';
+        if (typeof component.on === 'function') {
+          component.on(k.substr(2).toLowerCase(), opt[k]);
+        } else {
+          throw 'Invalid constructor \'' + arguments[0].name + '\', your component must have an "on" method.';
+        }
       }
     } else if (k === 'class') {
       // Check for a class property, and it exists, add the class to the component
