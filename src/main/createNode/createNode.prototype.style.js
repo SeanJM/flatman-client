@@ -1,5 +1,5 @@
 CreateNode.prototype.style = function (a, b) {
-  if (a && b || typeof a === 'object') {
+  if (a && typeof b !== 'undefined' || typeof a === 'object') {
     setStyle(this.node, a, b);
     return this;
   } else if (typeof a === 'string' || typeof a === 'undefined') {
