@@ -41,6 +41,15 @@ module.exports = new TinyTest(function (test) {
             .equal(out.right);
         }),
 
+      // Append
+      driver
+        .executeScript(tests.before)
+        .then(function (out) {
+          test('before')
+            .this(out.left)
+            .equal(out.right);
+        }),
+
       // attr
       driver
         .executeScript(tests.attr)
