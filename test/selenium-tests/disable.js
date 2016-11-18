@@ -1,4 +1,4 @@
-var p = el().disable();
+var p = el('div').disable();
 
 return {
   left : p.isDisabled() === true,

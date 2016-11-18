@@ -1,6 +1,6 @@
 var p = el('div', { tabIndex : '0' });
 
-p.appendTo('body');
+p.appendTo(document.body);
 p.focus();
 
 setTimeout(function () {

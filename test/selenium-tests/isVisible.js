@@ -1,15 +1,16 @@
-var a = el();
-var b = el();
-var c = el();
-var d = el();
-var e = el({ class : 'e' });
-var f = el({ class : 'f' });
+var a = el('div');
+var b = el('div');
+var c = el('div');
+var d = el('div');
+var e = el('div', { class : 'e' });
+var f = el('div', { class : 'f' });
+var body = document.body;
 
-a.appendTo('body');
-b.appendTo('body');
-c.appendTo('body');
-d.appendTo('body');
-e.appendTo('body');
+a.appendTo(body);
+b.appendTo(body);
+c.appendTo(body);
+d.appendTo(body);
+e.appendTo(body);
 
 f.appendTo(e);
 

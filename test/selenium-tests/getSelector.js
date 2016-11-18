@@ -1,6 +1,6 @@
-var p = el({ class : 'test'});
+var p = el('div', { class : 'test'});
 
-var a = el({
+var a = el('div', {
   class : 'test',
   tabIndex : '0',
   id : 'my-id'

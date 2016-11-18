@@ -1,5 +1,5 @@
-var a = el();
-var b = el();
+var a = el('div');
+var b = el('div');
 
 a.addClass('my-class-name');
 b.addClass(['my-class', 'my-class-2']);

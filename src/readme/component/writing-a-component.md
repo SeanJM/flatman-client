@@ -1,9 +1,9 @@
 ```javascript
 function Component(options) {
   this.node = {};
-  this.node.document = el('div',
+  this.node.document = el('div', [
     this.node.label = el('div', { class : 'text' })
-  );
+  ]);
 }
 
 Component.prototype.appendTo = function (target) {
@@ -55,7 +55,7 @@ el(Component, {
     onBody : function () {
       // What it does when it's appended to the body
     }
-  },
+  }, [
   'My Text'
-);
+]);
 ```

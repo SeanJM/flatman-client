@@ -1,4 +1,4 @@
-var a = el();
+var a = el('div');
 var x = true;
 
 a.on('click', function () { x = false; });

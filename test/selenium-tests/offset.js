@@ -1,7 +1,7 @@
-var a = el({ style : 'position: absolute; left: 0; top: 0; width : 0; height: 0'});
+var a = el('div', { style : 'position: absolute; left: 0; top: 0; width : 0; height: 0'});
 var o;
 
-a.appendTo('body');
+a.appendTo(document.body);
 o = a.offset();
 
 return {

@@ -7,6 +7,6 @@ element.once('click', function () {
   console.log('click');
 });
 
-div.appendTo('body');
+div.appendTo(document.body);
 ```
 Now when you click on the element, it will log `click` to the console. Any additional clicks will not trigger the event.

@@ -1,6 +1,6 @@
-var a = el();
+var a = el('div');
 
-a.appendTo('body');
+a.appendTo(document.body);
 a.remove();
 
 return {

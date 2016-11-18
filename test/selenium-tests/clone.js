@@ -1,4 +1,4 @@
-var p = el({ class : 'test' });
+var p = el('div', { class : 'test' });
 var c = p.clone();
 
 return {

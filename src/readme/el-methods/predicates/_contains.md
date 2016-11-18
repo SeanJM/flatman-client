@@ -1,8 +1,8 @@
 ```javascript
 var a;
-var p = el('div',
+var p = el('div', [
   a = el('div')
-);
+]);
 
 p.contains(a);
 // -> true

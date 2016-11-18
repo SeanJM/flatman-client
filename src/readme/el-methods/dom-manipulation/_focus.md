@@ -2,7 +2,7 @@ Will `focus` an element. This will only work if the element is in the `document.
 
 ```javascript
 var a = el('div');
-a.appendTo('body').focus();
+a.appendTo(document.body).focus();
 ```
 
 ### `html` [top](#methods)

@@ -1,13 +1,10 @@
-CreateNode.prototype.append = function () {
-  var n = arguments.length;
-  var i = 0;
-  var args = [];
-
-  for (; i < n; i++) {
-    args.push(arguments[i]);
+CreateNode.prototype.append = function (array) {
+  if (Array.isArray(array)) {
+    appendChild(this.node, array);
+  } else if (arguments.length === 1) {
+    appendChild(this.node, array);
+  } else {
+    throw 'Invalid argument type (' + typeof array + ') for .append';
   }
-
-  appendChild.apply(null, [this.node].concat(args));
-
   return this;
 };

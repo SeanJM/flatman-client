@@ -3,7 +3,7 @@ var p = el('div');
 var a = el('div');
 var b = el('div');
 
-p.append(a, b);
+p.append([a, b]);
 
 return {
   left : (

@@ -1,9 +1,9 @@
-var a = el({ class : 'test1' });
-var b = el({ class : 'test2' });
-var c = el({ class : 'test2' });
-var d = el({ class : 'test2' });
+var a = el('div', { class : 'test1' });
+var b = el('div', { class : 'test2' });
+var c = el('div', { class : 'test2' });
+var d = el('div', { class : 'test2' });
 
-a.append(b, c, d);
+a.append([b, c, d]);
 
 return {
   left : (

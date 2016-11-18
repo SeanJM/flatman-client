@@ -1,12 +1,12 @@
 CreateNode.prototype.before = function () {
-  var n = arguments.length;
-  var i = 0;
   var f = document.createDocumentFragment();
 
-  for (; i < n; i++) {
-    f.append(
-      el.getNode(arguments[i])
-    );
+  if (Array.isArray(arguments[0])) {
+    for (var i = 0, n = arguments[0].length; i < n; i++) {
+      f.append(getNode(arguments[i]));
+    }
+  } else {
+    f.append(getNode(arguments[0]));
   }
 
   this.node.parentNode.insertBefore(f, this.node);

@@ -1,13 +1,13 @@
 // children
-var p = el();
+var p = el('div');
 
-var a = el();
-var b = el();
-var c = el();
+var a = el('div');
+var b = el('div');
+var c = el('div');
 
 var x;
 
-p.append(a, b, c);
+p.append([a, b, c]);
 
 x = p.children(1, -1);
 

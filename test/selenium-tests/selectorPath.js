@@ -1,10 +1,10 @@
 var a;
 
-el('div', { class : '_1' },
-  el('div', { class : '1_1'},
+el('div', { class : '_1' }, [
+  el('div', { class : '1_1'}, [
     a = el('div', { class : '1_1_1'})
-  )
-);
+  ])
+]);
 
 return {
   left : a.selectorPath(),

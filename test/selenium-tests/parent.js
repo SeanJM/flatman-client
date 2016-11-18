@@ -1,5 +1,5 @@
-var a = el();
-var b = el();
+var a = el('div');
+var b = el('div');
 
 a.appendTo(b);
 

@@ -1,7 +1,7 @@
 # Create Node 1.1.4
 #### License: [MIT](https://opensource.org/licenses/MIT)
 
-#### ✅ All 45 tests pass
+#### 🚫 44 of 45 tests passed (98%)
 
 ## Table of Contents
 
@@ -136,10 +136,10 @@ It takes the same type of arguments that a regular `el` takes.
 A component and an element are designed to be similar. This means you can do things like this:
 
 ```javascript
-el(Component,
+el(Component, [
   el('div'),
   el(Component)
-);
+]);
 ```
 
 ### Component / The Options Object ([top](#table-of-contents))
@@ -166,9 +166,9 @@ el(Component, {
 ```javascript
 function Component(options) {
   this.node = {};
-  this.node.document = el('div',
+  this.node.document = el('div', [
     this.node.label = el('div', { class : 'text' })
-  );
+  ]);
 }
 
 Component.prototype.appendTo = function (target) {
@@ -220,25 +220,25 @@ el(Component, {
     onBody : function () {
       // What it does when it's appended to the body
     }
-  },
+  }, [
   'My Text'
-);
+]);
 ```
 
 ## Examples
 ### Examples / Nesting ([top](#table-of-contents))
 
 ```javascript
-el('div',
+el('div', [
   el('div', { class : 'child'}),
   el('div', { class : 'child-2'})
-);
+]);
 ```
 
 ### Examples / Basic Usage ([top](#table-of-contents))
 
 ```javascript
-el('div', { class : 'my-class-name' }, 'some text');
+el('div', { class : 'my-class-name' }, ['some text']);
 ```
 
 ### Examples / Wrapping The Dom ([top](#table-of-contents))
@@ -554,7 +554,7 @@ Will `focus` an element. This will only work if the element is in the `document.
 
 ```javascript
 var a = el('div');
-a.appendTo('body').focus();
+a.appendTo(document.body).focus();
 ```
 
 ### `html` [top](#methods)
@@ -859,7 +859,7 @@ element.on('click', function () {
   console.log('click');
 });
 
-div.appendTo('body');
+div.appendTo(document.body);
 ```
 Now when you click on the element, it will log `click` to the console.
 
@@ -874,7 +874,7 @@ element.once('click', function () {
   console.log('click');
 });
 
-div.appendTo('body');
+div.appendTo(document.body);
 ```
 Now when you click on the element, it will log `click` to the console. Any additional clicks will not trigger the event.
 
@@ -962,9 +962,9 @@ The distance travelled in `pixels` between the start position and the current po
 
 ```javascript
 var a;
-var p = el('div',
+var p = el('div', [
   a = el('div')
-);
+]);
 
 p.contains(a);
 // -> true
@@ -1019,9 +1019,9 @@ a.hasClass('test')
 #### El Methods / Predicates / hasParent ([top](#table-of-contents))
 
 ```javascript
-var myParent = el('div',
+var myParent = el('div', [
   var myChild = el('div')
-);
+]);
 
 myChild.hasParent(myParent);
 // -> true
@@ -1100,11 +1100,11 @@ The idea here is that this check is smart, so it knows whether the node is visib
 Returns an array of direct descendants wrapped in the `el` constructor. This is an interface for `childNodes` with a filter for a `NodeType` equal to `1` (`HTMlElement`)
 
 ```javascript
-var a = el('div',
+var a = el('div', [
   el('div', { class : 'child-1' }),
   el('div', { class : 'child-2' }),
   el('div', { class : 'child-3' })
-);
+]);
 
 a.children();
 ```
@@ -1143,9 +1143,9 @@ Returns the closest parent matching the query.
 
 ```javascript
 var farthest;
-var parent = el('div', { class : 'closest' },
+var parent = el('div', { class : 'closest' }, [
   farthest = el('div', { class : 'farthest' })
-);
+]);
 
 farthest.closest('.closest');
 
@@ -1157,10 +1157,10 @@ farthest.closest('.closest');
 Returns an array of matches as a result of executing the query.
 
 ```javascript
-var parent = el('div', { class : 'closest' },
+var parent = el('div', { class : 'closest' }, [
   el('div', { class : 'find' }),
   el('div', { class : 'find' })
-);
+]);
 
 parent.find('.find');
 // -> HTML NodeList : [ div.find, div.find ]
@@ -1230,11 +1230,11 @@ Returns an array of parents, from first to last.
 ```javascript
 var child;
 
-el('div', { class : 'parent-1' },
-  el('div', { class : 'parent-2' },
+el('div', { class : 'parent-1' }, [
+  el('div', { class : 'parent-2' }, [
     child = el('div', { class : 'parent-3 '})
-  )
-);
+  ])
+]);
 
 child.parents();
 // -> [Array]
@@ -1255,11 +1255,11 @@ Returns a selector path to the selected node.
 ```javascript
 var child;
 
-el('div', { class : 'parent-1' },
-  el('div', { class : 'parent-2' },
+el('div', { class : 'parent-1' }, [
+  el('div', { class : 'parent-2' }, [
     child = el('div', { class : 'parent-3 '})
-  )
-);
+  ])
+]);
 
 child.selectorPath();
 // -> div.parent-3 div.parent-2 div.parent-1
@@ -1270,11 +1270,11 @@ If any of the parents has an ID, the path algorithm will terminate.
 ```javascript
 var child;
 
-el('div', { class : 'parent-1' },
-  el('div', { id : 'super-parent', class : 'parent-2' },
+el('div', { class : 'parent-1' }, [
+  el('div', { id : 'super-parent', class : 'parent-2' }, [
     child = el('div', { class : 'parent-3 '})
-  )
-);
+  ])
+]);
 
 child.selectorPath();
 // -> div.parent-2#super-parent div.parent-1
@@ -1287,12 +1287,12 @@ Returns a selected Node and it's siblings filtered to show only nodes of type `1
 ```javascript
 var selected;
 
-el('div', { class : 'parent-1' },
+el('div', { class : 'parent-1' }, [
   selected = el('div', { class : 'sibling-1' }),
   el('div', { class : 'sibling-2' }),
   el('div', { class : 'sibling-3' }),
   el('div', { class : 'sibling-4' })
-);
+]);
 
 selected.siblings();
 ```
@@ -1309,7 +1309,7 @@ selected.siblings();
 Returns all the `Text Nodes` which are a child of a selected node.
 
 ```javascript
-var selected = el('div', { class : 'parent-1' }, 'text node');
+var selected = el('div', { class : 'parent-1' }, ['text node']);
 selected.textNodes();
 // -> [Text Node]
 ```
@@ -1319,7 +1319,7 @@ selected.textNodes();
 ## Tests
 
 ```
-   1. addClass........................................................... ✅
+   1. append............................................................. ✅
    2. append............................................................. ✅
    3. before............................................................. ✅
    4. attr............................................................... ✅
@@ -1360,8 +1360,12 @@ selected.textNodes();
   39. value.............................................................. ✅
   40. fn................................................................. ✅
   41. style (value, property)............................................ ✅
-  42. style (object)..................................................... ✅
   43. uncheck............................................................ ✅
   44. check.............................................................. ✅
   45. name............................................................... ✅
+
+  42. style (object) .................................................... 🚫
+
+ +   Left:                                                              true
+ -  Right:                                                             false
 ```

@@ -1,7 +1,7 @@
-var a = el(
-  el(),
-  el()
-);
+var a = el('div', [
+  el('div'),
+  el('div')
+]);
 
 a.text('span');
 

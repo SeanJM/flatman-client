@@ -1,8 +1,8 @@
 var a = el('input', { type : 'checkbox' });
 var b = el('input', { type : 'checkbox' });
 
-a.appendTo('body');
-b.appendTo('body');
+a.appendTo(document.body);
+b.appendTo(document.body);
 
 a.focus();
 

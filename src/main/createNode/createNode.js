@@ -3,51 +3,41 @@
   CreateNode([String], [Object], [Text | CreateNode Object | Array | Node ])
 */
 
-function CreateNode () {
+function CreateNode() {
   var i = 1;
   var n = arguments.length;
-  var children = document.createDocumentFragment();
-  var child;
+  var options = {};
 
-  this.isSVG = SVG_TAGNAMES.indexOf(arguments[0]) !== -1;
+  function getNode(node) {
+    if (isElement(node) || node === window) {
+      return node;
+    } else if (typeof node === 'string') {
+      this.isSVG = SVG_TAGNAMES.indexOf(node) !== -1;
+      return node = this.isSVG
+        ? document.createElementNS(SVG_NAMESPACE, node)
+        : document.createElement(node);
+    }
+
+    throw 'Invalid argument for el, the first argument can be either a node or a tagName';
+  }
+
   this.subscribers = {};
+  this.node = getNode.call(this, arguments[0]);
 
-  if (arguments[0] instanceof CreateNode) {
-    this.node = arguments[0].node;
-    this.subscribers = arguments[0].subscribers;
-  } else if (isElement(arguments[0]) || arguments[0] === window) {
-    this.node = arguments[0];
-  } else if (
-    typeof arguments[0] === 'string'
-    || isObject(arguments[0])
-    || isUndefined(arguments[0])
-  ) {
-    if (typeof arguments[0] === 'string') {
-      this.node = this.isSVG
-        ? document.createElementNS(SVG_NAMESPACE, arguments[0])
-        : this.node = document.createElement(arguments[0]);
-    } else if (isObject(arguments[0]) || isUndefined(arguments[0])) {
-      this.node = document.createElement('div');
-      i = 0;
-    }
-
-    for (; i < n; i++) {
-      child = getNode(arguments[i]);
-      if (child) {
-        children.appendChild(child);
-      } else if (isObject(arguments[i])) {
-        this.attr(arguments[i]);
-      }
+  for (; i < n; i++) {
+    if (Array.isArray(arguments[i])) {
+      this.append(arguments[i]);
+    } else if (typeof arguments[i] === 'object') {
+      this.attr(arguments[i]);
+    } else {
+      throw 'Invalid argument type: \"' + typeof arguments[i] + '\"';
     }
   }
 
-  if (isElement(this.node)) {
-    this.tag = this.node.tagName.toLowerCase();
-    this.node.style.transform = this.node.style[VENDOR_PREFIX.transform];
-    this.node.style.userSelect = this.node.style[VENDOR_PREFIX.userSelect];
-    this.node.style.userModify = this.node.style[VENDOR_PREFIX.userModify];
-    this.node.appendChild(children);
-  }
+  this.tag = this.node.tagName.toLowerCase();
+  this.node.style.transform = this.node.style[VENDOR_PREFIX.transform];
+  this.node.style.userSelect = this.node.style[VENDOR_PREFIX.userSelect];
+  this.node.style.userModify = this.node.style[VENDOR_PREFIX.userModify];
 
   bindDragAndDrop(this);
 }

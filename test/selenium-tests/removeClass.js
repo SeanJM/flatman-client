@@ -1,4 +1,4 @@
-var a = el({ class : 'a' });
+var a = el('div', { class : 'a' });
 
 return {
   left : a.removeClass('a').hasClass('a'),

@@ -3,12 +3,12 @@ Returns a selected Node and it's siblings filtered to show only nodes of type `1
 ```javascript
 var selected;
 
-el('div', { class : 'parent-1' },
+el('div', { class : 'parent-1' }, [
   selected = el('div', { class : 'sibling-1' }),
   el('div', { class : 'sibling-2' }),
   el('div', { class : 'sibling-3' }),
   el('div', { class : 'sibling-4' })
-);
+]);
 
 selected.siblings();
 ```

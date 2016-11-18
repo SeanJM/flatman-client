@@ -27,7 +27,7 @@ module.exports = new TinyTest(function (test) {
       driver
         .executeScript(tests.append)
         .then(function (out) {
-          test('addClass')
+          test('append')
             .this(out.left)
             .equal(out.right);
         }),

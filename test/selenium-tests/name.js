@@ -1,4 +1,4 @@
-var a = el({ name : 'checkbox' });
+var a = el('div', { name : 'checkbox' });
 
 return {
   left : a.name() === 'checkbox',
