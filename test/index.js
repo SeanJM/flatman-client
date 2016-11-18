@@ -387,6 +387,22 @@ module.exports = new TinyTest(function (test) {
             .equal(out.right);
         }),
 
+      driver
+        .executeScript(tests.component)
+        .then(function (out) {
+          test('Basic Component')
+            .this(out.left)
+            .equal(out.right);
+        }),
+
+      driver
+        .executeScript(tests.componentWithClassAndChildren)
+        .then(function (out) {
+          test('Component with class and children')
+            .this(out.left)
+            .equal(out.right);
+        }),
+
     ])
     .then(
       function () {

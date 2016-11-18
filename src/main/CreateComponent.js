@@ -1,9 +1,9 @@
-function createComponent() {
+function createComponent(constructor) {
   var i = 1;
   var n = arguments.length;
 
-  var hasAppend = typeof arguments[0].prototype.append === 'function';
-  var hasText = typeof arguments[0].prototype.text === 'function';
+  var hasAppend = typeof constructor.prototype.append === 'function';
+  var hasText = typeof constructor.prototype.text === 'function';
 
   // Pass the objec to the constructor if it exists
   var component;
@@ -16,56 +16,41 @@ function createComponent() {
   var k;
 
   for (; i < n; i++) {
-    if (
-      isComponent(arguments[i])
-      || arguments[i] instanceof CreateNode
-    ) {
-      if (hasAppend) {
-        if (typeof arguments[i].appendTo === 'function') {
-          children.push(arguments[i]);
+    if (Array.isArray(arguments[i])) {
+      arguments[i].forEach(function (child) {
+        if (typeof child === 'string' || typeof child === 'number') {
+          strings.push(child);
         } else {
-          throw '"' + (arguments[i].constructor.name || 'Anonymous component') + '" does not have an "appendTo" method';
+          children.push(child);
         }
-      } else {
-        throw '"' + (arguments[0].name || 'Anonymous component') + '" does not have an "append" method';
-      }
-    } else if (typeof arguments[i] === 'string' || typeof arguments[i] === 'number') {
-      if (!hasText) {
-        throw 'Invalid argument "' + arguments[i] + '", component "' + arguments[0].name + '" does not have a "text" method.';
-      }
-      strings.push(arguments[i]);
+      });
+      children = arguments[i];
     } else if (typeof arguments[i] === 'object') {
-      for (k in arguments[i]) {
-        opt[k] = arguments[i][k];
-      }
+      opt = arguments[i];
     }
   }
 
-  component = new arguments[0](opt);
+  component = new constructor(opt);
 
   // Check for an 'on' method
   for (k in opt) {
-    if (k.slice(0, 2) === 'on') {
-      if (k.slice(0, 4) === 'once') {
-        if (typeof component.once === 'function') {
-          component.once(k.substr(4).toLowerCase(), opt[k]);
-        } else {
-          throw 'Invalid constructor \'' + arguments[0].name + '\', your component must have a "once" method.';
-        }
+    if (k.slice(0, 4) === 'once') {
+      if (typeof component.once === 'function') {
+        component.once(k.substr(4).toLowerCase(), opt[k]);
       } else {
-        if (typeof component.on === 'function') {
-          component.on(k.substr(2).toLowerCase(), opt[k]);
-        } else {
-          throw 'Invalid constructor \'' + arguments[0].name + '\', your component must have an "on" method.';
-        }
+        throw 'Invalid constructor \'' + constructor.name + '\', your component must have a "once" method.';
+      }
+    } else if (k.slice(0, 2) === 'on') {
+      if (typeof component.on === 'function') {
+        component.on(k.substr(2).toLowerCase(), opt[k]);
+      } else {
+        throw 'Invalid constructor \'' + constructor.name + '\', your component must have an "on" method.';
       }
     } else if (k === 'class') {
       // Check for a class property, and it exists, add the class to the component
       if (typeof component.addClass === 'function') {
         component.addClass(opt[k]);
       }
-    } else if (k === 'init') {
-      init = opt[k];
     } else if (
       typeof component[k] === 'function'
     ) {
@@ -77,17 +62,11 @@ function createComponent() {
   }
 
   if (children.length) {
-    component.append.apply(component, children);
+    component.append(children);
   }
 
   if (strings.length) {
-    component.text.apply(component, strings);
-  }
-
-  if (init.length) {
-    for (i = 0, n = init.length; i < n; i++) {
-      component[init[i]]();
-    }
+    component.text(strings);
   }
 
   return component;

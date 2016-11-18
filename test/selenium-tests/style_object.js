@@ -1,6 +1,6 @@
 var a = el('div');
 
-a.style('div', { fontSize :  13 });
+a.style({ fontSize :  13 });
 a.appendTo(document.body);
 
 return {
