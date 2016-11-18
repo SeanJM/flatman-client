@@ -1,11 +1,11 @@
 Clones an element, is an interface for `Node.cloneNode(true)`
 
 ```javascript
-var a = el('div',
+var a = el('div', [
   el('div', { class : 'child-1' }),
   el('div', { class : 'child-2' }),
   el('div', { class : 'child-3' })
-);
+]);
 
 var b = a.clone();
 ```

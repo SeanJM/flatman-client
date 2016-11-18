@@ -2,9 +2,9 @@ Will append a child element in the first position of the parent node.
 
 ```javascript
 var child = el('div', { class : 'second-child' });
-var parent = el('div', { class : 'parent' },
+var parent = el('div', { class : 'parent' }, [
   el('div', { 'first-child' })
-);
+]);
 ```
 
 ```html

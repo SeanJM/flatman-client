@@ -306,7 +306,7 @@ el('div').attr({
 Will set or return value of the attribute `class` for a `Node`.
 
 ```javascript
-var b = el();
+var b = el('div');
 
 a.className('test');
 
@@ -319,8 +319,8 @@ a.className();
 Will copy a target node's attributes from another node, including it's `innerHTML`.
 
 ```javascript
-var a = el();
-var b = el({ class : 'test' }, 'text');
+var a = el('div');
+var b = el('div', { class : 'test' }, 'text');
 a.copy(b);
 
 a.className();
@@ -335,7 +335,7 @@ a.html();
 Will set or return value of the attribute `name` for a `Node`.
 
 ```javascript
-var b = el();
+var b = el('div');
 
 a.name('test');
 
@@ -365,7 +365,7 @@ node.removeClass('my-class-name');
 Will toggle a class name on a node. If the class exists, it will be removed, if it does not exist, it will be added.
 
 ```javascript
-var myDIV = el();
+var myDIV = el('div');
 myDIV.toggleClass('toggle'); // -> myDIV has class 'toggle'
 myDIV.toggleClass('toggle'); // -> myDIV does not have class 'toggle'
 ```
@@ -375,45 +375,46 @@ myDIV.toggleClass('toggle'); // -> myDIV does not have class 'toggle'
 
 Is an interface for `appendChild`, the result being a way to add a `Node` to a parent `Node`.
 
-When a `Node` is appended to an element in the `DOM` it emmits a `mount` event.
+When a `Node` is appended to an element in the `DOM` it emits a `mount` event.
 
 ```javascript
-var parent = el({ class : 'parent-1' });
-var child = el({ class : 'child-1' });
+var parent = el('div', { class : 'parent-1' });
+var child = el('div', { class : 'child-1' });
 parent.append(child);
 ```
 
 is the same as
 
 ```javascript
-var parent = el({ class : 'parent-1' },
-  el({ class : 'child-1' })
-);
+var parent = el('div', { class : 'parent-1' }, [
+  el('div', { class : 'child-1' })
+]);
 ```
 
 ```javascript
-el({ class : 'parent-1' }).append(
-  el({ class : 'child-1' })
+el('div', { class : 'parent-1' }).append(
+  el('div', { class : 'child-1' })
 );
 ```
 
 ```HTML
 <div class="parent-1">
   <div class="child-1"></div>
+  <div class="child-2"></div>
 </div>
 ```
 
-You can also pass as many valid elements as you want to `append`
+You can also pass as many valid elements as you want to `append`, but as soon as there are more than 1 elements to append, they must be wrapped in an array.
 
 ```javascript
-var parent = el({ class : 'parent-1' });
-var child1 = el({ class : 'child-1' });
-var child2 = el({ class : 'child-2' });
+var parent = el('div', { class : 'parent-1' });
+var child1 = el('div', { class : 'child-1' });
+var child2 = el('div', { class : 'child-2' });
 
-parent.append(
+parent.append([
   child1,
   child2
-);
+]);
 ```
 
 ```HTML
@@ -448,9 +449,9 @@ Is an interface for `insertBefore`, the result being a way to add a `Node` befor
 When a `Node` is appended to an element in the `DOM` it emmits a `mount` event.
 
 ```javascript
-var parent = el({ class : 'parent-1' });
-var reference = el({ class : 'reference-1' });
-var before = el({ class : 'before-1' });
+var parent = el('div', { class : 'parent-1' });
+var reference = el('div', { class : 'reference-1' });
+var before = el('div', { class : 'before-1' });
 
 parent.append(ref);
 reference.before(before);
@@ -463,16 +464,16 @@ reference.before(before);
 </div>
 ```
 
-You can also pass as many valid elements as you want to `before`
+You can also pass as many valid elements as you want to `before`, when there is more than 1 element, it must be wrapped in an array.
 
 ```javascript
-var parent = el({ class : 'parent-1' });
-var reference = el({ class : 'reference-1' });
-var before1 = el({ class : 'before-1' });
-var before2 = el({ class : 'before-2' });
+var parent = el('div', { class : 'parent-1' });
+var reference = el('div', { class : 'reference-1' });
+var before1 = el('div', { class : 'before-1' });
+var before2 = el('div', { class : 'before-2' });
 
 parent.append(ref);
-reference.before(before1, before2);
+reference.before([before1, before2]);
 ```
 
 ```HTML
@@ -500,11 +501,11 @@ a.isChecked();
 Clones an element, is an interface for `Node.cloneNode(true)`
 
 ```javascript
-var a = el('div',
+var a = el('div', [
   el('div', { class : 'child-1' }),
   el('div', { class : 'child-2' }),
   el('div', { class : 'child-3' })
-);
+]);
 
 var b = a.clone();
 ```
@@ -590,9 +591,9 @@ target.html();
 Will append a child element in the first position of the parent node.
 
 ```javascript
-var parent = el('div', { class : 'parent' },
+var parent = el('div', { class : 'parent' }, [
   el('div', { 'first-child' })
-);
+]);
 
 var child = el('div', { class : 'second-child' });
 ```
@@ -620,9 +621,9 @@ Will append a child element in the first position of the parent node.
 
 ```javascript
 var child = el('div', { class : 'second-child' });
-var parent = el('div', { class : 'parent' },
+var parent = el('div', { class : 'parent' }, [
   el('div', { 'first-child' })
-);
+]);
 ```
 
 ```html
@@ -674,7 +675,7 @@ Replaces a target node with a new node.
 
 ```javascript
 var targetNode = el(document.querySelector('.target-node'));
-var newNode = el({ class : 'new-node' });
+var newNode = el('div', { class : 'new-node' });
 targetNode.replaceWith(newNode);
 ```
 
@@ -711,10 +712,10 @@ a.select(0, -3);
 `select`
 
 ```javascript
-var a = el('select',
+var a = el('select', [
   el('option'),
   el('option')
-);
+]);
 
 a.select(0);
 
@@ -733,7 +734,7 @@ The property must be the JavaScript named property. Vendor prefixes are not nece
 ### Value and property
 
 ```javascript
-var a = el();
+var a = el('div');
 
 a.style('fontSize', 13);
 ```
@@ -741,7 +742,7 @@ a.style('fontSize', 13);
 ### Object
 
 ```javascript
-var a = el();
+var a = el('div');
 
 a.style({
   fontSize : 13,
@@ -883,7 +884,7 @@ Now when you click on the element, it will log `click` to the console. Any addit
 This will trigger all listeners for matching event name.
 
 ```javascript
-var node = el();
+var node = el('div');
 
 el.on('click', function myClickHandler() {
   // Do something
@@ -1011,7 +1012,7 @@ p.contains([a, b] c);
 Returns `boolean` value for whether a `Node` has a className.
 
 ```javascript
-var a = el({ class : 'test' });
+var a = el('div', { class : 'test' });
 a.hasClass('test')
 // -> true
 ```

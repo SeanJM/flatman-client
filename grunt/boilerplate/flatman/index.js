@@ -9,7 +9,7 @@ let index = page('index.html');
 index
   .title('Title')
   .body(
-    el()
+    el('div')
   );
 
 module.exports = index;

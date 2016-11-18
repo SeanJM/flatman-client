@@ -1,7 +1,7 @@
 This will trigger all listeners for matching event name.
 
 ```javascript
-var node = el();
+var node = el('div');
 
 el.on('click', function myClickHandler() {
   // Do something

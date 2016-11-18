@@ -8,7 +8,7 @@ The property must be the JavaScript named property. Vendor prefixes are not nece
 ### Value and property
 
 ```javascript
-var a = el();
+var a = el('div');
 
 a.style('fontSize', 13);
 ```
@@ -16,7 +16,7 @@ a.style('fontSize', 13);
 ### Object
 
 ```javascript
-var a = el();
+var a = el('div');
 
 a.style({
   fontSize : 13,

@@ -29,10 +29,10 @@ a.select(0, -3);
 `select`
 
 ```javascript
-var a = el('select',
+var a = el('select', [
   el('option'),
   el('option')
-);
+]);
 
 a.select(0);
 
