@@ -1,12 +1,12 @@
-CreateNode.prototype.before = function () {
+CreateNode.prototype.before = function (children) {
   var f = document.createDocumentFragment();
 
-  if (Array.isArray(arguments[0])) {
-    for (var i = 0, n = arguments[0].length; i < n; i++) {
-      f.append(getNode(arguments[i]));
+  if (Array.isArray(children)) {
+    for (var i = 0, n = children.length; i < n; i++) {
+      f.append(getNode(children[i]));
     }
-  } else {
-    f.append(getNode(arguments[0]));
+  } else if (!Array.isArray(children) || arguments.length > 1) {
+    throw 'Before takes a single array as an argument';
   }
 
   this.node.parentNode.insertBefore(f, this.node);

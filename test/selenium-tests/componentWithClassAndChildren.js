@@ -6,7 +6,7 @@ function C() {
   this.node = {
     document : a
   };
-  this.node.document.append(b);
+  this.node.document.append([b]);
 }
 
 C.prototype.addClass = function (a) {

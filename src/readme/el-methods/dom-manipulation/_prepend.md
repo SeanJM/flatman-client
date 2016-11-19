@@ -15,7 +15,7 @@ var child = el('div', { class : 'second-child' });
 ```
 
 ```javascript
-parent.prepend(child);
+parent.prepend([child]);
 ```
 
 ```html

@@ -2,7 +2,7 @@ var a = el('div');
 var b = el('div');
 var c = el('div');
 
-a.append(b);
+a.append([b]);
 b.replaceWith(c);
 
 return {

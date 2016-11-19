@@ -1,9 +1,16 @@
-CreateNode.prototype.prepend = function (node) {
-  var children = this.node.childNodes;
-  node = node.node || node;
-  if (children.length) {
-    this.node.insertBefore(node, children[0]);
+CreateNode.prototype.prepend = function (children) {
+  var i = 0;
+  var n = children.length;
+
+  if (!this.node.parentNode) {
+    throw 'Cannot perform \'prepend\', node requires a parent';
+  }
+
+  if (Array.isArray(children)) {
+    for (; i < n; i++) {
+      this.node.parentNode.insertBefore(getNode(children[i]), this.node);
+    }
   } else {
-    this.node.appendChild(node);
+    throw 'prepend takes a single array as an argument';
   }
 };

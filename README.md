@@ -380,7 +380,7 @@ When a `Node` is appended to an element in the `DOM` it emits a `mount` event.
 ```javascript
 var parent = el('div', { class : 'parent-1' });
 var child = el('div', { class : 'child-1' });
-parent.append(child);
+parent.append([child]);
 ```
 
 is the same as
@@ -392,28 +392,8 @@ var parent = el('div', { class : 'parent-1' }, [
 ```
 
 ```javascript
-el('div', { class : 'parent-1' }).append(
+el('div', { class : 'parent-1' }).append([
   el('div', { class : 'child-1' })
-);
-```
-
-```HTML
-<div class="parent-1">
-  <div class="child-1"></div>
-  <div class="child-2"></div>
-</div>
-```
-
-You can also pass as many valid elements as you want to `append`, but as soon as there are more than 1 elements to append, they must be wrapped in an array.
-
-```javascript
-var parent = el('div', { class : 'parent-1' });
-var child1 = el('div', { class : 'child-1' });
-var child2 = el('div', { class : 'child-2' });
-
-parent.append([
-  child1,
-  child2
 ]);
 ```
 
@@ -453,33 +433,13 @@ var parent = el('div', { class : 'parent-1' });
 var reference = el('div', { class : 'reference-1' });
 var before = el('div', { class : 'before-1' });
 
-parent.append(ref);
-reference.before(before);
+parent.append([ref]);
+reference.before([before]);
 ```
 
 ```HTML
 <div class="parent-1">
   <div class="before-1"></div>
-  <div class="reference-1"></div>
-</div>
-```
-
-You can also pass as many valid elements as you want to `before`, when there is more than 1 element, it must be wrapped in an array.
-
-```javascript
-var parent = el('div', { class : 'parent-1' });
-var reference = el('div', { class : 'reference-1' });
-var before1 = el('div', { class : 'before-1' });
-var before2 = el('div', { class : 'before-2' });
-
-parent.append(ref);
-reference.before([before1, before2]);
-```
-
-```HTML
-<div class="parent-1">
-  <div class="before-1"></div>
-  <div class="before-2"></div>
   <div class="reference-1"></div>
 </div>
 ```
@@ -605,7 +565,7 @@ var child = el('div', { class : 'second-child' });
 ```
 
 ```javascript
-parent.prepend(child);
+parent.prepend([child]);
 ```
 
 ```html

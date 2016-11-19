@@ -1,5 +1,5 @@
 CreateNode.prototype.prependTo = function (target) {
-  var node = target.node || target;
+  var node = getNode(target);
   var children = node.childNodes;
   if (children.length) {
     node.insertBefore(this.node, children[0]);
