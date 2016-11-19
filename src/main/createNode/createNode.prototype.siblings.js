@@ -7,7 +7,7 @@ CreateNode.prototype.siblings = function () {
 
   for (var i = 0, n = children.length; i < n; i++) {
     if (isElement(children[i])) {
-      siblings.push(new CreateNode(children[i]));
+      siblings.push(el(children[i]));
     }
   }
 

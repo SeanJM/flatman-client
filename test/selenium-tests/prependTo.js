@@ -3,9 +3,9 @@ var b = el('div', { class : 'b' });
 var c = el('div', { class : 'c' });
 
 a.append([b]);
-c.prependTo(a);
+c.prependTo(b);
 
 return {
-  left : a.children()[0].node === c.node,
+  left : b.children()[0].node === c.node,
   right : true
 };

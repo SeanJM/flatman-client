@@ -1,105 +1,37 @@
-function el() {
-  var i = 0;
+function el(tagName) {
+  var i = 1;
   var n = arguments.length;
-  var a;
 
-  function F() { return CreateNode.apply(this, a); }
+  var opt = {};
+  var children = [];
+
+  for (; i < n; i++) {
+    if (Array.isArray(arguments[i])) {
+      children = arguments[i];
+    } else if (typeof arguments[i] === 'object') {
+      opt = arguments[i];
+    } else {
+      throw new Error('Invaild argument of type: \'' + typeof arguments[i] + '\'');
+    }
+  }
 
   // Faster way to apply arguments
   // Guards against the [ OBJECT ] element which is a function and an HTML element
-  if (!isElement(arguments[0]) && typeof arguments[0] === 'function') {
-    switch (n) {
-      case 1 :
-        return createComponent(arguments[0]);
-
-      case 2 :
-        return createComponent(arguments[0], arguments[1]);
-
-      case 3 :
-        return createComponent(
-          arguments[0],
-          arguments[1],
-          arguments[2]
-        );
-
-      case 4 :
-        return createComponent(
-          arguments[0],
-          arguments[1],
-          arguments[2],
-          arguments[3]
-        );
-
-      case 5 :
-        return createComponent(
-          arguments[0],
-          arguments[1],
-          arguments[2],
-          arguments[3],
-          arguments[4]
-        );
-
-      default :
-        a = new Array(n);
-        for (; i < n; i++) {
-          a[i] = arguments[i];
-        }
-        return createComponent.apply(null, a);
-    }
-  } else if (typeof arguments[0] !== 'undefined') {
+  if (!isElement(tagName) && typeof tagName === 'function') {
+    return createComponent(tagName, opt, children);
+  } else if (typeof tagName === 'string') {
     // Check for the possibility that they are passing a constructor as a string
     if (
-      typeof arguments[0] === 'string'
-      && arguments[0][0] === arguments[0][0].toUpperCase()
-      && arguments[0][1] === arguments[0][1].toLowerCase()
+      typeof tagName === 'string'
+      && tagName[0] === tagName[0].toUpperCase()
+      && tagName[1] === tagName[1].toLowerCase()
     ) {
-      throw 'Invalid tag name: "' + arguments[0] + '", it looks like you are passing a constructor name as a string.';
+      throw 'Invalid tag name: "' + tagName + '", it looks like you are passing a constructor name as a string.';
     }
-    switch (n) {
-      case 1 :
-        return new CreateNode(arguments[0]);
-
-      case 2 :
-        return new CreateNode(
-          arguments[0],
-          arguments[1]
-        );
-
-      case 3 :
-        return new CreateNode(
-          arguments[0],
-          arguments[1],
-          arguments[2]
-        );
-
-      case 4 :
-        return new CreateNode(
-          arguments[0],
-          arguments[1],
-          arguments[2],
-          arguments[3]
-        );
-
-      case 5 :
-        return new CreateNode(
-          arguments[0],
-          arguments[1],
-          arguments[2],
-          arguments[3],
-          arguments[4]
-        );
-
-      default :
-        a = new Array(n);
-
-        for (; i < n; i++) {
-          a[i] = arguments[i];
-        }
-
-        F.prototype = CreateNode.prototype;
-        return new F();
-    }
+    return new CreateNode(tagName, opt, children);
+  } else if (isElement(tagName)) {
+    return new CreateNode(tagName, opt, children);
   } else {
-    return new CreateNode();
+    throw new Error('Invalid arguments for el');
   }
 }

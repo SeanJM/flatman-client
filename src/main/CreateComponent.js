@@ -1,37 +1,27 @@
-function createComponent(constructor) {
+function createComponent(constructor, opt, array) {
   var i = 1;
   var n = arguments.length;
+  var k;
 
   var hasAppend = typeof constructor.prototype.append === 'function';
   var hasText = typeof constructor.prototype.text === 'function';
-
-  // Pass the objec to the constructor if it exists
-  var component;
-
   var children = [];
   var strings = [];
-  var init = [];
 
-  var opt = {};
-  var k;
+  // Pass the objec to the constructor if it exists
+  var component = new constructor(opt);
 
-  for (; i < n; i++) {
-    if (Array.isArray(arguments[i])) {
-      arguments[i].forEach(function (child) {
-        if (typeof child === 'string' || typeof child === 'number') {
-          strings.push(child);
-        } else {
-          children.push(child);
-        }
-      });
-    } else if (typeof arguments[i] === 'object') {
-      opt = arguments[i];
-    } else {
-      throw 'Invalid argument for createComponent, acceptable types are an {object} for Component options, and an array for children. You passed an argument of type \'' + typeof arguments[i] + '\'';
-    }
+  if (hasText) {
+    array.forEach(function (child) {
+      if (typeof child === 'string' || typeof child === 'number') {
+        strings.push(child);
+      } else {
+        children.push(child);
+      }
+    });
+  } else {
+    children = array;
   }
-
-  component = new constructor(opt);
 
   // Check for an 'on' method
   for (k in opt) {
@@ -62,12 +52,16 @@ function createComponent(constructor) {
     }
   }
 
-  if (children.length) {
+  if (children.length && hasAppend) {
     component.append(children);
+  } else if (component.node && component.node.document) {
+    component.node.document.append(children);
+  } else {
+    throw new Error('Invalid component \'' + constructor.name + '\' does not have an append method, or a ' + constructor.name + '.node.document');
   }
 
   if (strings.length) {
-    component.text(strings);
+    component.text.apply(component, strings);
   }
 
   return component;

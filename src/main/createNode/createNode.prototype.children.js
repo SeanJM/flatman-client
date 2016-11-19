@@ -7,7 +7,7 @@ CreateNode.prototype.children = function (a, b) {
 
   for (; i < n; i++) {
     if (isElement(children[i])) {
-      output.push(new CreateNode(children[i]));
+      output.push(el(children[i]));
     }
   }
 

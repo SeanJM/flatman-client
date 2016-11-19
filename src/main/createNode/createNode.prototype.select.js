@@ -1,5 +1,5 @@
 CreateNode.prototype.select = function (start, end) {
-  if (['input', 'textarea'].indexOf(this.tag) > -1) {
+  if (['input', 'textarea'].indexOf(this.tagName) > -1) {
     if (
       typeof start === 'undefined'
       && typeof end === 'undefined'
@@ -24,7 +24,7 @@ CreateNode.prototype.select = function (start, end) {
     setSelection(this.node, start, end);
 
     return this;
-  } else if (this.tag === 'select') {
+  } else if (this.tagName === 'select') {
     if (typeof start === 'undefined') {
       return this.node.selectedIndex;
     } else {

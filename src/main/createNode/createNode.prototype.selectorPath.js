@@ -3,7 +3,7 @@ CreateNode.prototype.selectorPath = function () {
   var p = this.node.parentNode;
 
   while (p) {
-    path.unshift(new CreateNode(p).getSelector());
+    path.unshift(el(p).getSelector());
 
     if (p === document.body || p.id.length > 0) {
       return path.join(' ');
