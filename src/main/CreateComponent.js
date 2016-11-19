@@ -24,9 +24,10 @@ function createComponent(constructor) {
           children.push(child);
         }
       });
-      children = arguments[i];
     } else if (typeof arguments[i] === 'object') {
       opt = arguments[i];
+    } else {
+      throw 'Invalid argument for createComponent, acceptable types are an {object} for Component options, and an array for children. You passed an argument of type \'' + typeof arguments[i] + '\'';
     }
   }
 
