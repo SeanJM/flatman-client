@@ -24,7 +24,6 @@ function CreateNode(tagName, opt, children) {
   this.node = getNode.call(this, tagName);
   this.tagName = this.node.tagName.toLowerCase();
   this.attr(opt);
-  console.log(children);
   this.append(children);
 
   this.node.style.transform = this.node.style[VENDOR_PREFIX.transform];
