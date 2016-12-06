@@ -300,6 +300,14 @@ module.exports = new TinyTest(function (test) {
         }),
 
       driver
+        .executeScript(tests.siblings)
+        .then(function (out) {
+          test('scrollWidth')
+            .this(out.left)
+            .equal(out.right);
+        }),
+
+      driver
         .executeScript(tests.text)
         .then(function (out) {
           test('text')
@@ -410,6 +418,9 @@ module.exports = new TinyTest(function (test) {
         driver.close();
       }
     )
-    .catch(e => console.trace(e));
+    .catch(function (e) {
+      console.trace(e);
+      driver.close();
+    });
   });
 });
