@@ -14,16 +14,16 @@ CreateNode.prototype.getSelector = function () {
       return '#' + value;
     },
     name : function (value) {
-      return '[name="'+ value + '"]';
+      return '[name="' + value + '"]';
     },
     title : function (value) {
-      return '[title="'+ value + '"]';
+      return '[title="' + value + '"]';
     },
     value : function (value) {
-      return '[value="'+ value + '"]';
+      return '[value="' + value + '"]';
     },
     type : function (value) {
-      return '[type="'+ value + '"]';
+      return '[type="' + value + '"]';
     }
   };
   var selector = [];
