@@ -32,6 +32,6 @@ function el(tagName) {
   } else if (isElement(tagName)) {
     return new CreateNode(tagName, opt, children);
   } else {
-    throw new Error('Invalid arguments for el');
+    throw new Error('The first argument for "el" must be either a Component or a valid HTML tag name. eg: el("div")');
   }
 }
