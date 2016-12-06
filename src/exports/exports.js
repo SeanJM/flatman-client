@@ -1,7 +1,6 @@
 // El assignments
 window.el = el;
 window.el.fn = CreateNode.fn;
-window.el.isVisible = isVisible;
 window.el.hasParent = hasParent;
 window.el.contains = contains;
 window.el.isElement = isElement;
