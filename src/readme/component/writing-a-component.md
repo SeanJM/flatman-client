@@ -2,7 +2,7 @@
 function Component(options) {
   this.node = {};
   this.node.document = el('div', [
-    this.node.label = el('div', { class : 'text' })
+    this.node.label = el('div', { className : 'text' })
   ]);
 }
 
@@ -44,7 +44,7 @@ Component.extend = function (Constructor) {
 
 ```javascript
 el(Component, {
-    class : 'my-component-class',
+    className : 'my-component-class',
 
     onClick : function () {
       // What it does when it's clicked on

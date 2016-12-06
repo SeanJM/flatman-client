@@ -1,5 +1,5 @@
-var a = el('div', { class : 'test'});
-var b = el('div', { class : 'test-2'});
+var a = el('div', { className : 'test'});
+var b = el('div', { className : 'test-2'});
 
 return {
   left : (

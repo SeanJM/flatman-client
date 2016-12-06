@@ -7,21 +7,21 @@ function Test () {
     pass : []
   };
 
-  this.result = el('div', { class : 'result' }, [
-    this.dot = el('div', { class : 'result_dot' }),
-    this.title = el('div', { class : 'result_title'})
+  this.result = el('div', { className : 'result' }, [
+    this.dot = el('div', { className : 'result_dot' }),
+    this.title = el('div', { className : 'result_title'})
   ]);
 }
 
 Test.prototype.shouldEqual = function (right) {
-  var status = el('div', { class : 'result_status' }, [
-    el('div', { class : 'result_status_item result_status_item--expected'}, [
-      el('div', { class : 'result_status_title'}, 'Expected'),
-      el('div', { class : 'result_status_value'}, typeToString(right))
+  var status = el('div', { className : 'result_status' }, [
+    el('div', { className : 'result_status_item result_status_item--expected'}, [
+      el('div', { className : 'result_status_title'}, 'Expected'),
+      el('div', { className : 'result_status_value'}, typeToString(right))
     ]),
-    el('div', { class : 'result_status_item result_status_item--actual'}, [
-      el('div', { class : 'result_status_title'}, 'Actual'),
-      el('div', { class : 'result_status_value'}, typeToString(this.left))
+    el('div', { className : 'result_status_item result_status_item--actual'}, [
+      el('div', { className : 'result_status_title'}, 'Actual'),
+      el('div', { className : 'result_status_value'}, typeToString(this.left))
     ])
   ]);
 

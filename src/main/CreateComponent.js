@@ -37,7 +37,7 @@ function createComponent(constructor, opt, array) {
       } else {
         throw 'Invalid constructor \'' + constructor.name + '\', your component must have an "on" method.';
       }
-    } else if (k === 'class') {
+    } else if (k === 'className') {
       // Check for a class property, and it exists, add the class to the component
       if (typeof component.addClass === 'function') {
         component.addClass(opt[k]);
@@ -54,10 +54,10 @@ function createComponent(constructor, opt, array) {
 
   if (children.length && hasAppend) {
     component.append(children);
-  } else if (component.node && component.node.document) {
+  } else if (children.length && component.node && component.node.document) {
     component.node.document.append(children);
-  } else {
-    throw new Error('Invalid component \'' + constructor.name + '\' does not have an append method, or a ' + constructor.name + '.node.document');
+  } else if (children.length) {
+    throw new Error('Invalid component \'' + constructor.name + '\' does not have an append method');
   }
 
   if (strings.length) {

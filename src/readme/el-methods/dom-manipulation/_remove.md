@@ -1,8 +1,8 @@
 Will remove a `Node` from it's parent.
 
 ```javascript
-var a = el('div', { class : 'parent' });
-var b = el('div', { class : 'first-child' });
+var a = el('div', { className : 'parent' });
+var b = el('div', { className : 'first-child' });
 
 a.append(b);
 ```

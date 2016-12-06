@@ -1,7 +1,7 @@
-var p = el('div', { class : 'test'});
+var p = el('div', { className : 'test'});
 
 var a = el('div', {
-  class : 'test',
+  className : 'test',
   tabIndex : '0',
   id : 'my-id'
 });

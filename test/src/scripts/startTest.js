@@ -4,7 +4,7 @@ function StartTest (name, callback) {
   this.passed = 0;
   this.failed = 0;
 
-  this.test = el('div', { class : 'test-container' });
+  this.test = el('div', { className : 'test-container' });
 
   el('h1', name).appendTo(this.test);
 
@@ -24,14 +24,14 @@ function StartTest (name, callback) {
     return test.run(name, left);
   });
 
-  el('div', { class : 'test-results' },
-    el('div', { class : 'test-results_failed' }, 'Failed: ' + this.failed),
-    el('div', { class : 'test-results_passed' }, ' Passed: ' + this.passed)
+  el('div', { className : 'test-results' },
+    el('div', { className : 'test-results_failed' }, 'Failed: ' + this.failed),
+    el('div', { className : 'test-results_passed' }, ' Passed: ' + this.passed)
   ).prependTo(this.test);
 
-  el('div', { class : 'test-results_bar' },
+  el('div', { className : 'test-results_bar' },
     el('div', {
-      class : 'test-results_bar_progress',
+      className : 'test-results_bar_progress',
       style : 'width: ' + (this.passed / (this.failed + this.passed) * 100) + '%;'
     })
   ).prependTo(this.test);

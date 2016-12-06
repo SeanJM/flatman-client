@@ -1,6 +1,6 @@
 ```javascript
 el('div', [
-  el('div', { class : 'child'}),
-  el('div', { class : 'child-2'})
+  el('div', { className : 'child'}),
+  el('div', { className : 'child-2'})
 ]);
 ```

@@ -13,7 +13,7 @@ C.prototype.addClass = function (a) {
   this.node.document.addClass(a);
 };
 
-var p = el(C, { class : 'test' });
+var p = el(C, { className : 'test' });
 
 return {
   left : (

@@ -1,8 +1,8 @@
 Will append a child element in the first position of the parent node.
 
 ```javascript
-var child = el('div', { class : 'second-child' });
-var parent = el('div', { class : 'parent' }, [
+var child = el('div', { className : 'second-child' });
+var parent = el('div', { className : 'parent' }, [
   el('div', { 'first-child' })
 ]);
 ```

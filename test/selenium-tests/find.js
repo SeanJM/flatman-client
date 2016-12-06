@@ -1,5 +1,5 @@
 var a;
-var p = el('div', [ a = el('div', { class : 'test'}) ]);
+var p = el('div', [ a = el('div', { className : 'test'}) ]);
 
 return {
   left : p.find('.test')[0].node === a.node,

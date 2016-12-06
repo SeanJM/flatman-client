@@ -1,8 +1,8 @@
 var a;
 
-el('div', { class : '_1' }, [
-  el('div', { class : '1_1'}, [
-    a = el('div', { class : '1_1_1'})
+el('div', { className : '_1' }, [
+  el('div', { className : '1_1'}, [
+    a = el('div', { className : '1_1_1'})
   ])
 ]);
 

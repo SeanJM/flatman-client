@@ -1,7 +1,7 @@
-var a = el('div', { class : 'test1' });
-var b = el('div', { class : 'test2' });
-var c = el('div', { class : 'test2' });
-var d = el('div', { class : 'test2' });
+var a = el('div', { className : 'test1' });
+var b = el('div', { className : 'test2' });
+var c = el('div', { className : 'test2' });
+var d = el('div', { className : 'test2' });
 
 a.append([b, c, d]);
 

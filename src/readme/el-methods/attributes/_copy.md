@@ -2,7 +2,7 @@ Will copy a target node's attributes from another node, including it's `innerHTM
 
 ```javascript
 var a = el('div');
-var b = el('div', { class : 'test' }, 'text');
+var b = el('div', { className : 'test' }, 'text');
 a.copy(b);
 
 a.className();

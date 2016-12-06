@@ -3,9 +3,9 @@ Is an interface for `insertBefore`, the result being a way to add a `Node` befor
 When a `Node` is appended to an element in the `DOM` it emmits a `mount` event.
 
 ```javascript
-var parent = el('div', { class : 'parent-1' });
-var reference = el('div', { class : 'reference-1' });
-var before = el('div', { class : 'before-1' });
+var parent = el('div', { className : 'parent-1' });
+var reference = el('div', { className : 'reference-1' });
+var before = el('div', { className : 'before-1' });
 
 parent.append([ref]);
 reference.before([before]);

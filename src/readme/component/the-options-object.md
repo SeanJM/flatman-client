@@ -7,7 +7,7 @@ You can pass your component any options.
 
 ```
 el(Component, {
-  class : 'this-class', // Will actually trigger the components `addClass` method
+  className : 'this-class', // Will actually trigger the components `addClass` method
   onclick : function () {}, // onclick and onClick are functionally identical
   onClick : function () {},
   componentMethod : argument // Will be passed as a single argument to your method

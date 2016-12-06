@@ -1,11 +1,11 @@
 Will append a child element in the first position of the parent node.
 
 ```javascript
-var parent = el('div', { class : 'parent' }, [
+var parent = el('div', { className : 'parent' }, [
   el('div', { 'first-child' })
 ]);
 
-var child = el('div', { class : 'second-child' });
+var child = el('div', { className : 'second-child' });
 ```
 
 ```html

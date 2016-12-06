@@ -32,21 +32,21 @@
       pass : []
     };
   
-    this.result = el('div', { class : 'result' },
-      this.dot = el('div', { class : 'result_dot' }),
-      this.title = el('div', { class : 'result_title'})
+    this.result = el('div', { className : 'result' },
+      this.dot = el('div', { className : 'result_dot' }),
+      this.title = el('div', { className : 'result_title'})
     );
   }
   
   Test.prototype.shouldEqual = function (right) {
-    var status = el('div', { class : 'result_status' },
-      el('div', { class : 'result_status_item result_status_item--expected'},
-        el('div', { class : 'result_status_title'}, 'Expected'),
-        el('div', { class : 'result_status_value'}, typeToString(right))
+    var status = el('div', { className : 'result_status' },
+      el('div', { className : 'result_status_item result_status_item--expected'},
+        el('div', { className : 'result_status_title'}, 'Expected'),
+        el('div', { className : 'result_status_value'}, typeToString(right))
       ),
-      el('div', { class : 'result_status_item result_status_item--actual'},
-        el('div', { class : 'result_status_title'}, 'Actual'),
-        el('div', { class : 'result_status_value'}, typeToString(this.left))
+      el('div', { className : 'result_status_item result_status_item--actual'},
+        el('div', { className : 'result_status_title'}, 'Actual'),
+        el('div', { className : 'result_status_value'}, typeToString(this.left))
       )
     );
   
@@ -87,7 +87,7 @@
     this.passed = 0;
     this.failed = 0;
   
-    this.test = el('div', { class : 'test-container' });
+    this.test = el('div', { className : 'test-container' });
   
     el('h1', name).appendTo(this.test);
   
@@ -107,14 +107,14 @@
       return test.run(name, left);
     });
   
-    el('div', { class : 'test-results' },
-      el('div', { class : 'test-results_failed' }, 'Failed: ' + this.failed),
-      el('div', { class : 'test-results_passed' }, ' Passed: ' + this.passed)
+    el('div', { className : 'test-results' },
+      el('div', { className : 'test-results_failed' }, 'Failed: ' + this.failed),
+      el('div', { className : 'test-results_passed' }, ' Passed: ' + this.passed)
     ).prependTo(this.test);
   
-    el('div', { class : 'test-results_bar' },
+    el('div', { className : 'test-results_bar' },
       el('div', {
-        class : 'test-results_bar_progress',
+        className : 'test-results_bar_progress',
         style : 'width: ' + (this.passed / (this.failed + this.passed) * 100) + '%;'
       })
     ).prependTo(this.test);

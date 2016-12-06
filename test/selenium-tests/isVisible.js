@@ -2,8 +2,8 @@ var a = el('div');
 var b = el('div');
 var c = el('div');
 var d = el('div');
-var e = el('div', { class : 'e' });
-var f = el('div', { class : 'f' });
+var e = el('div', { className : 'e' });
+var f = el('div', { className : 'f' });
 var body = document.body;
 
 a.appendTo(body);

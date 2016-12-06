@@ -3,9 +3,9 @@ Returns a selector path to the selected node.
 ```javascript
 var child;
 
-el('div', { class : 'parent-1' }, [
-  el('div', { class : 'parent-2' }, [
-    child = el('div', { class : 'parent-3 '})
+el('div', { className : 'parent-1' }, [
+  el('div', { className : 'parent-2' }, [
+    child = el('div', { className : 'parent-3 '})
   ])
 ]);
 
@@ -18,9 +18,9 @@ If any of the parents has an ID, the path algorithm will terminate.
 ```javascript
 var child;
 
-el('div', { class : 'parent-1' }, [
-  el('div', { id : 'super-parent', class : 'parent-2' }, [
-    child = el('div', { class : 'parent-3 '})
+el('div', { className : 'parent-1' }, [
+  el('div', { id : 'super-parent', className : 'parent-2' }, [
+    child = el('div', { className : 'parent-3 '})
   ])
 ]);
 

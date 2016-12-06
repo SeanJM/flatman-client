@@ -1,11 +1,11 @@
 var a;
 var b;
 
-el('div', { class : '1' }, [
-  a = el('div', { class : '1_1'}),
-  el('div', { class : '1_2'}),
-  el('div', { class : '1_3'}),
-  b = el('div', { class : '1_4'})
+el('div', { className : '1' }, [
+  a = el('div', { className : '1_1'}),
+  el('div', { className : '1_2'}),
+  el('div', { className : '1_3'}),
+  b = el('div', { className : '1_4'})
 ]);
 
 return {

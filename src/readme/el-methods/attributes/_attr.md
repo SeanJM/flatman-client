@@ -10,7 +10,7 @@ div.attr('data-attribute', 'value');
 
 ```javascript
 el('div').attr({
-  class : 'some-class-name',
+  className : 'some-class-name',
   style : 'background: red'
 });
 ```

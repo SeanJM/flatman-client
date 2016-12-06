@@ -1,7 +1,7 @@
 # Create Node 1.1.4
 #### License: [MIT](https://opensource.org/licenses/MIT)
 
-#### ✅ All 47 tests pass
+#### ✅ All 48 tests pass
 
 ## Table of Contents
 
@@ -85,6 +85,7 @@
     - [parent](#el-methods--query--parent-top)
     - [parents](#el-methods--query--parents-top)
     - [parentsUntil](#el-methods--query--parentsuntil-top)
+    - [scrollWidth](#el-methods--query--scrollwidth-top)
     - [selectorPath](#el-methods--query--selectorpath-top)
     - [siblings](#el-methods--query--siblings-top)
     - [textNodes](#el-methods--query--textnodes-top)
@@ -153,7 +154,7 @@ You can pass your component any options.
 
 ```
 el(Component, {
-  class : 'this-class', // Will actually trigger the components `addClass` method
+  className : 'this-class', // Will actually trigger the components `addClass` method
   onclick : function () {}, // onclick and onClick are functionally identical
   onClick : function () {},
   componentMethod : argument // Will be passed as a single argument to your method
@@ -167,7 +168,7 @@ el(Component, {
 function Component(options) {
   this.node = {};
   this.node.document = el('div', [
-    this.node.label = el('div', { class : 'text' })
+    this.node.label = el('div', { className : 'text' })
   ]);
 }
 
@@ -209,7 +210,7 @@ Component.extend = function (Constructor) {
 
 ```javascript
 el(Component, {
-    class : 'my-component-class',
+    className : 'my-component-class',
 
     onClick : function () {
       // What it does when it's clicked on
@@ -230,15 +231,15 @@ el(Component, {
 
 ```javascript
 el('div', [
-  el('div', { class : 'child'}),
-  el('div', { class : 'child-2'})
+  el('div', { className : 'child'}),
+  el('div', { className : 'child-2'})
 ]);
 ```
 
 ### Examples / Basic Usage ([top](#table-of-contents))
 
 ```javascript
-el('div', { class : 'my-class-name' }, ['some text']);
+el('div', { className : 'my-class-name' }, ['some text']);
 ```
 
 ### Examples / Wrapping The Dom ([top](#table-of-contents))
@@ -293,7 +294,7 @@ div.attr('data-attribute', 'value');
 
 ```javascript
 el('div').attr({
-  class : 'some-class-name',
+  className : 'some-class-name',
   style : 'background: red'
 });
 ```
@@ -320,7 +321,7 @@ Will copy a target node's attributes from another node, including it's `innerHTM
 
 ```javascript
 var a = el('div');
-var b = el('div', { class : 'test' }, 'text');
+var b = el('div', { className : 'test' }, 'text');
 a.copy(b);
 
 a.className();
@@ -378,22 +379,22 @@ Is an interface for `appendChild`, the result being a way to add a `Node` to a p
 When a `Node` is appended to an element in the `DOM` it emits a `mount` event.
 
 ```javascript
-var parent = el('div', { class : 'parent-1' });
-var child = el('div', { class : 'child-1' });
+var parent = el('div', { className : 'parent-1' });
+var child = el('div', { className : 'child-1' });
 parent.append([child]);
 ```
 
 is the same as
 
 ```javascript
-var parent = el('div', { class : 'parent-1' }, [
-  el('div', { class : 'child-1' })
+var parent = el('div', { className : 'parent-1' }, [
+  el('div', { className : 'child-1' })
 ]);
 ```
 
 ```javascript
-el('div', { class : 'parent-1' }).append([
-  el('div', { class : 'child-1' })
+el('div', { className : 'parent-1' }).append([
+  el('div', { className : 'child-1' })
 ]);
 ```
 
@@ -411,8 +412,8 @@ Is an interface for `appendChild`, the result being a way to add a child `Node` 
 When a `Node` is appended to an element in the `DOM` it emmits a `mount` event.
 
 ```javascript
-var parent = el('div', { class : 'parent-1' });
-var child = el('div', { class : 'child-1' });
+var parent = el('div', { className : 'parent-1' });
+var child = el('div', { className : 'child-1' });
 child.appendTo(parent);
 ```
 
@@ -429,9 +430,9 @@ Is an interface for `insertBefore`, the result being a way to add a `Node` befor
 When a `Node` is appended to an element in the `DOM` it emmits a `mount` event.
 
 ```javascript
-var parent = el('div', { class : 'parent-1' });
-var reference = el('div', { class : 'reference-1' });
-var before = el('div', { class : 'before-1' });
+var parent = el('div', { className : 'parent-1' });
+var reference = el('div', { className : 'reference-1' });
+var before = el('div', { className : 'before-1' });
 
 parent.append([ref]);
 reference.before([before]);
@@ -462,9 +463,9 @@ Clones an element, is an interface for `Node.cloneNode(true)`
 
 ```javascript
 var a = el('div', [
-  el('div', { class : 'child-1' }),
-  el('div', { class : 'child-2' }),
-  el('div', { class : 'child-3' })
+  el('div', { className : 'child-1' }),
+  el('div', { className : 'child-2' }),
+  el('div', { className : 'child-3' })
 ]);
 
 var b = a.clone();
@@ -551,11 +552,11 @@ target.html();
 Will append a child element in the first position of the parent node.
 
 ```javascript
-var parent = el('div', { class : 'parent' }, [
+var parent = el('div', { className : 'parent' }, [
   el('div', { 'first-child' })
 ]);
 
-var child = el('div', { class : 'second-child' });
+var child = el('div', { className : 'second-child' });
 ```
 
 ```html
@@ -580,8 +581,8 @@ parent.prepend([child]);
 Will append a child element in the first position of the parent node.
 
 ```javascript
-var child = el('div', { class : 'second-child' });
-var parent = el('div', { class : 'parent' }, [
+var child = el('div', { className : 'second-child' });
+var parent = el('div', { className : 'parent' }, [
   el('div', { 'first-child' })
 ]);
 ```
@@ -608,8 +609,8 @@ child.prependTo(parent);
 Will remove a `Node` from it's parent.
 
 ```javascript
-var a = el('div', { class : 'parent' });
-var b = el('div', { class : 'first-child' });
+var a = el('div', { className : 'parent' });
+var b = el('div', { className : 'first-child' });
 
 a.append(b);
 ```
@@ -635,7 +636,7 @@ Replaces a target node with a new node.
 
 ```javascript
 var targetNode = el(document.querySelector('.target-node'));
-var newNode = el('div', { class : 'new-node' });
+var newNode = el('div', { className : 'new-node' });
 targetNode.replaceWith(newNode);
 ```
 
@@ -972,7 +973,7 @@ p.contains([a, b] c);
 Returns `boolean` value for whether a `Node` has a className.
 
 ```javascript
-var a = el('div', { class : 'test' });
+var a = el('div', { className : 'test' });
 a.hasClass('test')
 // -> true
 ```
@@ -1062,9 +1063,9 @@ Returns an array of direct descendants wrapped in the `el` constructor. This is 
 
 ```javascript
 var a = el('div', [
-  el('div', { class : 'child-1' }),
-  el('div', { class : 'child-2' }),
-  el('div', { class : 'child-3' })
+  el('div', { className : 'child-1' }),
+  el('div', { className : 'child-2' }),
+  el('div', { className : 'child-3' })
 ]);
 
 a.children();
@@ -1104,8 +1105,8 @@ Returns the closest parent matching the query.
 
 ```javascript
 var farthest;
-var parent = el('div', { class : 'closest' }, [
-  farthest = el('div', { class : 'farthest' })
+var parent = el('div', { className : 'closest' }, [
+  farthest = el('div', { className : 'farthest' })
 ]);
 
 farthest.closest('.closest');
@@ -1118,9 +1119,9 @@ farthest.closest('.closest');
 Returns an array of matches as a result of executing the query.
 
 ```javascript
-var parent = el('div', { class : 'closest' }, [
-  el('div', { class : 'find' }),
-  el('div', { class : 'find' })
+var parent = el('div', { className : 'closest' }, [
+  el('div', { className : 'find' }),
+  el('div', { className : 'find' })
 ]);
 
 parent.find('.find');
@@ -1133,7 +1134,7 @@ Returns a `String` selector for the selected node.
 
 ```javascript
 var parent = el('div', {
-  class : 'closest',
+  className : 'closest',
   tabIndex : 0,
   id : 'my-id'
 });
@@ -1191,9 +1192,9 @@ Returns an array of parents, from first to last.
 ```javascript
 var child;
 
-el('div', { class : 'parent-1' }, [
-  el('div', { class : 'parent-2' }, [
-    child = el('div', { class : 'parent-3 '})
+el('div', { className : 'parent-1' }, [
+  el('div', { className : 'parent-2' }, [
+    child = el('div', { className : 'parent-3 '})
   ])
 ]);
 
@@ -1209,6 +1210,15 @@ Takes a predicate as an argument and returns the first `truthy` match.
 div.parentsUntil(function (p) { return p.tagName === 'h1' });
 ```
 
+#### El Methods / Query / scrollWidth ([top](#table-of-contents))
+
+Returns the scrollWidth property of a `node`.
+
+```javascript
+node.scrollWidth();
+// -> Number
+```
+
 #### El Methods / Query / selectorPath ([top](#table-of-contents))
 
 Returns a selector path to the selected node.
@@ -1216,9 +1226,9 @@ Returns a selector path to the selected node.
 ```javascript
 var child;
 
-el('div', { class : 'parent-1' }, [
-  el('div', { class : 'parent-2' }, [
-    child = el('div', { class : 'parent-3 '})
+el('div', { className : 'parent-1' }, [
+  el('div', { className : 'parent-2' }, [
+    child = el('div', { className : 'parent-3 '})
   ])
 ]);
 
@@ -1231,9 +1241,9 @@ If any of the parents has an ID, the path algorithm will terminate.
 ```javascript
 var child;
 
-el('div', { class : 'parent-1' }, [
-  el('div', { id : 'super-parent', class : 'parent-2' }, [
-    child = el('div', { class : 'parent-3 '})
+el('div', { className : 'parent-1' }, [
+  el('div', { id : 'super-parent', className : 'parent-2' }, [
+    child = el('div', { className : 'parent-3 '})
   ])
 ]);
 
@@ -1248,11 +1258,11 @@ Returns a selected Node and it's siblings filtered to show only nodes of type `1
 ```javascript
 var selected;
 
-el('div', { class : 'parent-1' }, [
-  selected = el('div', { class : 'sibling-1' }),
-  el('div', { class : 'sibling-2' }),
-  el('div', { class : 'sibling-3' }),
-  el('div', { class : 'sibling-4' })
+el('div', { className : 'parent-1' }, [
+  selected = el('div', { className : 'sibling-1' }),
+  el('div', { className : 'sibling-2' }),
+  el('div', { className : 'sibling-3' }),
+  el('div', { className : 'sibling-4' })
 ]);
 
 selected.siblings();
@@ -1270,7 +1280,7 @@ selected.siblings();
 Returns all the `Text Nodes` which are a child of a selected node.
 
 ```javascript
-var selected = el('div', { class : 'parent-1' }, ['text node']);
+var selected = el('div', { className : 'parent-1' }, ['text node']);
 selected.textNodes();
 // -> [Text Node]
 ```
@@ -1314,17 +1324,18 @@ selected.textNodes();
   32. select............................................................. ✅
   33. selectorPath....................................................... ✅
   34. siblings........................................................... ✅
-  35. text............................................................... ✅
-  36. textNodes.......................................................... ✅
-  37. toggleClass........................................................ ✅
-  38. trigger............................................................ ✅
-  39. value.............................................................. ✅
-  40. fn................................................................. ✅
-  41. style (value, property)............................................ ✅
-  42. style (object)..................................................... ✅
-  43. uncheck............................................................ ✅
-  44. check.............................................................. ✅
-  45. name............................................................... ✅
-  46. Basic Component.................................................... ✅
-  47. Component with class and children.................................. ✅
+  35. scrollWidth........................................................ ✅
+  36. text............................................................... ✅
+  37. textNodes.......................................................... ✅
+  38. toggleClass........................................................ ✅
+  39. trigger............................................................ ✅
+  40. value.............................................................. ✅
+  41. fn................................................................. ✅
+  42. style (value, property)............................................ ✅
+  43. style (object)..................................................... ✅
+  44. uncheck............................................................ ✅
+  45. check.............................................................. ✅
+  46. name............................................................... ✅
+  47. Basic Component.................................................... ✅
+  48. Component with class and children.................................. ✅
 ```

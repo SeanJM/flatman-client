@@ -1,3 +1,3 @@
 ```javascript
-el('div', { class : 'my-class-name' }, ['some text']);
+el('div', { className : 'my-class-name' }, ['some text']);
 ```

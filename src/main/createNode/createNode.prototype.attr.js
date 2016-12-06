@@ -1,5 +1,6 @@
 CreateNode.prototype.attr = function () {
   var tagName = this.node.tagName.toLowerCase();
+  var className;
   if (arguments.length === 0) {
     return getAttributes(this.node);
   } else if (
@@ -15,7 +16,7 @@ CreateNode.prototype.attr = function () {
     return this.node.getAttribute(arguments[0]);
   } else if (typeof arguments[0] === 'object') {
     for (var k in arguments[0]) {
-      if (k === 'class') {
+      if (k === 'className') {
         className = arguments[0][k].split(' ').map(trim).filter(hasLength);
         if (this.isSVG) {
           this.node.setAttributeNS(null, 'class', className.sort().join(' '));

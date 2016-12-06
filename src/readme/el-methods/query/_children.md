@@ -2,9 +2,9 @@ Returns an array of direct descendants wrapped in the `el` constructor. This is 
 
 ```javascript
 var a = el('div', [
-  el('div', { class : 'child-1' }),
-  el('div', { class : 'child-2' }),
-  el('div', { class : 'child-3' })
+  el('div', { className : 'child-1' }),
+  el('div', { className : 'child-2' }),
+  el('div', { className : 'child-3' })
 ]);
 
 a.children();
