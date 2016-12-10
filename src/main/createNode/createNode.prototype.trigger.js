@@ -28,4 +28,6 @@ CreateNode.prototype.trigger = function (names, e) {
       }
     }
   }
+
+  return this;
 };
