@@ -1,8 +1,11 @@
 function style(node, name, value) {
+  if (Array.isArray(value)) {
+    value = value.join(', ');
+  }
   if (typeof style[name] === 'function') {
     node.style[name] = style[name](value);
   } else {
-    node.style[name] = toPixel(name, value);
+    node.style[name] = toStyleUnit(name, value);
   }
 }
 
@@ -11,11 +14,8 @@ style.transform = function (value) {
 
   if (typeof value === 'object') {
     for (var k in value) {
-      if (
-        typeof value[k] === 'number'
-        || typeof value[k] === 'string'
-      ) {
-        str.push(k + '(' + toPixel(k, value[k]) + ')');
+      if (typeof value[k] === 'number' || typeof value[k] === 'string') {
+        str.push(k + '(' + toStyleUnit(k, value[k]) + ')');
       } else if (Array.isArray(value[k])) {
         str.push(
           k + '(' + value[k].map(partial(toPixel, k)).join(', ') + ')'
