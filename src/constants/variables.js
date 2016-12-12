@@ -66,24 +66,6 @@ var SVG_TAGNAMES = ['svg', 'circle', 'line', 'path', 'use'];
 // Vendor Prefixes
 var CSS_PREFIXED_PROPERTIES = ['transform', 'userSelect', 'userModify', 'transition', 'animation'];
 var PREFIXES = ['Moz', 'webkit', 'ms'];
-
-// Certain event listeners are prefixed
-var ON_PREFIXED_EVENT = {
-  Moz : {
-    transitionend : 'transitionend'
-  },
-  webkit : {
-    transitionend : 'webkitTransitionEnd'
-  },
-  ms : {
-    transitionend : 'transitionend'
-  },
-  default : {
-    transitionend : 'transitionend'
-  }
-};
-
-var ON_PREFIX = ON_PREFIXED_EVENT.default;
 var VENDOR_PREFIX;
 
 var IE_INPUT = {

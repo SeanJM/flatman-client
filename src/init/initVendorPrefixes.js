@@ -17,9 +17,5 @@ function initVendorPrefixes() {
     }
   }
 
-  if (prefix) {
-    ON_PREFIX = ON_PREFIXED_EVENT[prefix];
-  }
-
   VENDOR_PREFIX = list;
 }

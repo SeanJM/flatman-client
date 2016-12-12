@@ -5,10 +5,6 @@ CreateNode.prototype.on = function (names, callback) {
     names[i] = names[i].trim();
 
     if (names[i].length) {
-      if (ON_PREFIX[names[i]]) {
-        names[i] = ON_PREFIX[names[i]];
-      }
-
       if (typeof this.subscribers[names[i]] === 'undefined') {
         this.subscribers[names[i]] = [];
       }
