@@ -1,27 +1,13 @@
-function addClass(name, node) {
-  function curry(node) {
-    var className = node.getAttribute('class') || '';
-    var i;
+function addClass(a, b) {
+  var node = isElement(a) ? el.getNode(a) : el.getNode(b);
+  var string = typeof a === 'string' ? a : b;
+  var className = node.getAttribute('class') || '';
+  var classList = className.split(' ').map(trim).filter(hasLength);
+  var i = classList.indexOf(string);
 
-    if (Array.isArray(name)) {
-      name.forEach(partial(addClass, node));
-    } else {
-      className = className.split(' ').map(trim).filter(hasLength);
-      i = className.indexOf(name);
-
-      if (i === -1) {
-        className.push(name);
-        className.sort();
-        node.setAttribute('class', className.join(' '));
-      }
-    }
-  }
-
-  if (arguments.length === 2) {
-    return curry(node);
-  } else if (arguments.length === 1) {
-    return curry;
-  } else {
-    throw new Error('Invalid number of arguments for \"addClass\"');
+  if (i === -1) {
+    classList.push(string);
+    classList.sort();
+    node.setAttribute('class', classList.join(' '));
   }
 }
