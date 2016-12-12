@@ -1,4 +1,3 @@
-initVendorPrefixes();
 initCustomEvent();
 initDoubleClick();
 initDragAndDrop();
