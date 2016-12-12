@@ -287,6 +287,21 @@ var pizza = document.querySelector('.pizza');
 el.addClass('class-name', pizza);
 ```
 
+The order of the arguments does not matter
+
+```javascript
+var pizza = document.querySelector('.pizza');
+el.addClass(pizza, 'class-name');
+```
+
+A curried function which adds class names to the `Node`
+```javascript
+var pizza = document.querySelector('.pizza');
+var toppings = el.addClass(pizza);
+toppings('peppers');
+toppings('mushrooms');
+```
+
 ### Functional Methods / el.isComponent ([top](#table-of-contents))
 
 Returns `true` or `false` if the argument is a component
