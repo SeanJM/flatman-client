@@ -25,6 +25,7 @@
 
 - Functional Methods
   - [Basics](#functional-methods--basics-top)
+  - [el.addClass](#functional-methods--el-addclass-top)
   - [el.isComponent](#functional-methods--el-iscomponent-top)
 
 - El Methods
@@ -265,6 +266,26 @@ var wrapped = el(document.querySelector('#my-div'));
 - `el.isCreateNode`
 - `el.isElement`
 - `el.isVisible`
+
+### Functional Methods / el.addClass ([top](#table-of-contents))
+
+Is a curried function which can take `1` or `2` arguments.
+
+Using `el.addClass` with a single argument will return a function which expects a `Node` or an `Array` of nodes.
+
+Using the partially applied function:
+
+```javascript
+var pizzas = document.querySelectorAll('.pizza');
+[].forEach.call(pizzas, el.addClass('class-name'));
+```
+
+Using the function with `2` arguments:
+
+```javascript
+var pizza = document.querySelector('.pizza');
+el.addClass('class-name', pizza);
+```
 
 ### Functional Methods / el.isComponent ([top](#table-of-contents))
 
