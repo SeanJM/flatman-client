@@ -175,7 +175,10 @@ function Component(options) {
 
 Component.prototype.render = function () {
   return el('div', [
-    el('div', { name : 'label', className : 'text' }, [ this.dict.text ])
+    el('div', { 
+      name : 'label', 
+      className : 'text' 
+    }, [ this.dict.text ])
   ]);
 };
 
@@ -205,7 +208,9 @@ Component.extend = function (Constructor) {
 };
 ```
 
-- Putting it together
+Putting it together
+
+Any property which is not `className`, starts with `on` or `once` will be added as a property on `this.dict`.
 
 ```javascript
 el(Component, {
