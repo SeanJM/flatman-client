@@ -3,27 +3,27 @@
 */
 
 function hasParent(node) {
-  var parents = [];
   var i = 1;
   var n = arguments.length;
+  var $arguments = [];
+  var parents = [];
+  var parent = node.parentNode;
+  var selectorMap = [];
 
-  node = node instanceof CreateNode
-    ? node.node
-    : node;
+  while (parent) {
+    parents.push(parent);
+    parent = parent.parentNode;
+  }
 
+  // First check for elements in the array
   for (; i < n; i++) {
-    if (Array.isArray(arguments[i])) {
-      [].push.apply(parents, arguments[i]);
-    } else {
-      parents.push(arguments[i]);
-    }
+    $arguments = $arguments.concat(arguments[i]);
   }
 
   i = 0;
-  n = parents.length;
-
+  n = $arguments.length;
   for (; i < n; i++) {
-    if (parents[i] && parents[i].contains(node)) {
+    if (parents.indexOf(getNode($arguments[i])) > -1) {
       return true;
     }
   }
