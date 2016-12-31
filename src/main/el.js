@@ -28,9 +28,9 @@ function el(tagName) {
     ) {
       throw 'Invalid tag name: "' + tagName + '", it looks like you are passing a constructor name as a string.';
     }
-    return new CreateNode(tagName, opt, children);
+    return new Node(tagName, opt, children);
   } else if (isElement(tagName)) {
-    return new CreateNode(tagName, opt, children);
+    return new Node(tagName, opt, children);
   } else {
     throw new Error('The first argument for "el" must be either a Component or a valid HTML tag name. eg: el("div")');
   }

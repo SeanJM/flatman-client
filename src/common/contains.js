@@ -4,12 +4,12 @@ function contains(node) {
   var x;
   var y;
 
-  node = node instanceof CreateNode
+  node = node instanceof Node
     ? node.node
     : node;
 
   function each(a) {
-    a = a instanceof CreateNode
+    a = a instanceof Node
       ? a.node
       : a;
 

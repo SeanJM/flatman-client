@@ -1,7 +1,7 @@
 function getNode(x) {
   if (isElement(x)) {
     return x;
-  } else if (x instanceof CreateNode) {
+  } else if (x instanceof Node) {
     return x.node;
   } else if (typeof x === 'string' || isNumber(x)) {
     return new Text(x);

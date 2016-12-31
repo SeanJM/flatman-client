@@ -1,3 +1,3 @@
 function isCreateNode (a) {
-  return a instanceof CreateNode;
+  return a instanceof Node;
 }
