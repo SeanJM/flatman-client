@@ -1,20 +1,10 @@
-function mount(node) {
-  var children = node.childNodes;
-  var i = 0;
-  var n = children.length;
-  var e = new Event('mount');
-
+function mount(element) {
   function each(child) {
     if (MOUNTED.indexOf(child) === -1) {
-      child.dispatchEvent(e);
-      [].forEach.call(child.childNodes, each);
+      child.trigger('mount');
+      child.childNodes.forEach(each);
       MOUNTED.push(child);
     }
   }
-
-  if (document.body.contains(node)) {
-    for (; i < n; i++) {
-      each(children[i]);
-    }
-  }
+  element.childNodes.forEach(each);
 }

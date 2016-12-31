@@ -1,13 +1,15 @@
-function appendChild(node, children) {
+function appendChild(element, children) {
   var f = document.createDocumentFragment();
-  if (children.length) {
-    node = getNode(node);
+  var node = getNode(element);
 
-    for (var i = 0, n = children.length; i < n; i++) {
-      f.appendChild(getNode(children[i]));
-    }
+  if (children.length) {
+    children.forEach(function (child) {
+      child.parentNode = element;
+      f.appendChild(getNode(child));
+    });
 
     node.appendChild(f);
-    mount(node);
+    [].push.apply(element.childNodes, children);
+    mount(element);
   }
 }
