@@ -3,14 +3,18 @@ var a = el('div');
 var b = el('div');
 
 function C() {
-  this.node = {
-    document : a
+  this.dict = {
+    name : 'c'
   };
-  this.node.document.append([b]);
 }
 
 C.prototype.addClass = function (a) {
   this.node.document.addClass(a);
+};
+
+C.prototype.render = function () {
+  a.append([b]);
+  return a;
 };
 
 var p = el(C, { className : 'test' });
