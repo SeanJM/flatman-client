@@ -167,24 +167,20 @@ el(Component, {
 
 ```javascript
 function Component(options) {
-  this.node = {};
-  this.node.document = el('div', [
-    this.node.label = el('div', { className : 'text' })
-  ]);
+  // Optional code
 }
 
+// The root node is always 'this.node.document'
+// When you name a child node it's name will be automatically added to 'this.node'
+
+Component.prototype.render = function () {
+  return el('div', [
+    el('div', { name : 'label', className : 'text' }, [ this.dict.text ])
+  ]);
+};
+
 Component.prototype.appendTo = function (target) {
-  if (typeof target.append === 'function') {
-    target.append(this.node.document);
-
-    this.trigger('appendto');  
-
-    if (this.node.document.hasParent('body')) {
-      this.trigger('body');
-    }
-  } else {
-    throw 'Invalid target: "' + target.constructor.name + '"';
-  }
+  target.append(this.node.document);
 };
 
 Component.prototype.addClass = function (className) {
@@ -199,11 +195,13 @@ Component.prototype.text = function (text) {
   this.node.label.text(text);
 };
 
-// A function to add the minimum prototypes to a constructor
+// A function to extend the prototypes of a constructor
 Component.extend = function (Constructor) {
-  Constructor.prototype.appendTo = Component.prototype.appendTo;
-  Constructor.prototype.addClass = Component.prototype.addClass;
-  Constructor.prototype.on = Component.prototype.on;
+  for (var k in Component.prototype) {
+    if (!Constructor.prototype[k]) {
+      Constructor.prototype[k] = Component.prototype[k];
+    }
+  }
 };
 ```
 
@@ -211,20 +209,12 @@ Component.extend = function (Constructor) {
 
 ```javascript
 el(Component, {
-    className : 'my-component-class',
-
-    onClick : function () {
-      // What it does when it's clicked on
-    },
-    onAppendTo : function () {
-      // What it does when it's appended
-    },
-    onBody : function () {
-      // What it does when it's appended to the body
-    }
-  }, [
-  'My Text'
-]);
+  className : 'my-component-class',
+  text : 'My Text',
+  onClick : function () {
+    // What it does when it's clicked on
+  }
+});
 ```
 
 ## Examples
