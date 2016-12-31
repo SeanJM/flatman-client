@@ -12,6 +12,21 @@ const driver = new webdriver.Builder()
 
 const tests = {};
 
+function testDriver(name, test) {
+  return driver
+    .executeScript(tests[name])
+      .then(function (out) {
+        test(name)
+          .this(out.left)
+          .equal(out.right);
+      })
+      .catch(function (err) {
+        test(name)
+          .this(true)
+          .equal(err.stack);
+      });
+}
+
 m('test/selenium-tests/', /\.js$/).forEach(function (a) {
   tests[path.basename(a).replace(/\.js$/, '')] = fs.readFileSync(a, 'utf8');
 });
@@ -24,393 +39,55 @@ module.exports = new TinyTest(function (test) {
     Promise.all([
 
       // Append
-      driver
-        .executeScript(tests.append)
-        .then(function (out) {
-          test('append')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      // Append
-      driver
-        .executeScript(tests.append)
-        .then(function (out) {
-          test('append')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      // Append
-      driver
-        .executeScript(tests.before)
-        .then(function (out) {
-          test('before')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      // attr
-      driver
-        .executeScript(tests.attr)
-        .then(function (out) {
-          test('attr')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.emptyAttr)
-        .then(function (out) {
-          test('attr (no arguments, returns an object)')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.children)
-        .then(function (out) {
-          test('children')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.childrenFirst)
-        .then(function (out) {
-          test('children (first)')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.childrenSlice)
-        .then(function (out) {
-          test('children (slice)')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.clone)
-        .then(function (out) {
-          test('clone')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.closest)
-        .then(function (out) {
-          test('closest')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.containsArray)
-        .then(function (out) {
-          test('contains (with array)')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.disable)
-        .then(function (out) {
-          test('disable')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.find)
-        .then(function (out) {
-          test('find')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.focus)
-        .then(function (out) {
-          test('focus')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.getSelector)
-        .then(function (out) {
-          test('getSelector')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.hasClass)
-        .then(function (out) {
-          test('hasClass')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.hasParent)
-        .then(function (out) {
-          test('hasParent')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.isDisabled)
-        .then(function (out) {
-          test('isDisabled')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.isVisible)
-        .then(function (out) {
-          test('isVisible')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.off)
-        .then(function (out) {
-          test('off')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.offset)
-        .then(function (out) {
-          test('offset')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.on)
-        .then(function (out) {
-          test('on')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.once)
-        .then(function (out) {
-          test('once')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.parent)
-        .then(function (out) {
-          test('parent')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.parents)
-        .then(function (out) {
-          test('parents')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.prepend)
-        .then(function (out) {
-          test('prepend')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.prependTo)
-        .then(function (out) {
-          test('prependTo')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.remove)
-        .then(function (out) {
-          test('remove')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.removeClass)
-        .then(function (out) {
-          test('removeClass')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.removeClassArray)
-        .then(function (out) {
-          test('removeClass (Array)')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.replaceWith)
-        .then(function (out) {
-          test('replaceWith')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.select)
-        .then(function (out) {
-          test('select')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.selectorPath)
-        .then(function (out) {
-          test('selectorPath')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.siblings)
-        .then(function (out) {
-          test('siblings')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.siblings)
-        .then(function (out) {
-          test('scrollWidth')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.text)
-        .then(function (out) {
-          test('text')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.textNodes)
-        .then(function (out) {
-          test('textNodes')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.toggleClass)
-        .then(function (out) {
-          test('toggleClass')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.trigger)
-        .then(function (out) {
-          test('trigger')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.value)
-        .then(function (out) {
-          test('value')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.fn)
-        .then(function (out) {
-          test('fn')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.style)
-        .then(function (out) {
-          test('style (value, property)')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.style_object)
-        .then(function (out) {
-          test('style (object)')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.uncheck)
-        .then(function (out) {
-          test('uncheck')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.check)
-        .then(function (out) {
-          test('check')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.name)
-        .then(function (out) {
-          test('name')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.component)
-        .then(function (out) {
-          test('Basic Component')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
-      driver
-        .executeScript(tests.componentWithClassAndChildren)
-        .then(function (out) {
-          test('Component with class and children')
-            .this(out.left)
-            .equal(out.right);
-        }),
-
+      testDriver('append', test),
+      testDriver('before', test),
+      testDriver('attr', test),
+      testDriver('emptyAttr', test),
+      testDriver('children', test),
+      testDriver('childrenFirst', test),
+      testDriver('childrenSlice', test),
+      testDriver('clone', test),
+      testDriver('closest', test),
+      testDriver('containsArray', test),
+      testDriver('disable', test),
+      testDriver('find', test),
+      testDriver('focus', test),
+      testDriver('getSelector', test),
+      testDriver('hasClass', test),
+      testDriver('hasParent', test),
+      testDriver('isDisabled', test),
+      testDriver('isVisible', test),
+      testDriver('off', test),
+      testDriver('offset', test),
+      testDriver('on', test),
+      testDriver('once', test),
+      testDriver('parent', test),
+      testDriver('parents', test),
+      testDriver('prepend', test),
+      testDriver('prependTo', test),
+      testDriver('remove', test),
+      testDriver('removeClass', test),
+      testDriver('removeClassArray', test),
+      testDriver('replaceWith', test),
+      testDriver('select', test),
+      testDriver('selectorPath', test),
+      testDriver('siblings', test),
+      testDriver('scrollWidth', test),
+      testDriver('text', test),
+      testDriver('textNodes', test),
+      testDriver('toggleClass', test),
+      testDriver('trigger', test),
+      testDriver('value', test),
+      testDriver('fn', test),
+      testDriver('style', test),
+      testDriver('style_object', test),
+      testDriver('uncheck', test),
+      testDriver('check', test),
+      testDriver('name', test),
+      testDriver('component', test),
+      testDriver('componentWithClassAndChildren', test),
+      testDriver('componentWithRenderMethod', test),
+      testDriver('componentWithNames', test),
     ])
     .then(
       function () {
