@@ -1,6 +1,6 @@
 {
   "name": "create-node",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "license": "MIT",
   "author": "Sean MacIsaac <seanjmacisaac@gmail.com> (http://twitter.com/seanjmacisaac)",
   "gruntBuild": {

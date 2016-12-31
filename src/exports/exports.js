@@ -8,4 +8,4 @@ window.el.isComponent = isComponent;
 window.el.isCreateNode = isCreateNode;
 window.el.addClass = curry(addClass);
 window.el.getNode = getNode;
-window.el.version = '1.0.5';
+window.el.version = '1.1.5';
