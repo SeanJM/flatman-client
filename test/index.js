@@ -87,6 +87,7 @@ module.exports = new TinyTest(function (test) {
       testDriver('component', test),
       testDriver('componentWithClassAndChildren', test),
       testDriver('componentWithRenderMethod', test),
+      testDriver('componentCheckChildren', test),
       testDriver('componentWithNames', test),
     ])
     .then(
