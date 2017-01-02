@@ -1,7 +1,7 @@
-# Create Node 1.1.5
+# Create Node 1.2.6
 #### License: [MIT](https://opensource.org/licenses/MIT)
 
-#### ✅ All 49 tests pass
+#### ✅ All 50 tests pass
 
 ## Table of Contents
 
@@ -1368,5 +1368,6 @@ selected.textNodes();
   46. component.......................................................... ✅
   47. componentWithClassAndChildren...................................... ✅
   48. componentWithRenderMethod.......................................... ✅
-  49. componentWithNames................................................. ✅
+  49. componentCheckChildren............................................. ✅
+  50. componentWithNames................................................. ✅
 ```
