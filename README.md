@@ -117,7 +117,6 @@ I use this on production, and I would like some help on it. Thanks. The goal is 
 ## Component
 ### Component / Required Methods ([top](#table-of-contents))
 
-- `appendTo`
 - `addClass` when the class key is present
 - `on` when a key matching that pattern is present
 - `off` when a key matching that pattern is present
