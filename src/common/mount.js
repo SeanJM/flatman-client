@@ -1,6 +1,6 @@
 function mount(element) {
   function each(child) {
-    if (MOUNTED.indexOf(child) === -1) {
+    if (MOUNTED.indexOf(child) === -1 && child.trigger) {
       child.trigger('mount');
       child.childNodes.forEach(each);
       MOUNTED.push(child);

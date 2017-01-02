@@ -40,9 +40,10 @@ function createComponent(constructor, opt, array) {
     children = array;
   }
 
-  if (typeof component.render === 'function') {
-    component.dict = component.dict || {};
+  component.dict = component.dict || {};
+  component.childNodes = component.childNodes || [];
 
+  if (typeof component.render === 'function') {
     for (k in opt) {
       if (k.slice(0, 4) === 'once') {
         afterRender.once.push({
@@ -56,13 +57,15 @@ function createComponent(constructor, opt, array) {
         });
       } else if (k === 'className') {
         afterRender.className = opt[k];
+      } else if (k === 'id') {
+        afterRender.id = opt[k];
       } else {
         component.dict[k] = opt[k];
       }
     }
 
     component.node = {
-      document : component.render()
+      document : component.render(opt)
     };
 
     if (component.node.document) {
@@ -83,7 +86,13 @@ function createComponent(constructor, opt, array) {
       if (component.addClass) {
         component.addClass(afterRender.className);
       } else {
-        throw 'Invalid component, className \'' + afterRender.className + '\' cannot be added, because your component does not have an \'addClass\' method.';
+        component.node.document.addClass(afterRender.className);
+      }
+    } else if (afterRender.id) {
+      if (component.attr) {
+        component.attr('id', afterRender.id);
+      } else {
+        component.node.document.attr('id', afterRender.className);
       }
     }
 
@@ -130,6 +139,8 @@ function createComponent(constructor, opt, array) {
   } else if (children.length) {
     throw new Error('Invalid component \'' + constructor.name + '\' does not have an append method');
   }
+
+  [].push.apply(component.childNodes, children);
 
   if (strings.length) {
     component.text.apply(component, strings);
