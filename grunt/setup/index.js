@@ -18,7 +18,6 @@ if (config.isSite) {
 
 require('./readme');
 require('./gitignore');
-require('./jshintrc');
 require('./tests');
 require('./scripts');
 require('./styles');
