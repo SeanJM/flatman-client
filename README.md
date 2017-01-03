@@ -1,4 +1,4 @@
-# Create Node 1.2.6
+# Create Node 1.2.8
 #### License: [MIT](https://opensource.org/licenses/MIT)
 
 #### ✅ All 52 tests pass
