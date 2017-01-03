@@ -74,3 +74,4 @@ var IE_INPUT = {
 };
 
 var MOUNTED = [];
+var BODY;
