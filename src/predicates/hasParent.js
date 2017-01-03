@@ -1,18 +1,14 @@
-/*
-  The first argument is always the node which is being checked
-*/
-
 function hasParent(node) {
   var i = 1;
   var n = arguments.length;
   var $arguments = [];
   var parents = [];
-  var parent = node.parentNode;
+  var parent = getNode(node.parentNode);
   var selectorMap = [];
 
   while (parent) {
     parents.push(parent);
-    parent = parent.parentNode;
+    parent = getNode(parent.parentNode);
   }
 
   // First check for elements in the array
