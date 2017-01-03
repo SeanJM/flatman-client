@@ -16,16 +16,19 @@ function createComponent(constructor, opt, array) {
   };
 
   function getNames(node) {
-    node.childNodes.forEach(function (child) {
-      var name = isCreateNode(child) ? child.name() : child.dict.name;
-      if (name) {
-        if (component.node[name]) {
-          throw 'Invalid name \'' + name + '\', this name is already taken.';
+    if (node.childNodes) {
+      node.childNodes.forEach(function (child) {
+        var name = isCreateNode(child)
+          ? child.name()
+          : child.dict && child.dict.name;
+
+        if (name) {
+          component.node[name] = child;
         }
-        component.node[name] = child;
-      }
-      getNames(child);
-    });
+
+        getNames(child);
+      });
+    }
   }
 
   if (hasText) {
@@ -136,11 +139,10 @@ function createComponent(constructor, opt, array) {
     component.append(children);
   } else if (children.length && component.node && component.node.document) {
     component.node.document.append(children);
+    [].push.apply(component.childNodes, children);
   } else if (children.length) {
     throw new Error('Invalid component \'' + constructor.name + '\' does not have an append method');
   }
-
-  [].push.apply(component.childNodes, children);
 
   if (strings.length) {
     component.text.apply(component, strings);
