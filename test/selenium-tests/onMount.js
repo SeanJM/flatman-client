@@ -5,7 +5,7 @@ var a = el('div', {
   onMount : function () {
     isMounted = !isMounted;
   }
-});
+}, [ 'test' ]);
 
 a.appendTo(document.body);
 a.appendTo(document.body);

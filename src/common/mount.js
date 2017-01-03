@@ -1,6 +1,7 @@
 function mount(element) {
   if (
-    element.hasParent(BODY)
+    element.hasParent
+    && element.hasParent(BODY)
     && MOUNTED.indexOf(element) === -1
     && element.trigger
   ) {
