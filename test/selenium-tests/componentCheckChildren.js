@@ -17,7 +17,7 @@ var p = el(C, [
 
 return {
   left : (
-    p.childNodes.length === 4
+    p.childNodes.length === 4 && p.node.document.childNodes.length === 4
   ),
   right : true
 };
