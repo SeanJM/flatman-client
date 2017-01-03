@@ -1,10 +1,11 @@
 function mount(element) {
-  function each(child) {
-    if (MOUNTED.indexOf(child) === -1 && child.trigger) {
-      child.trigger('mount');
-      child.childNodes.forEach(each);
-      MOUNTED.push(child);
-    }
+  if (
+    element.hasParent(BODY)
+    && MOUNTED.indexOf(element) === -1
+    && element.trigger
+  ) {
+    MOUNTED.push(element);
+    element.trigger('mount');
+    element.childNodes.forEach(mount);
   }
-  element.childNodes.forEach(each);
 }

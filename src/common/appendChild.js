@@ -1,6 +1,5 @@
 function appendChild(element, children) {
   var f = document.createDocumentFragment();
-  var node = getNode(element);
 
   if (children.length) {
     children.forEach(function (child) {
@@ -8,8 +7,8 @@ function appendChild(element, children) {
       f.appendChild(getNode(child));
     });
 
-    node.appendChild(f);
+    getNode(element).appendChild(f);
     [].push.apply(element.childNodes, children);
-    mount(element);
+    children.forEach(mount);
   }
 }
