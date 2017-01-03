@@ -1,4 +1,12 @@
-Node.prototype.trigger = function (names, e) {
+Node.prototype.trigger = function () {
+  var names = arguments[0];
+  var e = arguments[1];
+
+  if (typeof arguments[0] === 'object') {
+    names = arguments[0].type;
+    e = arguments[0];
+  }
+
   function trigger(self, callback) {
     callback.call(self, e);
   }
