@@ -13,21 +13,14 @@
   <body>
     <script src="../bin/createNode.min.js"></script>
     <script>
-      var isMounted = false;
-
-      var a = el('div', {
-        className : 'test',
-        onMount : function () {
-          isMounted = !isMounted;
-        }
-      }, [ 'test' ]);
+      var a = el('div');
 
       a.appendTo(document.body);
-      a.appendTo(document.body);
+      a.remove();
 
       console.log({
-        left : isMounted,
-        right : true
+        left : document.body.contains(a.node),
+        right : false
       });
     </script>
   </body>

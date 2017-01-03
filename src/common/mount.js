@@ -7,6 +7,9 @@ function mount(element) {
   ) {
     MOUNTED.push(element);
     element.trigger('mount');
+  }
+
+  if (element.childNods) {
     element.childNodes.forEach(mount);
   }
 }

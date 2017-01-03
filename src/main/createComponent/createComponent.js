@@ -43,6 +43,7 @@ function createComponent(constructor, opt, array) {
     children = array;
   }
 
+  component.node = component.node || {};
   component.dict = component.dict || {};
   component.childNodes = component.childNodes || [];
 
@@ -67,9 +68,7 @@ function createComponent(constructor, opt, array) {
       }
     }
 
-    component.node = {
-      document : component.render(opt)
-    };
+    component.node.document = component.render(opt);
 
     if (component.node.document) {
       getNames(component.node.document);

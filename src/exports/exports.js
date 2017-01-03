@@ -1,11 +1,12 @@
 // El assignments
 window.el = el;
-window.el.fn = Node.fn;
-window.el.hasParent = hasParent;
+window.el.addClass = curry(addClass);
 window.el.contains = contains;
-window.el.isElement = isElement;
+window.el.fn = Node.fn;
+window.el.getNode = getNode;
+window.el.hasParent = hasParent;
 window.el.isComponent = isComponent;
 window.el.isCreateNode = isCreateNode;
-window.el.addClass = curry(addClass);
-window.el.getNode = getNode;
+window.el.isElement = isElement;
+window.el.remove = remove;
 window.el.version = '1.2.8';
