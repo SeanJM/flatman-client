@@ -3,5 +3,3 @@
 - Plugin architecture to extend the prototype
 
 Thanks to [FRZR](https://frzr.js.org/) for some help for clearing up the "child" problem https://freezer.js.org/minimum-viable-view-library/
-
-### `el.isComponent` [top](#methods)

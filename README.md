@@ -99,9 +99,6 @@
 - Plugin architecture to extend the prototype
 
 Thanks to [FRZR](https://frzr.js.org/) for some help for clearing up the "child" problem https://freezer.js.org/minimum-viable-view-library/
-
-### `el.isComponent` [top](#methods)
-
 ## Installation ([top](#table-of-contents))
 
 Include the script in your `body` tag, or `head`, I think it's wise to place it in the `body`, at the bottom.
