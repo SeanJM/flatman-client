@@ -1,15 +1,11 @@
-function mount(element) {
-  if (
-    element.hasParent
-    && element.hasParent(BODY)
-    && MOUNTED.indexOf(element) === -1
-    && element.trigger
-  ) {
-    MOUNTED.push(element);
-    element.trigger('mount');
-  }
-
-  if (element.childNods) {
-    element.childNodes.forEach(mount);
+function mount(child) {
+  var createNode = getEl(child);
+  if (createNode) {
+    if (createNode.hasParent(BODY)) {
+      createNode.trigger('mount');
+    }
+    if (createNode.childNodes) {
+      createNode.childNodes.forEach(mount);
+    }
   }
 }
