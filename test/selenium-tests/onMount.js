@@ -1,5 +1,7 @@
 var isMounted = false;
 
+var b = el('div');
+
 var a = el('div', {
   className : 'test',
   onMount : function () {
@@ -7,8 +9,9 @@ var a = el('div', {
   }
 }, [ 'test' ]);
 
-a.appendTo(document.body);
-a.appendTo(document.body);
+b.append([a]);
+
+b.appendTo(document.body);
 
 return {
   left : isMounted,

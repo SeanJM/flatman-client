@@ -4,6 +4,6 @@ a.appendTo(document.body);
 a.remove();
 
 return {
-  left : document.body.contains(a.node),
+  left : document.body.contains(a.node) && a.childNodes.length === 0,
   right : false
 };

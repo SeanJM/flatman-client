@@ -71,6 +71,7 @@ module.exports = new TinyTest(function (test) {
       testDriver('prependTo', test),
       testDriver('remove', test),
       testDriver('removeClass', test),
+      testDriver('removeChild', test),
       testDriver('removeClassArray', test),
       testDriver('replaceWith', test),
       testDriver('select', test),
