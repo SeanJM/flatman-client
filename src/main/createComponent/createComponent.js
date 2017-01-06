@@ -90,7 +90,9 @@ function createComponent(constructor, opt, array) {
       } else {
         component.node.document.addClass(afterRender.className);
       }
-    } else if (afterRender.id) {
+    }
+
+    if (afterRender.id) {
       if (component.attr) {
         component.attr('id', afterRender.id);
       } else {
