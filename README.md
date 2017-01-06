@@ -1,7 +1,7 @@
 # Create Node 1.2.8
 #### License: [MIT](https://opensource.org/licenses/MIT)
 
-#### ✅ All 54 tests pass
+#### 🚫 0 of 55 tests passed (0%)
 
 ## Table of Contents
 
@@ -1320,58 +1320,1269 @@ selected.textNodes();
 ## Tests
 
 ```
-   1. append............................................................. ✅
-   2. before............................................................. ✅
-   3. attr............................................................... ✅
-   4. emptyAttr.......................................................... ✅
-   5. children........................................................... ✅
-   6. childrenFirst...................................................... ✅
-   7. childrenSlice...................................................... ✅
-   8. clone.............................................................. ✅
-   9. closest............................................................ ✅
-  10. containsArray...................................................... ✅
-  11. componentNames..................................................... ✅
-  12. disable............................................................ ✅
-  13. find............................................................... ✅
-  14. focus.............................................................. ✅
-  15. getSelector........................................................ ✅
-  16. hasClass........................................................... ✅
-  17. hasParent.......................................................... ✅
-  18. hasParentBody...................................................... ✅
-  19. isDisabled......................................................... ✅
-  20. isVisible.......................................................... ✅
-  21. off................................................................ ✅
-  22. offset............................................................. ✅
-  23. on................................................................. ✅
-  24. onMount............................................................ ✅
-  25. onUnmount.......................................................... ✅
-  26. once............................................................... ✅
-  27. parent............................................................. ✅
-  28. parents............................................................ ✅
-  29. prepend............................................................ ✅
-  30. prependTo.......................................................... ✅
-  31. remove............................................................. ✅
-  32. removeClass........................................................ ✅
-  33. removeClassArray................................................... ✅
-  34. replaceWith........................................................ ✅
-  35. select............................................................. ✅
-  36. selectorPath....................................................... ✅
-  37. siblings........................................................... ✅
-  38. scrollWidth........................................................ ✅
-  39. text............................................................... ✅
-  40. textNodes.......................................................... ✅
-  41. toggleClass........................................................ ✅
-  42. trigger............................................................ ✅
-  43. value.............................................................. ✅
-  44. fn................................................................. ✅
-  45. style.............................................................. ✅
-  46. style_object....................................................... ✅
-  47. uncheck............................................................ ✅
-  48. check.............................................................. ✅
-  49. name............................................................... ✅
-  50. component.......................................................... ✅
-  51. componentWithClassAndChildren...................................... ✅
-  52. componentWithRenderMethod.......................................... ✅
-  53. componentCheckChildren............................................. ✅
-  54. componentWithNames................................................. ✅
+
+   1. append ............................................................ 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:42:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+   2. before ............................................................ 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:43:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+   3. attr .............................................................. 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:44:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+   4. emptyAttr ......................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:45:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+   5. children .......................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:46:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+   6. childrenFirst ..................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:47:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+   7. childrenSlice ..................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:48:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+   8. clone ............................................................. 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:49:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+   9. closest ........................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:50:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  10. containsArray ..................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:51:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  11. componentNames .................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:52:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  12. disable ........................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:53:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  13. find .............................................................. 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:54:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  14. focus ............................................................. 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:55:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  15. getSelector ....................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:56:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  16. hasClass .......................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:57:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  17. hasParent ......................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:58:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  18. hasParentBody ..................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:59:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  19. isDisabled ........................................................ 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:60:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  20. isVisible ......................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:61:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  21. off ............................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:62:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  22. offset ............................................................ 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:63:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  23. on ................................................................ 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:64:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  24. onMount ........................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:65:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  25. onUnmount ......................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:66:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  26. once .............................................................. 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:67:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  27. parent ............................................................ 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:68:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  28. parents ........................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:69:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  29. prepend ........................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:70:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  30. prependTo ......................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:71:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  31. remove ............................................................ 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:72:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  32. removeClass ....................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:73:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  33. removeChild ....................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:74:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  34. removeClassArray .................................................. 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:75:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  35. replaceWith ....................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:76:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  36. select ............................................................ 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:77:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  37. selectorPath ...................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:78:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  38. siblings .......................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:79:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  39. scrollWidth ....................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:80:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  40. text .............................................................. 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:81:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  41. textNodes ......................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:82:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  42. toggleClass ....................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:83:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  43. trigger ........................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:84:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  44. value ............................................................. 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:85:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  45. fn ................................................................ 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:86:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  46. style ............................................................. 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:87:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  47. style_object ...................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:88:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  48. uncheck ........................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:89:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  49. check ............................................................. 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:90:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  50. name .............................................................. 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:91:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  51. component ......................................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:92:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  52. componentWithClassAndChildren ..................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:93:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  53. componentWithRenderMethod ......................................... 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:94:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  54. componentCheckChildren ............................................ 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:95:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
+
+  55. componentWithNames ................................................ 🚫
+
+ +   Left: "WebDriverError: unknown error: el is not defined
+  (Session info: chrome=55.0.2883.95)
+  (Driver info: chromedriver=2.24.417412 (ac882d3ce7c0d99292439bf3405780058fcca0a6),platform=Mac OS X 10.11.6 x86_64)
+    at WebDriverError (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:27:5)
+    at Object.checkLegacyResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/error.js:505:15)
+    at parseHttpResponse (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:396:13)
+    at doSend.then.response (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/http.js:328:11)
+    at process._tickCallback (internal/process/next_tick.js:103:7)
+From: Task: WebDriver.executeScript()
+    at Driver.schedule (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:414:17)
+    at Driver.executeScript (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/webdriver.js:563:16)
+    at testDriver (/Users/sean/Dropbox/projects/createNode/test/index.js:17:6)
+    at /Users/sean/Dropbox/projects/createNode/test/index.js:96:7
+    at ManagedPromise.invokeCallback_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:1315:14)
+    at TaskQueue.execute_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2736:14)
+    at TaskQueue.executeNext_ (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2719:21)
+    at asyncRun (/Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:2595:27)
+    at /Users/sean/Dropbox/projects/createNode/node_modules/selenium-webdriver/lib/promise.js:639:7
+    at process._tickCallback (internal/process/next_tick.js:103:7)"
+ -  Right:                                                              true
 ```
