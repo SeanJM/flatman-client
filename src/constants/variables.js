@@ -73,5 +73,4 @@ var IE_INPUT = {
   value : []
 };
 
-var MOUNTED = [];
 var BODY;
