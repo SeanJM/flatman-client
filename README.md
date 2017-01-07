@@ -52,6 +52,7 @@
     - [prepend](#el-methods--dom-manipulation--prepend-top)
     - [prependTo](#el-methods--dom-manipulation--prependto-top)
     - [remove](#el-methods--dom-manipulation--remove-top)
+    - [removeChild](#el-methods--dom-manipulation--removechild-top)
     - [replaceWith](#el-methods--dom-manipulation--replacewith-top)
     - [select](#el-methods--dom-manipulation--select-top)
     - [style](#el-methods--dom-manipulation--style-top)
@@ -650,6 +651,32 @@ a.append(b);
 
 ```javascript
 b.remove();
+```
+
+```html
+<div class="parent">
+</div>
+```
+
+#### El Methods / Dom Manipulation / removeChild ([top](#table-of-contents))
+
+Will remove a child `Node`.
+
+```javascript
+var a = el('div', { className : 'parent' });
+var b = el('div', { className : 'first-child' });
+
+a.append(b);
+```
+
+```html
+<div class="parent">
+  <div class="first-child"></div>
+</div>
+```
+
+```javascript
+a.removeChild(b);
 ```
 
 ```html
