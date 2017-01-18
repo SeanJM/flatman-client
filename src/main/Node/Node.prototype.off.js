@@ -6,8 +6,11 @@ Node.prototype.off = function (names, callback) {
 
     if (names[i].length) {
       if (typeof callback === 'function') {
-        this.subscribers[names[i]] = this.subscribers[names[i]].filter(partial(not, callback));
         this.node.removeEventListener(names[i], callback, false);
+        this.subscribers[names[i]] = this.subscribers[names[i]]
+          .filter(function ($callback) {
+            return $callback !== callback;
+          });
       } else {
         while (this.subscribers[names[i]].length) {
           this.node.removeEventListener(names[i], this.subscribers[names[i]][0], false);

@@ -1,10 +1,5 @@
-// El assignments
-window.el = el;
-window.el.addClass = curry(addClass);
-window.el.contains = contains;
-window.el.fn = Node.fn;
-window.el.getNode = getNode;
-window.el.hasParent = hasParent;
-window.el.isCreateNode = isCreateNode;
-window.el.isElement = isElement;
-window.el.version = '1.2.8';
+window.flatman = {};
+window.flatman.el = el;
+window.flatman.el.fn = Node.fn;
+window.flatman.version = '1.2.8';
+window.flatman.Component = Component;

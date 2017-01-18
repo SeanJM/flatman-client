@@ -2,18 +2,17 @@ const _ = require('lodash');
 const m = require('match-file-utility');
 const fs = require('fs');
 const path = require('path');
-const config = JSON.parse(fs.readFileSync('package.json')).gruntBuild;
+const config = JSON.parse(fs.readFileSync('grunt.json'));
 
 let dest = {
-  root : {},
-  group : {}
+  sprites : {},
+  group : {},
+  root : {}
 };
 
-let root = config.isSite
-  ? 'src/application/images'
-  : 'src/images';
+let root = path.join(config.src, 'images');
 
-let match = /\.(png|jpg|svg)$/;
+let match = /\.(png|jpg|svg|jpeg)$/;
 let files = m(root, match);
 let list_tasks = [];
 
@@ -36,7 +35,7 @@ let task = {
 };
 
 _.forEach(group.root, function (file) {
-  dest.root['bin/' + path.basename(file)] = file;
+  dest.root[path.join(config.dest, path.basename(file))] = file;
 });
 
 task.imagemin.images = {
@@ -52,20 +51,22 @@ task.imagemin.images = {
 
 _.forEach(_.omit(group, 'root'), function (files, key) {
   var svg_files = {};
-  var name = 'bin/' + key + '.svg';
+  var cleanKey = key.replace(/^_/, '');
+  var name = path.join(config.dest, cleanKey + '.svg');
 
   svg_files[name] = files;
   dest.group[name] = files;
 
-  task.svgstore[key] = {
-    options : {
+  task.svgstore[cleanKey] = {
+    options : key[0] === '_'
+    ? {} : {
       cleanup : [ 'fill', 'stroke' ],
       cleanupdefs : true
     },
     files : svg_files
   };
 
-  list_tasks.push('svgstore:' + key);
+  list_tasks.push('svgstore:' + cleanKey);
 });
 
 list_tasks.push('copy:images');
@@ -74,7 +75,7 @@ task.copy = {
   expand : true,
   flatten : true,
   src : group.root,
-  dest : 'bin/'
+  dest : config.dest
 };
 
 task.watch.images = {

@@ -1,3 +1,4 @@
+var el = flatman.el;
 var i = 0;
 
 var a = el('div').once('click', function () { i++; });

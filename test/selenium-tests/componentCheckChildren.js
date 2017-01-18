@@ -1,14 +1,15 @@
-// Component Basics
+var Component = flatman.Component;
+var el = flatman.el;
 var a = el('div');
 var b = el('div');
 
-function C() {}
+Component.create('C', {
+  render() {
+    return el('div', { className : 'children-test' });
+  }
+})
 
-C.prototype.render = function () {
-  return el('div', { className : 'children-test' });
-};
-
-var p = el(C, [
+var p = el('C', [
   el('div'),
   el('div'),
   el('div'),

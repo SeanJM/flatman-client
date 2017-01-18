@@ -3,19 +3,19 @@
   Node([String], [Object], [Text | Node Object | Array | Node ])
 */
 
-function Node(tagName, opt, children) {
+function Node(tagName, opt, children, isElement) {
   var i = 1;
   var n = arguments.length;
 
   function getNode(node) {
-    if (isElement(node) || node === window) {
+    if (isElement || node === window) {
       return node;
-    } else if (typeof node === 'string') {
-      this.isSVG = SVG_TAGNAMES.indexOf(node) !== -1;
-      return node = this.isSVG
-        ? document.createElementNS(SVG_NAMESPACE, node)
-        : document.createElement(node);
     }
+
+    this.isSVG = SVG_TAGNAMES.indexOf(node) !== -1;
+    return node = this.isSVG
+      ? document.createElementNS(SVG_NAMESPACE, node)
+      : document.createElement(node);
 
     throw 'Invalid argument for el, the first argument can be either a node or a tagName';
   }

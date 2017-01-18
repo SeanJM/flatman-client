@@ -1,19 +1,18 @@
-// Component Basics
+var el = flatman.el;
+var Component = flatman.Component;
 var a = el('div');
 var b = el('div');
 
-function C() {
-  this.node = {
-    document : a
-  };
-  this.node.document.append([b]);
-}
+Component.create('C', {
+  addClass(a) {
+    this.node.document.addClass(a);
+  },
+  render() {
+    return a.append([b]);
+  }
+})
 
-C.prototype.addClass = function (a) {
-  this.node.document.addClass(a);
-};
-
-var p = el(C, { className : 'test' });
+var p = el('C', { className : 'test' });
 
 return {
   left : (

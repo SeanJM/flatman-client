@@ -1,3 +1,4 @@
+var el = flatman.el;
 var x = true;
 var y = true;
 

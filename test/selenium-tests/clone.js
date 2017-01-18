@@ -1,3 +1,4 @@
+var el = flatman.el;
 var p = el('div', { className : 'test' });
 var c = p.clone();
 

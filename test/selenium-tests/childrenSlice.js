@@ -1,6 +1,5 @@
-// children
+var el = flatman.el;
 var p = el('div');
-
 var a = el('div');
 var b = el('div');
 var c = el('div');

@@ -1,24 +1,21 @@
-function C() {
+var el = flatman.el;
+var Component = flatman.Component;
 
-}
+Component.create('C', {
+  render() {
+    return el('div', [
+      el('Control', { name : 'control' })
+    ]);
+  }
+});
 
-function Control() {
-  this.dict = {
-    name : 'control'
-  };
-}
+Component.create('Control', {
+  render() {
+    return el('div');
+  }
+});
 
-Control.prototype.render = function () {
-  return el('div');
-};
-
-C.prototype.render = function () {
-  return el('div', [
-    el(Control)
-  ]);
-};
-
-var p = el(C);
+var p = el('C');
 
 return {
   left : !!p.node.control,

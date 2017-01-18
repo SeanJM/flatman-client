@@ -1,22 +1,22 @@
+var el = flatman.el;
 var a = el('div');
 var b = el('div');
 var c = el('div');
 var results = [];
 
-function C() {};
+Component.create('C', {
+  remove() {
+    var p = this.parentNode;
+    var index = p.childNodes.indexOf(this);
+    this.node.document.remove();
+    p.childNodes.splice(index, 1);
+  },
+  render() {
+    return el('div');
+  }
+});
 
-C.prototype.render = function () {
-  return el('div');
-};
-
-C.prototype.remove = function () {
-  var p = this.parentNode;
-  var index = p.childNodes.indexOf(this);
-  this.node.document.remove();
-  p.childNodes.splice(index, 1);
-};
-
-var d = el(C);
+var d = el('C');
 
 a.append([ b, c, d ]);
 a.removeChild(b);

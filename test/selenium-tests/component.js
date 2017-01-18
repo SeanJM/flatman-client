@@ -1,13 +1,13 @@
-// Component Basics
+var el = flatman.el;
 var a = el('div');
 
-function C() {
-  this.node = {
-    document : a
-  };
-}
+Component.create('C', {
+  render() {
+    return a;
+  }
+});
 
-var p = el(C);
+var p = el('C');
 
 return {
   left : (

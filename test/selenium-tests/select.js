@@ -1,3 +1,4 @@
+var el = flatman.el;
 var a = el('input', { type : 'text' });
 
 a.node.value = 'text';

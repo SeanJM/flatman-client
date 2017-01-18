@@ -1,3 +1,4 @@
+var el = flatman.el;
 var isMounted = true;
 
 var a = el('div', {

@@ -2,7 +2,6 @@ const flatman = require('./grunt/flatman');
 const tasks = require('./grunt/tasks');
 const initConfig = require('./grunt/initConfig');
 const readme = require('./grunt/readme');
-const clean = require('./grunt/clean');
 
 require('./grunt/setup');
 
@@ -27,10 +26,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('readme', function () {
     readme.task(this.async());
-  });
-
-  grunt.registerTask('clean', function () {
-    clean.task(this.async());
   });
 
   grunt.registerTask('default', tasks);

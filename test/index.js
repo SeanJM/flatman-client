@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const m = require('match-file-utility');
 const _ = require('lodash');
-const TinyTest = require(path.resolve('grunt/tinyTest'));
+const tinyTest = require('tiny-test');
 const webdriver = require('selenium-webdriver');
 
 const driver = new webdriver.Builder()
@@ -17,13 +17,13 @@ function testDriver(name, test) {
     .executeScript(tests[name])
       .then(function (out) {
         test(name)
-          .this(out.left)
-          .equal(out.right);
+          .this(() => out.left)
+          .isEqual(() => out.right);
       })
       .catch(function (err) {
         test(name)
-          .this(true)
-          .equal(err.stack);
+          .this(() => true)
+          .isEqual(() => err.stack);
       });
 }
 
@@ -31,79 +31,27 @@ m('test/selenium-tests/', /\.js$/).forEach(function (a) {
   tests[path.basename(a).replace(/\.js$/, '')] = fs.readFileSync(a, 'utf8');
 });
 
-module.exports = new TinyTest(function (test) {
+module.exports = tinyTest(function (test, load) {
   var file = 'file://' + path.resolve('test/index.html');
   var list_promise = [];
 
-  driver.get(file).then(function () {
-    Promise.all([
+  return driver.get(file).then(function () {
+    var list = [];
 
-      // Append
-      testDriver('append', test),
-      testDriver('before', test),
-      testDriver('attr', test),
-      testDriver('emptyAttr', test),
-      testDriver('children', test),
-      testDriver('childrenFirst', test),
-      testDriver('childrenSlice', test),
-      testDriver('clone', test),
-      testDriver('closest', test),
-      testDriver('containsArray', test),
-      testDriver('componentNames', test),
-      testDriver('disable', test),
-      testDriver('find', test),
-      testDriver('focus', test),
-      testDriver('getSelector', test),
-      testDriver('hasClass', test),
-      testDriver('hasParent', test),
-      testDriver('hasParentBody', test),
-      testDriver('isDisabled', test),
-      testDriver('isVisible', test),
-      testDriver('off', test),
-      testDriver('offset', test),
-      testDriver('on', test),
-      testDriver('onMount', test),
-      testDriver('onUnmount', test),
-      testDriver('once', test),
-      testDriver('parent', test),
-      testDriver('parents', test),
-      testDriver('prepend', test),
-      testDriver('prependTo', test),
-      testDriver('remove', test),
-      testDriver('removeClass', test),
-      testDriver('removeChild', test),
-      testDriver('removeClassArray', test),
-      testDriver('replaceWith', test),
-      testDriver('select', test),
-      testDriver('selectorPath', test),
-      testDriver('siblings', test),
-      testDriver('scrollWidth', test),
-      testDriver('text', test),
-      testDriver('textNodes', test),
-      testDriver('toggleClass', test),
-      testDriver('trigger', test),
-      testDriver('value', test),
-      testDriver('fn', test),
-      testDriver('style', test),
-      testDriver('style_object', test),
-      testDriver('uncheck', test),
-      testDriver('check', test),
-      testDriver('name', test),
-      testDriver('component', test),
-      testDriver('componentWithClassAndChildren', test),
-      testDriver('componentWithRenderMethod', test),
-      testDriver('componentCheckChildren', test),
-      testDriver('componentWithNames', test),
-    ])
+    Object.keys(tests).forEach(function (k) {
+      list.push(testDriver(k, test));
+    });
+
+    Promise.all(list)
     .then(
       function () {
-        test.done();
         driver.close();
+        load();
       }
     )
     .catch(function (e) {
-      console.trace(e);
       driver.close();
+      load();
     });
   });
 });

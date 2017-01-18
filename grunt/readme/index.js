@@ -1,7 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const pkg = JSON.parse(fs.readFileSync('package.json'));
-const config = pkg.gruntBuild;
+const config = JSON.parse(fs.readFileSync('grunt.json'));
 const generate = require('./generate');
 
 const exists = require('../lib/exists');
@@ -10,14 +9,12 @@ function task(callback) {
   try {
 
     if (config.isProduction && exists('test/index.js')) {
-      let tinyTest = require(path.resolve('test/'));
+      let test = require('../../test/index.js');
 
-      tinyTest.silence();
-
-      tinyTest.then(function (test_results) {
+      test.then(function (results) {
         try {
-          generate(test_results, callback);
-        } catch(e) {
+          generate(results, callback);
+        } catch (e) {
           console.trace(e);
         }
       });
@@ -25,12 +22,12 @@ function task(callback) {
     } else {
       generate(undefined, callback);
     }
-  } catch(e) {
+  } catch (e) {
     console.trace(e);
   }
 }
 
 module.exports = {
-  glob : ['src/readme/**/*.md'],
+  files : [ path.join(config.src, 'readme', '**', '*.md') ],
   task : task
 };

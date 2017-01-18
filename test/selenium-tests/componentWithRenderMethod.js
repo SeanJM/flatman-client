@@ -1,23 +1,16 @@
-// Component Basics
+var el = flatman.el;
 var a = el('div');
 var b = el('div');
 
-function C() {
-  this.dict = {
-    name : 'c'
-  };
-}
+Component.create('C', {
+  render(props) {
+    a.addClass(props.className);
+    a.append([b]);
+    return a;
+  }
+});
 
-C.prototype.addClass = function (a) {
-  this.node.document.addClass(a);
-};
-
-C.prototype.render = function () {
-  a.append([b]);
-  return a;
-};
-
-var p = el(C, { className : 'test' });
+var p = el('C', { className : 'test' });
 
 return {
   left : (

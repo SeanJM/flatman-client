@@ -1,3 +1,4 @@
+var el = flatman.el;
 var a = el('input', { type : 'checkbox' });
 var value = [];
 
@@ -8,6 +9,6 @@ a.uncheck();
 value.push(a.isChecked());
 
 return {
-  left : value,
-  right : [ true, false ]
+  left : value[0] && !value[1],
+  right : true
 };

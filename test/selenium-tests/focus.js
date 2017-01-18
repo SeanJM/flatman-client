@@ -1,3 +1,4 @@
+var el = flatman.el;
 var p = el('div', { tabIndex : '0' });
 
 p.appendTo(document.body);

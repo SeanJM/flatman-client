@@ -1,10 +1,10 @@
+const fs = require('fs');
 const path = require('path');
-const padLeft = require(path.resolve('grunt/lib/padLeft'));
-const padRight = require(path.resolve('grunt/lib/padRight'));
 const smartCase = require(path.resolve('grunt/lib/smartCase'));
+const config = JSON.parse(fs.readFileSync('grunt.json'));
 
 const _ = require('lodash');
-const source = 'src/readme/';
+const source = path.join(config.src, 'readme');
 
 function toLink(s) {
   var p = s.split('/');
@@ -21,7 +21,7 @@ function toLink(s) {
 function printTableOfContents(text, content, i) {
   _.forEach(content, function (value, key) {
     if (typeof value === 'object') {
-      text.push('', new Array(i).join('  ') + '- ' + smartCase(key));
+      text.push('', new Array(i).join('  ') + '- ' + smartCase(key.replace(/\.md$/, '')));
     }
 
     if (Array.isArray(value)) {

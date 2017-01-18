@@ -1,3 +1,4 @@
+var el = flatman.el;
 var a = el('input', { type : 'checkbox' });
 
 a.check();

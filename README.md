@@ -1,106 +1,239 @@
-# Create Node 1.2.8
+# Flatman Client 1.2.8
 #### License: [MIT](https://opensource.org/licenses/MIT)
 
-#### ✅ All 55 tests pass
+#### 🐛 No unit tests
 
 ## Table of Contents
 
 #### Overview
 
-- [Description](#description-md-top-top)
-- [Installation](#installation-md-top-top)
-- [Notes](#notes-md-top-top)
+
+- Description
+  - [Description](#--description-top)
+
+- Installation
+  - [Installation](#--installation-top)
+
+- Notes
+  - [Notes](#--notes-top)
 
 - Component
-  - [Required Methods](#component--required-methods-top)
-  - [Initialing A Component](#component--initialing-a-component-top)
-  - [The Options Object](#component--the-options-object-top)
-  - [Writing A Component](#component--writing-a-component-top)
+
+  - Required Methods
+    - [Required Methods](#--component--required-methods-top)
+
+  - Initialing A Component
+    - [Initialing A Component](#--component--initialing-a-component-top)
+
+  - The Options Object
+    - [The Options Object](#--component--the-options-object-top)
+
+  - Writing A Component
+    - [Writing A Component](#--component--writing-a-component-top)
 
 - Examples
-  - [Nesting](#examples--nesting-top)
-  - [Basic Usage](#examples--basic-usage-top)
-  - [Wrapping The Dom](#examples--wrapping-the-dom-top)
-  - [What You Can Pass As An Object](#examples--what-you-can-pass-as-an-object-top)
+
+  - Nesting
+    - [Nesting](#--examples--nesting-top)
+
+  - Basic Usage
+    - [Basic Usage](#--examples--basic-usage-top)
+
+  - Wrapping The Dom
+    - [Wrapping The Dom](#--examples--wrapping-the-dom-top)
+
+  - What You Can Pass As An Object
+    - [What You Can Pass As An Object](#--examples--what-you-can-pass-as-an-object-top)
 
 - Functional Methods
-  - [Basics](#functional-methods--basics-top)
-  - [el.addClass](#functional-methods--el-addclass-top)
-  - [el.isComponent](#functional-methods--el-iscomponent-top)
+
+  - Basics
+    - [Basics](#--functional-methods--basics-top)
+
+  - el.addClass
+    - [el.addClass](#--functional-methods--el-addclass-top)
+
+  - el.isComponent
+    - [el.isComponent](#--functional-methods--el-iscomponent-top)
 
 - El Methods
 
   - Attributes
-    - [addClass](#el-methods--attributes--addclass-top)
-    - [attr](#el-methods--attributes--attr-top)
-    - [className](#el-methods--attributes--classname-top)
-    - [copy](#el-methods--attributes--copy-top)
-    - [name](#el-methods--attributes--name-top)
-    - [removeClass](#el-methods--attributes--removeclass-top)
-    - [toggleClass](#el-methods--attributes--toggleclass-top)
+
+    - addClass
+      - [addClass](#--el-methods--attributes--addclass-top)
+
+    - attr
+      - [attr](#--el-methods--attributes--attr-top)
+
+    - className
+      - [className](#--el-methods--attributes--classname-top)
+
+    - copy
+      - [copy](#--el-methods--attributes--copy-top)
+
+    - name
+      - [name](#--el-methods--attributes--name-top)
+
+    - removeClass
+      - [removeClass](#--el-methods--attributes--removeclass-top)
+
+    - toggleClass
+      - [toggleClass](#--el-methods--attributes--toggleclass-top)
 
   - Dom Manipulation
-    - [append](#el-methods--dom-manipulation--append-top)
-    - [appendTo](#el-methods--dom-manipulation--appendto-top)
-    - [before](#el-methods--dom-manipulation--before-top)
-    - [check](#el-methods--dom-manipulation--check-top)
-    - [clone](#el-methods--dom-manipulation--clone-top)
-    - [disable](#el-methods--dom-manipulation--disable-top)
-    - [enable](#el-methods--dom-manipulation--enable-top)
-    - [focus](#el-methods--dom-manipulation--focus-top)
-    - [html](#el-methods--dom-manipulation--html-top)
-    - [prepend](#el-methods--dom-manipulation--prepend-top)
-    - [prependTo](#el-methods--dom-manipulation--prependto-top)
-    - [remove](#el-methods--dom-manipulation--remove-top)
-    - [removeChild](#el-methods--dom-manipulation--removechild-top)
-    - [replaceWith](#el-methods--dom-manipulation--replacewith-top)
-    - [select](#el-methods--dom-manipulation--select-top)
-    - [style](#el-methods--dom-manipulation--style-top)
-    - [text](#el-methods--dom-manipulation--text-top)
-    - [uncheck](#el-methods--dom-manipulation--uncheck-top)
-    - [value](#el-methods--dom-manipulation--value-top)
+
+    - append
+      - [append](#--el-methods--dom-manipulation--append-top)
+
+    - appendTo
+      - [appendTo](#--el-methods--dom-manipulation--appendto-top)
+
+    - before
+      - [before](#--el-methods--dom-manipulation--before-top)
+
+    - check
+      - [check](#--el-methods--dom-manipulation--check-top)
+
+    - clone
+      - [clone](#--el-methods--dom-manipulation--clone-top)
+
+    - disable
+      - [disable](#--el-methods--dom-manipulation--disable-top)
+
+    - enable
+      - [enable](#--el-methods--dom-manipulation--enable-top)
+
+    - focus
+      - [focus](#--el-methods--dom-manipulation--focus-top)
+
+    - html
+      - [html](#--el-methods--dom-manipulation--html-top)
+
+    - prepend
+      - [prepend](#--el-methods--dom-manipulation--prepend-top)
+
+    - prependTo
+      - [prependTo](#--el-methods--dom-manipulation--prependto-top)
+
+    - remove
+      - [remove](#--el-methods--dom-manipulation--remove-top)
+
+    - removeChild
+      - [removeChild](#--el-methods--dom-manipulation--removechild-top)
+
+    - replaceWith
+      - [replaceWith](#--el-methods--dom-manipulation--replacewith-top)
+
+    - select
+      - [select](#--el-methods--dom-manipulation--select-top)
+
+    - style
+      - [style](#--el-methods--dom-manipulation--style-top)
+
+    - text
+      - [text](#--el-methods--dom-manipulation--text-top)
+
+    - uncheck
+      - [uncheck](#--el-methods--dom-manipulation--uncheck-top)
+
+    - value
+      - [value](#--el-methods--dom-manipulation--value-top)
 
   - Events
-    - [doubleclick](#el-methods--events--doubleclick-top)
-    - [off](#el-methods--events--off-top)
-    - [on](#el-methods--events--on-top)
-    - [once](#el-methods--events--once-top)
-    - [trigger](#el-methods--events--trigger-top)
-    - [Input](#el-methods--events--input-top)
-    - [Drag And Drop](#el-methods--events--drag-and-drop-top)
+
+    - doubleclick
+      - [doubleclick](#--el-methods--events--doubleclick-top)
+
+    - off
+      - [off](#--el-methods--events--off-top)
+
+    - on
+      - [on](#--el-methods--events--on-top)
+
+    - once
+      - [once](#--el-methods--events--once-top)
+
+    - trigger
+      - [trigger](#--el-methods--events--trigger-top)
+
+    - Input
+      - [Input](#--el-methods--events--input-top)
+
+    - Drag And Drop
+      - [Drag And Drop](#--el-methods--events--drag-and-drop-top)
 
   - Predicates
-    - [contains](#el-methods--predicates--contains-top)
-    - [hasClass](#el-methods--predicates--hasclass-top)
-    - [hasParent](#el-methods--predicates--hasparent-top)
-    - [isChecked](#el-methods--predicates--ischecked-top)
-    - [isFocused](#el-methods--predicates--isfocused-top)
-    - [isVisible](#el-methods--predicates--isvisible-top)
+
+    - contains
+      - [contains](#--el-methods--predicates--contains-top)
+
+    - hasClass
+      - [hasClass](#--el-methods--predicates--hasclass-top)
+
+    - hasParent
+      - [hasParent](#--el-methods--predicates--hasparent-top)
+
+    - isChecked
+      - [isChecked](#--el-methods--predicates--ischecked-top)
+
+    - isFocused
+      - [isFocused](#--el-methods--predicates--isfocused-top)
+
+    - isVisible
+      - [isVisible](#--el-methods--predicates--isvisible-top)
 
   - Query
-    - [children](#el-methods--query--children-top)
-    - [closest](#el-methods--query--closest-top)
-    - [find](#el-methods--query--find-top)
-    - [getSelector](#el-methods--query--getselector-top)
-    - [hasClass](#el-methods--query--hasclass-top)
-    - [offset](#el-methods--query--offset-top)
-    - [parent](#el-methods--query--parent-top)
-    - [parents](#el-methods--query--parents-top)
-    - [parentsUntil](#el-methods--query--parentsuntil-top)
-    - [scrollWidth](#el-methods--query--scrollwidth-top)
-    - [selectorPath](#el-methods--query--selectorpath-top)
-    - [siblings](#el-methods--query--siblings-top)
-    - [textNodes](#el-methods--query--textnodes-top)
-- [Tests](#tests)
 
-## Description ([top](#table-of-contents))
+    - children
+      - [children](#--el-methods--query--children-top)
+
+    - closest
+      - [closest](#--el-methods--query--closest-top)
+
+    - find
+      - [find](#--el-methods--query--find-top)
+
+    - getSelector
+      - [getSelector](#--el-methods--query--getselector-top)
+
+    - hasClass
+      - [hasClass](#--el-methods--query--hasclass-top)
+
+    - offset
+      - [offset](#--el-methods--query--offset-top)
+
+    - parent
+      - [parent](#--el-methods--query--parent-top)
+
+    - parents
+      - [parents](#--el-methods--query--parents-top)
+
+    - parentsUntil
+      - [parentsUntil](#--el-methods--query--parentsuntil-top)
+
+    - scrollWidth
+      - [scrollWidth](#--el-methods--query--scrollwidth-top)
+
+    - selectorPath
+      - [selectorPath](#--el-methods--query--selectorpath-top)
+
+    - siblings
+      - [siblings](#--el-methods--query--siblings-top)
+
+    - textNodes
+      - [textNodes](#--el-methods--query--textnodes-top)
+
+## Description
+### Description.md ([top](#table-of-contents))
 
 - Create nodes with a simple interface which will be very familiar.
 - Get an API to simplify DOM manipulation
 - Plugin architecture to extend the prototype
 
 Thanks to [FRZR](https://frzr.js.org/) for some help for clearing up the "child" problem https://freezer.js.org/minimum-viable-view-library/
-## Installation ([top](#table-of-contents))
+## Installation
+### Installation.md ([top](#table-of-contents))
 
 Include the script in your `body` tag, or `head`, I think it's wise to place it in the `body`, at the bottom.
 
@@ -108,12 +241,14 @@ Include the script in your `body` tag, or `head`, I think it's wise to place it 
 <script src="createNode.min.js"></script>
 ```
 
-## Notes ([top](#table-of-contents))
+## Notes
+### Notes.md ([top](#table-of-contents))
 
 I use this on production, and I would like some help on it. Thanks. The goal is to keep it as simple and light as possible. It's a bit of a bastard child between FRZR and jQuery — a somewhat attractive & useful bastard.
 
 ## Component
-### Component / Required Methods ([top](#table-of-contents))
+### Required Methods
+#### Component / Required Methods.md ([top](#table-of-contents))
 
 - `addClass` when the class key is present
 - `on` when a key matching that pattern is present
@@ -122,7 +257,8 @@ I use this on production, and I would like some help on it. Thanks. The goal is 
 
 You will also get the options object passed to the constructor.
 
-### Component / Initialing A Component ([top](#table-of-contents))
+### Initialing A Component
+#### Component / Initialing A Component.md ([top](#table-of-contents))
 
 The most basic way to initialize a component is like this:
 
@@ -141,7 +277,8 @@ el(Component, [
 ]);
 ```
 
-### Component / The Options Object ([top](#table-of-contents))
+### The Options Object
+#### Component / The Options Object.md ([top](#table-of-contents))
 
 You can pass your component any options.
 
@@ -160,7 +297,8 @@ el(Component, {
 })
 ```
 
-### Component / Writing A Component ([top](#table-of-contents))
+### Writing A Component
+#### Component / Writing A Component.md ([top](#table-of-contents))
 
 ```javascript
 function Component(options) {
@@ -220,7 +358,8 @@ el(Component, {
 ```
 
 ## Examples
-### Examples / Nesting ([top](#table-of-contents))
+### Nesting
+#### Examples / Nesting.md ([top](#table-of-contents))
 
 ```javascript
 el('div', [
@@ -229,13 +368,15 @@ el('div', [
 ]);
 ```
 
-### Examples / Basic Usage ([top](#table-of-contents))
+### Basic Usage
+#### Examples / Basic Usage.md ([top](#table-of-contents))
 
 ```javascript
 el('div', { className : 'my-class-name' }, ['some text']);
 ```
 
-### Examples / Wrapping The Dom ([top](#table-of-contents))
+### Wrapping The Dom
+#### Examples / Wrapping The Dom.md ([top](#table-of-contents))
 
 You can get all the methods and the simplified interface based on ideas in jQuery by wrapping a node in `el`.
 
@@ -243,12 +384,14 @@ You can get all the methods and the simplified interface based on ideas in jQuer
 var wrapped = el(document.querySelector('#my-div'));
 ```
 
-### Examples / What You Can Pass As An Object ([top](#table-of-contents))
+### What You Can Pass As An Object
+#### Examples / What You Can Pass As An Object.md ([top](#table-of-contents))
 
 - You can pass it anything which has an `appendTo` method
 
 ## Functional Methods
-### Functional Methods / Basics ([top](#table-of-contents))
+### Basics
+#### Functional Methods / Basics.md ([top](#table-of-contents))
 
 ## Functional interfaces
 - `el.contains`
@@ -259,7 +402,8 @@ var wrapped = el(document.querySelector('#my-div'));
 - `el.isElement`
 - `el.isVisible`
 
-### Functional Methods / el.addClass ([top](#table-of-contents))
+### el.addClass
+#### Functional Methods / el.addClass.md ([top](#table-of-contents))
 
 Is a curried function which can take `1` or `2` arguments.
 
@@ -294,13 +438,15 @@ toppings('peppers');
 toppings('mushrooms');
 ```
 
-### Functional Methods / el.isComponent ([top](#table-of-contents))
+### el.isComponent
+#### Functional Methods / el.isComponent.md ([top](#table-of-contents))
 
 Returns `true` or `false` if the argument is a component
 
 ## El Methods
 ### Attributes
-#### El Methods / Attributes / addClass ([top](#table-of-contents))
+#### addClass
+##### El Methods / Attributes / addClass.md ([top](#table-of-contents))
 
 Will add a class to a node, and will check if the class does not exist before adding.
 
@@ -308,7 +454,8 @@ Will add a class to a node, and will check if the class does not exist before ad
 el('div').addClass('this-class-name');
 ```
 
-#### El Methods / Attributes / attr ([top](#table-of-contents))
+#### attr
+##### El Methods / Attributes / attr.md ([top](#table-of-contents))
 
 ```javascript
 var div = el('div');
@@ -330,7 +477,8 @@ el('div').attr({
 <div class="some-class-name" style="background: red"></div>
 ```
 
-#### El Methods / Attributes / className ([top](#table-of-contents))
+#### className
+##### El Methods / Attributes / className.md ([top](#table-of-contents))
 
 Will set or return value of the attribute `class` for a `Node`.
 
@@ -343,7 +491,8 @@ a.className();
 //-> test
 ```
 
-#### El Methods / Attributes / copy ([top](#table-of-contents))
+#### copy
+##### El Methods / Attributes / copy.md ([top](#table-of-contents))
 
 Will copy a target node's attributes from another node, including it's `innerHTML`.
 
@@ -359,7 +508,8 @@ a.html();
 // -> text
 ```
 
-#### El Methods / Attributes / name ([top](#table-of-contents))
+#### name
+##### El Methods / Attributes / name.md ([top](#table-of-contents))
 
 Will set or return value of the attribute `name` for a `Node`.
 
@@ -372,7 +522,8 @@ a.name();
 //-> test
 ```
 
-#### El Methods / Attributes / removeClass ([top](#table-of-contents))
+#### removeClass
+##### El Methods / Attributes / removeClass.md ([top](#table-of-contents))
 
 Will remove the class name from a node.
 
@@ -389,7 +540,8 @@ node.removeClass('my-class-name');
 <div id="copy" data-attribute="some-text">
 ```
 
-#### El Methods / Attributes / toggleClass ([top](#table-of-contents))
+#### toggleClass
+##### El Methods / Attributes / toggleClass.md ([top](#table-of-contents))
 
 Will toggle a class name on a node. If the class exists, it will be removed, if it does not exist, it will be added.
 
@@ -400,7 +552,8 @@ myDIV.toggleClass('toggle'); // -> myDIV does not have class 'toggle'
 ```
 
 ### Dom Manipulation
-#### El Methods / Dom Manipulation / append ([top](#table-of-contents))
+#### append
+##### El Methods / Dom Manipulation / append.md ([top](#table-of-contents))
 
 Is an interface for `appendChild`, the result being a way to add a `Node` to a parent `Node`.
 
@@ -433,7 +586,8 @@ el('div', { className : 'parent-1' }).append([
 </div>
 ```
 
-#### El Methods / Dom Manipulation / appendTo ([top](#table-of-contents))
+#### appendTo
+##### El Methods / Dom Manipulation / appendTo.md ([top](#table-of-contents))
 
 Is an interface for `appendChild`, the result being a way to add a child `Node` to a parent `Node`.
 
@@ -451,7 +605,8 @@ child.appendTo(parent);
 </div>
 ```
 
-#### El Methods / Dom Manipulation / before ([top](#table-of-contents))
+#### before
+##### El Methods / Dom Manipulation / before.md ([top](#table-of-contents))
 
 Is an interface for `insertBefore`, the result being a way to add a `Node` before the reference `Node`.
 
@@ -473,7 +628,8 @@ reference.before([before]);
 </div>
 ```
 
-#### El Methods / Dom Manipulation / check ([top](#table-of-contents))
+#### check
+##### El Methods / Dom Manipulation / check.md ([top](#table-of-contents))
 
 Check a checkbox and radio
 
@@ -485,7 +641,8 @@ a.isChecked();
 // -> true
 ```
 
-#### El Methods / Dom Manipulation / clone ([top](#table-of-contents))
+#### clone
+##### El Methods / Dom Manipulation / clone.md ([top](#table-of-contents))
 
 Clones an element, is an interface for `Node.cloneNode(true)`
 
@@ -508,7 +665,8 @@ var b = a.clone();
 </div>
 ```
 
-#### El Methods / Dom Manipulation / disable ([top](#table-of-contents))
+#### disable
+##### El Methods / Dom Manipulation / disable.md ([top](#table-of-contents))
 
 Disables an element by setting it's `disabled` attribute to `disabled`
 
@@ -522,7 +680,8 @@ Result
 <div disabled="disabled"></div>
 ```
 
-#### El Methods / Dom Manipulation / enable ([top](#table-of-contents))
+#### enable
+##### El Methods / Dom Manipulation / enable.md ([top](#table-of-contents))
 
 Enables an element by removing it's `disabled` attribute
 
@@ -538,7 +697,8 @@ var a = el(document.getElementById('disabled')).enable();
 <div id="disabled"></div>
 ```
 
-#### El Methods / Dom Manipulation / focus ([top](#table-of-contents))
+#### focus
+##### El Methods / Dom Manipulation / focus.md ([top](#table-of-contents))
 
 Will `focus` an element. This will only work if the element is in the `document.body` and if it has an `tabindex` attribute.
 
@@ -558,7 +718,8 @@ a.html('test');
 // a.html() -> 'test'
 ```
 
-#### El Methods / Dom Manipulation / html ([top](#table-of-contents))
+#### html
+##### El Methods / Dom Manipulation / html.md ([top](#table-of-contents))
 
 Sets the `innerHTML` value of a node.
 
@@ -575,7 +736,8 @@ target.html();
 // -> '<div class="my-div"></div>'
 ```
 
-#### El Methods / Dom Manipulation / prepend ([top](#table-of-contents))
+#### prepend
+##### El Methods / Dom Manipulation / prepend.md ([top](#table-of-contents))
 
 Will append a child element in the first position of the parent node.
 
@@ -604,7 +766,8 @@ parent.prepend([child]);
 </div>
 ```
 
-#### El Methods / Dom Manipulation / prependTo ([top](#table-of-contents))
+#### prependTo
+##### El Methods / Dom Manipulation / prependTo.md ([top](#table-of-contents))
 
 Will append a child element in the first position of the parent node.
 
@@ -632,7 +795,8 @@ child.prependTo(parent);
 </div>
 ```
 
-#### El Methods / Dom Manipulation / remove ([top](#table-of-contents))
+#### remove
+##### El Methods / Dom Manipulation / remove.md ([top](#table-of-contents))
 
 Will remove a `Node` from it's parent.
 
@@ -658,7 +822,8 @@ b.remove();
 </div>
 ```
 
-#### El Methods / Dom Manipulation / removeChild ([top](#table-of-contents))
+#### removeChild
+##### El Methods / Dom Manipulation / removeChild.md ([top](#table-of-contents))
 
 Will remove a child `Node`.
 
@@ -684,7 +849,8 @@ a.removeChild(b);
 </div>
 ```
 
-#### El Methods / Dom Manipulation / replaceWith ([top](#table-of-contents))
+#### replaceWith
+##### El Methods / Dom Manipulation / replaceWith.md ([top](#table-of-contents))
 
 Replaces a target node with a new node.
 
@@ -694,7 +860,8 @@ var newNode = el('div', { className : 'new-node' });
 targetNode.replaceWith(newNode);
 ```
 
-#### El Methods / Dom Manipulation / select ([top](#table-of-contents))
+#### select
+##### El Methods / Dom Manipulation / select.md ([top](#table-of-contents))
 
 Provides an interface to select text ranges and select the `option` node.
 
@@ -737,7 +904,8 @@ a.select(0);
 // -> will select the first option node
 ```
 
-#### El Methods / Dom Manipulation / style ([top](#table-of-contents))
+#### style
+##### El Methods / Dom Manipulation / style.md ([top](#table-of-contents))
 
 An interface to edit the style of a node, it can be used in 2 different ways.
 
@@ -777,7 +945,8 @@ div.style('fontSize');
 // -> 13px
 ```
 
-#### El Methods / Dom Manipulation / text ([top](#table-of-contents))
+#### text
+##### El Methods / Dom Manipulation / text.md ([top](#table-of-contents))
 
 Sets the text value of a node, uses `textContent` as opposed to `innerHTML`, this distinction is important since any HTML passed as a string will be converted to text.
 
@@ -794,7 +963,8 @@ target.text();
 // -> 'my text'
 ```
 
-#### El Methods / Dom Manipulation / uncheck ([top](#table-of-contents))
+#### uncheck
+##### El Methods / Dom Manipulation / uncheck.md ([top](#table-of-contents))
 
 Uncheck a checkbox and radio
 
@@ -810,7 +980,8 @@ a.isChecked();
 // -> false
 ```
 
-#### El Methods / Dom Manipulation / value ([top](#table-of-contents))
+#### value
+##### El Methods / Dom Manipulation / value.md ([top](#table-of-contents))
 
 Query
 ```javascript
@@ -826,13 +997,15 @@ a.value('New text');
 ```
 
 ### Events
-#### El Methods / Events / doubleclick ([top](#table-of-contents))
+#### doubleclick
+##### El Methods / Events / doubleclick.md ([top](#table-of-contents))
 
 A listener which is triggered when the user double clicks on an element.
 
 - `on('doubleclick', [ Function ])`
 
-#### El Methods / Events / off ([top](#table-of-contents))
+#### off
+##### El Methods / Events / off.md ([top](#table-of-contents))
 
 This is an interface for `removeEventListener`, with the main difference being that you don't have to pass a function as a second argument. And when no second argument is passed, all functions associated with the event will be removed.
 
@@ -864,7 +1037,8 @@ We will now remove all event listeners attached to the `click` event by passing 
 element.off('click');
 ```
 
-#### El Methods / Events / on ([top](#table-of-contents))
+#### on
+##### El Methods / Events / on.md ([top](#table-of-contents))
 
 This is an interface for `addEventListener`, with the main difference being how functions are tracked internally.
 
@@ -879,7 +1053,8 @@ div.appendTo(document.body);
 ```
 Now when you click on the element, it will log `click` to the console.
 
-#### El Methods / Events / once ([top](#table-of-contents))
+#### once
+##### El Methods / Events / once.md ([top](#table-of-contents))
 
 Will add an event listener which will execute once, then remove the listener.
 
@@ -894,7 +1069,8 @@ div.appendTo(document.body);
 ```
 Now when you click on the element, it will log `click` to the console. Any additional clicks will not trigger the event.
 
-#### El Methods / Events / trigger ([top](#table-of-contents))
+#### trigger
+##### El Methods / Events / trigger.md ([top](#table-of-contents))
 
 This will trigger all listeners for matching event name.
 
@@ -913,7 +1089,8 @@ el.trigger('click');
 // -> will execute 'myClickHandler' and 'myClickSecondHandler'
 ```
 
-#### El Methods / Events / Input ([top](#table-of-contents))
+#### Input
+##### El Methods / Events / Input.md ([top](#table-of-contents))
 
 Input has been unified across browsers, so that when you use `on('input')` you will have consistent performance on Internet Explorer, Chrome and Firefox.
 
@@ -950,7 +1127,8 @@ var a = el(Editbox, {
 
 ```
 
-#### El Methods / Events / Drag And Drop ([top](#table-of-contents))
+#### Drag And Drop
+##### El Methods / Events / Drag And Drop.md ([top](#table-of-contents))
 
 - `on('dragstart', [ Function ])`
 - `on('dragmove', [ Function ])`
@@ -974,7 +1152,8 @@ The `X` and `Y` position of where drag started
 The distance travelled in `pixels` between the start position and the current position.
 
 ### Predicates
-#### El Methods / Predicates / contains ([top](#table-of-contents))
+#### contains
+##### El Methods / Predicates / contains.md ([top](#table-of-contents))
 
 ```javascript
 var a;
@@ -1022,7 +1201,8 @@ p.contains([a, b] c);
 // They will both return 'true'
 ```
 
-#### El Methods / Predicates / hasClass ([top](#table-of-contents))
+#### hasClass
+##### El Methods / Predicates / hasClass.md ([top](#table-of-contents))
 
 Returns `boolean` value for whether a `Node` has a className.
 
@@ -1032,7 +1212,8 @@ a.hasClass('test')
 // -> true
 ```
 
-#### El Methods / Predicates / hasParent ([top](#table-of-contents))
+#### hasParent
+##### El Methods / Predicates / hasParent.md ([top](#table-of-contents))
 
 ```javascript
 var myParent = el('div', [
@@ -1043,7 +1224,8 @@ myChild.hasParent(myParent);
 // -> true
 ```
 
-#### El Methods / Predicates / isChecked ([top](#table-of-contents))
+#### isChecked
+##### El Methods / Predicates / isChecked.md ([top](#table-of-contents))
 
 Returns a `[ Boolean ]` value of the checked state of a node.
 
@@ -1054,7 +1236,8 @@ a.isChecked();
 // -> false
 ```
 
-#### El Methods / Predicates / isFocused ([top](#table-of-contents))
+#### isFocused
+##### El Methods / Predicates / isFocused.md ([top](#table-of-contents))
 
 ```javascript
 var myFocus = el('label', { tabIndex : 0 });
@@ -1068,7 +1251,8 @@ myFocus.isFocused();
 // -> true
 ```
 
-#### El Methods / Predicates / isVisible ([top](#table-of-contents))
+#### isVisible
+##### El Methods / Predicates / isVisible.md ([top](#table-of-contents))
 
 This one requires a bit of explaining, it doesn't only check for 'visibility'.
 
@@ -1111,7 +1295,8 @@ myFocus.isVisible();
 The idea here is that this check is smart, so it knows whether the node is visible or not in various contexts.
 
 ### Query
-#### El Methods / Query / children ([top](#table-of-contents))
+#### children
+##### El Methods / Query / children.md ([top](#table-of-contents))
 
 Returns an array of direct descendants wrapped in the `el` constructor. This is an interface for `childNodes` with a filter for a `NodeType` equal to `1` (`HTMlElement`)
 
@@ -1153,7 +1338,8 @@ a.children(1, -1);
 // -> <div class="child-3"></div>
 ```
 
-#### El Methods / Query / closest ([top](#table-of-contents))
+#### closest
+##### El Methods / Query / closest.md ([top](#table-of-contents))
 
 Returns the closest parent matching the query.
 
@@ -1168,7 +1354,8 @@ farthest.closest('.closest');
 // -> HTML Element : div.closest
 ```
 
-#### El Methods / Query / find ([top](#table-of-contents))
+#### find
+##### El Methods / Query / find.md ([top](#table-of-contents))
 
 Returns an array of matches as a result of executing the query.
 
@@ -1182,7 +1369,8 @@ parent.find('.find');
 // -> HTML NodeList : [ div.find, div.find ]
 ```
 
-#### El Methods / Query / getSelector ([top](#table-of-contents))
+#### getSelector
+##### El Methods / Query / getSelector.md ([top](#table-of-contents))
 
 Returns a `String` selector for the selected node.
 
@@ -1197,7 +1385,8 @@ parent.getSelector();
 // -> HTML NodeList : div.closest#my-id[tabindex="0"]
 ```
 
-#### El Methods / Query / hasClass ([top](#table-of-contents))
+#### hasClass
+##### El Methods / Query / hasClass.md ([top](#table-of-contents))
 
 ```javascript
 var node = document.querySelector('.class-name');
@@ -1205,7 +1394,8 @@ el(node).hasClass('class-name');
 // -> true
 ```
 
-#### El Methods / Query / offset ([top](#table-of-contents))
+#### offset
+##### El Methods / Query / offset.md ([top](#table-of-contents))
 
 Returns the `top`, `left`, `width`, `height` relative to the `body`'s coordinates. It is an interface for `this.node.getBoundingClientRect()`
 
@@ -1224,7 +1414,8 @@ parent.offset();
 */
 ```
 
-#### El Methods / Query / parent ([top](#table-of-contents))
+#### parent
+##### El Methods / Query / parent.md ([top](#table-of-contents))
 
 If the `node` has a parent, it will return it's parent. Otherwise, it will return `false`
 
@@ -1239,7 +1430,8 @@ child.parent();
 // -> HTML Element : document.body
 ```
 
-#### El Methods / Query / parents ([top](#table-of-contents))
+#### parents
+##### El Methods / Query / parents.md ([top](#table-of-contents))
 
 Returns an array of parents, from first to last.
 
@@ -1256,7 +1448,8 @@ child.parents();
 // -> [Array]
 ```
 
-#### El Methods / Query / parentsUntil ([top](#table-of-contents))
+#### parentsUntil
+##### El Methods / Query / parentsUntil.md ([top](#table-of-contents))
 
 Takes a predicate as an argument and returns the first `truthy` match.
 
@@ -1264,7 +1457,8 @@ Takes a predicate as an argument and returns the first `truthy` match.
 div.parentsUntil(function (p) { return p.tagName === 'h1' });
 ```
 
-#### El Methods / Query / scrollWidth ([top](#table-of-contents))
+#### scrollWidth
+##### El Methods / Query / scrollWidth.md ([top](#table-of-contents))
 
 Returns the scrollWidth property of a `node`.
 
@@ -1273,7 +1467,8 @@ node.scrollWidth();
 // -> Number
 ```
 
-#### El Methods / Query / selectorPath ([top](#table-of-contents))
+#### selectorPath
+##### El Methods / Query / selectorPath.md ([top](#table-of-contents))
 
 Returns a selector path to the selected node.
 
@@ -1305,7 +1500,8 @@ child.selectorPath();
 // -> div.parent-2#super-parent div.parent-1
 ```
 
-#### El Methods / Query / siblings ([top](#table-of-contents))
+#### siblings
+##### El Methods / Query / siblings.md ([top](#table-of-contents))
 
 Returns a selected Node and it's siblings filtered to show only nodes of type `1`, which are HTML element nodes, this excludes text nodes.
 
@@ -1329,7 +1525,8 @@ selected.siblings();
 <div class="siblings-4"></div>
 ```
 
-#### El Methods / Query / textNodes ([top](#table-of-contents))
+#### textNodes
+##### El Methods / Query / textNodes.md ([top](#table-of-contents))
 
 Returns all the `Text Nodes` which are a child of a selected node.
 
@@ -1337,66 +1534,4 @@ Returns all the `Text Nodes` which are a child of a selected node.
 var selected = el('div', { className : 'parent-1' }, ['text node']);
 selected.textNodes();
 // -> [Text Node]
-```
-
-***
-
-## Tests
-
-```
-   1. append............................................................. ✅
-   2. before............................................................. ✅
-   3. attr............................................................... ✅
-   4. emptyAttr.......................................................... ✅
-   5. children........................................................... ✅
-   6. childrenFirst...................................................... ✅
-   7. childrenSlice...................................................... ✅
-   8. clone.............................................................. ✅
-   9. closest............................................................ ✅
-  10. containsArray...................................................... ✅
-  11. componentNames..................................................... ✅
-  12. disable............................................................ ✅
-  13. find............................................................... ✅
-  14. focus.............................................................. ✅
-  15. getSelector........................................................ ✅
-  16. hasClass........................................................... ✅
-  17. hasParent.......................................................... ✅
-  18. hasParentBody...................................................... ✅
-  19. isDisabled......................................................... ✅
-  20. isVisible.......................................................... ✅
-  21. off................................................................ ✅
-  22. offset............................................................. ✅
-  23. on................................................................. ✅
-  24. onMount............................................................ ✅
-  25. onUnmount.......................................................... ✅
-  26. once............................................................... ✅
-  27. parent............................................................. ✅
-  28. parents............................................................ ✅
-  29. prepend............................................................ ✅
-  30. prependTo.......................................................... ✅
-  31. remove............................................................. ✅
-  32. removeClass........................................................ ✅
-  33. removeChild........................................................ ✅
-  34. removeClassArray................................................... ✅
-  35. replaceWith........................................................ ✅
-  36. select............................................................. ✅
-  37. selectorPath....................................................... ✅
-  38. siblings........................................................... ✅
-  39. scrollWidth........................................................ ✅
-  40. text............................................................... ✅
-  41. textNodes.......................................................... ✅
-  42. toggleClass........................................................ ✅
-  43. trigger............................................................ ✅
-  44. value.............................................................. ✅
-  45. fn................................................................. ✅
-  46. style.............................................................. ✅
-  47. style_object....................................................... ✅
-  48. uncheck............................................................ ✅
-  49. check.............................................................. ✅
-  50. name............................................................... ✅
-  51. component.......................................................... ✅
-  52. componentWithClassAndChildren...................................... ✅
-  53. componentWithRenderMethod.......................................... ✅
-  54. componentCheckChildren............................................. ✅
-  55. componentWithNames................................................. ✅
 ```

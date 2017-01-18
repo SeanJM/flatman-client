@@ -1,8 +1,8 @@
-function createComponent(constructor, opt, array) {
+function createComponent(tagName, opt, array) {
   var i = 1;
   var n = arguments.length;
   var k;
-
+  var constructor = Component.lib[tagName];
   var hasAppend = typeof constructor.prototype.append === 'function';
   var hasText = typeof constructor.prototype.text === 'function';
   var component = new constructor(opt);
@@ -31,6 +31,11 @@ function createComponent(constructor, opt, array) {
     }
   }
 
+  component.tagName = tagName;
+  component.node = component.node || {};
+  component.dict = component.dict || {};
+  component.childNodes = component.childNodes || [];
+
   if (hasText) {
     array.forEach(function (child) {
       if (typeof child === 'string' || typeof child === 'number') {
@@ -43,31 +48,27 @@ function createComponent(constructor, opt, array) {
     children = array;
   }
 
-  component.node = component.node || {};
-  component.dict = component.dict || {};
-  component.childNodes = component.childNodes || [];
+  for (k in opt) {
+    if (k.slice(0, 4) === 'once') {
+      afterRender.once.push({
+        name : k.slice(4).toLowerCase(),
+        callback : opt[k]
+      });
+    } else if (k.slice(0, 2) === 'on') {
+      afterRender.on.push({
+        name : k.slice(2).toLowerCase(),
+        callback : opt[k]
+      });
+    } else if (k === 'className') {
+      afterRender.className = opt[k];
+    } else if (k === 'id') {
+      afterRender.id = opt[k];
+    } else {
+      component.dict[k] = opt[k];
+    }
+  }
 
   if (typeof component.render === 'function') {
-    for (k in opt) {
-      if (k.slice(0, 4) === 'once') {
-        afterRender.once.push({
-          name : k.slice(4).toLowerCase(),
-          callback : opt[k]
-        });
-      } else if (k.slice(0, 2) === 'on') {
-        afterRender.on.push({
-          name : k.slice(2).toLowerCase(),
-          callback : opt[k]
-        });
-      } else if (k === 'className') {
-        afterRender.className = opt[k];
-      } else if (k === 'id') {
-        afterRender.id = opt[k];
-      } else {
-        component.dict[k] = opt[k];
-      }
-    }
-
     component.node.document = component.render(opt);
 
     if (component.node.document) {
@@ -96,42 +97,7 @@ function createComponent(constructor, opt, array) {
       if (component.attr) {
         component.attr('id', afterRender.id);
       } else {
-        component.node.document.attr('id', afterRender.className);
-      }
-    }
-
-  } else {
-    // Ensure compatibility with older version
-    // Check for an 'on' method
-    for (k in opt) {
-      if (k.slice(0, 4) === 'once') {
-        if (typeof component.once === 'function') {
-          component.once(k.substr(4).toLowerCase(), opt[k]);
-        } else {
-          throw 'Invalid constructor \'' + constructor.name + '\', your component must have a "once" method.';
-        }
-      } else if (k.slice(0, 2) === 'on') {
-        if (typeof component.on === 'function') {
-          component.on(k.substr(2).toLowerCase(), opt[k]);
-        } else {
-          throw 'Invalid constructor \'' + constructor.name + '\', your component must have an "on" method.';
-        }
-      } else if (k === 'className') {
-        // Check for a class property, and it exists, add the class to the component
-        if (typeof component.addClass === 'function') {
-          component.addClass(opt[k]);
-        }
-      } else if (
-        typeof component[k] === 'function'
-      ) {
-        component[k](opt[k]);
-      } else if (typeof component[k] === 'undefined') {
-        // Pass the value of 'opt' to 'this'
-        component[k] = opt[k];
-      } else if (typeof component[k] === 'object' && typeof opt[k] === 'object') {
-        for (var j in opt[k]) {
-          component[k][j] = opt[k][j];
-        }
+        component.node.document.attr('id', afterRender.id);
       }
     }
   }

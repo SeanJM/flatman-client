@@ -1,3 +1,4 @@
+var el = flatman.el;
 var a = el('div');
 
 a.style({ fontSize :  13 });

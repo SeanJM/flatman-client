@@ -6,33 +6,33 @@ const m = require('match-file-utility');
 const pkg = JSON.parse(fs.readFileSync('package.json'));
 
 const linkLicense = require('./linkLicense');
-const exists = require('../lib/exists');
-const padLeft = require(path.resolve('grunt/lib/padLeft'));
-const padRight = require(path.resolve('grunt/lib/padRight'));
 const smartCase = require(path.resolve('grunt/lib/smartCase'));
 const printTests = require('./printTests');
 const printTableOfContents = require('./printTableOfContents');
 const printContents = require('./printContents');
+const config = JSON.parse(fs.readFileSync('grunt.json'));
 
-const source = 'src/readme/';
+const source = path.join(config.src, 'readme');
 
-function generate(test_results, callback) {
+function generate(testResults, callback) {
   let content = {};
   let text = [];
-  var hasTests = test_results && test_results.int_total > 0;
+  var hasTests = testResults && testResults.tests.length > 0;
+  var total = testResults && testResults.tests.length;
+  var passed = testResults && testResults.tests.filter(a => a.passed);
+  var failed = testResults && testResults.tests.filter(a => !a.passed);
 
   m(source, /\.md$/)
     .forEach(function (a) {
-      var p = a.substr(source.length).split(path.sep);
-      var s = p.slice(0, -1);
+      var p = a.substr(source.length).split(path.sep).filter(a => a.length);
 
-      if (s.length) {
-        if (typeof _.get(content, s) === 'undefined') {
-          _.set(content, s, []);
-        } else if (typeof _.get(content, s) === 'string') {
-          throw new Error('Invalid folder structure for "' + s.join(path.sep) + '"');
+      if (p.length) {
+        if (typeof _.get(content, p) === 'undefined') {
+          _.set(content, p, []);
+        } else if (typeof _.get(content, p) === 'string') {
+          throw new Error('Invalid folder structure for "' + p.join(path.sep) + '"');
         }
-        _.get(content, s).push(a);
+        _.get(content, p).push(a);
       } else {
         content[ p[0].replace(/\.md$/, '') ] = a;
       }
@@ -46,10 +46,10 @@ function generate(test_results, callback) {
   text.push('');
 
   if (hasTests) {
-    if (test_results.int_passed === test_results.int_total) {
-      text.push('#### ✅ All ' + test_results.int_total + ' tests pass');
+    if (passed.length === total) {
+      text.push('#### ✅ All ' + total + ' tests pass');
     } else {
-      text.push('#### 🚫 ' + test_results.int_passed + ' of ' + test_results.int_total + ' tests passed (' + Math.round((test_results.int_passed / test_results.int_total) * 100) + '%)');
+      text.push('#### 🚫 ' + passed.length + ' of ' + total + ' tests passed (' + Math.round((passed.length / total) * 100) + '%)');
     }
   } else {
     text.push('#### 🐛 No unit tests');
@@ -70,7 +70,7 @@ function generate(test_results, callback) {
   printContents(text, content, 1);
 
   if (hasTests) {
-    printTests(text, test_results);
+    printTests(text, testResults);
   }
 
   fs.writeFileSync('README.md', text.join('\n'));

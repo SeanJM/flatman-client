@@ -1,3 +1,4 @@
+var el = flatman.el;
 var a = el('div');
 
 a
@@ -5,9 +6,6 @@ a
   .attr('tabindex', '0');
 
 return {
-  left : a.attr(),
-  right : {
-    type : 'test',
-    tabindex : '0'
-  }
+  left : a.attr().type === 'test' && a.attr().tabindex === '0',
+  right : true
 };

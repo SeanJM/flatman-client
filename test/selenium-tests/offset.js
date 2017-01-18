@@ -1,4 +1,15 @@
-var a = el('div', { style : 'position: absolute; left: 0; top: 0; width : 0; height: 0'});
+var el = flatman.el;
+
+var a = el('div', {
+  style : {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    width : 0,
+    height: 0
+  }
+});
+
 var o;
 
 a.appendTo(document.body);

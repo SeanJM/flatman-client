@@ -1,3 +1,4 @@
+var el = flatman.el;
 var b = el('div', { className : 'a b c' });
 
 return {

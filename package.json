@@ -1,16 +1,8 @@
 {
-  "name": "create-node",
+  "name": "flatman-client",
   "version": "1.2.8",
   "license": "MIT",
   "author": "Sean MacIsaac <seanjmacisaac@gmail.com> (http://twitter.com/seanjmacisaac)",
-  "gruntBuild": {
-    "isBundle": true,
-    "isProduction": true,
-    "sourceMap": false,
-    "isSite": false,
-    "useClosure": true,
-    "bundle": "createNode"
-  },
   "main": "bin/createNode.min.js",
   "scripts": {
     "test": "test/index.js"
@@ -18,6 +10,7 @@
   "dependencies": {
     "colors": "^1.1.2",
     "dotenv": "^2.0.0",
+    "eslint": "^3.13.1",
     "grunt": "^0.4.5",
     "grunt-autoprefixer": "^1.0.1",
     "grunt-cli": "^0.1.13",
@@ -35,6 +28,7 @@
     "imagemin-pngquant": "^5.0.0",
     "lodash": "^3.10.1",
     "match-file-utility": "^3.4.0",
-    "selenium-webdriver": "^3.0.0-beta-2"
+    "selenium-webdriver": "^3.0.0-beta-2",
+    "tiny-test": "^0.5.9"
   }
 }
