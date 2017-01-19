@@ -1,20 +1,18 @@
 Node.prototype.addClass = function (className) {
   var classList = this.classList();
 
-  if (Array.isArray(className)) {
-    for (var i = 0, n = className.length; i < n; i++) {
-      if (classList.indexOf(className[i]) === -1) {
-        classList.push(className[i]);
-      }
-    }
-  } else {
-    if (classList.indexOf(className) === -1) {
-      classList.push(className);
+  function addClass(a) {
+    if (classList.indexOf(a) === -1) {
+      classList.push(a);
     }
   }
 
-  classList.sort();
-  this.node.className = classList.join(' ');
+  if (Array.isArray(className)) {
+    className.forEach(addClass);
+  } else {
+    addClass(className);
+  }
 
+  this.node.className = classList.sort().join(' ');
   return this;
 };
