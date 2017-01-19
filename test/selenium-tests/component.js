@@ -1,4 +1,5 @@
 var el = flatman.el;
+var Component = flatman.Component;
 var a = el('div');
 
 Component.create('C', {
