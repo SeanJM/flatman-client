@@ -1,12 +1,16 @@
 Node.prototype.removeClass = function (a) {
   var classList = this.classList();
 
+  function filter(b) {
+    return b !== a;
+  }
+
   if (Array.isArray(a)) {
     a.forEach(function (b) {
-      classList.splice(classList.indexOf(b), 1);
+      classList = classList.filter(filter);
     });
   } else {
-    classList.splice(classList.indexOf(a), 1);
+    classList = classList.filter(filter);
   }
 
   this.node.className = classList.join(' ');
