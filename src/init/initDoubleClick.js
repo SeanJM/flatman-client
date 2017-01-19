@@ -5,7 +5,6 @@ function initDoubleClick() {
   document.body.addEventListener('click', function (e) {
     if (isDoubleClick) {
       e.target.dispatchEvent(
-
         new MouseEvent('doubleclick', {
           clientX : e.pageX,
           clientY : e.pageY,
