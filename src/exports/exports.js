@@ -1,5 +1,15 @@
-window.flatman = {};
-window.flatman.el = el;
-window.flatman.el.fn = Node.fn;
-window.flatman.version = '1.2.8';
-window.flatman.Component = Component;
+el.fn = Node.fn;
+
+if (typeof module === 'object') {
+  module.export = {
+    el : el,
+    version : VERSION,
+    Component : Component,
+  };
+} else if (window) {
+  window.flatman = {
+    el : el,
+    version : VERSION,
+    Component : Component,
+  };
+}
