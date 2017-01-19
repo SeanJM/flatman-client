@@ -1,4 +1,5 @@
-// CSS Related
+var VERSION = '1.3.8';
+
 var CSS_PROPERTY_IS_NUMBER = [
   'z-index',
   'opacity'
