@@ -11,12 +11,10 @@ function initInputEvent() {
           if (index === -1) {
             index = IE_INPUT.node.length;
             IE_INPUT.node.push(e.target);
-            IE_INPUT.value.push(
-              [
-                '',
-                e.target.value
-              ]
-            );
+            IE_INPUT.value.push([
+              '',
+              e.target.value
+            ]);
           } else {
             IE_INPUT.value[index].shift();
             IE_INPUT.value[index].push(e.target.value);
