@@ -1,4 +1,5 @@
 var el = flatman.el;
+var Component = flatman.Component;
 var a = el('div');
 var b = el('div');
 
