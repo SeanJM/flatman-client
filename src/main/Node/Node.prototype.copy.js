@@ -1,12 +1,6 @@
 Node.prototype.copy = function (node) {
   var elNode = el(node);
-  var opt = elNode.attr();
-
-  for(var k in opt) {
-    this.attr(k, opt[k]);
-  }
-
+  this.attr(elNode.attr());
   this.html(elNode.html());
-
   return this;
 };
