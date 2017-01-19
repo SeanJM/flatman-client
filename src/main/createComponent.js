@@ -74,7 +74,7 @@ function createComponent(tagName, opt, array) {
     if (component.node.document) {
       getNames(component.node.document);
     } else {
-      throw 'Invalid component, component must return a node in the render function.';
+      throw new Error('Invalid component, component must return a node in the render function.');
     }
 
     afterRender.once.forEach(function (def) {
