@@ -1,19 +1,13 @@
 Node.prototype.remove = function () {
   var onBody = this.hasParent(BODY);
-  var index = -1;
+  var pChildNodes = this.parentNode.childNodes;
 
-  if (this.parentNode) {
-    index = this.parentNode.childNodes.indexOf(this);
-    this.parentNode.childNodes.splice(index, 1);
-    getNode(this.parentNode).removeChild(getNode(this));
-    this.parentNode = undefined;
-    this.trigger('remove');
-  }
+  this.node.parentNode.removeChild(this.node);
+  pChildNodes.splice(pChildNodes.indexOf(this), 1);
 
   if (onBody) {
     unmount(this);
   }
-
 
   return this;
 };
