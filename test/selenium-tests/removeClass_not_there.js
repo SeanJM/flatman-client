@@ -1,5 +1,5 @@
 var el = flatman.el;
-var a = el('div', { className : 'a b' });
+var a = el('div', { className : 'b' });
 
 a.removeClass('a')
 

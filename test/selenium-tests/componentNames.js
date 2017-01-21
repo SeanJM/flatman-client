@@ -10,8 +10,8 @@ Component.create('C', {
 });
 
 Component.create('Control', {
-  render() {
-    return el('div');
+  render(props) {
+    return el('div', { name : props.name });
   }
 });
 

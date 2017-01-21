@@ -14,18 +14,21 @@
     <script src="../index.js"></script>
     <script>
       var el = flatman.el;
+      var Component = flatman.Component;
       var a = el('div');
-      var b = el('div');
+      var p = el('div');
 
-      a.addClass('my-class-name');
-      b.addClass(['my-class', 'my-class-2']);
+      Component.create('C', {
+        render() {
+          return a;
+        }
+      });
+
+      p.append([ el('C') ]);
 
       console.log({
-        right : (
-          a.attr('class') === 'my-class-name'
-          && b.attr('class') === 'my-class my-class-2'
-        ),
-        left : true
+        left : p.find(a => a.componentTag === 'C')[0].node === a.node,
+        right : true
       });
     </script>
   </body>

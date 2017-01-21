@@ -7,6 +7,6 @@ a.append([b]);
 b.before([c]);
 
 return {
-  left : a.children()[0].node === c.node,
+  left : a.children(0) === b,
   right : true
 };

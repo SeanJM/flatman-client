@@ -6,12 +6,6 @@ var c = el('div');
 var results = [];
 
 Component.create('C', {
-  remove() {
-    var p = this.parentNode;
-    var index = p.childNodes.indexOf(this);
-    this.node.document.remove();
-    p.childNodes.splice(index, 1);
-  },
   render() {
     return el('div');
   }
@@ -21,13 +15,15 @@ var d = el('C');
 
 a.append([ b, c, d ]);
 a.removeChild(b);
-results.push(!a.contains(b) && a.childNodes.length === 2 && a.childNodes[0] === c);
+results.push(!a.contains(b) && a.children().length === 2 && a.children()[0].node === c.node);
 
 a.removeChild(c);
-results.push(!a.contains(c) && a.childNodes.length === 1);
+results.push(!a.contains(c.getNode()) && a.children().length === 1);
 
 a.removeChild(d);
-results.push(!a.contains(d));
+results.push(!a.contains(d.getNode()));
+
+console.log(results);
 
 return {
   left : results[0] && results[1] && results[2],

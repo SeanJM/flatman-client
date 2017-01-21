@@ -4,10 +4,8 @@ var a = el('div');
 var b = el('div');
 
 Component.create('C', {
-  addClass(a) {
-    this.node.document.addClass(a);
-  },
-  render() {
+  render(props) {
+    a.addClass(props.className);
     return a.append([b]);
   }
 })
