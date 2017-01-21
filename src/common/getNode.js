@@ -3,7 +3,7 @@ function getNode(x) {
     return x;
   } else if (x instanceof Node) {
     return x.node;
-  } else if (typeof x === 'string' || isNumber(x)) {
+  } else if (typeof x === 'string' || (typeof x === 'number' && !isNaN(x))) {
     return new Text(x);
   } else if (
     x
