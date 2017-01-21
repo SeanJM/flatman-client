@@ -24,8 +24,8 @@ function Node(tagName, opt, children, isElement) {
   this.childNodes = [];
   this.node = getNode.call(this, tagName);
   this.tagName = this.node.tagName.toLowerCase();
-  this.attr(opt);
   this.append(children);
+  this.attr(opt);
 
   this.node.style.transform = this.node.style[VENDOR_PREFIX.transform];
   this.node.style.userSelect = this.node.style[VENDOR_PREFIX.userSelect];
