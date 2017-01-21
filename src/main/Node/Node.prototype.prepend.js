@@ -9,8 +9,9 @@ Node.prototype.prepend = function (children) {
   if (Array.isArray(children)) {
     for (; i < n; i++) {
       children[i].parentNode = this;
-      this.node.parentNode.insertBefore(getNode(children[i]), this.node);
+      this.node.parentNode.insertBefore(children[i].getNode().node, this.node);
     }
+    [].unshift.apply(this.childNodes, children.reverse());
   } else {
     throw 'prepend takes a single array as an argument';
   }
