@@ -10,6 +10,7 @@ Node.prototype.before = function (children) {
   }
 
   this.node.parentNode.insertBefore(f, this.node);
+  this.parentNode.childNodes = this.parentNode.childNodes.concat(children);
   [].forEach.call(f, mount);
 
   return this;
