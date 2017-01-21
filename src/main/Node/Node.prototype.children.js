@@ -1,23 +1,6 @@
 Node.prototype.children = function (a, b) {
-  var children = this.node.childNodes;
-  var output = [];
-
-  var i = 0;
-  var n = children.length;
-
-  for (; i < n; i++) {
-    if (isElement(children[i])) {
-      output.push(el(children[i]));
-    }
+  if (typeof a === 'number' && typeof b === 'number') {
+    return this.childNodes.slice(a, b);
   }
-
-  if (arguments.length === 1) {
-    return a < 0
-      ? output[output.length + a]
-      : output[a];
-  } else if (arguments.length === 2) {
-    return output.slice(a, b);
-  }
-
-  return output;
+  return typeof a === 'number' ? this.childNodes[a] : this.childNodes;
 };
