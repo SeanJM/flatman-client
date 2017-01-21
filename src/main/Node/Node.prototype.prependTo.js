@@ -1,9 +1,13 @@
 Node.prototype.prependTo = function (target) {
-  var node = getNode(target);
-  var children = node.childNodes;
+  var element = target.getNode();
+  var children = element.node.childNodes;
+
   if (children.length) {
-    node.insertBefore(this.node, children[0]);
+    element.node.insertBefore(this.node, children[0]);
   } else {
-    node.appendChild(this.node);
+    element.node.appendChild(this.node);
   }
+
+  element.childNodes.unshift(this);
+  return this;
 };
