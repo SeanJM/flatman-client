@@ -1,7 +1,8 @@
 Node.prototype.getSelector = function () {
-  var attr = this.node.attributes;
+  var attr = this.attr();
   var tagName = this.node.tagName.toLowerCase();
   var siblings = this.siblings();
+
   var format = {
     class : function (value) {
       return '.' + value.replace(/[ ]+/g, ' ')
@@ -26,6 +27,7 @@ Node.prototype.getSelector = function () {
       return '[type="' + value + '"]';
     }
   };
+
   var selector = [];
 
   if (tagName === 'body') {
@@ -37,10 +39,9 @@ Node.prototype.getSelector = function () {
     selector.push(tagName);
   }
 
-
-  for (var i = 0; i < attr.length; i++) {
-  	if (typeof format[attr[i].name] === 'function' && attr[i].value.length) {
-			selector.push(format[attr[i].name.toLowerCase()](attr[i].value));
+  for (var k in attr) {
+  	if (typeof format[k] === 'function' && attr[k].length) {
+			selector.push(format[k.toLowerCase()](attr[k]));
     }
   }
 
