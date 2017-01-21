@@ -1,6 +1,6 @@
 Node.prototype.contains = function (maybeList) {
   function contains(node, a) {
-    a = getNode(a);
+    a = a.getNode().node;
     return node.contains(a) && a !== node;
   }
 
