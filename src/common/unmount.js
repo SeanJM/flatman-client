@@ -1,8 +1,6 @@
 function unmount(element) {
   if (element.trigger) {
     element.trigger('unmount');
-    if (element.childNodes) {
-      element.childNodes.forEach(unmount);
-    }
+    element.children().forEach(unmount);
   }
 }
