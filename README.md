@@ -1307,7 +1307,7 @@ var a = el('div', [
   el('div', { className : 'child-3' })
 ]);
 
-a.children();
+a.childNodes;
 ```
 
 ```html
