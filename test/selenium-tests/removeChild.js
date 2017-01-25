@@ -5,6 +5,8 @@ var b = el('div');
 var c = el('div');
 var results = [];
 
+Component.lib = {};
+
 Component.create('C', {
   render() {
     return el('div');

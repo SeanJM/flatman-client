@@ -1,23 +1,28 @@
 var el = flatman.el;
-var Component = flatman.Component;
-var a = el('div', { name : 'a' });
-var b = el('div', { name : 'b' });
-var c = el('div', { name : 'c' });
+      var Component = flatman.Component;
 
-Component.create('C', {
-  render() {
-    a.append([ b.append([ c ]) ]);
-    return a;
-  }
-});
+      Component.lib = {};
+      Component.create('C', {
+        render() {
+          return el('div', [ el('div', { name : 'b' }), el('div', { name : 'c' }) ]);
+        }
+      });
 
-var p = el('C');
+      Component.create('D', {
+        render() {
+          return el('C');
+        }
+      });
 
-return {
-  left : (
-    p.node.document.node === a.node &&
-    p.node.b.node === b.node &&
-    p.node.c.node === c.node
-  ),
-  right : true
-};
+      var p = el('C');
+      var q = el('D');
+
+      return {
+        left : (
+          p.node.b.name() === 'b' &&
+          p.node.c.name() === 'c' &&
+          q.node.b.name() === 'b' &&
+          q.node.c.name() === 'c'
+        ),
+        right : true
+      };

@@ -13,23 +13,25 @@
   <body>
     <script src="../index.js"></script>
     <script>
-      var el = flatman.el;
-      var Component = flatman.Component;
-      var a = el('div');
-      var p = el('div');
+    var el = flatman.el;
+    var Component = flatman.Component;
+    var a = el('div');
+    var b = el('div');
 
-      Component.create('C', {
-        render() {
-          return a;
-        }
-      });
+    Component.create('C', {
+      render() {
+        return b;
+      }
+    });
 
-      p.append([ el('C') ]);
+    a.append([el('C')]);
 
-      console.log({
-        left : p.find(a => a.componentTag === 'C')[0].node === a.node,
-        right : true
-      });
+    console.log(a);
+
+    console.log({
+      left : a.children(0).node === b.node,
+      right : true
+    });
     </script>
   </body>
 </HTML>

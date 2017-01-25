@@ -3,6 +3,8 @@ var el = flatman.el;
 var a = el('div');
 var b = el('div');
 
+Component.lib = {};
+
 Component.create('C', {
   render() {
     return el('div', { className : 'children-test' });

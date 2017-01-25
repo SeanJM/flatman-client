@@ -11,7 +11,9 @@ Component.create('C', {
 
 a.append([el('C')]);
 
+console.log(a);
+
 return {
-  left : a.children()[0].node === b.node,
+  left : a.children(0).node === b.node,
   right : true
 };

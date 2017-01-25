@@ -1,6 +1,8 @@
 var el = flatman.el;
 var Component = flatman.Component;
 
+Component.lib = {};
+
 Component.create('C', {
   render() {
     return el('div', [

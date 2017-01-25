@@ -2,6 +2,8 @@ var el = flatman.el;
 var Component = flatman.Component;
 var isMounted = false;
 
+Component.lib = {};
+
 Component.create('C', {
   render() {
     return el('div', { onMount : function () {

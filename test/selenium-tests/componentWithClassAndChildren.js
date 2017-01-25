@@ -3,6 +3,8 @@ var Component = flatman.Component;
 var a = el('div');
 var b = el('div');
 
+Component.lib = {};
+
 Component.create('C', {
   render(props) {
     a.addClass(props.className);
