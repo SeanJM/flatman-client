@@ -2,7 +2,7 @@ function initDoubleClick() {
   var isDoubleClick = false;
 
   // Double click
-  document.body.addEventListener('click', function (e) {
+  document.addEventListener('click', function (e) {
     if (isDoubleClick) {
       e.target.dispatchEvent(
         new MouseEvent('doubleclick', {

@@ -1,7 +1,7 @@
 // Normalize IE 9 input event
 function initInputEvent() {
   if (IS_IE) {
-    document.body.addEventListener(
+    document.addEventListener(
       'keyup',
       function (e) {
         var index;
