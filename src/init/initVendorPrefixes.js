@@ -1,5 +1,6 @@
 function initVendorPrefixes() {
-  var styles = window.getComputedStyle(document.body);
+  var dummy = document.getElementsByTagName('*')[0];
+  var styles = window.getComputedStyle(dummy);
   var prefix = false;
   var list = {};
   var property;
