@@ -1,5 +1,5 @@
 function initDragAndDrop() {
-  document.body.addEventListener('mousedown', function (e) {
+  document.addEventListener('mousedown', function (e) {
     var startX = e.pageX;
     var startY = e.pageY;
     var isDrag = false;
@@ -20,13 +20,13 @@ function initDragAndDrop() {
         cancelable : true
       });
 
-      document.body.removeEventListener('mousemove', dragmove);
-      document.body.removeEventListener('mouseup', dragend);
+      document.removeEventListener('mousemove', dragmove);
+      document.removeEventListener('mouseup', dragend);
 
       if (e.which === 1 && isDrag) {
         isDrag = false;
-        document.body.style[ VENDOR_PREFIX.userSelect ] = '';
-        document.body.style.cursor = '';
+        document.style[ VENDOR_PREFIX.userSelect ] = '';
+        document.style.cursor = '';
         target.dispatchEvent(eve);
       }
     }
@@ -59,8 +59,8 @@ function initDragAndDrop() {
 
     // Ensure it's left click which starts the dragging
     if (e.which === 1) {
-      document.body.addEventListener('mouseup', dragend);
-      document.body.addEventListener('mousemove', dragmove);
+      document.addEventListener('mouseup', dragend);
+      document.addEventListener('mousemove', dragmove);
     }
   });
 }

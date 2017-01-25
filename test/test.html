@@ -14,22 +14,13 @@
     <script src="../index.js"></script>
     <script>
     var el = flatman.el;
-    var Component = flatman.Component;
-    var a = el('div');
-    var b = el('div');
+    var a = el('div', { className : 'test'});
+    var b = el('div', { className : 'test-2'});
 
-    Component.create('C', {
-      render() {
-        return b;
-      }
-    });
-
-    a.append([el('C')]);
-
-    console.log(a);
+    a.append([b]);
 
     console.log({
-      left : a.children(0).node === b.node,
+      left : b.hasParent(a) && !a.hasParent(b),
       right : true
     });
     </script>
