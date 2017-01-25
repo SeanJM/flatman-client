@@ -1,18 +1,25 @@
 function appendChild(element, children) {
   var f = document.createDocumentFragment();
+  var childNodes = [];
 
-  var childNodes = children.map(function (child) {
-    return child.getNode
-      ? child.getNode()
-      : child;
-  });
+  for (var i = 0, n = children.length; i < n; i++) {
+    if (children[i]) {
+      children[i] = children[i].getNode
+        ? children[i].getNode()
+        : children[i];
 
-  childNodes.forEach(function (child) {
-    if (child.node) { child.parentNode = element; }
-    f.appendChild(child.node ? child.node : new Text(child));
-  });
+      childNodes.push(children[i]);
+      element.childNodes.push(children[i]);
 
-  element.childNodes = element.childNodes.concat(childNodes);
+      if (children[i].node) {
+        children[i].parentNode = element;
+        f.appendChild(children[i].node);
+      } else {
+        f.appendChild(new Text(children[i]));
+      }
+    }
+  }
+
   element.node.appendChild(f);
   childNodes.forEach(mount);
 }
