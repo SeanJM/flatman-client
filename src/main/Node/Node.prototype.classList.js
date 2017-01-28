@@ -1,5 +1,5 @@
 Node.prototype.classList = function () {
-  var className = this.node.className.split(' ');
+  var className = (this.node.getAttribute('class') || '').split(' ');
   var classList = [];
   var temp;
 

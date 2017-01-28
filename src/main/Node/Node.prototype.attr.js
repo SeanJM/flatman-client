@@ -6,10 +6,10 @@ Node.prototype.attr = function () {
   function setAttrPropValue(prop, value) {
     if (prop === 'className') {
       self.className(value);
-    } else if (self.isSVG) {
-      self.node.setAttributeNS('http://www.w3.org/1999/xlink', prop, value);
     } else if (prop === 'style') {
       self.style(value);
+    } else if (self.isSVG) {
+      self.node.setAttributeNS('http://www.w3.org/1999/xlink', prop, value);
     } else if ('once' === prop.substr(0, 4)) {
       self.once(prop.substr(4), value);
     } else if ('on' === prop.substr(0, 2)) {
