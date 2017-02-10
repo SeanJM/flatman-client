@@ -6,7 +6,7 @@ function createComponent(tagName, props, array) {
 
   component.tagName = tagName;
   component.node = component.node || {};
-  component.dict = component.dict || {};
+  component.props = component.props || {};
 
   if (constructor.prototype.text) {
     for (var i = 0, n = array.length; i < n; i++) {
@@ -21,7 +21,7 @@ function createComponent(tagName, props, array) {
   }
 
   for (var prop in props) {
-    component.dict[prop] = props[prop];
+    component.props[prop] = props[prop];
   }
 
   if (typeof component.render === 'function') {
