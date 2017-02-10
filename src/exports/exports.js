@@ -1,7 +1,7 @@
 el.fn = Node.fn;
 
 if (typeof module === 'object') {
-  module.export = {
+  module.exports = {
     el : el,
     version : VERSION,
     Component : Component,
