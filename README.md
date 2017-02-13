@@ -78,6 +78,12 @@
     - removeClass
       - [removeClass](#--el-methods--attributes--removeclass-top)
 
+    - scrollHeight
+      - [scrollHeight](#--el-methods--attributes--scrollheight-top)
+
+    - scrollWidth
+      - [scrollWidth](#--el-methods--attributes--scrollwidth-top)
+
     - toggleClass
       - [toggleClass](#--el-methods--attributes--toggleclass-top)
 
@@ -539,6 +545,26 @@ node.removeClass('my-class-name');
 
 ```html
 <div id="copy" data-attribute="some-text">
+```
+
+#### scrollHeight
+##### El Methods / Attributes / scrollHeight.md ([top](#table-of-contents))
+
+Will tell you an elements `scrollHeight` value
+
+```javascript
+myDiv.scrollHeight();
+// -> Number
+```
+
+#### scrollWidth
+##### El Methods / Attributes / scrollWidth.md ([top](#table-of-contents))
+
+Will tell you an elements `scrollWidth` value
+
+```javascript
+myDiv.scrollWidth();
+// -> Number
 ```
 
 #### toggleClass
