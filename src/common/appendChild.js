@@ -1,21 +1,22 @@
 function appendChild(element, children) {
   var f = document.createDocumentFragment();
   var childNodes = [];
+  var childrenByNode = [];
 
   for (var i = 0, n = children.length; i < n; i++) {
     if (children[i]) {
-      children[i] = children[i].getNode
+      childrenByNode[i] = children[i].getNode
         ? children[i].getNode()
         : children[i];
 
-      childNodes.push(children[i]);
-      element.childNodes.push(children[i]);
+      childNodes.push(childrenByNode[i]);
+      element.childNodes.push(childrenByNode[i]);
 
-      if (children[i].node) {
-        children[i].parentNode = element;
-        f.appendChild(children[i].node);
+      if (childrenByNode[i].node) {
+        childrenByNode[i].parentNode = element;
+        f.appendChild(childrenByNode[i].node);
       } else {
-        f.appendChild(new Text(children[i]));
+        f.appendChild(new Text(childrenByNode[i]));
       }
     }
   }

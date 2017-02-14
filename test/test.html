@@ -14,18 +14,22 @@
     <script src="../index.js"></script>
     <script>
     var el = flatman.el;
-    var a = el('div');
-    var b = el('div');
+    var a = el('div', {
+      style : {
+        width : 100,
+        height : 100,
+        overflow : 'scroll'
+      }
+    }, [
+      el('div', { style : { height : 300, width : 100 }})
+    ]);
 
-    a.addClass('my-class-name');
-    b.addClass(['my-class', 'my-class-2']);
+    a.appendTo(document.body);
+    a.scrollTop(10);
 
     console.log({
-      right : (
-        a.attr('class') === 'my-class-name'
-        && b.attr('class') === 'my-class my-class-2'
-      ),
-      left : true
+      left : a.scrollTop() === 10,
+      right : true
     });
     </script>
   </body>

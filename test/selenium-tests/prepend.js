@@ -10,6 +10,6 @@ b.append([d]);
 b.prepend([c]);
 
 return {
-  left : b.children(0).node === c.node,
+  left : b.children(0).node === c.node && c.parentNode === b,
   right : true
 };

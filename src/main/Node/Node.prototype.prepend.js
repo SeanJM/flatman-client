@@ -1,6 +1,8 @@
 Node.prototype.prepend = function (children) {
   var i = 0;
   var n = children.length;
+  var f = document.createDocumentFragment();
+  var childrenByNode = [];
 
   if (!this.node.parentNode) {
     throw 'Cannot perform \'prepend\', node requires a parent';
@@ -8,11 +10,24 @@ Node.prototype.prepend = function (children) {
 
   if (Array.isArray(children)) {
     for (; i < n; i++) {
-      children[i].parentNode = this;
-      this.node.parentNode.insertBefore(children[i].getNode().node, this.node);
+      if (children[i]) {
+        childrenByNode[i] = children[i].getNode
+          ? children[i].getNode()
+          : children[i];
+
+        if (childrenByNode[i].node) {
+          childrenByNode[i].parentNode = this;
+          f.appendChild(childrenByNode[i].node);
+        } else {
+          childrenByNode[i] = new Text(childrenByNode[i]);
+          f.appendChild(new Text(childrenByNode[i]));
+        }
+      }
     }
-    [].unshift.apply(this.childNodes, children.reverse());
+
+    this.node.parentNode.insertBefore(f, this.node);
+    [].unshift.apply(this.childNodes, childrenByNode.reverse());
   } else {
-    throw 'prepend takes a single array as an argument';
+    this.prepend([ children ]);
   }
 };
