@@ -4,8 +4,10 @@ Node.prototype.before = function (children) {
 
   if (Array.isArray(children)) {
     for (var i = 0, n = children.length; i < n; i++) {
-      f.appendChild(getNode(children[i]));
+      f.appendChild(children[i].getNode().node);
     }
+  } else {
+    f.appendChild(children.getNode().node);
   }
 
   this.node.parentNode.insertBefore(f, this.node);

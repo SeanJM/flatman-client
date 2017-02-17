@@ -2,13 +2,11 @@ var el = flatman.el;
 var a = el('div');
 var b = el('div');
 var c = el('div');
-var d = el('div');
-var e = el('div');
 
-a.append([b, c, e]);
-e.after([d]);
+a.append([b]);
+b.before(c);
 
 return {
-  left : a.children(3) === d,
+  left : a.children(0) === c,
   right : true
 };
