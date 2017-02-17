@@ -1,13 +1,21 @@
 Node.prototype.before = function (children) {
   var f = document.createDocumentFragment();
-  var childNodes = this.parentNode.childNodes;
+  var parentNode = this.parentNode;
+  var childNodes = parentNode.childNodes;
+  var t;
+
+  function each(child) {
+    var t = child.getNode();
+    t.parentNode = parentNode;
+    f.appendChild(t.node);
+  }
 
   if (Array.isArray(children)) {
     for (var i = 0, n = children.length; i < n; i++) {
-      f.appendChild(children[i].getNode().node);
+      each(children[i]);
     }
   } else {
-    f.appendChild(children.getNode().node);
+    each(children);
   }
 
   this.node.parentNode.insertBefore(f, this.node);
