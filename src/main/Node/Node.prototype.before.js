@@ -6,8 +6,6 @@ Node.prototype.before = function (children) {
     for (var i = 0, n = children.length; i < n; i++) {
       f.appendChild(getNode(children[i]));
     }
-  } else if (!Array.isArray(children) || arguments.length > 1) {
-    throw 'Before takes a single array as an argument';
   }
 
   this.node.parentNode.insertBefore(f, this.node);
