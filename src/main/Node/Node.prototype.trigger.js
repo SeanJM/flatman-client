@@ -11,6 +11,7 @@ Node.prototype.trigger = function () {
     e = arguments[0];
   }
 
+  e.type = e.type || names;
   names = names.toLowerCase().split(',');
 
   if (!this.node.disabled) {
