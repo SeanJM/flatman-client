@@ -1,19 +1,15 @@
 Node.prototype.replaceWith = function (newNode) {
   var onBody = this.hasParent(BODY);
+  var $newNode = newNode.getNode();
 
-  newNode = el(
-    newNode.getNode().node
-  );
-
-  if (onBody) {
-    unmount(this);
-  }
+  unmount(this);
 
   if (this.node.parentNode) {
-    this.node.parentNode.replaceChild(newNode.node, this.node);
-    return this;
+    this.node.parentNode.replaceChild($newNode.node, this.node);
+  } else {
+    this.node = $newNode.node;
   }
 
-  this.node = newNode.node;
+  mount(this);
   return this;
 };
