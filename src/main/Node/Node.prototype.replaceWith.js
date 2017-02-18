@@ -1,7 +1,13 @@
 Node.prototype.replaceWith = function (newNode) {
+  var onBody = this.hasParent(BODY);
+
   newNode = el(
-    getNode(newNode)
+    newNode.getNode().node
   );
+
+  if (onBody) {
+    unmount(this);
+  }
 
   if (this.node.parentNode) {
     this.node.parentNode.replaceChild(newNode.node, this.node);
