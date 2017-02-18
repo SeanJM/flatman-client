@@ -10,6 +10,6 @@ Node.prototype.replaceWith = function (newNode) {
     this.node = $newNode.node;
   }
 
-  mount(this);
+  mount($newNode);
   return this;
 };
