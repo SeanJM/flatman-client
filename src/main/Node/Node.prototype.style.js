@@ -43,10 +43,11 @@
   }
 
   function style(node, property, value) {
+    var prefixed = VENDOR_PREFIX[property] ? VENDOR_PREFIX[property] : property;
     if (typeof process[property] === 'function') {
-      node.style[property] = process[property](value);
+      node.style[prefixed] = process[property](value);
     } else {
-      node.style[property] = toStyleUnit(property, value);
+      node.style[prefixed] = toStyleUnit(property, value);
     }
   }
 
