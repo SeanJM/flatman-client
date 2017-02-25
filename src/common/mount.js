@@ -1,6 +1,6 @@
 function mount(child) {
   if (child.hasParent && child.hasParent(BODY)) {
-    child.trigger('mount');
+    child.trigger({ type : 'mount', target : child });
     child.children().forEach(mount);
   }
 }
