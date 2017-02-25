@@ -1,7 +1,7 @@
 # Flatman Client 1.2.8
 #### License: [MIT](https://opensource.org/licenses/MIT)
 
-#### ✅ All 81 tests pass
+#### ✅ All 82 tests pass
 
 ## Table of Contents
 
@@ -19,11 +19,11 @@
 
 - Component
 
-  - Required Methods
-    - [Required Methods](#--component--required-methods-top)
-
   - Initialing A Component
     - [Initialing A Component](#--component--initialing-a-component-top)
+
+  - Mixing A Component
+    - [Mixing A Component](#--component--mixing-a-component-top)
 
   - The Options Object
     - [The Options Object](#--component--the-options-object-top)
@@ -257,23 +257,13 @@ Include the script in your `body` tag, or `head`, I think it's wise to place it 
 I use this on production, and I would like some help on it. Thanks. The goal is to keep it as simple and light as possible. It's a bit of a bastard child between FRZR and jQuery — a somewhat attractive & useful bastard.
 
 ## Component
-### Required Methods
-#### Component / Required Methods.md ([top](#table-of-contents))
-
-- `addClass` when the class key is present
-- `on` when a key matching that pattern is present
-- `off` when a key matching that pattern is present
-- `trigger` when a key matching that pattern is present
-
-You will also get the options object passed to the constructor.
-
 ### Initialing A Component
 #### Component / Initialing A Component.md ([top](#table-of-contents))
 
 The most basic way to initialize a component is like this:
 
 ```javascript
-el(Component)
+el('Component')
 ```
 
 It takes the same type of arguments that a regular `el` takes.
@@ -281,10 +271,64 @@ It takes the same type of arguments that a regular `el` takes.
 A component and an element are designed to be similar. This means you can do things like this:
 
 ```javascript
-el(Component, [
+el('Component', [
   el('div'),
   el(Component)
 ]);
+```
+
+### Mixing A Component
+#### Component / Mixing A Component.md ([top](#table-of-contents))
+
+### Special considerations
+
+Wrapped components cannot share method names which are shared with 'el()' node. They will be excluded.
+
+```javascript
+var wrap = flatman.wrap;
+Component.create('interior', {
+  myExposedMethod() {
+    // Do stuff
+  },
+
+  render() {
+    return el('div', {
+      name : 'interior',
+      className : 'component'
+    });
+  }
+});
+
+Component.create('my-component', wrap('interior', {
+  constructor(props) {
+    // Set my stuff
+  },
+
+  thisMethod() {
+    // do stuff
+  },
+
+  onHover() {
+    // Do stuff
+    this.node.name.trigger('hover');
+  },
+
+  render(props) {
+    el('div', {
+      onClick : props.onClick,
+      onHover : () => this.onHover()
+    }, [
+      props.component // <-- The 'interior' component
+    ])
+  }
+}));
+```
+
+```javascript
+var a = el('my-component');
+
+a.myExposedMethod();
+a.thisMethod();
 ```
 
 ### The Options Object
@@ -294,16 +338,11 @@ You can pass your component any options.
 
 - Keys will be checked for matching methods
 - The options will be passed as an argument to the Component constructor
-- on* is used to attach event listeners on initialization
-- `onmethod` or `onMethod` are treated equally
 
 ```
-el(Component, {
-  className : 'this-class', // Will actually trigger the components `addClass` method
-  onclick : function () {}, // onclick and onClick are functionally identical
+el('Component', {
+  className : 'this-class',
   onClick : function () {},
-  componentMethod : argument // Will be passed as a single argument to your method
-  init : [ 'method', 'method' ] // Functions to run last
 })
 ```
 
@@ -311,58 +350,28 @@ el(Component, {
 #### Component / Writing A Component.md ([top](#table-of-contents))
 
 ```javascript
-function Component(options) {
-  // Optional code
-}
+Component.create('my-component', {
+  constructor(props) {
+    // Set my stuff
+  },
 
-// The root node is always 'this.node.document'
-// When you name a child node it's name will be automatically added to 'this.node'
+  onHover() {
+    // Do stuff
+  },
 
-Component.prototype.render = function () {
-  return el('div', [
-    el('div', { 
-      name : 'label', 
-      className : 'text' 
-    }, [ this.dict.text ])
-  ]);
-};
+  touchInner() {
+    this.node.inner.trigger('touch');
+  },
 
-Component.prototype.appendTo = function (target) {
-  target.append(this.node.document);
-};
-
-Component.prototype.addClass = function (className) {
-  this.node.document.addClass(className);
-};
-
-Component.prototype.on = function (name, callback) {
-  this.node.document.on(name, callback);
-};
-
-Component.prototype.text = function (text) {
-  this.node.label.text(text);
-};
-
-// A function to extend the prototypes of a constructor
-Component.extend = function (Constructor) {
-  for (var k in Component.prototype) {
-    if (!Constructor.prototype[k]) {
-      Constructor.prototype[k] = Component.prototype[k];
-    }
-  }
-};
-```
-
-Putting it together
-
-Any property which is not `className`, starts with `on` or `once` will be added as a property on `this.dict`.
-
-```javascript
-el(Component, {
-  className : 'my-component-class',
-  text : 'My Text',
-  onClick : function () {
-    // What it does when it's clicked on
+  render(props) {
+    el('div', {
+      onClick : props.onClick,
+      onHover : () => this.onHover()
+    }, [
+      // Names will be added as a reference to 'this.node',
+      // name : 'inner' becomes this.node.inner
+      el('div', { name : 'inner' })
+    ])
   }
 });
 ```
@@ -1666,5 +1675,6 @@ selected.textNodes();
   78. trigger_object..................................................... ✅
   79. uncheck............................................................ ✅
   80. value.............................................................. ✅
-  81. hasClass_array_array-is-className.................................. ✅
+  81. wrap............................................................... ✅
+  82. hasClass_array_array-is-className.................................. ✅
 ```

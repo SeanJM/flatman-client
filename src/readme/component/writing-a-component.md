@@ -1,56 +1,26 @@
 ```javascript
-function Component(options) {
-  // Optional code
-}
+Component.create('my-component', {
+  constructor(props) {
+    // Set my stuff
+  },
 
-// The root node is always 'this.node.document'
-// When you name a child node it's name will be automatically added to 'this.node'
+  onHover() {
+    // Do stuff
+  },
 
-Component.prototype.render = function () {
-  return el('div', [
-    el('div', { 
-      name : 'label', 
-      className : 'text' 
-    }, [ this.dict.text ])
-  ]);
-};
+  touchInner() {
+    this.node.inner.trigger('touch');
+  },
 
-Component.prototype.appendTo = function (target) {
-  target.append(this.node.document);
-};
-
-Component.prototype.addClass = function (className) {
-  this.node.document.addClass(className);
-};
-
-Component.prototype.on = function (name, callback) {
-  this.node.document.on(name, callback);
-};
-
-Component.prototype.text = function (text) {
-  this.node.label.text(text);
-};
-
-// A function to extend the prototypes of a constructor
-Component.extend = function (Constructor) {
-  for (var k in Component.prototype) {
-    if (!Constructor.prototype[k]) {
-      Constructor.prototype[k] = Component.prototype[k];
-    }
-  }
-};
-```
-
-Putting it together
-
-Any property which is not `className`, starts with `on` or `once` will be added as a property on `this.dict`.
-
-```javascript
-el(Component, {
-  className : 'my-component-class',
-  text : 'My Text',
-  onClick : function () {
-    // What it does when it's clicked on
+  render(props) {
+    el('div', {
+      onClick : props.onClick,
+      onHover : () => this.onHover()
+    }, [
+      // Names will be added as a reference to 'this.node',
+      // name : 'inner' becomes this.node.inner
+      el('div', { name : 'inner' })
+    ])
   }
 });
 ```
