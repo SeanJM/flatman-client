@@ -1,44 +1,44 @@
 var el = flatman.el;
-    var Component = flatman.Component;
-    var wrap = flatman.wrap;
-    var t;
+var Component = flatman.Component;
+var wrap = flatman.wrap;
+var t;
 
-    Component.create('B', {
-      value() {
-        return 'b';
-      },
+Component.create('B', {
+  value() {
+    return 'b';
+  },
 
-      classify() {
-        this.node.document.addClass('classify');
-      },
+  classify() {
+    this.node.document.addClass('classify');
+  },
 
-      getClassify() {
-        return 'classify';
-      },
+  getClassify() {
+    return 'classify';
+  },
 
-      render(props) {
-        return el('div', {
-          name : 'b',
-          className : 'b'
-        });
-      }
+  render(props) {
+    return el('div', {
+      name : 'b',
+      className : 'b'
     });
+  }
+});
 
-    Component.create('A', wrap('B', {
-      value() {
-        return this.node.b.value();
-      },
+Component.create('A', wrap('B', {
+  value() {
+    return this.node.b.value();
+  },
 
-      render(props) {
-        return el('div', [ props.component ]);
-      }
-    }));
+  render(props) {
+    return el('div', [ props.component ]);
+  }
+}));
 
-    t = el('A');
+t = el('A');
 
-    t.classify();
+t.classify();
 
-    return {
-      left : t.value() === 'b' && t.getClassify() === 'classify',
-      right : true
-    };
+return {
+  left : t.value() === 'b' && t.getClassify() === 'classify',
+  right : true
+};

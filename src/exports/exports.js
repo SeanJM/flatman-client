@@ -5,13 +5,13 @@ if (typeof module === 'object') {
     el : el,
     version : VERSION,
     Component : Component,
-    wrap : wrap
+    wrap : wrap,
   };
 } else if (window) {
   window.flatman = {
     el : el,
     version : VERSION,
     Component : Component,
-    wrap : wrap
+    wrap : wrap,
   };
 }

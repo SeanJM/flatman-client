@@ -3,7 +3,7 @@ Node.prototype.className = function (value) {
     return this.classList().join(' ');
   }
 
-  value = Array.isArray(value) ? value.sort().join(' ') : value;
+  value = Array.isArray(value) ? value.sort().filter(function (a) { return a; }).join(' ') : value;
 
   if (this.isSVG) {
     this.node.setAttributeNS(null, 'class', value);
