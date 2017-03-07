@@ -20,8 +20,8 @@ function wrap(tagName, methods) {
 
   methods.render = function (props) {
     props.component = component;
-    return render(props);
-  }
+    return render.call(this, props);
+  };
 
   return methods;
 }
@@ -43,6 +43,6 @@ wrap.method = function (self, method) {
       return self;
     }
 
-    return result
-  }
+    return result;
+  };
 };
