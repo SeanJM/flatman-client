@@ -1,6 +1,7 @@
 function wrap(tagName, methods) {
-  var component = el(tagName);
+  var cTemp = el(tagName);
   var render = methods.render;
+  var constructor = methods.constructor;
 
   if (!wrap.keyGuard) {
     wrap.tempElement = el('div');
@@ -12,21 +13,31 @@ function wrap(tagName, methods) {
     }
   }
 
-  for (var k in component) {
-    if (typeof component[k] === 'function' && !methods[k] && !wrap.keyGuard[k]) {
-      methods[k] = wrap.method(component, k);
+  for (var k in cTemp) {
+    if (typeof cTemp[k] === 'function' && !methods[k] && !wrap.keyGuard[k]) {
+      methods[k] = wrap.method(k);
     }
   }
 
+  if (constructor) {
+    methods.constructor = function (props) {
+      props.component = el(tagName);
+      constructor(props);
+    };
+  } else {
+    methods.constructor = function (props) {
+      props.component = el(tagName);
+    };
+  }
+
   methods.render = function (props) {
-    props.component = component;
     return render.call(this, props);
   };
 
   return methods;
 }
 
-wrap.method = function (self, method) {
+wrap.method = function (method) {
   return function () {
     var i = 0;
     var n = arguments.length;
@@ -37,10 +48,10 @@ wrap.method = function (self, method) {
       $arguments[i] = arguments[i];
     }
 
-    result = self[method].apply(self, $arguments);
+    result = this.props.component[method].apply(this.props.component, $arguments);
 
     if (typeof result === 'undefined') {
-      return self;
+      return this;
     }
 
     return result;
