@@ -30,7 +30,7 @@ Component.create('A', wrap('B', {
   },
 
   render(props) {
-    return el('div', [ props.component ]);
+    return el('div', [ this.node.component ]);
   }
 }));
 

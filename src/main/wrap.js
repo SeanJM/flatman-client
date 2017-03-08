@@ -13,22 +13,21 @@ function wrap(tagName, methods) {
     }
   }
 
+  // These are the methods bound the wrapped component, it's contextual 'this'
   for (var k in cTemp) {
     if (typeof cTemp[k] === 'function' && !methods[k] && !wrap.keyGuard[k]) {
       methods[k] = wrap.method(k);
     }
   }
 
-  if (constructor) {
-    methods.constructor = function (props) {
-      props.component = el(tagName);
-      constructor(props);
+  methods.constructor = function (props) {
+    this.node = {
+      component : el(tagName)
     };
-  } else {
-    methods.constructor = function (props) {
-      props.component = el(tagName);
-    };
-  }
+    if (constructor) {
+      constructor.call(this, props);
+    }
+  };
 
   methods.render = function (props) {
     return render.call(this, props);
@@ -48,7 +47,7 @@ wrap.method = function (method) {
       $arguments[i] = arguments[i];
     }
 
-    result = this.props.component[method].apply(this.props.component, $arguments);
+    result = this.node.component[method].apply(this.node.component, $arguments);
 
     if (typeof result === 'undefined') {
       return this;
