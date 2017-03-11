@@ -2,7 +2,6 @@ Node.prototype.before = function (children) {
   var f = document.createDocumentFragment();
   var parentNode = this.parentNode;
   var childNodes = parentNode.childNodes;
-  var t;
 
   function each(child) {
     var t = child.getNode();
