@@ -1,6 +1,5 @@
 var el = flatman.el;
 var Component = flatman.Component;
-var wrap = flatman.wrap;
 var t;
 
 Component.create('B', {
@@ -24,7 +23,7 @@ Component.create('B', {
   }
 });
 
-Component.create('A', wrap('B', {
+Component.create('A', Component.wrap('B', {
   value() {
     return this.node.b.value();
   },

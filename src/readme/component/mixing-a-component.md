@@ -3,7 +3,6 @@
 Wrapped components cannot share method names which are shared with 'el()' node. They will be excluded.
 
 ```javascript
-var wrap = flatman.wrap;
 Component.create('interior', {
   myExposedMethod() {
     // Do stuff
@@ -17,7 +16,7 @@ Component.create('interior', {
   }
 });
 
-Component.create('my-component', wrap('interior', {
+Component.create('my-component', Component.wrap('interior', {
   constructor(props) {
     // Set my stuff
   },

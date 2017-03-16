@@ -6,3 +6,4 @@ initVendorPrefixes();
 
 BODY = el(document.body);
 Component.facade(Object.keys(Node.prototype));
+Component.createWrapper(el);
