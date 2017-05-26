@@ -17,18 +17,11 @@
     "grunt-concat-sourcemap": "^0.4.3",
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-copy": "^0.8.2",
-    "grunt-contrib-cssmin": "^0.10.0",
-    "grunt-contrib-imagemin": "^0.7.2",
-    "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-uglify": "^0.5.1",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-svgstore": "^1.0.0",
-    "imagemin-gifsicle": "^5.1.0",
-    "imagemin-optipng": "^5.2.0",
-    "imagemin-pngquant": "^5.0.0",
     "lodash": "^3.10.1",
     "match-file-utility": "^3.4.0",
-    "selenium-webdriver": "^3.0.0-beta-2",
-    "tiny-test": "^0.5.9"
+    "selenium-webdriver": "^3.4.0",
+    "tiny-test": "^0.9.2"
   }
 }

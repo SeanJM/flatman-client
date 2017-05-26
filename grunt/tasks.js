@@ -1,7 +1,4 @@
 const fs = require('fs');
-const css = require('./css');
-const fonts = require('./fonts');
-const images = require('./images');
 const scripts = require('./scripts');
 const config = JSON.parse(fs.readFileSync('grunt.json'));
 
@@ -15,34 +12,7 @@ if (scripts.list.length) {
   }
 }
 
-if (css.files.list.length) {
-  tasks.push('sass');
-  tasks.push('autoprefixer');
-  if (config.isProduction) {
-    tasks.push('cssmin');
-  }
-}
-
-if (fonts.files.length) {
-  tasks.push('copy:fonts');
-}
-
-if (images.files.length) {
-  if (config.isProduction) {
-    tasks.push('imagemin');
-  } else {
-    tasks.push('copy:images');
-  }
-
-  if (Object.keys(images.task.svgstore).length) {
-    tasks.push('svgstore');
-  }
-}
-
-tasks.push(
-  'readme',
-  'flatman'
-);
+tasks.push('readme');
 
 if (!config.isProduction) {
   tasks.push('watch');
