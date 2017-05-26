@@ -6,7 +6,7 @@ Node.prototype.attr = function () {
   function setAttrPropValue(prop, value) {
     if (prop === 'className') {
       self.className(value);
-    } else if (prop === 'style') {
+    } else if (prop === 'style' && typeof value === 'object') {
       self.style(value);
     } else if (self.isSVG) {
       self.node.setAttributeNS('http://www.w3.org/1999/xlink', prop, value);

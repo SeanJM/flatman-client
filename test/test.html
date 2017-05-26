@@ -14,21 +14,17 @@
     <script src="../index.js"></script>
     <script>
     var el = flatman.el;
-    var a = el('div', {
-      style : {
-        width : 100,
-        height : 100,
-        overflow : 'scroll'
-      }
-    }, [
-      el('div', { style : { height : 300, width : 100 }})
-    ]);
+    var a = el('div');
+    var res = [];
 
+    a.style({ display :  'inline-block' });
     a.appendTo(document.body);
-    a.scrollTop(10);
+    res.push(a.style('display'));
+    a.attr('style', '');
+    res.push(a.style('display'));
 
     console.log({
-      left : a.scrollTop() === 10,
+      left : res[0] === 'inline-block' && res[1] === 'block',
       right : true
     });
     </script>

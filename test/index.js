@@ -33,7 +33,6 @@ m('test/selenium-tests/', /\.js$/).forEach(function (a) {
 
 module.exports = tinyTest(function (test, load) {
   var file = 'file://' + path.resolve('test/index.html');
-  var list_promise = [];
 
   return driver.get(file).then(function () {
     var list = [];
