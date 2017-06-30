@@ -1,6 +1,6 @@
 {
   "name": "flatman-client",
-  "version": "1.2.9",
+  "version": "1.3.0",
   "license": "MIT",
   "author": "Sean MacIsaac <seanjmacisaac@gmail.com> (http://twitter.com/seanjmacisaac)",
   "main": "bin/createNode.min.js",
