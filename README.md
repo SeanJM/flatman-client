@@ -1,4 +1,4 @@
-# Flatman Client 1.2.9
+# Flatman Client 1.3.0
 #### License: [MIT](https://opensource.org/licenses/MIT)
 
 #### ✅ All 81 tests pass
