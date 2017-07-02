@@ -13,8 +13,8 @@
   <body>
     <script src="../index.js"></script>
     <script>
-    var Component = flatman.Component;
     var el = flatman.el;
+var Component = flatman.Component;
 var t;
 
 Component.create('B', {
@@ -23,7 +23,7 @@ Component.create('B', {
   },
 
   classify() {
-    this.node.document.addClass('classify');
+    this.document.addClass('classify');
   },
 
   getClassify() {
@@ -44,7 +44,7 @@ Component.create('A', Component.wrap('B', {
   },
 
   render(props) {
-    return el('div', [ this.node.component ]);
+    return el('div', [ this.component ]);
   }
 }));
 
@@ -52,7 +52,7 @@ t = el('A');
 
 t.classify();
 
-console.log('test', t);
+console.log(t);
 
 console.log({
   left : t.value() === 'b' && t.getClassify() === 'classify',
