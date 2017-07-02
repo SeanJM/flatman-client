@@ -5,6 +5,6 @@ var b = el(document.body);
 a.appendTo(document.body);
 
 return {
-  left : a.hasParent(document.body) && a.hasParent(b),
+  left : a.hasParent(b),
   right : true
 };

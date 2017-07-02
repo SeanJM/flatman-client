@@ -1,9 +1,9 @@
 Node.prototype.hasParent = function (target) {
-  var node = this.node;
+  var self = this;
 
   return Array.isArray(target)
     ? target.map(function (t) {
-      return t.contains(node);
+      return t.contains(self);
     })
-    : target.contains(node);
+    : target.contains(self);
 };

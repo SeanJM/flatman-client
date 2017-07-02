@@ -1,7 +1,7 @@
 Node.prototype.contains = function (a) {
   if (Array.isArray(a)) {
-    for (var x = 0, y = a.length; x < y; x++) {
-      if (this.node.contains(a[x].node) && a[x].node !== this.node) {
+    for (var i = 0, y = a.length; i < y; i++) {
+      if (this.node.contains(a[i].node) && a[i].node !== this.node) {
         return true;
       }
     }
