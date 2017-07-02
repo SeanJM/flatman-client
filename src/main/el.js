@@ -2,18 +2,11 @@ function el(tagName) {
   var props = {};
   var children = [];
 
-  switch (arguments.length) {
-    case 2 :
-      if (Array.isArray(arguments[1])) {
-        children = arguments[1];
-      } else {
-        props = arguments[1];
-      }
-      break;
-    case 3 :
-      props = arguments[1];
-      children = arguments[2];
-      break;
+  if (Array.isArray(arguments[1])) {
+    children = arguments[1];
+  } else {
+    props = arguments[1];
+    children = arguments[2] || children;
   }
 
   if (Component.function[tagName]) {
