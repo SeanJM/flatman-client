@@ -8,7 +8,7 @@ Component.create('B', {
   },
 
   classify() {
-    this.node.document.addClass('classify');
+    this.document.addClass('classify');
   },
 
   getClassify() {
@@ -29,7 +29,7 @@ Component.create('A', Component.wrap('B', {
   },
 
   render(props) {
-    return el('div', [ this.node.component ]);
+    return el('div', [ this.component ]);
   }
 }));
 
