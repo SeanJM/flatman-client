@@ -5,7 +5,7 @@ function createComponent(tagName, props, array) {
   var strings = [];
 
   component.tagName = tagName;
-  component.node = component.node || {};
+  component.names = component.names || {};
   component.props = component.props || {};
 
   if (constructor.prototype.text) {
@@ -25,10 +25,11 @@ function createComponent(tagName, props, array) {
   }
 
   if (typeof component.render === 'function') {
-    component.node.document = component.render(props);
-    if (component.node.document) {
-      component.node.document.component = component;
-      getComponentNames(component, component.node.document);
+    component.document = component.render(props);
+    component.node = component.document.node;
+    if (component.document) {
+      component.document.component = component;
+      getComponentNames(component, component.document);
     } else {
       throw new Error('Invalid component, component must return a node in the render function.');
     }
