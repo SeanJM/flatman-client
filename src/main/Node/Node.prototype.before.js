@@ -4,9 +4,8 @@ Node.prototype.before = function (children) {
   var childNodes = parentNode.childNodes;
 
   function each(child) {
-    var t = child.getNode();
-    t.parentNode = parentNode;
-    f.appendChild(t.node);
+    child.parentNode = parentNode;
+    f.appendChild(child.node);
   }
 
   if (Array.isArray(children)) {

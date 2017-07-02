@@ -1,16 +1,11 @@
-Node.prototype.contains = function (maybeList) {
-  function contains(node, a) {
-    a = a.getNode().node;
-    return node.contains(a) && a !== node;
-  }
-
-  if (Array.isArray(maybeList)) {
-    for (var x = 0, y = maybeList.length; x < y; x++) {
-      if (contains(this.node, maybeList[x])) {
+Node.prototype.contains = function (a) {
+  if (Array.isArray(a)) {
+    for (var x = 0, y = a.length; x < y; x++) {
+      if (this.node.contains(a[x].node) && a[x].node !== this.node) {
         return true;
       }
     }
   }
 
-  return contains(this.node, maybeList);
+  return this.node.contains(a.node);
 };
