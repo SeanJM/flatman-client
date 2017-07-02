@@ -20,6 +20,6 @@ Component.create('Control', {
 var p = el('C');
 
 return {
-  left : !!p.node.control,
+  left : !!p.names.control,
   right : true
 };

@@ -19,10 +19,10 @@ var el = flatman.el;
 
       return {
         left : (
-          p.node.b.name() === 'b' &&
-          p.node.c.name() === 'c' &&
-          q.node.b.name() === 'b' &&
-          q.node.c.name() === 'c'
+          p.names.b.name() === 'b' &&
+          p.names.c.name() === 'c' &&
+          q.names.b.name() === 'b' &&
+          q.names.c.name() === 'c'
         ),
         right : true
       };

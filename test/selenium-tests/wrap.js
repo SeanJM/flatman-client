@@ -25,7 +25,7 @@ Component.create('B', {
 
 Component.create('A', Component.wrap('B', {
   value() {
-    return this.node.b.value();
+    return this.names.b.value();
   },
 
   render(props) {
