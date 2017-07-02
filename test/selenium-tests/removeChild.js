@@ -20,10 +20,10 @@ a.removeChild(b);
 results.push(!a.contains(b) && a.children().length === 2 && a.children()[0].node === c.node);
 
 a.removeChild(c);
-results.push(!a.contains(c.getNode()) && a.children().length === 1);
+results.push(!a.contains(c) && a.children().length === 1);
 
 a.removeChild(d);
-results.push(!a.contains(d.getNode()));
+results.push(!a.contains(d));
 
 console.log(results);
 

@@ -4,9 +4,8 @@ Node.prototype.prepend = function (children) {
   var self = this;
 
   function each(child) {
-    var t = child.getNode();
-    t.parentNode = self;
-    fragment.appendChild(t.node);
+    child.parentNode = self;
+    fragment.appendChild(child.node);
   }
 
   if (Array.isArray(children)) {
