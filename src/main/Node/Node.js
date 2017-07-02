@@ -4,9 +4,6 @@
 */
 
 function Node(tagName, opt, children, isElement) {
-  var i = 1;
-  var n = arguments.length;
-
   function getNode(node) {
     if (isElement || node === window) {
       return node;
