@@ -13,8 +13,6 @@ Component.create('C', {
 var p = el('C');
 
 return {
-  left : (
-    p.node.document.node === a.node
-  ),
+  left : p.document === a,
   right : true
 };

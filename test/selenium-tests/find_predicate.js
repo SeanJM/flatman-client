@@ -14,6 +14,6 @@ Component.create('C', {
 p.append([ el('C') ]);
 
 return {
-  left : p.find(a => a.component.tagName === 'C')[0].node === a.node,
+  left : p.find(a => a.tagName === 'C')[0].document === a,
   right : true
 };

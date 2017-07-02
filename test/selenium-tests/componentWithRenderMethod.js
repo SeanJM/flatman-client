@@ -17,9 +17,9 @@ var p = el('C', { className : 'test' });
 
 return {
   left : (
-    p.node.document.node === a.node
-    && p.node.document.attr('class') === 'test'
-    && p.node.document.children()[0].node === b.node
+    p.document === a
+    && p.document.attr('class') === 'test'
+    && p.document.children()[0] === b
   ),
   right : true
 };
