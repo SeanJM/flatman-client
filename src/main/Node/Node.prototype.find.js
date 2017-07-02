@@ -8,19 +8,18 @@
           if (predicate(element)) {
             found.push(element);
           }
-          find(element.childNodes);
+          find(element.children());
         }
       });
     }
 
-    find(this.childNodes);
+    find(this.children());
     return found;
   }
 
   function findStringSelector(selector) {
     var list = getSelectorGroup(selector);
     var found = [ [ this ] ];
-    var self = this;
 
     function each (node) {
       found.push(findPredicate.call(node, function (element) {
