@@ -13,20 +13,51 @@
   <body>
     <script src="../index.js"></script>
     <script>
+    var Component = flatman.Component;
     var el = flatman.el;
-    var a = el('div');
-    var res = [];
+var t;
 
-    a.style({ display :  'inline-block' });
-    a.appendTo(document.body);
-    res.push(a.style('display'));
-    a.attr('style', '');
-    res.push(a.style('display'));
+Component.create('B', {
+  value() {
+    return 'b';
+  },
 
-    console.log({
-      left : res[0] === 'inline-block' && res[1] === 'block',
-      right : true
+  classify() {
+    this.node.document.addClass('classify');
+  },
+
+  getClassify() {
+    return 'classify';
+  },
+
+  render(props) {
+    return el('div', {
+      name : 'b',
+      className : 'b'
     });
+  }
+});
+
+Component.create('A', Component.wrap('B', {
+  value() {
+    return this.node.b.value();
+  },
+
+  render(props) {
+    return el('div', [ this.node.component ]);
+  }
+}));
+
+t = el('A');
+
+t.classify();
+
+console.log('test', t);
+
+console.log({
+  left : t.value() === 'b' && t.getClassify() === 'classify',
+  right : true
+});
     </script>
   </body>
 </HTML>
