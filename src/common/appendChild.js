@@ -1,32 +1,27 @@
 function appendChild(element, children) {
   var f = document.createDocumentFragment();
   var childNodes = [];
-  var childrenByNode = [];
 
-  function eachChild(child, i) {
+  function eachChild(child) {
     if (child) {
-      childrenByNode[i] = child.getNode
-        ? child.getNode()
-        : child;
+      childNodes.push(child);
+      element.childNodes.push(child);
 
-      childNodes.push(childrenByNode[i]);
-      element.childNodes.push(childrenByNode[i]);
-
-      if (childrenByNode[i].node) {
-        childrenByNode[i].parentNode = element;
-        f.appendChild(childrenByNode[i].node);
+      if (child.node) {
+        child.parentNode = element;
+        f.appendChild(child.node);
       } else {
-        f.appendChild(new Text(childrenByNode[i]));
+        f.appendChild(new Text(child));
       }
     }
   }
 
   if (Array.isArray(children)) {
     for (var i = 0, n = children.length; i < n; i++) {
-      eachChild(children[i], i);
+      eachChild(children[i]);
     }
   } else {
-    eachChild(children, 0);
+    eachChild(children);
   }
 
   element.node.appendChild(f);
