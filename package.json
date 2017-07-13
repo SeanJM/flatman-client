@@ -11,7 +11,7 @@
     "colors": "^1.1.2",
     "dotenv": "^2.0.0",
     "eslint": "^3.14.0",
-    "flatman-component": "^0.11.1",
+    "flatman-component": "^0.11.2",
     "grunt": "^0.4.5",
     "grunt-autoprefixer": "^1.0.1",
     "grunt-cli": "^0.1.13",
