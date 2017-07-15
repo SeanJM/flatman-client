@@ -454,8 +454,6 @@ function createComponentConstructor(tagName, methods) {
 
 function Component() {}
 
-var module = module || {};
-
 Component.lib = {};
 Component.function = {};
 Component.onCreateListeners = [];
@@ -849,7 +847,7 @@ Component.prototype.trigger = function () {
 };
 
 
-if (module && module.exports) {
+if (typeof module !== 'undefined' && module.exports) {
   module.exports = Component;
 }
 
@@ -1968,13 +1966,13 @@ Component.createWrapper(el);
 
 el.fn = Node.fn;
 
-if (module && module.exports) {
+if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     el : el,
     version : VERSION,
     Component : Component,
   };
-} else if (window) {
+} else if (typeof window !== 'undefined') {
   window.flatman = {
     el : el,
     version : VERSION,
