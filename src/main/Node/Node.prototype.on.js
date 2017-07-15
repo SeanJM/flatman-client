@@ -1,10 +1,10 @@
-Node.prototype.on = function (names, callback) {
-  function onWrap(self, name) {
-    return function (event) {
-      self.trigger(name, event);
-    };
-  }
+function onWrap(self, name) {
+  return function (event) {
+    self.trigger(name, event);
+  };
+}
 
+Node.prototype.on = function (names, callback) {
   names = names.toLowerCase().split(',');
 
   for (var i = 0, n = names.length; i < n; i++) {

@@ -1,6 +1,9 @@
 function mount(child) {
-  if (child.hasParent && child.hasParent(BODY)) {
-    child.trigger('mount', { target : child });
-    child.children().forEach(mount);
+  var c = (child.document || child);
+  if (c.hasParent && c.hasParent(BODY)) {
+    c
+      .trigger('mount')
+      .children()
+      .forEach(mount);
   }
 }

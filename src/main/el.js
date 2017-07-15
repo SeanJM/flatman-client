@@ -9,9 +9,7 @@ function el(tagName) {
     children = arguments[2] || children;
   }
 
-  if (Component.function[tagName]) {
-    return Component.function[tagName](props, children);
-  } else if (Component.lib[tagName]) {
+  if (Component.lib[tagName]) {
     return createComponent(tagName, props, children);
   } else if (typeof tagName === 'string') {
     return new Node(tagName, props, children);

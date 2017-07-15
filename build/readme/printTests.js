@@ -1,6 +1,4 @@
-const path = require('path');
-const padLeft = require(path.resolve('grunt/lib/padLeft'));
-const padRight = require(path.resolve('grunt/lib/padRight'));
+const _ = require('lodash');
 
 module.exports = function (text, testResults) {
   var passed = testResults && testResults.tests.filter(a => a.passed);
@@ -12,13 +10,13 @@ module.exports = function (text, testResults) {
 
   passed.forEach(function (a) {
     text.push(
-      padLeft(a.index, 5, ' ') + '. ' + padRight(a.name, 68, '.') + ' ✅'
+      _.padStart(a.index, 5, ' ') + '. ' + _.padEnd(a.name, 68, '.') + ' ✅'
     );
   });
 
   failed.forEach(function (a) {
     text.push(
-      '\n' + padLeft(a.index, 5, ' ') + '. ' + padRight(a.name + ' ', 68, '.') + ' 🚫'
+      '\n' + _.padStart(a.index, 5, ' ') + '. ' + _.padEnd(a.name + ' ', 68, '.') + ' 🚫'
     );
   });
 

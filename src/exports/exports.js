@@ -1,6 +1,6 @@
 el.fn = Node.fn;
 
-if (typeof module === 'object') {
+if (module && module.exports) {
   module.exports = {
     el : el,
     version : VERSION,

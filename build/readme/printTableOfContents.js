@@ -1,10 +1,8 @@
-const fs = require('fs');
 const path = require('path');
-const smartCase = require(path.resolve('grunt/lib/smartCase'));
-const config = JSON.parse(fs.readFileSync('grunt.json'));
+const smartCase = require('../lib/smartCase');
 
 const _ = require('lodash');
-const source = path.join(config.src, 'readme');
+const source = 'readme';
 
 function toLink(s) {
   var p = s.split('/');

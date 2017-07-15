@@ -6,21 +6,19 @@ const m = require('match-file-utility');
 const pkg = JSON.parse(fs.readFileSync('package.json'));
 
 const linkLicense = require('./linkLicense');
-const smartCase = require(path.resolve('grunt/lib/smartCase'));
+const smartCase = require('../lib/smartCase');
 const printTests = require('./printTests');
 const printTableOfContents = require('./printTableOfContents');
 const printContents = require('./printContents');
-const config = JSON.parse(fs.readFileSync('grunt.json'));
 
-const source = path.join(config.src, 'readme');
+const source = 'readme/';
 
-function generate(testResults, callback) {
+function generate(testResults) {
   let content = {};
   let text = [];
   var hasTests = testResults && testResults.tests.length > 0;
   var total = testResults && testResults.tests.length;
   var passed = testResults && testResults.tests.filter(a => a.passed);
-  var failed = testResults && testResults.tests.filter(a => !a.passed);
 
   m(source, /\.md$/)
     .forEach(function (a) {
@@ -74,7 +72,6 @@ function generate(testResults, callback) {
   }
 
   fs.writeFileSync('README.md', text.join('\n'));
-  callback();
 }
 
 module.exports = generate;

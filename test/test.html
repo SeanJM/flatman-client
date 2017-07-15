@@ -13,49 +13,40 @@
   <body>
     <script src="../index.js"></script>
     <script>
-    var el = flatman.el;
-var Component = flatman.Component;
-var t;
+    var Component = flatman.Component;
+var el = flatman.el;
+var isMounted = false;
 
-Component.create('B', {
-  value() {
-    return 'b';
-  },
+Component.lib.C = undefined;
 
-  classify() {
-    this.document.addClass('classify');
-  },
-
-  getClassify() {
-    return 'classify';
-  },
-
+Component.create('C', {
   render(props) {
     return el('div', {
-      name : 'b',
-      className : 'b'
+      onMount: props.onMount,
+      className : 'children-test'
     });
   }
 });
 
-Component.create('A', Component.wrap('B', {
-  value() {
-    return this.node.b.value();
-  },
-
-  render(props) {
-    return el('div', [ this.component ]);
+Component.create('D', {
+  render() {
+    return el('div');
   }
-}));
+});
 
-t = el('A');
+var p = el('D', [
+  el('C', {
+    onMount: function () {
+      console.log('ONMOUNTED');
+      isMounted = true;
+    }
+  })
+]);
 
-t.classify();
-
-console.log(t);
+p.appendTo(document.body);
 
 console.log({
-  left : t.value() === 'b' && t.getClassify() === 'classify',
+  left : isMounted,
   right : true
 });
     </script>
