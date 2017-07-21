@@ -13,6 +13,6 @@ Node.prototype.addClass = function (className) {
     addClass(className);
   }
 
-  this.node.className = classList.sort().join(' ');
+  this.node.setAttribute("class", classList.sort().join(' '));
   return this;
 };
