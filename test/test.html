@@ -14,41 +14,42 @@
     <script src="../index.js"></script>
     <script>
     var Component = flatman.Component;
-var el = flatman.el;
-var isMounted = false;
+    var el = flatman.el;
+    var isMounted = false;
 
-Component.lib.C = undefined;
+    Component.lib.C = undefined;
 
-Component.create('C', {
-  render(props) {
-    return el('div', {
-      onMount: props.onMount,
-      className : 'children-test'
+    Component.create('C', {
+      render(props) {
+        return el('div', {
+          onMount: props.onMount,
+          className : 'children-test'
+        });
+      }
     });
-  }
-});
 
-Component.create('D', {
-  render() {
-    return el('div');
-  }
-});
+    Component.create('D', {
+      render() {
+        return el('div', {
+          className : 'D'
+        });
+      }
+    });
 
-var p = el('D', [
-  el('C', {
-    onMount: function () {
-      console.log('ONMOUNTED');
-      isMounted = true;
-    }
-  })
-]);
+    var p = el('D', [
+      el('C', {
+        onMount: function () {
+          isMounted = true;
+        }
+      })
+    ]);
 
-p.appendTo(document.body);
+    p.appendTo(document.body);
 
-console.log({
-  left : isMounted,
-  right : true
-});
+    console.log({
+      left : isMounted,
+      right : true
+    });
     </script>
   </body>
 </HTML>

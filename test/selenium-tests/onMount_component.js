@@ -6,6 +6,12 @@ Component.lib = {};
 
 Component.create('C', {
   render() {
+    return el('D');
+  }
+});
+
+Component.create('D', {
+  render() {
     return el('div', { onMount : function () {
       isMounted = !isMounted;
     }});

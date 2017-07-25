@@ -279,8 +279,8 @@ function getSelectorObject(selector) {
 
 
 function mount(child) {
-  var c = (child.document || child);
-  if (c.hasParent && c.hasParent(BODY)) {
+  var c = child.document || child;
+  if (document.body.contains(c.node)) {
     c
       .trigger('mount')
       .children()
