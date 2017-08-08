@@ -1,7 +1,7 @@
 # Flatman Client 1.6.5
 #### License: [MIT](https://opensource.org/licenses/MIT)
 
-#### ✅ All 85 tests pass
+#### ✅ All 86 tests pass
 
 ## Table of Contents
 
@@ -1623,5 +1623,6 @@ selected.textNodes();
    82. uncheck............................................................. ✅
    83. value............................................................... ✅
    84. wrap................................................................ ✅
-   85. hasClass_array_array-is-className................................... ✅
+   85. html_remove-children................................................ ✅
+   86. hasClass_array_array-is-className................................... ✅
 ```
