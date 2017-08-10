@@ -1,9 +1,14 @@
 Node.prototype.remove = function () {
   var onBody = this.hasParent(BODY);
-  var pChildNodes = this.parentNode.childNodes;
+  var siblings = this.parentNode && this.parentNode.childNodes;
 
-  this.node.parentNode.removeChild(this.node);
-  pChildNodes.splice(pChildNodes.indexOf(this), 1);
+  if (this.node.parentNode) {
+    this.node.parentNode
+      .removeChild(this.node);
+
+    siblings
+      .splice(siblings.indexOf(this), 1);
+  }
 
   if (onBody) {
     unmount(this);
