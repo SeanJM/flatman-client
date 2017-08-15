@@ -6,20 +6,20 @@ Component.lib = {};
 Component.create('C', {
   render() {
     return el('div', [
-      el('Control', { name : 'control' })
+      el('Control', { ref : 'control' })
     ]);
   }
 });
 
 Component.create('Control', {
   render(props) {
-    return el('div', { name : props.name });
+    return el('div', { ref : props.ref });
   }
 });
 
 var p = el('C');
 
 return {
-  left : !!p.names.control,
+  left : !!p.refs.control,
   right : true
 };

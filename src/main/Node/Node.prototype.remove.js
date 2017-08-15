@@ -1,5 +1,5 @@
 Node.prototype.remove = function () {
-  var onBody = this.hasParent(BODY);
+  var isOnBody = document.body.contains(this.node);
   var siblings = this.parentNode && this.parentNode.childNodes;
 
   if (this.node.parentNode) {
@@ -10,7 +10,7 @@ Node.prototype.remove = function () {
       .splice(siblings.indexOf(this), 1);
   }
 
-  if (onBody) {
+  if (isOnBody) {
     unmount(this);
   }
 

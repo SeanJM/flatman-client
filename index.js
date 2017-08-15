@@ -317,7 +317,7 @@ function setSelection (node, start, end) {
 function unmount(element) {
   if (element.trigger) {
     element.trigger('unmount');
-    element.children().forEach(unmount);
+    element.childNodes.forEach(unmount);
   }
 }
 
@@ -347,18 +347,6 @@ function isTextInput(node) {
 }
 
 
-function getComponentNames(component, node) {
-  if (node.children) {
-    node.children().forEach(function (child) {
-      var name = child.name && child.name();
-      if (name && !component.names[name]) {
-        component.names[name] = child.component || child;
-      }
-      getComponentNames(component, child);
-    });
-  }
-}
-
 function createComponentMethodProxy(method, methods) {
   return function () {
     var i = 0;
@@ -374,6 +362,18 @@ function createComponentMethodProxy(method, methods) {
 
     return result;
   };
+}
+
+function getRefs(self, node) {
+  for (var i = 0, n = node.childNodes.length; i < n; i++) {
+    if (node.childNodes[i].ref && !self.refs[node.childNodes[i].ref]) {
+      self.refs[node.childNodes[i].ref] = node.childNodes[i];
+    }
+
+    if (node.childNodes[i].childNodes) {
+      getRefs(self, node.childNodes[i]);
+    }
+  }
 }
 
 function createComponentConstructor(tagName, methods) {
@@ -392,19 +392,34 @@ function createComponentConstructor(tagName, methods) {
       methods.constructor.call(this, props);
     }
 
-    this.props = this.props || props;
     this.tagName = tagName;
-    this.names = this.names || {};
     this.childNodes = [];
+    this.props = this.props || {};
+    this.refs = this.refs || {};
+
+    for (var k in props) {
+      if (k === "ref") {
+        this.ref = props[k];
+      } else if (!this.props[k]) {
+        this.props[k] = props[k];
+      }
+    }
 
     if (typeof this.render === 'function') {
       this.document = this.render(props);
       this.node = this.document.node;
+
       if (this.document) {
-        getComponentNames(this, this.document);
+        if (this.document.childNodes.length) {
+          [].push.apply(this.childNodes, this.document.childNodes);
+        }
+
+        getRefs(this, this);
+
         if (children.length) {
           this.append(children);
         }
+
       } else {
         throw new Error('Invalid component, component must return a node in the render function.');
       }
@@ -468,95 +483,6 @@ Component.create = function (tagName, methods) {
 };
 
 
-Component.createWrapper = function (el) {
-  var keyGuard = {};
-  var tempElement = el('div');
-
-  for (var k in tempElement) {
-    if (typeof tempElement[k] === 'function') {
-      keyGuard[k] = true;
-    }
-  }
-
-  tempElement = undefined;
-
-  function wrapMethod(method) {
-    return function () {
-      var i = 0;
-      var n = arguments.length;
-      var $arguments = new Array(n);
-      var result;
-
-      for (;i < n; i++) {
-        $arguments[i] = arguments[i];
-      }
-
-      result = this.component[method].apply(this.component, $arguments);
-
-      if (typeof result === 'undefined') {
-        return this;
-      }
-
-      return result;
-    };
-  }
-
-  Component.wrap = function wrap(tagName, methods) {
-    var cTemp = el(tagName);
-    var render = methods.render;
-    var constructor = methods.constructor;
-
-    // These are the methods bound the wrapped component, it's contextual 'this'
-    for (var k in cTemp) {
-      if (typeof cTemp[k] === 'function' && !methods[k] && !keyGuard[k]) {
-        methods[k] = wrapMethod(k);
-      }
-    }
-
-    methods.constructor = function (props) {
-      this.component = el(tagName);
-      if (constructor) {
-        constructor.call(this, props);
-      }
-    };
-
-    methods.render = function (props) {
-      return render.call(this, props);
-    };
-
-    return methods;
-  };
-};
-
-Component.facade = function (methods) {
-  if (Array.isArray(methods)) {
-    methods.forEach(function (method) {
-      if (!Component.prototype[method]) {
-        Component.prototype[method] = Component.facade.method(method);
-      }
-    });
-  } else {
-    throw 'Invalid argument for Component.facade. The argument must be an array of methods.';
-  }
-};
-
-Component.facade.method = function (method) {
-  return function () {
-    var i = 0;
-    var n = arguments.length;
-    var $arguments = new Array(n);
-    var root = this.document;
-    var result;
-
-    for (;i < n; i++) {
-      $arguments[i] = arguments[i];
-    }
-
-    result = root[method].apply(root, $arguments);
-    return typeof result === 'undefined' ? this : result;
-  };
-};
-
 Component.find = function (name) {
   var matches = [];
   for (var k in Component.lib) {
@@ -573,7 +499,13 @@ Component.fn = function (name, callback) {
     Component.prototype[name] = callback;
 
     for (var k in Component.lib) {
-      Component.lib[k].prototype[name] = callback;
+      if (typeof Component.lib[k].prototype[name] === "undefined") {
+        Component.lib[k].prototype[name] = callback;
+      } else {
+        console.log(
+          "[Component] Warning: the method \"" + name + "\" could not be added to \"" + k + "\""
+        );
+      }
     }
 
   } else if (typeof name !== "string") {
@@ -653,6 +585,7 @@ Component.prototype.after = function (target) {
 Component.prototype.append = function (children) {
   this.document.append(children);
   this.mapChildrenToNode(children);
+  [].push.apply(this.childNodes, children);
   return this;
 };
 
@@ -700,21 +633,20 @@ Component.prototype.enable = function () {
 
 
 Component.prototype.mapChildrenToNode = function (children) {
-  var name;
+  var ref;
 
   children = Array.isArray(children)
     ? children
     : [ children ];
 
   for (var i = 0, n = children.length; i < n; i++) {
-    name = children[i].name && children[i].name();
+    ref = children[i].ref;
     children[i].parentNode = this;
-    if (name && !this.node[name]) {
-      this.node[name] = children[i];
+    if (ref && !this.refs[ref]) {
+      this.refs[ref] = children[i];
     }
   }
 
-  [].push.apply(this.childNodes, children);
   return this;
 };
 
@@ -800,14 +732,22 @@ Component.prototype.once = function (names, callback) {
 
 
 Component.prototype.prepend = function (children) {
-  this.mapChildrenToNode(children);
   this.document.prepend(children);
+  this.mapChildrenToNode(children);
+  this.childNodes = [].concat(children).concat(this.childNodes);
   return this;
 };
 
 
 Component.prototype.remove = function () {
   this.document.remove.call(this);
+  return this;
+};
+
+
+Component.prototype.removeChild = function (child) {
+  this.document.removeChild(child);
+  this.childNodes.splice(this.childNodes.indexOf(child), 1);
   return this;
 };
 
@@ -963,6 +903,8 @@ Node.prototype.attr = function () {
       self.once(prop.substr(4), value);
     } else if ('on' === prop.substr(0, 2)) {
       self.on(prop.substr(2), value);
+    } else if ('ref' === prop) {
+      self.ref = value;
     } else {
       prop === 'tabindex'
         ? 'tabIndex'
@@ -1147,16 +1089,16 @@ Node.prototype.enable = function () {
 
     function find(childNodes) {
       childNodes.forEach(function (element) {
-        if (element.children) {
+        if (element.childNodes) {
           if (predicate(element)) {
             found.push(element);
           }
-          find(element.children());
+          find(element.childNodes);
         }
       });
     }
 
-    find(this.children());
+    find(this.childNodes);
     return found;
   }
 
@@ -1210,17 +1152,6 @@ Node.prototype.hasClass = function (a) {
   }
 
   return classList.indexOf(a) !== -1;
-};
-
-
-Node.prototype.hasParent = function (target) {
-  var self = this;
-
-  return Array.isArray(target)
-    ? target.map(function (t) {
-      return t.contains(self);
-    })
-    : target.contains(self);
 };
 
 
@@ -1487,7 +1418,7 @@ Node.prototype.prependTo = function (target) {
 
 
 Node.prototype.remove = function () {
-  var onBody = this.hasParent(BODY);
+  var isOnBody = document.body.contains(this.node);
   var siblings = this.parentNode && this.parentNode.childNodes;
 
   if (this.node.parentNode) {
@@ -1498,7 +1429,7 @@ Node.prototype.remove = function () {
       .splice(siblings.indexOf(this), 1);
   }
 
-  if (onBody) {
+  if (isOnBody) {
     unmount(this);
   }
 
@@ -1974,8 +1905,6 @@ initInputEvent();
 initVendorPrefixes();
 
 BODY = el(document.body);
-Component.facade(Object.keys(Node.prototype));
-Component.createWrapper(el);
 
 el.fn = Node.fn;
 

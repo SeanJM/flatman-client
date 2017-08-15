@@ -16,6 +16,6 @@ var a = el('a');
 a.prepend(b);
 
 return {
-  left : a.children(0).node === b.node,
+  left : a.childNodes[0].node === b.node,
   right : true
 };

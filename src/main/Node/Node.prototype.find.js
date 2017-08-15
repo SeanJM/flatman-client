@@ -4,16 +4,16 @@
 
     function find(childNodes) {
       childNodes.forEach(function (element) {
-        if (element.children) {
+        if (element.childNodes) {
           if (predicate(element)) {
             found.push(element);
           }
-          find(element.children());
+          find(element.childNodes);
         }
       });
     }
 
-    find(this.children());
+    find(this.childNodes);
     return found;
   }
 

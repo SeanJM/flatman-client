@@ -14,6 +14,8 @@ Node.prototype.attr = function () {
       self.once(prop.substr(4), value);
     } else if ('on' === prop.substr(0, 2)) {
       self.on(prop.substr(2), value);
+    } else if ('ref' === prop) {
+      self.ref = value;
     } else {
       prop === 'tabindex'
         ? 'tabIndex'
