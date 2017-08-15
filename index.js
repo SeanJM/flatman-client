@@ -603,6 +603,11 @@ Component.prototype.appendTo = function (parentNode) {
 };
 
 
+Component.prototype.attr = function (a, b) {
+  return this.document.attr(a, b);
+};
+
+
 // 'this' is appended before target
 Component.prototype.before = function (target) {
   this.document.before.call(this, target);
