@@ -576,6 +576,12 @@ Component.trigger = function () {
 };
 
 
+Component.prototype.addClass = function (className) {
+  this.document.addClass(className);
+  return this;
+};
+
+
 Component.prototype.after = function (target) {
   this.document.after.call(this, target);
   return this;
@@ -618,17 +624,17 @@ Component.prototype.disable = function () {
 };
 
 
-Component.prototype.is = function (selector) {
-  return this.document.is.call(this, selector);
-};
-
-
 Component.prototype.enable = function () {
   this.document.enable();
   this.document.childNodes.forEach(function (a) {
     a.enable();
   });
   return this;
+};
+
+
+Component.prototype.is = function (selector) {
+  return this.document.is.call(this, selector);
 };
 
 
@@ -748,6 +754,12 @@ Component.prototype.remove = function () {
 Component.prototype.removeChild = function (child) {
   this.document.removeChild(child);
   this.childNodes.splice(this.childNodes.indexOf(child), 1);
+  return this;
+};
+
+
+Component.prototype.removeClass = function (className) {
+  this.document.removeClass(className);
   return this;
 };
 
