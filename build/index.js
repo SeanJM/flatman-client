@@ -27,6 +27,7 @@ function render() {
       'src/init/initDragAndDrop.js',
       'src/init/initInputEvent.js',
       'src/init/initVendorPrefixes.js',
+      'src/init/initComponentMethods.js',
       'src/init/init.js',
     ])
 

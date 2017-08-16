@@ -604,7 +604,15 @@ Component.prototype.appendTo = function (parentNode) {
 
 
 Component.prototype.attr = function (a, b) {
-  return this.document.attr(a, b);
+  var n = arguments.length;
+  if (n === 0) {
+    return this.document.attr();
+  } else if (n === 1) {
+    return this.document.attr(a);
+  } else {
+    this.document.attr(a, b);
+    return this;
+  }
 };
 
 
@@ -635,6 +643,11 @@ Component.prototype.enable = function () {
     a.enable();
   });
   return this;
+};
+
+
+Component.prototype.hasClass = function (className) {
+  return this.document.hasClass(className);
 };
 
 
@@ -1915,10 +1928,18 @@ function initVendorPrefixes() {
 }
 
 
+function initComponentMethods() {
+  Component.fn("offset", function () {
+    return this.document.offset();
+  });
+}
+
+
 initCustomEvent();
 initDoubleClick();
 initDragAndDrop();
 initInputEvent();
+initComponentMethods();
 initVendorPrefixes();
 
 BODY = el(document.body);

@@ -12,7 +12,7 @@
   "dependencies": {
     "colors": "^1.1.2",
     "eslint": "^3.14.0",
-    "flatman-component": "^0.17.0",
+    "flatman-component": "^0.17.1",
     "glob": "^7.1.2",
     "lodash": "^4.17.4",
     "match-file-utility": "^3.4.0",
