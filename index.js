@@ -782,6 +782,18 @@ Component.prototype.removeClass = function (className) {
 };
 
 
+Component.prototype.style = function () {
+  if (arguments.length === 2) {
+    this.document.style(arguments[0], arguments[1]);
+  } else if (arguments.length === 1) {
+    this.document.style(arguments[0]);
+  } else {
+    return this.document.style();
+  }
+  return this;
+};
+
+
 Component.prototype.trigger = function () {
   var self = this;
   var names = arguments[0];
