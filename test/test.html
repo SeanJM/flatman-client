@@ -14,47 +14,17 @@
     <script src="../index.js"></script>
     <script>
     var el = flatman.el;
-    var Component = flatman.Component;
-    var t;
+    var a = el('div');
 
-    Component.create('B', {
-      value() {
-        return 'b';
-      },
-
-      classify() {
-        this.document.addClass('classify');
-      },
-
-      getClassify() {
-        return 'classify';
-      },
-
-      render(props) {
-        return el('div', {
-          name : 'b',
-          className : 'b'
-        });
-      }
+    a.style({
+      translateY: 40
     });
 
-    Component.create('A', Component.wrap('B', {
-      value() {
-        return this.names.b.value();
-      },
-
-      render(props) {
-        return el('div', [ this.component ]);
-      }
-    }));
-
-    t = el('A');
-
-    t.classify();
+    a.appendTo(document.body);
 
     console.log({
-      left : t.value() === 'b' && t.getClassify() === 'classify',
-      right : true
+      left : a.attr('style'),
+      right : "transform: translateY(40px);"
     });
     </script>
   </body>
